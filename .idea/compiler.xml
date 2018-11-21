@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="fnstatic_main" target="1.8" />
+      <module name="fnstatic_test" target="1.8" />
+      <module name="xrat_main" target="1.8" />
+      <module name="xrat_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

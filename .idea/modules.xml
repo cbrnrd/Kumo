@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xrat.iml" filepath="$PROJECT_DIR$/.idea/modules/xrat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xrat_main.iml" filepath="$PROJECT_DIR$/.idea/modules/xrat_main.iml" group="xrat" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xrat_test.iml" filepath="$PROJECT_DIR$/.idea/modules/xrat_test.iml" group="xrat" />
+    </modules>
+  </component>
+</project>
