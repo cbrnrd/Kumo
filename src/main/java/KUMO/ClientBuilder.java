@@ -47,14 +47,12 @@ public class ClientBuilder {
             ArrayList<File> fileList = new ArrayList<>();
             try {
                 FileUtils.ExportResource("/Client/Client.class");
-                System.out.println("I've made it here to line 50");
                 Thread.sleep(2000);
             } catch (Exception e) {
                 Logger.log(Level.ERROR, e.toString());
                 e.printStackTrace();
             }
             fileList.add(new File(System.getProperty("user.home").replace("\\", "/") + "/Kumo/Client/Client.class"));
-            System.out.println("I've added the client class to fileList");
             fileList.add(new File(System.getProperty("user.home").replace("\\", "/") + "/Kumo/.xrst"));
 
             for (File file : fileList) {

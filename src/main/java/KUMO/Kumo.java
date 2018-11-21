@@ -73,7 +73,7 @@ public class Kumo extends Application {
     public void start(Stage primaryStage) throws IOException, ClassNotFoundException {
         KUMO.Kumo.primaryStage = primaryStage;
         /* Ensure that the necessary files exist */
-        new PseudoBase().createXratData();
+        new PseudoBase().createKumoData();
         /* Load data from files - including client data, server settings, etc. */
         new PseudoBase().loadData();
         /* Set up primary view */

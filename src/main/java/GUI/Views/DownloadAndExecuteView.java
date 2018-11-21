@@ -52,7 +52,7 @@ public class DownloadAndExecuteView {
         urlLabel = (Label) Styler.styleAdd(urlLabel, "label-bright");
         urlField = new TextField();
         downloadButton = new Button("GO");
-        statusLabel = new Label("This is a test");
+        statusLabel = new Label("");
         vBox2.getChildren().addAll(urlLabel, urlField, downloadButton, statusLabel);
         vBox.getChildren().addAll(new TopBar().getTopBarSansOptions(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;

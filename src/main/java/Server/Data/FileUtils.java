@@ -10,10 +10,10 @@ public class FileUtils {
     /* Pulls files outside of a .jar */
     static public void ExportResource(String resourceName) throws Exception {
         new File(KUMO.Kumo.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile().getPath().replace('\\', '/');
-        File r = new File(System.getProperty("user.home") + "/Xrat/Client/");
+        File r = new File(System.getProperty("user.home") + "/Kumo/Client/");
         r.mkdir();
         try (InputStream stream = KUMO.Kumo.class.getResourceAsStream(resourceName);
-             OutputStream resStreamOut = new FileOutputStream(System.getProperty("user.home") + "/Xrat/Client/Client.class")) {
+             OutputStream resStreamOut = new FileOutputStream(System.getProperty("user.home") + "/Kumo/Client/Client.class")) {
             if (stream == null) {
                 throw new Exception("Cannot get resource \"" + resourceName + "\" from Jar file.");
             }
@@ -56,8 +56,8 @@ public class FileUtils {
 
     /* Deletes temporary files created by KUMO */
     public static void deleteFiles() {
-        File dir = new File(System.getProperty("user.home").replace("\\", "/") + "/Xrat/Client");
-        File fil = new File(System.getProperty("user.home").replace("\\", "/") + "/Xrat/Client/Client.class");
+        File dir = new File(System.getProperty("user.home").replace("\\", "/") + "/Kumo/Client");
+        File fil = new File(System.getProperty("user.home").replace("\\", "/") + "/Kumo/Client/Client.class");
         try {
             //String d = new File(KUMO.KUMO.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile().getPath().replace('\\', '/');
             String d = new File(Kumo.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile().getPath().replace('\\','/');

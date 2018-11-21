@@ -27,16 +27,16 @@ public class ClientHandler implements Runnable, Repository {
             /* Check to ensure there's room left via Max Connections setting. */
             if (CONNECTIONS.size() < KumoSettings.MAX_CONNECTIONS) {
                 if (!CONNECTIONS.containsKey(ip)) {
-                    if(PseudoBase.getXratData().containsKey(ip)){
-                            client = new ClientObject(socket, PseudoBase.getXratData().get(ip).getNickName(), ip);
+                    if(PseudoBase.getKumoData().containsKey(ip)){
+                            client = new ClientObject(socket, PseudoBase.getKumoData().get(ip).getNickName(), ip);
                         } else {
-                        client = new ClientObject(socket, "KUMO Machine " + (PseudoBase.getXratData().size() + 1), ip);
+                        client = new ClientObject(socket, "KUMO Machine " + (PseudoBase.getKumoData().size() + 1), ip);
                     }
                 } else {
                     client = new ClientObject(socket, CONNECTIONS.get(ip).getNickName(), ip);
                 }
                 Platform.runLater(() -> CONNECTIONS.put(ip, client));
-                Platform.runLater(() -> PseudoBase.getXratData().put(ip, client));
+                Platform.runLater(() -> PseudoBase.getKumoData().put(ip, client));
             }
             Controller.updateStats();
             /* Notification on new client connection */

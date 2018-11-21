@@ -13,15 +13,15 @@ import java.io.*;
 
 public class PseudoBase implements Repository {
     /* Collection of client connections by representation of ClientObjects*/
-    private static ObservableMap<String, ClientObject> xratData = FXCollections.observableHashMap();
+    private static ObservableMap<String, ClientObject> kumoData = FXCollections.observableHashMap();
 
-    public synchronized static ObservableMap<String, ClientObject> getXratData() {
-        return xratData;
+    public synchronized static ObservableMap<String, ClientObject> getKumoData() {
+        return kumoData;
     }
 
     /* Serializes client objects  & writes server settings */
     public static void writeKumoData() throws IOException {
-        for (ClientObject o : xratData.values()) {
+        for (ClientObject o : kumoData.values()) {
             if (o != null) {
                 o.serialize();
             }
@@ -55,7 +55,7 @@ public class PseudoBase implements Repository {
     }
 
     /* Creates necessary files for Xrat to run. Including the directories for client + server setting data. */
-    public void createXratData() throws IOException {
+    public void createKumoData() throws IOException {
         final File parent = new File(System.getProperty("user.home") + "/Kumo/clients");
         final File parent2 = new File(System.getProperty("user.home") + "/Kumo/Client");
         if (!parent.mkdirs() && !parent2.mkdirs()) {
@@ -105,10 +105,10 @@ public class PseudoBase implements Repository {
                     ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
                     try {
                         o = (ClientObject) in.readObject();
-                        xratData.put(o.getIP(), o);
+                        kumoData.put(o.getIP(), o);
                         in.close();
                     } catch (InvalidClassException e){
-                        deleteXratData(System.getProperty("user.home") + "/Kumo/clients/");
+                        deleteKumoData(System.getProperty("user.home") + "/Kumo/clients/");
                     }
                     listOfFile.delete();
                 }
@@ -119,7 +119,7 @@ public class PseudoBase implements Repository {
     }
 
     /* Deletes serialized client objects in the event that they become corrupted / out dated (mostly used for development)*/
-    private void deleteXratData(String directory){
+    private void deleteKumoData(String directory){
        File folder = new File(directory);
        File[] listOfFiles = folder.listFiles();
        assert listOfFiles != null;

