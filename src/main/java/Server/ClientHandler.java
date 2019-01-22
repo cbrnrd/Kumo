@@ -1,7 +1,7 @@
 package Server;
 
-import GUI.Controller;
 import GUI.Components.NotificationView;
+import GUI.Controller;
 import Server.Data.PseudoBase;
 import Server.Data.Repository;
 import javafx.application.Platform;
@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class ClientHandler implements Runnable, Repository {
     private Socket socket;
@@ -44,9 +45,16 @@ public class ClientHandler implements Runnable, Repository {
                 Platform.runLater(() -> NotificationView.openNotification(client));
             }
             InputStream is = client.getClient().getInputStream();
-
-            /* Begin listening for client commands via ProcessCommands */
-            ProcessCommands.processCommands(is, client);
+            try {
+                /* Begin listening for client commands via ProcessCommands */
+                ProcessCommands.processCommands(is, client);
+            } catch (SocketException s){
+                Platform.runLater(() -> CONNECTIONS.remove(ip, client));
+                Platform.runLater(() -> PseudoBase.getKumoData().remove(ip, client));
+                Controller.updateStats();
+                Controller.updateTable();
+                s.printStackTrace();
+            }
         } catch (IOException e) {
             client.setOnlineStatus("offline");
             e.printStackTrace();

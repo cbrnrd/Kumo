@@ -53,4 +53,8 @@ public class TopBar {
         imageView.setFitHeight(50);
         return Styler.vContainer(new VBox(), new TitleBar().getMenuBar(stage), hBox);
     }
+
+    public VBox getStrippedTopBar(Stage stage){
+        return Styler.vContainer(new VBox(), new TitleBar().getMenuBar(stage));
+    }
 }

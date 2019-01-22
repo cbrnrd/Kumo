@@ -113,6 +113,10 @@ public class ClientObject implements Serializable, Repository {
         dis.writeUTF(msg);
     }
 
+    public void clientCommunicate(byte[] msg) throws IOException {
+        dis.write(msg);
+    }
+
     @Override
     protected void finalize() throws Throwable {
         clientOutput.close();

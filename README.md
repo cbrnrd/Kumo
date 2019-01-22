@@ -1,7 +1,7 @@
 ## ![icon](https://github.com/cbrnrd/Kumo/blob/master/src/main/resources/Images/Icons/icon.png?raw=true)
 Kumo
 
-Kumo is a lightweignt and portable remote administrative tool written in Java. It can be used on Windows, macOS, or Linux as long as they have the JRE installed.
+Kumo is a lightweight and portable remote administrative tool written in Java. It can be used on Windows, macOS, or Linux as long as they have the JRE installed.
 
 ## Features
 
@@ -15,9 +15,9 @@ Kumo is a lightweignt and portable remote administrative tool written in Java. I
 ## In progress
 These features will likely be released in the order they are in below:
 
-* System information
-* Clipboard control
-* Visit website
+* ~~System information~~ ✔
+* ~~Clipboard control~~ ✔
+* ~~Visit website~~ ✔
 * Show messagebox
 * Full reverse shell instead of sending individual commands
 * Metasploit integration

