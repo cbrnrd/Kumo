@@ -18,6 +18,20 @@
     -fx-background-color: #16161d;
 }
 
+.titled-pane > .title{
+    -fx-pref-height: 20px;
+    -fx-font: 14 "Roboto Thin";
+    -fx-content-display: bottom;
+    -fx-alignment: bottom-left;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+#java-settings {
+    -fx-background-color: #FFFFFF;
+    -fx-stroke: black;
+    -fx-stroke-width: 3px;
+}
+
 .root {
     -fx-background-color: #16161d;
 }

