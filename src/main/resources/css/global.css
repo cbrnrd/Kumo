@@ -1,3 +1,7 @@
+.root {
+    -fx-font-smoothing-type: grey;
+}
+
 .alert {
     -fx-background-color: #16161d;
     -fx-font-size: 12px;
@@ -38,7 +42,7 @@
 
 .title {
     -fx-font-size: 22px;
-    -fx-font-family: "Roboto Thin";
+    -fx-font-family: "Roboto";
     -fx-text-fill: black;
     -fx-text-alignment: center;
 }
@@ -58,7 +62,7 @@
 
 .label-light {
     -fx-font-size: 12px;
-    -fx-font-family: "Roboto Thin";
+    -fx-font-family: "Roboto";
     -fx-text-fill: white;
 }
 
@@ -191,7 +195,7 @@
 
 .check-box {
     -fx-font-size: 14px;
-    -fx-font-family: "Roboto Thin";
+    -fx-font-family: "Roboto";
     -fx-text-fill: #8d9db1;
     -fx-opacity: 1;
 }

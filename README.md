@@ -18,12 +18,9 @@ These features will likely be released in the order they are in below:
 * ~~System information~~ ✔
 * ~~Clipboard control~~ ✔
 * ~~Visit website~~ ✔
-* Show messagebox
-* Full reverse shell instead of sending individual commands
+* ~~Show messagebox~~ ✔
 * Metasploit integration
-* Command broadcasting
-* Keylogger
-* Upload and execute
+* Upload/download and execute
 
 
 ## Legal

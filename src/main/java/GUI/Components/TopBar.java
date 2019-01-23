@@ -22,6 +22,7 @@ public class TopBar {
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         Label label = (Label) Styler.styleAdd(new Label("Dashboard"), "label-light");
+        label.setStyle("-fx-font-family: \"Roboto\"");
         vBox.getChildren().addAll(new ImageView(new Image(getClass().getResourceAsStream("/Images/Icons/icon.png"))), label);
         vBox.setPadding(new Insets(5, 10, 0, 5));
         vBox.setId("homeButton");

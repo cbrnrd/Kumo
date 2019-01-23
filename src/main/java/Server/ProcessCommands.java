@@ -115,7 +115,7 @@ class ProcessCommands implements Repository {
 
             /** clipboard stuff **/
             else if (input.contains("CLIPGET")){
-                GetClipboardView.getData().appendText("Clipboard data: " + dis.readUTF());
+                GetClipboardView.getData().appendText("Clipboard data: \n\n" + dis.readUTF());
             }
         }
     }

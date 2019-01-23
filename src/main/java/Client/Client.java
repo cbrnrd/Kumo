@@ -1,7 +1,9 @@
 package Client;
 
 
+
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
@@ -131,6 +133,13 @@ public class Client {
                     directoryChange();
                 } else if (input.contains("DOWNLOAD")) {
                     sendFile();
+                } else if (input.contains("MSGBOX")) {
+                    String[] split = Arrays.copyOfRange(input.split(" "), 1, input.split(" ").length);
+                    StringBuilder toSet = new StringBuilder();
+                    for (String w : split) {
+                        toSet.append(w).append(" ");
+                    }
+                    showMessagebox(toSet.toString());
                 } else if (input.equals("SYINFO")) {
                     /*
                     "SYINFO" NOT A TYPO!!!!! Prevents clash with "SYS"
@@ -414,6 +423,30 @@ public class Client {
             sb.append("Hostname: " + inetAddress.getHostName() + "\n");
         } catch (IOException ioe){}
         communicate(sb.toString());
+    }
 
+    private void showMessagebox(String msg){
+        if(debugMode){
+            System.out.println("Showing messagebox with message: " + msg);
+        }
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        JFrame frame = new JFrame("ALERT");
+        /*frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        //JOptionPane alert = new JOptionPane(msg, JOptionPane.INFORMATION_MESSAGE);
+
+        /*JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+        panel.add(alert);
+        //frame.add(alert);
+        //frame.pack();
+        frame.setAlwaysOnTop(true);
+        frame.setVisible(true);
+        */
+        frame.setAlwaysOnTop(true);
+        frame.setAutoRequestFocus(true);
+        frame.setEnabled(true);
+
+        JOptionPane.showMessageDialog(frame, msg, "ALERT", JOptionPane.INFORMATION_MESSAGE);
     }
 }
