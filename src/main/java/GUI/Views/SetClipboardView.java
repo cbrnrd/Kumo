@@ -3,6 +3,7 @@ package GUI.Views;
 import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
 import GUI.Styler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +12,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+@SuppressWarnings("Duplicates")
 public class SetClipboardView {
 
     private static Button setClipboard;
@@ -26,6 +28,7 @@ public class SetClipboardView {
         vBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
         VBox vBox2 = new VBox(5);
         vBox2.setId("settingsView");
+        vBox2.setPadding(new Insets(0, 25, 0, 25));
         vBox2.setAlignment(Pos.CENTER);
         VBox.setVgrow(vBox2, Priority.ALWAYS);
         Label label = new Label("Clipboard data:");

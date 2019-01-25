@@ -1,7 +1,3 @@
-.root {
-    -fx-font-smoothing-type: grey;
-}
-
 .alert {
     -fx-background-color: #16161d;
     -fx-font-size: 12px;

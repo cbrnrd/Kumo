@@ -19,7 +19,7 @@ These features will likely be released in the order they are in below:
 * ~~Clipboard control~~ ✔
 * ~~Visit website~~ ✔
 * ~~Show messagebox~~ ✔
-* Metasploit integration
+* ~~Metasploit integration~~ ✔
 * Upload/download and execute
 
 

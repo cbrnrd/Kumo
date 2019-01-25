@@ -3,6 +3,7 @@ package GUI.Views;
 import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
 import GUI.Styler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,6 +28,7 @@ public class VisitWebsiteView {
         VBox vBox2 = new VBox(5);
         vBox2.setId("settingsView");
         vBox2.setAlignment(Pos.CENTER);
+        vBox2.setPadding(new Insets(0, 25, 0, 25));
         VBox.setVgrow(vBox2, Priority.ALWAYS);
         Label label = new Label("URL:");
         label = (Label) Styler.styleAdd(label, "label-bright");

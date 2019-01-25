@@ -3,6 +3,7 @@ package GUI.Views;
 import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
 import GUI.Styler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,7 +12,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 
 public class DownloadAndExecuteView {
@@ -48,9 +48,11 @@ public class DownloadAndExecuteView {
         vBox2.setId("downloadAndExecuteView");
         vBox2.setAlignment(Pos.CENTER);
         VBox.setVgrow(vBox2, Priority.ALWAYS);
+        vBox2.setPadding(new Insets(0, 25, 0, 25));
         Label urlLabel = new Label("URL of binary: ");
         urlLabel = (Label) Styler.styleAdd(urlLabel, "label-bright");
         urlField = new TextField();
+        urlField.setPromptText("Example: http://example.com/evil.exe");
         downloadButton = new Button("GO");
         statusLabel = new Label("");
         vBox2.getChildren().addAll(urlLabel, urlField, downloadButton, statusLabel);
