@@ -2,6 +2,7 @@ package GUI.Components;
 
 import GUI.Controller;
 import GUI.Views.*;
+import KUMO.Kumo;
 import Logger.Level;
 import Logger.Logger;
 import Server.ClientObject;
@@ -15,9 +16,11 @@ import javafx.scene.control.TableCell;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
 import java.io.IOException;
 
 class IPContextMenu implements Repository {
@@ -66,10 +69,16 @@ class IPContextMenu implements Repository {
         MenuItem si4 = new MenuItem("Take Screenshot");
         si4.setOnAction(event -> {
             if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
+
+                DirectoryChooser directoryChooser = new DirectoryChooser();
+                directoryChooser.setTitle("Select download location");
+                File selectedDirectory =
+                        directoryChooser.showDialog(Kumo.getPrimaryStage());
+                FileContextMenu.selectedDirectory = selectedDirectory.getAbsolutePath();
                 try {
                     clientObject.clientCommunicate("SCREENSHOT");
                 } catch (IOException e1) {
-                    e1.printStackTrace();
+                    Logger.log(Level.ERROR, e1.toString());
                 }
             }
         });
@@ -220,7 +229,7 @@ class IPContextMenu implements Repository {
         });
         misc.getItems().addAll(visit, showMsgbox);
 
-        mi1.getItems().addAll(sb1, sb2, sb3, si4, si5, si6, si7, clip, misc);
+        mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, clip, misc);
         MenuItem mi2 = new MenuItem("Copy IP");
         mi2.setOnAction(event -> {
             final Clipboard clipboard = Clipboard.getSystemClipboard();

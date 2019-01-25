@@ -6,12 +6,17 @@ import GUI.Components.NotificationView;
 import GUI.Components.TopBar;
 import GUI.Styler;
 import Server.KumoSettings;
-import KUMO.Kumo;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+
+import javax.crypto.Cipher;
+import java.security.NoSuchAlgorithmException;
 
 class SettingsView {
 
@@ -61,6 +66,13 @@ class SettingsView {
                 maxConnections.setText(newValue.replaceAll("[^\\d]", ""));
             }
         }));
+
+        Label aesLabel = (Label) Styler.styleAdd(new Label("Encryption Key: "), "label-bright");
+        TextField aesKey = new TextField("" + KumoSettings.AES_KEY);
+        HBox aesBox = Styler.hContainer(aesLabel, aesKey);
+        aesKey.setEditable(false);
+        aesKey.setDisable(true);
+
 
         CheckBox soundToggle = new CheckBox();
         soundToggle.setSelected(KumoSettings.SOUND);
@@ -123,9 +135,21 @@ class SettingsView {
             if (Integer.parseInt(maxConnections.getText()) != KumoSettings.MAX_CONNECTIONS) {
                 KumoSettings.MAX_CONNECTIONS = (Integer.parseInt(maxConnections.getText()));
             }
+            if (!aesKey.getText().equals(KumoSettings.AES_KEY)){
+                int len = 16;
+                try{
+                    len = Cipher.getMaxAllowedKeyLength("AES");
+                } catch (NoSuchAlgorithmException e){
+                    e.printStackTrace();
+                }
+                if (aesKey.getText().length() > len){ // Keys larger than 16 will cause an error on most JRE's
+                } else {
+                    KumoSettings.AES_KEY = aesKey.getText();
+                }
+            }
                 Platform.runLater(() -> NotificationView.openNotification("Settings Applied"));
         });
-        hBox.getChildren().add(Styler.vContainer(20, title, listeningPortBox, maxConnectionsBox, soundToggle,notificaitonToggle,backgroundPersistentTogle, applySettings));
+        hBox.getChildren().add(Styler.vContainer(20, title, listeningPortBox, maxConnectionsBox, aesBox, soundToggle,notificaitonToggle,backgroundPersistentTogle, applySettings));
         return hBox;
     }
 }

@@ -4,6 +4,7 @@ package Server;
 import GUI.Controller;
 import Logger.Level;
 import Logger.Logger;
+import Server.Data.CryptoUtils;
 import Server.Data.Repository;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -91,7 +92,7 @@ public class ClientObject implements Serializable, Repository {
     }
 
     public void serialize() {
-        final File parent = new File(System.getProperty("user.home") + "/xrat/clients");
+        final File parent = new File(System.getProperty("user.home") + "/Kumo/clients");
         if (!parent.mkdirs()) {
             Logger.log(Level.WARNING, "Unable to make necessary directories, may already exist.");
         }
@@ -110,7 +111,8 @@ public class ClientObject implements Serializable, Repository {
     }
 
     public void clientCommunicate(String msg) throws IOException {
-        dis.writeUTF(msg);
+        String toSend = CryptoUtils.encrypt(msg, KumoSettings.AES_KEY);
+        dis.writeUTF(toSend);
     }
 
     public void clientCommunicate(byte[] msg) throws IOException {

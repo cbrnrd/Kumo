@@ -4,7 +4,6 @@ import GUI.Styler;
 import Logger.Level;
 import Logger.Logger;
 import Server.KumoSettings;
-import KUMO.Kumo;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -21,10 +20,10 @@ class TitleBar {
         menuBar.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
         menuBar.getStyleClass().add("background");
 
-        Label xrat = (Label) Styler.styleAdd(new Label("KUMO " + KumoSettings.CURRENT_VERSION), "option-button");
-        xrat.setPadding(new Insets(5, 10, 5, 10));
-        xrat.setOnMouseClicked(event -> {
-            String[] XratEasterEgg = {
+        Label kumo = (Label) Styler.styleAdd(new Label("KUMO " + KumoSettings.CURRENT_VERSION), "option-button");
+        kumo.setPadding(new Insets(5, 10, 5, 10));
+        kumo.setOnMouseClicked(event -> {
+            String[] KumoEasterEgg = {
                     KumoSettings.CURRENT_VERSION,
                     "):",
                     "Where's the cheese?",
@@ -60,10 +59,11 @@ class TitleBar {
                     "msfconsole > ",
                     "Hacking printers since 1996!",
                     "Winblows",
+                    "You shouldn't be here..."
             };
             Random rn = new Random();
-            int rnn = rn.nextInt(XratEasterEgg.length);
-            xrat.setText(XratEasterEgg[rnn]);
+            int rnn = rn.nextInt(KumoEasterEgg.length);
+            kumo.setText(KumoEasterEgg[rnn]);
         });
 
         Label minimize = (Label) Styler.styleAdd(new Label("_"), "option-button");
@@ -100,7 +100,7 @@ class TitleBar {
             stage.setY(mouseEvent.getScreenY() + dragDelta.y);
         });
 
-        HBox hBox = Styler.hContainer(5, xrat, sep, minimize, exit);
+        HBox hBox = Styler.hContainer(5, kumo, sep, minimize, exit);
         hBox.setId("drag-bar");
         return hBox;
     }

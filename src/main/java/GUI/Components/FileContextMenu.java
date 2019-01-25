@@ -1,8 +1,8 @@
 package GUI.Components;
 
+import KUMO.Kumo;
 import Logger.Level;
 import Logger.Logger;
-import KUMO.Kumo;
 import Server.ClientObject;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -21,6 +21,7 @@ public class FileContextMenu {
         ContextMenu cm = new ContextMenu();
         MenuItem sb1 = new MenuItem("Delete File");
         MenuItem sb2 = new MenuItem("Download File");
+
         sb2.setOnAction(event -> {
             DirectoryChooser directoryChooser = new DirectoryChooser();
             directoryChooser.setTitle("Select download location");
@@ -45,7 +46,7 @@ public class FileContextMenu {
             try {
                 client.clientCommunicate("CHNGDIR");
                 DataOutputStream dos = new DataOutputStream(client.getClient().getOutputStream());
-                dos.writeUTF(fileName);
+                client.clientCommunicate(fileName);
             } catch (IOException e1) {
                 Logger.log(Level.ERROR, e1.toString());
             }

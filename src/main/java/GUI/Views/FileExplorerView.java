@@ -22,6 +22,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 
@@ -192,6 +193,17 @@ public class FileExplorerView {
                         FileContextMenu.getDirectoryMenu(hBox, s, event, client);
                     } else {
                         FileContextMenu.getFileContextMenu(hBox, s, event, client);
+                    }
+                } else if (event.getButton().equals(MouseButton.PRIMARY)){
+                    if (event.getClickCount() == 2 && getExtensionImage(s).contains("folder.png")){
+                        //FileContextMenu.getDirectoryMenu(hBox, s, event, client);
+                        try {
+                            client.clientCommunicate("CHNGDIR");
+                            DataOutputStream dos = new DataOutputStream(client.getClient().getOutputStream());
+                            client.clientCommunicate(s);
+                        } catch (IOException ioe){
+                            ioe.printStackTrace();
+                        }
                     }
                 }
             });
