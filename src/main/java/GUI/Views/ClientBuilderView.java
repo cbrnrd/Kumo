@@ -25,6 +25,7 @@ class ClientBuilderView {
     private CheckBox debug;
     private TextField jarCreatedBy;
     private TextField jarVersion;
+    private TextField updateTime;
 
     BorderPane getClientBuilderView() {
         BorderPane borderPane = new BorderPane();
@@ -40,6 +41,7 @@ class ClientBuilderView {
     private HBox jarSettingsRight(){
         HBox hbox = Styler.hContainer(20);
         hbox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        HBox.setHgrow(hbox, Priority.ALWAYS);
         hbox.setId("clientBuilder");
         hbox.setPadding(new Insets(75, 20, 20, 20));
         // Created-By
@@ -67,7 +69,26 @@ class ClientBuilderView {
         jarSettings.setExpanded(false);
         jarSettings.setAnimated(true);
         jarSettings.setContent(grid);
-        hbox.getChildren().add(Styler.vContainer(20, jarSettings));
+
+       /* // Evasion, custom networking
+        Label updateTimeLabel = (Label) Styler.styleAdd(new Label("Update Time: "), "label-bright");
+        updateTime = new TextField("30");
+
+        TitledPane networkSettings = (TitledPane) Styler.styleAdd(new TitledPane(), "label-bright");
+        GridPane netGrid = new GridPane();
+        grid.setId("java-settings");
+        grid.setVgap(4);
+        grid.setPadding(new Insets(5));
+        grid.add(updateTimeLabel, 0, 0);
+        grid.add(updateTime, 1, 0);
+
+        networkSettings.setLayoutY(10);
+        networkSettings.setText("Networking Settings");
+        networkSettings.setExpanded(false);
+        networkSettings.setAnimated(true);
+        networkSettings.setContent(grid);*/
+
+        hbox.getChildren().add(Styler.vContainer(20, jarSettings));//, networkSettings));
         return hbox;
     }
 

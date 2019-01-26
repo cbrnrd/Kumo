@@ -4,7 +4,6 @@ import GUI.Components.BottomBar;
 import GUI.Components.NotificationView;
 import GUI.Components.TopBar;
 import GUI.Styler;
-import KUMO.Kumo;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -15,7 +14,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Scanner;
 
 
@@ -49,18 +47,19 @@ class UpdatesView {
             hBox.setId("updatesView");
             updatesView.setCenter(hBox);
         });
-        return Styler.hContainer(Styler.vContainer(10, title, desc, checkUpdates));
+        return Styler.hContainer(Styler.vContainer(30, title, desc, checkUpdates));
     }
 
     private HBox getUpdatesPanel() {
         TextArea updates = new TextArea();
         updates.setPrefWidth(600);
         updates.setEditable(false);
-        try {
-            updates.setText(new Scanner(new URL("https://raw.githubusercontent.com/cbrnrd/Maus/master/Changelog.txt").openStream(), "UTF-8").useDelimiter("\\A").next());
-        } catch (IOException e) {
-            e.printStackTrace();
+        try{
+            updates.setText(new Scanner(getClass().getResource("/LICENSE").openStream(), "UTF-8").useDelimiter("\\A").next());
+        } catch (IOException ioe){
+            ioe.printStackTrace();
         }
+
         return Styler.hContainer(updates);
     }
 

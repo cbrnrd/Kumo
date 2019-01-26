@@ -44,7 +44,7 @@ class IPContextMenu implements Repository {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setMinWidth(300);
             stage.setMinWidth(300);
-            stage.setScene(new Scene(new SendCommandView().getSendCommandView(stage), 400, 400));
+            stage.setScene(new Scene(new SendCommandView().getSendCommandView(stage), 800, 800));
             stage.show();
             SendCommandView.getsendCommandButton().setOnAction(a -> {
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
