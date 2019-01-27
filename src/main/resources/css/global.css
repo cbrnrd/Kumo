@@ -123,8 +123,8 @@
 
 .table-view {
     -fx-base: #16161d;
-    -fx-control-inner-background: #2f2f3e;
-    -fx-background-color: #2f2f3e;
+    -fx-control-inner-background: #ecf0f1;
+    -fx-background-color: #ecf0f1;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -233,7 +233,7 @@
 
 #icon {
     -fx-background-color: whitesmoke;
-    -fx-background-radius: 15px;
+    -fx-background-radius: 150px;
 }
 
 #icon:hover {

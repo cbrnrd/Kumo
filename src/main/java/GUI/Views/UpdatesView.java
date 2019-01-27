@@ -35,10 +35,11 @@ class UpdatesView {
     }
 
     private HBox getAboutPanel() {
-        Label title = (Label) Styler.styleAdd(new Label("KUMO 1.0a"), "title");
-        Text desc = (Text) Styler.styleAdd(new Text("KUMO is a lightweight remote administrative tool " +
-                "written in Java. \n KUMO is intended to present necessary \nfeatures in an attractive and " +
-                "easy to use UI."), "");
+        Label title = (Label) Styler.styleAdd(new Label("KUMO 1.0"), "title");
+        Text desc = (Text) Styler.styleAdd(new Text("KUMO is a lightweight cross-platform remote administrative tool " +
+                "written in Java. \n\nKUMO is intended to present necessary features \nin an attractive and " +
+                "easy to use UI. \n\nKumo is adapted from an open-sourced RAT called \nMaus (https://github.com/Ghosts/Maus) " +
+                "Kumo builds on \nthe foundation it laid out and improves on all of them."), "");
         Button checkUpdates = new Button("Check for Updates");
         checkUpdates.setOnMouseClicked(event -> {
             Platform.runLater(() -> NotificationView.openNotification("Update Check Complete"));
@@ -47,7 +48,7 @@ class UpdatesView {
             hBox.setId("updatesView");
             updatesView.setCenter(hBox);
         });
-        return Styler.hContainer(Styler.vContainer(30, title, desc, checkUpdates));
+        return Styler.hContainer(Styler.vContainer(30, title, desc)); //, checkUpdates));
     }
 
     private HBox getUpdatesPanel() {

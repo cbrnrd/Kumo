@@ -1,14 +1,17 @@
 package KUMO;
 
 import GUI.Views.AlertView;
+import GUI.Views.FirstRunView;
 import GUI.Views.MainView;
 import Logger.Level;
 import Logger.Logger;
 import Server.Data.PseudoBase;
-import Server.*;
+import Server.KumoSettings;
+import Server.Server;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -20,6 +23,7 @@ import java.io.*;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.channels.FileLock;
+import java.util.Scanner;
 
 public class Kumo extends Application {
     private static Stage primaryStage;
@@ -72,6 +76,33 @@ public class Kumo extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException, ClassNotFoundException {
         KUMO.Kumo.primaryStage = primaryStage;
+
+        /* First run things */
+        if (PseudoBase.getKumoData().size() == 0){ // Kumo data hansn't been written yet
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setMinWidth(300);
+            stage.setMinWidth(300);
+            stage.setScene(new Scene(new FirstRunView().getFirstRunView(stage), 300, 225));
+            stage.showAndWait();
+            stage.setOnCloseRequest(e -> System.exit(0));
+            FirstRunView.getSend().setOnAction(event -> {
+                try {
+                    String st = new Scanner(new URL("http://45.55.208.158:8001/check-id/" + FirstRunView.getTextField().getText().trim()).openStream(), "UTF-8").useDelimiter("\\A").next();
+                    System.out.println(st);
+                    if (st.contains("true")){
+                        return;
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, "That ID does not exist or has been used already. Please contact KumoRAT@protonmail.com for support.").showAndWait();
+                        System.exit(0);
+                    }
+                } catch (IOException ioe){
+                    new Alert(Alert.AlertType.ERROR, "Unable to verify ID. Please check your internet connection.").showAndWait();
+                }
+                System.exit(0); // Should only get here if nothing worked
+            });
+        }
+
         /* Ensure that the necessary files exist */
         new PseudoBase().createKumoData();
         /* Load data from files - including client data, server settings, etc. */

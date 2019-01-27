@@ -4,12 +4,14 @@ import Server.ClientObject;
 import Server.Data.Repository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseButton;
+import javafx.scene.paint.Paint;
 
 public class ClientList implements Repository {
     private static TableView tableView;
@@ -20,7 +22,11 @@ public class ClientList implements Repository {
 
     public TableView getClientList() {
 
+        Label placeholder = new Label("No clients yet :(");
+        placeholder.setTextFill(Paint.valueOf("mediumslateblue"));
+
         tableView = new TableView();
+        tableView.setPlaceholder(placeholder);
         tableView.setEditable(true);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableView.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
@@ -41,6 +47,13 @@ public class ClientList implements Repository {
                 t -> t.getTableView().getItems().get(
                         t.getTablePosition().getRow()).setNickName(t.getNewValue())
         );
+
+        TableColumn<ClientObject, String> OS = new TableColumn<>("OS");
+        OS.setMinWidth(100);
+        OS.setMaxWidth(150);
+        OS.setResizable(true);
+        OS.setCellValueFactory(new PropertyValueFactory<>("os"));
+        OS.setEditable(false);
 
         TableColumn<ClientObject, String> IP = new TableColumn<>("IP");
         IP.setMinWidth(600);

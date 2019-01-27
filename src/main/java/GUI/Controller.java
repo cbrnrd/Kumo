@@ -26,7 +26,7 @@ public class Controller implements Repository {
 
     /* Refreshes the number of connections based on KumoData size. */
     public static void updateStats() {
-        Platform.runLater(() -> BottomBar.getConnectionsLabel().setText("  Connections: " + CONNECTIONS.size()));
+        Platform.runLater(() -> BottomBar.getConnectionsLabel().setText("  Clients: " + CONNECTIONS.size()));
     }
 
     /* Changes the primary view to the provided scene. */

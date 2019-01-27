@@ -5,7 +5,6 @@ import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
 import GUI.Controller;
 import GUI.Styler;
-import KUMO.Kumo;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -24,14 +23,14 @@ public class MainView {
         flow.setPadding(new Insets(10, 50, 10, 50));
         flow.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
         flow.setId("iconFlow");
-        flow.setVgap(15);
-        flow.setHgap(15);
+        flow.setVgap(40);
+        flow.setHgap(40);
         flow.setAlignment(Pos.CENTER);
         flow.setOrientation(Orientation.VERTICAL);
 
         HBox icons[] = new HBox[8];
         for (int i = 0; i < 7; i++) {
-            if (i == 2) {
+            if (i == 2 || i == 4 || i == 3) {
                 continue;
             }
             HBox hBox = new HBox();

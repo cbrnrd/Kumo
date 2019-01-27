@@ -31,8 +31,9 @@ public class ClientObject implements Serializable, Repository {
             dis = new DataOutputStream(client.getOutputStream());
             if (SYSTEM_OS == null) {
                 clientCommunicate("SYS");
+            } else {
+                clientCommunicate("SYS");
             }
-            clientCommunicate("SYS");
         } catch (IOException e) {
             Logger.log(Level.WARNING, "Exception thrown: " + e);
         }

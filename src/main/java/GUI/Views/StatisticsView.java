@@ -3,7 +3,6 @@ package GUI.Views;
 import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
 import GUI.Styler;
-import KUMO.Kumo;
 import Server.Data.Repository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,9 +47,7 @@ class StatisticsView implements Repository {
                 }
             }
         });
-        operatingSystems.forEach((string, integer) -> {
-            pieChartData.add(new PieChart.Data(string, CONNECTIONS.size() / integer));
-        });
+        operatingSystems.forEach((string, integer) -> pieChartData.add(new PieChart.Data(string, CONNECTIONS.size() / integer)));
         final PieChart chart = new PieChart(pieChartData);
         chart.setLegendVisible(false);
         chart.setTitle("Operating Systems");

@@ -21,17 +21,17 @@ public class TopBar {
 
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
-        Label label = (Label) Styler.styleAdd(new Label("Dashboard"), "label-light");
+        Label label = (Label) Styler.styleAdd(new Label("Home"), "label-light");
         label.setStyle("-fx-font-family: \"Roboto\"");
         vBox.getChildren().addAll(new ImageView(new Image(getClass().getResourceAsStream("/Images/Icons/icon.png"))), label);
-        vBox.setPadding(new Insets(5, 10, 0, 5));
+        vBox.setPadding(new Insets(5, 10, 0, 10));
         vBox.setId("homeButton");
 
 
         VBox vBox1 = new VBox();
         vBox1.setAlignment(Pos.CENTER);
         vBox1.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/Images/logo.png"))));
-        vBox1.setPadding(new Insets(5, 10, 5, 5));
+        vBox1.setPadding(new Insets(5, 10, 5, 340));
 
         HBox hBox = Styler.hContainer(new HBox(), vBox, vBox1);
         vBox.setOnMouseClicked(event -> Controller.changePrimaryStage(new MainView().getMainView()));

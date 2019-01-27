@@ -21,7 +21,7 @@ public class BottomBar implements Repository {
         VBox vBox = new VBox();
         vBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
         VBox.setVgrow(vBox, Priority.ALWAYS);
-        connectionsLabel = new Label("  Connections: " + CONNECTIONS.size());
+        connectionsLabel = new Label("  Clients: " + CONNECTIONS.size());
         connectionsLabel = (Label) Styler.styleAdd(connectionsLabel, "label-light");
         vBox.getChildren().add(connectionsLabel);
         hBox.getChildren().add(vBox);
