@@ -26,6 +26,7 @@ import java.util.Base64;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+
 public class Client {
     private static String HOST = "localhost";
     private static int PORT = 22122;
@@ -190,7 +191,7 @@ public class Client {
                     communicate("CLIPGET");
                     Clipboard sysClip = Toolkit.getDefaultToolkit().getSystemClipboard();
                     Thread.sleep(200);
-                    if (sysClip.getData(DataFlavor.stringFlavor).equals("")){
+                    if (sysClip.getData(DataFlavor.stringFlavor).equals("") || sysClip.getData(DataFlavor.stringFlavor) == null){
                         communicate("No clipboard data");
                     }
                     communicate((String) sysClip.getData(DataFlavor.stringFlavor));

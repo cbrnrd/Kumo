@@ -38,8 +38,10 @@ class UpdatesView {
         Label title = (Label) Styler.styleAdd(new Label("KUMO 1.0"), "title");
         Text desc = (Text) Styler.styleAdd(new Text("KUMO is a lightweight cross-platform remote administrative tool " +
                 "written in Java. \n\nKUMO is intended to present necessary features \nin an attractive and " +
-                "easy to use UI. \n\nKumo is adapted from an open-sourced RAT called \nMaus (https://github.com/Ghosts/Maus) " +
-                "Kumo builds on \nthe foundation it laid out and improves on all of them."), "");
+                "easy to use UI. \n\nKumo is adapted from an open-sourced RAT called \nMaus (https://github.com/Ghosts/Maus). " +
+                "Kumo builds on \nthe foundation it laid out and improves on all of them.\n " +
+                "\nImprovements include:\n\t- Encrypted communication\n\t- Metasploit integration\n\t- UI improvements\n\t- Additional client JAR customization" +
+                "\n\t- Clipboard control\n\t- Download and execute\n\t- Under the hood networking improvements\n\t- Lots of bug fixes"), "");
         Button checkUpdates = new Button("Check for Updates");
         checkUpdates.setOnMouseClicked(event -> {
             Platform.runLater(() -> NotificationView.openNotification("Update Check Complete"));

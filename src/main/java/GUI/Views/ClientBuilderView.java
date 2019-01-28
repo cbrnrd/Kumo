@@ -99,9 +99,9 @@ class ClientBuilderView {
         hBox.setPadding(new Insets(20, 20, 20, 20));
         Label title = (Label) Styler.styleAdd(new Label("Client Builder"), "title");
         persistent = new CheckBox("Persistent");
-        autoSpread = new CheckBox("Auto-Spread");
+        //autoSpread = new CheckBox("Auto-Spread");
         debug = new CheckBox("Debug Mode");
-        hBox.getChildren().add(Styler.vContainer(20, title, persistent, autoSpread, debug));
+        hBox.getChildren().add(Styler.vContainer(20, title, persistent, debug )); //autoSpread, debug));
         return hBox;
     }
 
