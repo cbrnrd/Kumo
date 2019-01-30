@@ -71,7 +71,7 @@
 
 .label-bright {
     -fx-font-size: 14px;
-    -fx-font-family: "Roboto Thin";
+    -fx-font-family: "Roboto";
     -fx-text-fill: black;
     -fx-opacity: 1;
 }

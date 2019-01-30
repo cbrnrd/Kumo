@@ -8,6 +8,8 @@ import Logger.Logger;
 import Server.Data.PseudoBase;
 import Server.KumoSettings;
 import Server.Server;
+import de.codecentric.centerdevice.javafxsvg.SvgImageLoaderFactory;
+import de.codecentric.centerdevice.javafxsvg.dimension.PrimitiveDimensionProvider;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -36,6 +38,7 @@ public class Kumo extends Application {
 
     public static void main(String[] args) {
         if (lockInstance()) {
+            SvgImageLoaderFactory.install(new PrimitiveDimensionProvider());
             launch(args);
         } else {
             System.exit(0);
