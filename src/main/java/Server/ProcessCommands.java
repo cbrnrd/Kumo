@@ -49,6 +49,10 @@ class ProcessCommands implements Repository {
             } else if (input.contains("CHNGDIR")) {
                 client.clientCommunicate("FILELIST");
                 /* Gets list of files in current directory in file explorer */
+            } else if (input.contains("SLEEP")){
+                client.setOnlineStatus("Online");
+                Controller.updateStats();
+                Controller.updateTable();
             } else if (input.contains("SCREENSHOT")) {
                 // SERVER: SCREENSHOT
                 // CLIENT: filename

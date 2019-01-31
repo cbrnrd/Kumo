@@ -144,9 +144,6 @@ class ClientBuilderView {
                 KumoSettings.PORT = (Integer.parseInt(port.getText()));
             }
             try {
-                if (autoSpread.isSelected()) {
-                    ClientBuilder.autoSpread = true;
-                }
                 if (persistent.isSelected()) {
                     ClientBuilder.isPersistent = true;
                 }

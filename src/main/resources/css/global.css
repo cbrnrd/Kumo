@@ -1,7 +1,7 @@
 .alert {
     -fx-background-color: #16161d;
     -fx-font-size: 12px;
-    -fx-font-family: "Roboto Thin";
+    -fx-font-family: "Roboto";
     -fx-text-fill: #FFFFFF;
 }
 

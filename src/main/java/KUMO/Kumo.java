@@ -111,7 +111,7 @@ public class Kumo extends Application {
         /* Load data from files - including client data, server settings, etc. */
         new PseudoBase().loadData();
         /* Set up primary view */
-        getPrimaryStage().setTitle(KumoSettings.CURRENT_VERSION);
+        getPrimaryStage().setTitle("KUMO " + KumoSettings.CURRENT_VERSION);
 
         SwingUtilities.invokeLater(this::addAppToTray);
         Platform.setImplicitExit(false);

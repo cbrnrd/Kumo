@@ -25,7 +25,11 @@ public class ClientBuilder {
     public static String jarVersion = "1.0";
 
     public ClientBuilder(String clientName) {
-        this.clientName = clientName;
+        if (isDebug){
+            this.clientName = clientName + "-debug";
+        } else {
+            this.clientName = clientName;
+        }
         try {
             PseudoBase.writeKumoData();
         } catch (IOException e) {
