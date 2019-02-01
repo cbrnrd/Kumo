@@ -30,11 +30,11 @@ public class ChromePassView {
         VBox.setVgrow(vBox2, Priority.ALWAYS);
         Label label = new Label("Results:");
         label = (Label) Styler.styleAdd(label, "label-bright");
-        resultsArea = new TextArea("Gathering passwords...");
-        resultsArea.setId("console");
+        resultsArea = new TextArea("Gathering passwords...\n\n");
+        //resultsArea.setId("console");
         resultsArea.setEditable(false);
         resultsArea.setPrefRowCount(30);
-        resultsArea.setPrefColumnCount(100);
+        resultsArea.setPrefColumnCount(300);
         vBox2.getChildren().addAll(label, Styler.vContainer(resultsArea));
         vBox.getChildren().addAll(new TopBar().getStrippedTopBar(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;

