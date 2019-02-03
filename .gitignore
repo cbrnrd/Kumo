@@ -55,6 +55,7 @@ fabric.properties
 ### Gradle template
 .gradle
 /build/
+!/build/libs/rules.pro
 
 # Ignore Gradle GUI config
 gradle-app.setting

