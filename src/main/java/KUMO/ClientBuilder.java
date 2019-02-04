@@ -40,10 +40,12 @@ public class ClientBuilder {
     public void run() throws IOException {
         Manifest manifest = new Manifest();
         manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0");
-        manifest.getMainAttributes().put(new Attributes.Name("Created-By"), jarCreatedBy);
-        manifest.getMainAttributes().put(new Attributes.Name("Version"), jarVersion);
+        manifest.getMainAttributes().put(Attributes.Name.IMPLEMENTATION_TITLE, clientName);
+        manifest.getMainAttributes().put(Attributes.Name.IMPLEMENTATION_VENDOR, jarCreatedBy);
+        manifest.getMainAttributes().put(Attributes.Name.IMPLEMENTATION_VERSION, jarVersion);
         manifest.getMainAttributes().put(Attributes.Name.CLASS_PATH, ".");
         manifest.getMainAttributes().put(Attributes.Name.MAIN_CLASS, "Client.Client");
+        manifest.getMainAttributes().put(Attributes.Name.SEALED, "true");
 
         String jarFileName = System.getProperty("user.home") + "/Kumo/" + clientName + ".jar";
         File jarFile = new File(jarFileName);

