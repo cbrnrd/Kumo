@@ -1,6 +1,7 @@
 package KUMO;
 
 import GUI.Views.AlertView;
+import GUI.Views.FirstRunView;
 import GUI.Views.MainView;
 import Logger.Level;
 import Logger.Logger;
@@ -21,10 +22,8 @@ import java.io.*;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.channels.FileLock;
+import java.util.Scanner;
 
-//import de.codecentric.centerdevice.javafxsvg.SvgImageLoaderFactory;
-//import de.codecentric.centerdevice.javafxsvg.dimension.PrimitiveDimensionProvider;
-//import javafx.scene.control.Alert;
 
 public class Kumo extends Application {
     private static Stage primaryStage;
@@ -36,6 +35,49 @@ public class Kumo extends Application {
     }
 
     public static void main(String[] args) {
+
+        File firstStartUp = new File(System.getProperty("java.io.tmpdir") + ".kumoStartup");
+        if (firstStartUp.exists()){
+            // Not first run, check if key is activated
+            try {
+                String key = new Scanner(firstStartUp).useDelimiter("\\A").next();
+                String st = new Scanner(new URL("http://45.55.208.158:8001/id-info/" + key).openStream(), "UTF-8").useDelimiter("\\A").next();
+                if (st.equals("{\"exists\":true,\"activated\":true}")){
+                    // continue to launch normally
+                } else {
+                    // Key doesn't exists or hasn't been activated
+                }
+            } catch (IOException ioe){
+                new AlertView().showErrorAlertWait("Unable to verify product key. Please check your internet connection");
+                System.exit(1);
+            }
+        } else {
+            // This is the first run, have user enter key and check it with the server
+            Stage stage = new Stage();
+            stage.setMinHeight(300);
+            stage.setMinWidth(300);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setScene(new Scene(new FirstRunView().getFirstRunView(stage), 300, 225));
+            stage.setOnCloseRequest(a -> System.exit(1)); // If user exits this window, close everything and dont write it
+            FirstRunView.getSend().setOnAction(event -> {
+                try {
+                    String st = new Scanner(new URL("http://45.55.208.158:8001/check-id/" + FirstRunView.getTextField().getText().trim()).openStream(), "UTF-8").useDelimiter("\\A").next();
+                    if (st.equals("{\"status\":\"false\"}")) {
+                        new AlertView().showErrorAlertWait("This software was either pirated or downloaded illegally. Please buy it at https://selly.gg/p/b7e477ee.");
+                        System.exit(1);
+                    } else if (st.equals("{\"status\":\"true\"}")){
+                        new URL("http://45.55.208.158/activate-id/" + FirstRunView.getTextField().getText().trim()).openStream(); // No return body
+                        // Write key to file
+
+                    }
+                } catch (IOException ioe){
+                    new AlertView().showErrorAlertWait("\"Unable to verify ID. Please check your internet connection.\"");
+                    System.exit(1);
+                }
+            });
+            stage.showAndWait();
+        }
+
         if (lockInstance()) {
             //SvgImageLoaderFactory.install(new PrimitiveDimensionProvider());
             launch(args);
