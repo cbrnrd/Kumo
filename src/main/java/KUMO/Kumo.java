@@ -83,7 +83,7 @@ public class Kumo extends Application {
             // Not first run, check if key is activated
             try {
                 String key = new Scanner(firstStartUp).useDelimiter("\\A").next();
-                String st = new Scanner(new URL("http://45.55.208.158:8001/id-info/" + key).openStream(), "UTF-8").useDelimiter("\\A").next();
+                String st = new Scanner(new URL("https://sellywebhook-dnbgcmxnum.now.sh/id-info/" + key).openStream(), "UTF-8").useDelimiter("\\A").next();
                 if (st.equals("{\"exists\":true,\"activated\":true}")){
                     // continue to launch normally
                 } else {
@@ -106,13 +106,13 @@ public class Kumo extends Application {
             FirstRunView.getSend().setOnAction(event -> {
                 String key = FirstRunView.getTextField().getText().trim();
                 try {
-                    String st = new Scanner(new URL("http://45.55.208.158:8001/check-id/" + key).openStream(), "UTF-8").useDelimiter("\\A").next();
+                    String st = new Scanner(new URL("https://sellywebhook-dnbgcmxnum.now.sh/check-id/" + key).openStream(), "UTF-8").useDelimiter("\\A").next();
                     if (st.equals("{\"status\":\"false\"}")) {
                         new AlertView().showErrorAlertWait("This software was either pirated or downloaded illegally. Please buy it at https://selly.gg/p/b7e477ee.");
                         System.exit(1);
                     } else if (st.equals("{\"status\":\"true\"}")){
                         System.out.println("Activating key " + key);
-                        new URL("http://45.55.208.158/activate-id/" + key).openStream().close(); // No return body
+                        new URL("https://sellywebhook-dnbgcmxnum.now.sh/activate-id/" + key).openStream().close(); // No return body
                         System.out.println("Key activated");
                         // Write key to file
                         PrintWriter pr = new PrintWriter(firstStartUp);
