@@ -4,6 +4,7 @@ import GUI.Components.BottomBar;
 import GUI.Components.NotificationView;
 import GUI.Components.TopBar;
 import GUI.Styler;
+import KUMO.Kumo;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -27,6 +28,7 @@ class UpdatesView {
         hBox.setId("updatesView");
         hBox1.setId("updatesView");
         hBox.setPadding(new Insets(0, 0, 0, 10));
+        Kumo.getPrimaryStage().setHeight(600);
         updatesView.setTop(new TopBar().getTopBar(KUMO.Kumo.getPrimaryStage()));
         updatesView.setLeft(hBox);
         updatesView.setCenter(hBox1);
@@ -49,13 +51,15 @@ class UpdatesView {
             HBox hBox = getUpdatesPanel();
             hBox.setId("updatesView");
             updatesView.setCenter(hBox);
+
         });
-        return Styler.hContainer(Styler.vContainer(30, title, desc)); //, checkUpdates));
+        return Styler.hContainer(Styler.vContainer(20, title, desc)); //, checkUpdates));
     }
 
     private HBox getUpdatesPanel() {
         TextArea updates = new TextArea();
         updates.setPrefWidth(600);
+        updates.setPrefColumnCount(120);
         updates.setEditable(false);
         try{
             updates.setText(new Scanner(getClass().getResource("/LICENSE").openStream(), "UTF-8").useDelimiter("\\A").next());

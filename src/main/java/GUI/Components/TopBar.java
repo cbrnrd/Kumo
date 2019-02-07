@@ -3,6 +3,7 @@ package GUI.Components;
 import GUI.Controller;
 import GUI.Styler;
 import GUI.Views.MainView;
+import KUMO.Kumo;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -34,7 +35,10 @@ public class TopBar {
         vBox1.setPadding(new Insets(5, 10, 5, 340));
 
         HBox hBox = Styler.hContainer(new HBox(), vBox, vBox1);
-        vBox.setOnMouseClicked(event -> Controller.changePrimaryStage(new MainView().getMainView()));
+        vBox.setOnMouseClicked(event -> {
+            Kumo.getPrimaryStage().setHeight(500);
+            Controller.changePrimaryStage(new MainView().getMainView());
+        });
         imageView.setFitWidth(100);
         imageView.setFitHeight(50);
         return Styler.vContainer(new VBox(), new TitleBar().getMenuBar(stage), hBox);

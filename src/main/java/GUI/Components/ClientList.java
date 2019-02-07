@@ -49,14 +49,14 @@ public class ClientList implements Repository {
         );
 
         TableColumn<ClientObject, String> OS = new TableColumn<>("OS");
-        OS.setMinWidth(100);
-        OS.setMaxWidth(150);
+        OS.setMinWidth(400);
         OS.setResizable(true);
         OS.setCellValueFactory(new PropertyValueFactory<>("os"));
+        OS.setCellFactory(TextFieldTableCell.forTableColumn());
         OS.setEditable(false);
 
         TableColumn<ClientObject, String> IP = new TableColumn<>("IP");
-        IP.setMinWidth(600);
+        IP.setMinWidth(300);
         IP.setResizable(false);
         IP.setCellValueFactory(new PropertyValueFactory<>("IP"));
         IP.setCellFactory(col -> {
@@ -72,7 +72,7 @@ public class ClientList implements Repository {
         ObservableList<ClientObject> list = FXCollections.observableArrayList();
         list.addAll(CONNECTIONS.values());
         tableView.setItems(list);
-        tableView.getColumns().addAll(onlineStatus, nickName, IP);
+        tableView.getColumns().addAll(onlineStatus, nickName, IP, OS);
 
         return tableView;
     }

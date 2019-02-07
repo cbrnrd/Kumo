@@ -34,7 +34,7 @@ public class ChromePassView {
         //resultsArea.setId("console");
         resultsArea.setEditable(false);
         resultsArea.setPrefRowCount(30);
-        resultsArea.setPrefColumnCount(300);
+        resultsArea.setPrefColumnCount(1000);
         vBox2.getChildren().addAll(label, Styler.vContainer(resultsArea));
         vBox.getChildren().addAll(new TopBar().getStrippedTopBar(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;
