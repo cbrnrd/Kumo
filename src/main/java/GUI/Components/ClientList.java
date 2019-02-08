@@ -40,23 +40,26 @@ public class ClientList implements Repository {
         TableColumn<ClientObject, String> nickName = new TableColumn<>("Nickname");
         nickName.setMinWidth(150);
         nickName.setMaxWidth(200);
-        nickName.setResizable(false);
+        nickName.setResizable(true);
         nickName.setCellValueFactory(new PropertyValueFactory<>("nickName"));
         nickName.setCellFactory(TextFieldTableCell.forTableColumn());
         nickName.setOnEditCommit(
                 t -> t.getTableView().getItems().get(
                         t.getTablePosition().getRow()).setNickName(t.getNewValue())
         );
-
-        TableColumn<ClientObject, String> OS = new TableColumn<>("OS");
-        OS.setMinWidth(400);
-        OS.setResizable(true);
-        OS.setCellValueFactory(new PropertyValueFactory<>("os"));
-        OS.setCellFactory(TextFieldTableCell.forTableColumn());
-        OS.setEditable(false);
+        nickName.setCellFactory(col -> {
+            final TableCell<ClientObject, String> cell = new TableCell<>();
+            cell.textProperty().bind(cell.itemProperty());
+            cell.setOnMouseClicked(event -> {
+                if (event.getButton().equals(MouseButton.SECONDARY) && cell.getTableView().getSelectionModel().getSelectedItem() != null && cell.getTableView().getSelectionModel().getSelectedItem().getClient().isConnected()) {
+                    IPContextMenu.getIPContextMenu(cell, event);
+                }
+            });
+            return cell;
+        });
 
         TableColumn<ClientObject, String> IP = new TableColumn<>("IP");
-        IP.setMinWidth(300);
+        IP.setMinWidth(200);
         IP.setResizable(false);
         IP.setCellValueFactory(new PropertyValueFactory<>("IP"));
         IP.setCellFactory(col -> {
@@ -69,10 +72,44 @@ public class ClientList implements Repository {
             });
             return cell;
         });
+
+        TableColumn<ClientObject, String> OS = new TableColumn<>("OS");
+        OS.setMinWidth(100);
+        OS.setResizable(true);
+        OS.setCellValueFactory(new PropertyValueFactory<>("SYSTEM_OS"));
+        OS.setCellFactory(TextFieldTableCell.forTableColumn());
+        OS.setEditable(false);
+        OS.setCellFactory(col -> {
+            final TableCell<ClientObject, String> cell = new TableCell<>();
+            cell.textProperty().bind(cell.itemProperty());
+            cell.setOnMouseClicked(event -> {
+                if (event.getButton().equals(MouseButton.SECONDARY) && cell.getTableView().getSelectionModel().getSelectedItem() != null && cell.getTableView().getSelectionModel().getSelectedItem().getClient().isConnected()) {
+                    IPContextMenu.getIPContextMenu(cell, event);
+                }
+            });
+            return cell;
+        });
+
+        TableColumn<ClientObject, String> user = new TableColumn<>("User");
+        user.setMinWidth(200);
+        user.setResizable(true);
+        user.setCellValueFactory(new PropertyValueFactory<>("uname"));
+        user.setEditable(false);
+        user.setCellFactory(col -> {
+            final TableCell<ClientObject, String> cell = new TableCell<>();
+            cell.textProperty().bind(cell.itemProperty());
+            cell.setOnMouseClicked(event -> {
+                if (event.getButton().equals(MouseButton.SECONDARY) && cell.getTableView().getSelectionModel().getSelectedItem() != null && cell.getTableView().getSelectionModel().getSelectedItem().getClient().isConnected()) {
+                    IPContextMenu.getIPContextMenu(cell, event);
+                }
+            });
+            return cell;
+        });
+
         ObservableList<ClientObject> list = FXCollections.observableArrayList();
-        list.addAll(CONNECTIONS.values());
+        list.addAll(CONNECTIONS.values()); // Only ClientObjects
         tableView.setItems(list);
-        tableView.getColumns().addAll(onlineStatus, nickName, IP, OS);
+        tableView.getColumns().addAll(onlineStatus, nickName, IP, OS, user);
 
         return tableView;
     }

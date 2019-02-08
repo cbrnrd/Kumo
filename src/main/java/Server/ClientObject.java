@@ -19,6 +19,7 @@ public class ClientObject implements Serializable, Repository {
     private String onlineStatus = client.isConnected() ? "Online" : "Offline";
     private String nickName;
     private String IP;
+    private String uname;
     private transient PrintWriter clientOutput;
     private transient DataOutputStream dis;
 
@@ -63,6 +64,10 @@ public class ClientObject implements Serializable, Repository {
     public void setSYSTEM_OS(String SYSTEM_OS) {
         this.SYSTEM_OS = SYSTEM_OS;
     }
+
+    public String getUname() { return uname; }
+
+    public void setUname(String uname) { this.uname = uname; }
 
     public Socket getClient() {
         return client;

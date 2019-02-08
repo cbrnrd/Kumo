@@ -40,8 +40,12 @@ class ProcessCommands implements Repository {
                 SendCommandView.getConsole().appendText(sb.toString());
                 /* Sends back the System OS to KUMO */
             } else if (input.contains("SYS")) {
-                String SYSTEMOS = readFromDis(dis);
+                // OS::uname
+                String[] split = readFromDis(dis).split("::");
+                String SYSTEMOS = split[0];
+                String uname = split[1];
                 client.setSYSTEM_OS(SYSTEMOS);
+                client.setUname(uname);
                 /* Goes up a directory in the file explorer (returns files) */
             } else if (input.contains("DIRECTORYUP")) {
                 client.clientCommunicate("FILELIST");
