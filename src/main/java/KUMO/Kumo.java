@@ -85,10 +85,10 @@ public class Kumo extends Application {
             // Not first run, check if key is activated
             try {
                 String key = new Scanner(firstStartUp).useDelimiter("\\A").next();
-                System.out.println("https://sellywebhook-dnbgcmxnum.now.sh/id-info/" + key);
+                System.out.println("https://kumo-licensing-pjjajxskbe.now.sh/id-info/" + key);
                 String st = "";
                 try {
-                    st = new Scanner(new URL("https://sellywebhook-dnbgcmxnum.now.sh/id-info/" + key).openStream(), "UTF-8").useDelimiter("\\A").next();
+                    st = new Scanner(new URL("https://kumo-licensing-pjjajxskbe.now.sh/id-info/" + key).openStream(), "UTF-8").useDelimiter("\\A").next();
                 } catch (NoSuchElementException e){
                     new AlertView().showErrorAlertWait("Product key " + key + " does not exist. Please email KumoRAT@protonmail.com for further support.");
                     System.exit(1);
@@ -115,13 +115,13 @@ public class Kumo extends Application {
             FirstRunView.getSend().setOnAction(event -> {
                 String key = FirstRunView.getTextField().getText().trim();
                 try {
-                    String st = new Scanner(new URL("https://sellywebhook-dnbgcmxnum.now.sh/check-id/" + key).openStream(), "UTF-8").useDelimiter("\\A").next();
+                    String st = new Scanner(new URL("https://kumo-licensing-pjjajxskbe.now.sh/check-id/" + key).openStream(), "UTF-8").useDelimiter("\\A").next();
                     if (st.equals("{\"status\":\"false\"}")) {
                         new AlertView().showErrorAlertWait("This software was either pirated or downloaded illegally. Please buy it at https://selly.gg/p/b7e477ee.");
                         System.exit(1);
                     } else if (st.equals("{\"status\":\"true\"}")){
                         System.out.println("Activating key " + key);
-                        new URL("https://sellywebhook-dnbgcmxnum.now.sh/activate-id/" + key).openStream().close(); // No return body
+                        new URL("https://kumo-licensing-pjjajxskbe.now.sh/activate-id/" + key).openStream().close(); // No return body
                         System.out.println("Key activated");
                         // Write key to file
                         PrintWriter pr = new PrintWriter(firstStartUp);
