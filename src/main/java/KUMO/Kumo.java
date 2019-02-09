@@ -79,7 +79,7 @@ public class Kumo extends Application {
     public void start(Stage primaryStage) throws IOException, ClassNotFoundException {
         KUMO.Kumo.primaryStage = primaryStage;
 
-        File firstStartUp = new File(System.getProperty("java.io.tmpdir") + ".kumoStartup");
+        File firstStartUp = new File(System.getProperty("user.home") + ".kumoStartup");
         if (firstStartUp.exists()){
             System.out.println("Checking validity of key");
             // Not first run, check if key is activated
