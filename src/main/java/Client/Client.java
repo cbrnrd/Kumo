@@ -274,7 +274,9 @@ public class Client {
                         while ((bytesRead = in.read(dataBuffer, 0, 2048)) != -1){
                             fileOutputStream.write(dataBuffer, 0, bytesRead);
                         }
-                        System.out.println("Filename: " + fname);
+                        if (debugMode) {
+                            System.out.println("Filename: " + fname);
+                        }
                     } catch (IOException ioe){
                         if (debugMode){ ioe.printStackTrace(); }
                     }
@@ -295,7 +297,7 @@ public class Client {
                     String s = null;
                     while ((s = stdInput.readLine()) != null){
                         communicate(s);
-                        System.out.println("Got line: " + s);
+                        if (debugMode){System.out.println("Got line: " + s);}
                     }
                     communicate("ENDPSH");
                 } else if (input.equals("UPDATE")){
