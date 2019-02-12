@@ -21,9 +21,16 @@ These features will likely be released in the order they are in below:
 * ~~Show messagebox~~ ✔
 * ~~Metasploit integration~~ ✔
 * Upload/~~download~~ ✔ and execute
-* Module execution (see below)
+* Reverse Proxy (SOCKS5)
+* Cookie stealing
+* Remote desktop
+* Keylogger
+* XMR miner
+* Webcam stuff
+* Process viewer/killer
+* Plugin execution (see below)
 
-## Idea for module execution
+## Idea for plugin execution
 ```java
 class ModuleName implements Runnable {
 
