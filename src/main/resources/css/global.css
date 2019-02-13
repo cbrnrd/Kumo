@@ -118,7 +118,7 @@
     -fx-text-fill: mediumslateblue;
     -fx-background-color: white;
     -fx-background-insets: 0, 1, 2;
-    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+    /*-fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;*/
 }
 
 .table-view {

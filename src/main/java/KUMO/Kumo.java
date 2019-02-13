@@ -1,6 +1,7 @@
 package KUMO;
 
 import GUI.Views.AlertView;
+import GUI.Views.ClientView;
 import GUI.Views.FirstRunView;
 import GUI.Views.MainView;
 import Logger.Level;
@@ -144,11 +145,12 @@ public class Kumo extends Application {
         /* Load data from files - including client data, server settings, etc. */
         new PseudoBase().loadData();
         /* Set up primary view */
-        getPrimaryStage().setTitle("KUMO " + KumoSettings.CURRENT_VERSION);
+        getPrimaryStage().setTitle("Kumo RAT");// + KumoSettings.CURRENT_VERSION);
 
         SwingUtilities.invokeLater(this::addAppToTray);
         Platform.setImplicitExit(false);
-        Scene mainScene = new Scene(new MainView().getMainView(), 900, 500);
+        //Scene mainScene = new Scene(new MainView().getMainView(), 900, 500);
+        Scene mainScene = new Scene(new ClientView().getClientView(), 900, 500);
         mainScene.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
         getPrimaryStage().setScene(mainScene);
         getPrimaryStage().getIcons().add(new Image(getClass().getResourceAsStream("/Images/Icons/icon.png")));

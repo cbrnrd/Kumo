@@ -18,9 +18,9 @@ import javafx.scene.layout.HBox;
 import javax.crypto.Cipher;
 import java.security.NoSuchAlgorithmException;
 
-class SettingsView {
+public class SettingsView {
 
-    BorderPane getSettingsView() {
+    public BorderPane getSettingsView() {
         BorderPane borderPane = new BorderPane();
         borderPane.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
         borderPane.setTop(new TopBar().getTopBar(KUMO.Kumo.getPrimaryStage()));

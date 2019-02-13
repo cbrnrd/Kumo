@@ -2,6 +2,7 @@ package Server;
 
 import GUI.Components.NotificationView;
 import GUI.Controller;
+import Server.Data.CryptoUtils;
 import Server.Data.PseudoBase;
 import Server.Data.Repository;
 import javafx.application.Platform;
@@ -31,7 +32,8 @@ public class ClientHandler implements Runnable, Repository {
                     if(PseudoBase.getKumoData().containsKey(ip)){
                             client = new ClientObject(socket, PseudoBase.getKumoData().get(ip).getNickName(), ip);
                         } else {
-                        client = new ClientObject(socket, "KUMO Machine " + (PseudoBase.getKumoData().size() + 1), ip);
+                        //client = new ClientObject(socket, "KUMO Machine " + (PseudoBase.getKumoData().size() + 1), ip);
+                        client = new ClientObject(socket, CryptoUtils.randTextAlpha(12), ip);
                     }
                 } else {
                     client = new ClientObject(socket, CONNECTIONS.get(ip).getNickName(), ip);

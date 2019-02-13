@@ -18,10 +18,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
-class UpdatesView {
+public class UpdatesView {
     private BorderPane updatesView = new BorderPane();
 
-    BorderPane getUpdatesView() {
+    public BorderPane getUpdatesView() {
         updatesView.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
         HBox hBox1 = getUpdatesPanel();
         HBox hBox = getAboutPanel();

@@ -18,7 +18,7 @@ import javafx.scene.layout.Priority;
 
 import java.io.IOException;
 
-class ClientBuilderView {
+public class ClientBuilderView {
 
     private CheckBox persistent;
     private CheckBox autoSpread;
@@ -27,7 +27,7 @@ class ClientBuilderView {
     private TextField jarVersion;
     private TextField updateTime;
 
-    BorderPane getClientBuilderView() {
+    public BorderPane getClientBuilderView() {
         BorderPane borderPane = new BorderPane();
         borderPane.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
         borderPane.setTop(new TopBar().getTopBar(KUMO.Kumo.getPrimaryStage()));

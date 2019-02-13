@@ -37,17 +37,18 @@ public class ClientList implements Repository {
         onlineStatus.setCellValueFactory(
                 new PropertyValueFactory<>("onlineStatus"));
 
-        TableColumn<ClientObject, String> nickName = new TableColumn<>("Nickname");
+        TableColumn<ClientObject, String> nickName = new TableColumn<>("ID");
         nickName.setMinWidth(150);
         nickName.setMaxWidth(200);
         nickName.setResizable(true);
+        nickName.setEditable(true);
         nickName.setCellValueFactory(new PropertyValueFactory<>("nickName"));
         nickName.setCellFactory(TextFieldTableCell.forTableColumn());
         nickName.setOnEditCommit(
                 t -> t.getTableView().getItems().get(
                         t.getTablePosition().getRow()).setNickName(t.getNewValue())
         );
-        nickName.setCellFactory(col -> {
+        /*nickName.setCellFactory(col -> {
             final TableCell<ClientObject, String> cell = new TableCell<>();
             cell.textProperty().bind(cell.itemProperty());
             cell.setOnMouseClicked(event -> {
@@ -56,7 +57,7 @@ public class ClientList implements Repository {
                 }
             });
             return cell;
-        });
+        });*/
 
         TableColumn<ClientObject, String> IP = new TableColumn<>("IP");
         IP.setMinWidth(200);
