@@ -22,7 +22,7 @@ These features will likely be released in the order they are in below:
 * ~~Metasploit integration~~ ✔
 * Upload/~~download~~ ✔ and execute
 * Reverse Proxy (SOCKS5)
-* Cookie stealing
+* Linux/Mac persistence
 * Remote desktop
 * Keylogger
 * XMR miner
