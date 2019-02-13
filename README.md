@@ -28,7 +28,7 @@ These features will likely be released in the order they are in below:
 * XMR miner
 * Webcam stuff
 * Process viewer/killer
-* Plugin execution (see below)
+* ~~Plugin execution (see below)~~ ✔
 
 ## Idea for plugin execution
 ```java
