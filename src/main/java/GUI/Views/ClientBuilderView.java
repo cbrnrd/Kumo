@@ -25,6 +25,7 @@ public class ClientBuilderView {
     private CheckBox debug;
     private TextField jarCreatedBy;
     private TextField jarVersion;
+    private CheckBox createProguardRules;
     private TextField updateTime;
 
     public BorderPane getClientBuilderView() {
@@ -51,6 +52,8 @@ public class ClientBuilderView {
         // Version
         Label jarVersionLabel = (Label) Styler.styleAdd(new Label("Implementation-Version: "), "label-bright");
         jarVersion = new TextField();
+        Label proguardLabel = (Label) Styler.styleAdd(new Label("Generate proguard rules: "), "label-bright");
+        createProguardRules = new CheckBox();
 
         TitledPane jarSettings = (TitledPane) Styler.styleAdd(new TitledPane(), "label-bright");
         GridPane grid = new GridPane();
@@ -63,6 +66,8 @@ public class ClientBuilderView {
         grid.add(jarCreatedBy, 1, 0);
         grid.add(jarVersionLabel, 0, 1);
         grid.add(jarVersion, 1, 1);
+        grid.add(proguardLabel, 0, 2);
+        grid.add(createProguardRules, 1, 2);
 
         jarSettings.setLayoutY(10);
         jarSettings.setText("JAR Settings");
@@ -169,6 +174,9 @@ public class ClientBuilderView {
             }
             if ((!jarVersion.getText().equals(""))){
                 ClientBuilder.jarVersion = jarVersion.getText();
+            }
+            if (createProguardRules.isSelected()){
+                ClientBuilder.createProguard = true;
             }
         });
 
