@@ -1,7 +1,7 @@
 .alert {
     -fx-background-color: #16161d;
     -fx-font-size: 12px;
-    -fx-font-family: "Roboto Thin";
+    -fx-font-family: "Roboto";
     -fx-text-fill: #FFFFFF;
 }
 
@@ -18,13 +18,27 @@
     -fx-background-color: #16161d;
 }
 
+.titled-pane > .title{
+    -fx-pref-height: 20px;
+    -fx-font: 14 "Roboto Thin";
+    -fx-content-display: bottom;
+    -fx-alignment: bottom-left;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+#java-settings {
+    -fx-background-color: #FFFFFF;
+    -fx-stroke: black;
+    -fx-stroke-width: 3px;
+}
+
 .root {
     -fx-background-color: #16161d;
 }
 
 .title {
     -fx-font-size: 22px;
-    -fx-font-family: "Roboto Thin";
+    -fx-font-family: "Roboto";
     -fx-text-fill: black;
     -fx-text-alignment: center;
 }
@@ -44,7 +58,7 @@
 
 .label-light {
     -fx-font-size: 12px;
-    -fx-font-family: "Roboto Thin";
+    -fx-font-family: "Roboto";
     -fx-text-fill: white;
 }
 
@@ -57,7 +71,7 @@
 
 .label-bright {
     -fx-font-size: 14px;
-    -fx-font-family: "Roboto Thin";
+    -fx-font-family: "Roboto";
     -fx-text-fill: black;
     -fx-opacity: 1;
 }
@@ -104,13 +118,13 @@
     -fx-text-fill: mediumslateblue;
     -fx-background-color: white;
     -fx-background-insets: 0, 1, 2;
-    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+    /*-fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;*/
 }
 
 .table-view {
     -fx-base: #16161d;
-    -fx-control-inner-background: #2f2f3e;
-    -fx-background-color: #2f2f3e;
+    -fx-control-inner-background: #ecf0f1;
+    -fx-background-color: #ecf0f1;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -177,7 +191,7 @@
 
 .check-box {
     -fx-font-size: 14px;
-    -fx-font-family: "Roboto Thin";
+    -fx-font-family: "Roboto";
     -fx-text-fill: #8d9db1;
     -fx-opacity: 1;
 }
@@ -201,6 +215,10 @@
     -fx-background-color: white;
 }
 
+#downloadAndExecuteView {
+    -fx-background-color: white;
+}
+
 .notification {
     -fx-background-color: #2f2f3e;
     -fx-opacity: 0.9;
@@ -215,7 +233,7 @@
 
 #icon {
     -fx-background-color: whitesmoke;
-    -fx-background-radius: 15px;
+    -fx-background-radius: 150px;
 }
 
 #icon:hover {

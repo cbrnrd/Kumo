@@ -159,6 +159,9 @@ class ProcessCommands implements Repository {
                     DownloadAndExecuteView.setStatusLabel("Execution successful");
                 }
 
+            } else if (input.contains("PLUGOUT")){
+                String output = readFromDis(dis);
+                PluginView.getData().setText(output);
             }
 
             /** clipboard stuff **/

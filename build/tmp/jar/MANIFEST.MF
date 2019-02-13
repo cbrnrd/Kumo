@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-Implementation-Title: xrat
-Implementation-Version: 0.1.0
+Implementation-Title: kumo
+Implementation-Version: 1.0
 

