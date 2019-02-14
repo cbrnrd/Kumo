@@ -21,7 +21,6 @@ These features will likely be released in the order they are in below:
 * ~~Show messagebox~~ ✔
 * ~~Metasploit integration~~ ✔
 * Upload/~~download~~ ✔ and execute
-* Reverse Proxy (SOCKS5)
 * Linux/Mac persistence
 * Remote desktop
 * Keylogger
