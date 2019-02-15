@@ -27,7 +27,7 @@ class IPContextMenu implements Repository {
     static void getIPContextMenu(TableCell n, MouseEvent e) {
         ClientObject clientObject = ((ClientObject) n.getTableView().getSelectionModel().getSelectedItem());
         ContextMenu cm = new ContextMenu();
-        Menu mi1 = new Menu("Perform Action\t\u25B6");
+        Menu mi1 = new Menu("Actions\t\t\u25B6");
         MenuItem sb1 = new MenuItem("File Explorer");
         sb1.setOnAction(event -> {
             if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
@@ -324,7 +324,18 @@ class IPContextMenu implements Repository {
                 }
             });
         });
-        misc.getItems().addAll(visit, showMsgbox, sleep);
+
+        MenuItem shutdown = new MenuItem("Shutdown Machine");
+        shutdown.setOnAction(event -> {
+            if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
+                try {
+                    clientObject.clientCommunicate("SHUTDOWN");
+                } catch (IOException e1) {
+                    new AlertView().showErrorAlert("Unable to communicate with client.");
+                }
+            }
+        });
+        misc.getItems().addAll(visit, showMsgbox, sleep, shutdown);
 
         MenuItem update = new MenuItem("Update Client");
         update.setOnAction(event -> {
