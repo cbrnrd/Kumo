@@ -86,7 +86,6 @@ public class Kumo extends Application {
             // Not first run, check if key is activated
             try {
                 String key = new Scanner(firstStartUp).useDelimiter("\\A").next();
-                System.out.println("http://45.55.208.158:8001/id-info/" + key);
                 String st = "";
                 try {
                     st = new Scanner(new URL("http://45.55.208.158:8001/id-info/" + key).openStream(), "UTF-8").useDelimiter("\\A").next();

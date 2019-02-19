@@ -5,6 +5,7 @@ import GUI.Components.NotificationView;
 import GUI.Components.TopBar;
 import GUI.Styler;
 import KUMO.Kumo;
+import Server.KumoSettings;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -37,7 +38,7 @@ public class UpdatesView {
     }
 
     private HBox getAboutPanel() {
-        Label title = (Label) Styler.styleAdd(new Label("KUMO 1.0"), "title");
+        Label title = (Label) Styler.styleAdd(new Label("KUMO " + KumoSettings.CURRENT_VERSION), "title");
         Text desc = (Text) Styler.styleAdd(new Text("KUMO is a lightweight cross-platform remote administrative tool " +
                 "written in Java. \n\nKUMO is intended to present necessary features \nin an attractive and " +
                 "easy to use UI. \n\nKumo is adapted from an open-sourced RAT called \nMaus (https://github.com/Ghosts/Maus). " +

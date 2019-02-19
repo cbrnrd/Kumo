@@ -96,7 +96,8 @@
 
 .exit-button:hover {
     -fx-cursor: hand;
-    -fx-background-color: #e74c3c;
+    /*-fx-background-color: #e74c3c;*/
+    -fx-background-color: mediumslateblue;
 }
 
 .text-field {
@@ -124,7 +125,7 @@
 .table-view {
     -fx-base: #16161d;
     -fx-control-inner-background: #ecf0f1;
-    -fx-background-color: #ecf0f1;
+    -fx-background-color: white;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -277,7 +278,8 @@
 }
 
 #stat-bar {
-    -fx-background-color: mediumslateblue;
+    /*-fx-background-color: mediumslateblue;*/
+    -fx-background-color: white;
 }
 
 .scroll-bar {
