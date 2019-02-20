@@ -25,6 +25,7 @@ public class BottomBar implements Repository {
         connectionsLabel = new Label("  Clients: " + CONNECTIONS.size() + " \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Version " + KumoSettings.CURRENT_VERSION + " | Developer: Clova");
         connectionsLabel = (Label) Styler.styleAdd(connectionsLabel, "label-light");
         connectionsLabel.setStyle("-fx-text-fill: mediumslateblue");
+
         vBox.getChildren().add(connectionsLabel);
         hBox.getChildren().add(vBox);
         hBox.setId("stat-bar");

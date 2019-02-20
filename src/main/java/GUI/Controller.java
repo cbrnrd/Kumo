@@ -35,6 +35,10 @@ public class Controller implements Repository {
         KUMO.Kumo.getPrimaryStage().setScene(new Scene(newScene, 900, 500));
     }
 
+    public static void changePrimaryStage(Pane newScene, int w, int h) {
+        KUMO.Kumo.getPrimaryStage().setScene(new Scene(newScene, w, h));
+    }
+
     public static String getReleaseNotes(){
         String s = "Release notes: Kumo v" + KumoSettings.CURRENT_VERSION + "\n" +
                 "\tNew features:\n" +
@@ -49,7 +53,9 @@ public class Controller implements Repository {
                 "\t\t- Add the ability to generate ProGuard obfuscation rules for the client JAR.\n\n" +
                 "\tBug fixes:\n" +
                 "\t\t- Fix download & execute so it works on Windows clients.\n" +
+                "\t\t- Fixed accidental stage height reset when double clicking info and updates nav tiles.\n" +
                 "\t\t- Fix client exit on Windows.\n";
+
         return s;
     }
 }

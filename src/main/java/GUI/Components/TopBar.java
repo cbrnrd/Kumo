@@ -75,12 +75,12 @@ public class TopBar {
             Controller.changePrimaryStage(new ClientBuilderView().getClientBuilderView());
         });
         settingsVbox.setOnMouseClicked(event -> {
+            Controller.changePrimaryStage(new SettingsView().getSettingsView(), 900, 550);
             Kumo.getPrimaryStage().setHeight(550);
-            Controller.changePrimaryStage(new SettingsView().getSettingsView());
         });
         infoVbox.setOnMouseClicked(event -> {
-            Kumo.getPrimaryStage().setHeight(500);
-            Controller.changePrimaryStage(new UpdatesView().getUpdatesView());
+            Controller.changePrimaryStage(new UpdatesView().getUpdatesView(), 900, 600);
+            Kumo.getPrimaryStage().setHeight(600);
         });
         imageView.setFitWidth(100);
         imageView.setFitHeight(50);

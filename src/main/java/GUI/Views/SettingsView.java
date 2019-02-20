@@ -35,7 +35,7 @@ public class SettingsView {
         hBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
         hBox.setId("clientBuilder");
         hBox.setPadding(new Insets(20, 20, 20, 20));
-        Label title = (Label) Styler.styleAdd(new Label("Settings"), "title");
+        Label title = (Label) Styler.styleAdd(new Label("Server Settings"), "title");
         hBox.getChildren().add(Styler.vContainer(20, title));
         return hBox;
     }
@@ -71,7 +71,7 @@ public class SettingsView {
         TextField aesKey = new TextField("" + KumoSettings.AES_KEY);
         HBox aesBox = Styler.hContainer(aesLabel, aesKey);
         aesKey.setEditable(false);
-        aesKey.setDisable(true);
+        aesKey.setStyle("-fx-text-fill: grey");
 
 
         CheckBox soundToggle = new CheckBox();
