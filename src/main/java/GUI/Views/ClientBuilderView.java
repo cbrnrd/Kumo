@@ -9,8 +9,13 @@ import Logger.Level;
 import Logger.Logger;
 import Server.Data.PseudoBase;
 import Server.KumoSettings;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -23,10 +28,10 @@ public class ClientBuilderView {
     private CheckBox persistent;
     private CheckBox autoSpread;
     private CheckBox debug;
-    private TextField jarCreatedBy;
-    private TextField jarVersion;
+    private JFXTextField jarCreatedBy;
+    private JFXTextField jarVersion;
     private CheckBox createProguardRules;
-    private TextField updateTime;
+    private JFXTextField updateTime;
 
     public BorderPane getClientBuilderView() {
         BorderPane borderPane = new BorderPane();
@@ -47,11 +52,11 @@ public class ClientBuilderView {
         hbox.setPadding(new Insets(75, 20, 20, 20));
         // Created-By
         Label createdByLabel = (Label) Styler.styleAdd(new Label("Implementation-Title: "), "label-bright");
-        jarCreatedBy = new TextField();
+        jarCreatedBy = new JFXTextField();
 
         // Version
         Label jarVersionLabel = (Label) Styler.styleAdd(new Label("Implementation-Version: "), "label-bright");
-        jarVersion = new TextField();
+        jarVersion = new JFXTextField();
         Label proguardLabel = (Label) Styler.styleAdd(new Label("Generate proguard rules: "), "label-bright");
         createProguardRules = new CheckBox();
 
@@ -77,7 +82,7 @@ public class ClientBuilderView {
 
        /* // Evasion, custom networking
         Label updateTimeLabel = (Label) Styler.styleAdd(new Label("Update Time: "), "label-bright");
-        updateTime = new TextField("30");
+        updateTime = new JFXTextField("30");
 
         TitledPane networkSettings = (TitledPane) Styler.styleAdd(new TitledPane(), "label-bright");
         GridPane netGrid = new GridPane();
@@ -115,16 +120,19 @@ public class ClientBuilderView {
         hBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
         hBox.setId("clientBuilder");
         hBox.setPadding(new Insets(20, 20, 20, 20));
+        RequiredFieldValidator fieldValidator = new RequiredFieldValidator("This field is required");
         Label title = (Label) Styler.styleAdd(new Label(" "), "title");
 
         Label serverIPLabel = (Label) Styler.styleAdd(new Label("Server IP: "), "label-bright");
-        TextField serverIP = new TextField("" + KumoSettings.CONNECTION_IP);
+        JFXTextField serverIP = new JFXTextField("" + KumoSettings.CONNECTION_IP);
         HBox serverIPBox = Styler.hContainer(serverIPLabel, serverIP);
+        serverIPBox.setPadding(new Insets(10, 10, 10, 10));
         serverIP.setEditable(true);
 
         Label portLabel = (Label) Styler.styleAdd(new Label("Port: "), "label-bright");
-        TextField port = new TextField("" + KumoSettings.PORT);
+        JFXTextField port = new JFXTextField("" + KumoSettings.PORT);
         HBox portBox = Styler.hContainer(portLabel, port);
+        portBox.setPadding(new Insets(10, 10, 10, 10));
         port.setEditable(true);
         port.textProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
@@ -133,12 +141,21 @@ public class ClientBuilderView {
         }));
 
         Label clientNameLabel = (Label) Styler.styleAdd(new Label("Client Name: "), "label-bright");
-        TextField clientName = new TextField("Client");
+        JFXTextField clientName = new JFXTextField("Client");
         HBox clientNameBox = Styler.hContainer(clientNameLabel, clientName);
+        clientNameBox.setPadding(new Insets(10, 10, 10, 10));
         clientName.setEditable(true);
 
+        // Add required field to all fields
+        JFXTextField[] fields = new JFXTextField[] {serverIP, port, clientName};
+        for (JFXTextField f : fields){
+            f.getValidators().add(fieldValidator);
+            f.focusedProperty().addListener((o, old, newVal) -> {
+                if (!newVal) f.validate();
+            });
+        }
 
-        Button buildClient = new Button("Build");
+        JFXButton buildClient = new JFXButton("Build");
         buildClient.setPrefWidth(150);
         buildClient.setPrefHeight(50);
         buildClient.setOnAction(event -> {

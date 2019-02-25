@@ -1,3 +1,8 @@
+@font-face {
+    font-family: axis;
+    src: url("axis.bold.otf");
+}
+
 .alert {
     -fx-background-color: #16161d;
     -fx-font-size: 12px;
@@ -37,10 +42,11 @@
 }
 
 .title {
-    -fx-font-size: 22px;
-    -fx-font-family: "Roboto";
+    -fx-font-size: 32px;
+    -fx-font-family: "Roboto Black";
     -fx-text-fill: black;
     -fx-text-alignment: center;
+    -fx-font-smoothing-type: gray;
 }
 
 .table-row-cell:selected {
@@ -140,16 +146,16 @@
     -fx-text-fill: black;
 }
 
-.button {
-    -fx-text-fill: black;
-    -fx-font-family: "Roboto Thin";
+.jfx-button {
+    -fx-text-fill: white;
+    -fx-font-family: "Roboto";
     -fx-font-weight: bold;
-    -fx-background-color: #a29bfe;
+    -fx-background-color: #6c5ce7;
 }
 
-.button:hover {
+.jfx-button:hover {
     -fx-cursor: hand;
-    -fx-background-color: #6c5ce7;
+    -jfx-button-type: RAISED;
 }
 
 .text-area:focused .content {

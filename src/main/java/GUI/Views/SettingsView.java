@@ -6,14 +6,16 @@ import GUI.Components.NotificationView;
 import GUI.Components.TopBar;
 import GUI.Styler;
 import Server.KumoSettings;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 
 import javax.crypto.Cipher;
 import java.security.NoSuchAlgorithmException;
@@ -35,6 +37,9 @@ public class SettingsView {
         hBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
         hBox.setId("clientBuilder");
         hBox.setPadding(new Insets(20, 20, 20, 20));
+        Font.loadFont(
+                getClass().getResource("/css/axis.bold.otf").toExternalForm(), 20
+        );
         Label title = (Label) Styler.styleAdd(new Label("Server Settings"), "title");
         hBox.getChildren().add(Styler.vContainer(20, title));
         return hBox;
@@ -46,10 +51,12 @@ public class SettingsView {
         hBox.setId("settingsView");
         hBox.setPadding(new Insets(20, 20, 20, 20));
         Label title = (Label) Styler.styleAdd(new Label(" "), "title");
+        RequiredFieldValidator fieldValidator = new RequiredFieldValidator("This field is required");
 
         Label listeningPortLabel = (Label) Styler.styleAdd(new Label("Listening Port: "), "label-bright");
-        TextField listeningPort = new TextField("" + KumoSettings.PORT);
+        JFXTextField listeningPort = new JFXTextField("" + KumoSettings.PORT);
         HBox listeningPortBox = Styler.hContainer(listeningPortLabel, listeningPort);
+        listeningPortBox.setPadding(new Insets(5, 5, 5, 5));
         listeningPort.setEditable(true);
         listeningPort.textProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
@@ -58,8 +65,9 @@ public class SettingsView {
         }));
 
         Label maxConnectionsLabel = (Label) Styler.styleAdd(new Label("Max Connections: "), "label-bright");
-        TextField maxConnections = new TextField("" + KumoSettings.MAX_CONNECTIONS);
+        JFXTextField maxConnections = new JFXTextField("" + KumoSettings.MAX_CONNECTIONS);
         HBox maxConnectionsBox = Styler.hContainer(maxConnectionsLabel, maxConnections);
+        maxConnectionsBox.setPadding(new Insets(5, 5, 5, 5));
         maxConnections.setEditable(true);
         maxConnections.textProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
@@ -67,8 +75,17 @@ public class SettingsView {
             }
         }));
 
+        // Add required field to all fields
+        JFXTextField[] fields = new JFXTextField[] {listeningPort, maxConnections};
+        for (JFXTextField f : fields){
+            f.getValidators().add(fieldValidator);
+            f.focusedProperty().addListener((o, old, newVal) -> {
+                if (!newVal) f.validate();
+            });
+        }
+
         Label aesLabel = (Label) Styler.styleAdd(new Label("Encryption Key: "), "label-bright");
-        TextField aesKey = new TextField("" + KumoSettings.AES_KEY);
+        JFXTextField aesKey = new JFXTextField("" + KumoSettings.AES_KEY);
         HBox aesBox = Styler.hContainer(aesLabel, aesKey);
         aesKey.setEditable(false);
         aesKey.setStyle("-fx-text-fill: grey");
@@ -125,7 +142,7 @@ public class SettingsView {
             }
         });
 
-        Button applySettings = new Button("Apply Settings");
+        JFXButton applySettings = new JFXButton("Apply Settings");
         applySettings.setPrefWidth(150);
         applySettings.setPrefHeight(50);
         applySettings.setOnAction(event -> {

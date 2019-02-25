@@ -149,6 +149,11 @@ public class Kumo extends Application {
         SwingUtilities.invokeLater(this::addAppToTray);
         Platform.setImplicitExit(false);
         //Scene mainScene = new Scene(new MainView().getMainView(), 900, 500);
+        // Load some required project stuff
+        javafx.scene.text.Font.loadFont(getClass().getResource("/css/axis.bold.otf").toExternalForm().replace("%20", " "), 20);
+        System.setProperty("prism.lcdtext", "false");
+
+
         Scene mainScene = new Scene(new ClientView().getClientView(), 900, 500);
         mainScene.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
         getPrimaryStage().setScene(mainScene);
