@@ -95,3 +95,5 @@ hs_err_pid*
 build/classes/java/main/XRAT/
 build/tmp/compileJava/
 src/test/
+
+!lib/jfoenix-8.0.8.jar

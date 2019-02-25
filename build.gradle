@@ -1,1 +1,46 @@
-version '2.0'apply plugin: 'java'apply plugin: 'application'apply plugin: 'distribution'sourceCompatibility = 1.8mainClassName = "KUMO.Kumo"repositories {    mavenCentral()}task fatJar(type: Jar){    manifest {        attributes 'Implementation-Title' : 'kumo',                'Implementation-Version' : project.version,                'Main-Class' : 'KUMO.Kumo'    }    baseName = 'kumo'    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }    with jar}jar {    manifest {        attributes('Implementation-Title' : 'kumo',                'Implementation-Version' : project.version,                'Main-Class' : 'KUMO.Kumo'        )    }    baseName = 'kumo-gradle'    from {        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }    }}dependencies {    //compile 'com.github.sarxos:webcam-capture:0.3.12'    //compile 'de.codecentric.centerdevice:javafxsvg:1.3.0'    // Dependencies cannot be added via gradle because it breaks ProGuard obfuscation/skrinking/optimization    testCompile group: 'junit', name: 'junit', version: '4.12'}
+version '2.0'
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'distribution'
+
+
+sourceCompatibility = 1.8
+
+mainClassName = "KUMO.Kumo"
+
+repositories {
+    mavenCentral()
+}
+
+task fatJar(type: Jar){
+    manifest {
+        attributes 'Implementation-Title' : 'kumo',
+                'Implementation-Version' : project.version,
+                'Main-Class' : 'KUMO.Kumo'
+    }
+    baseName = 'kumo'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+jar {
+    manifest {
+        attributes('Implementation-Title' : 'kumo',
+                'Implementation-Version' : project.version,
+                'Main-Class' : 'KUMO.Kumo'
+        )
+    }
+    baseName = 'kumo-gradle'
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+dependencies {
+    //compile 'com.github.sarxos:webcam-capture:0.3.12'
+    //compile 'de.codecentric.centerdevice:javafxsvg:1.3.0'
+    // Dependencies cannot be added via gradle because it breaks ProGuard obfuscation/skrinking/optimization
+    compile 'com.jfoenix:jfoenix:8.0.8'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
