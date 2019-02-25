@@ -3,6 +3,9 @@ package GUI.Views;
 import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
 import GUI.Styler;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -22,21 +25,21 @@ public class WebDeliveryView {
             "Powershell"
     );
 
-    public static ComboBox getTargetsComboBox() {
+    public static JFXComboBox getTargetsComboBox() {
         return targetsComboBox;
     }
 
-    public static TextField getUrl() {
+    public static JFXTextField getUrl() {
         return url;
     }
 
-    public static Button getExecuteButton(){
+    public static JFXButton getExecuteButton(){
         return executeButton;
     }
 
-    private static ComboBox targetsComboBox;
-    private static TextField url;
-    private static Button executeButton;
+    private static JFXComboBox targetsComboBox;
+    private static JFXTextField url;
+    private static JFXButton executeButton;
 
 
     public VBox getWebDeliveryView(Stage stage) {
@@ -50,12 +53,12 @@ public class WebDeliveryView {
         VBox.setVgrow(vBox2, Priority.ALWAYS);
 
         Label tgtLabel = (Label) Styler.styleAdd(new Label("Target: "), "label-bright");
-        targetsComboBox = new ComboBox(targets);
+        targetsComboBox = new JFXComboBox(targets);
         Label urlLabel = (Label) Styler.styleAdd(new Label("URL of payload: "), "label-bright");
-        url = new TextField();
+        url = new JFXTextField();
         url.setId(".textarea-padded");
         url.setPromptText("Eg. 192.168.1.2:8080/jUipTv5");
-        executeButton = new Button("Execute Web Delivery");
+        executeButton = new JFXButton("Execute Web Delivery");
         vBox2.getChildren().addAll(tgtLabel, targetsComboBox, urlLabel, url, executeButton);
         vBox.getChildren().addAll(new TopBar().getTopBarSansOptions(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;

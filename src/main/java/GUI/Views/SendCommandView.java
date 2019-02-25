@@ -3,6 +3,8 @@ package GUI.Views;
 import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
 import GUI.Styler;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -15,18 +17,18 @@ import javafx.stage.Stage;
 
 public class SendCommandView {
     private static TextArea console;
-    private static Button sendCommandButton;
-    private static TextField textField;
+    private static JFXButton sendCommandButton;
+    private static JFXTextField textField;
 
     public static TextArea getConsole() {
         return console;
     }
 
-    public static Button getsendCommandButton() {
+    public static JFXButton getsendCommandButton() {
         return sendCommandButton;
     }
 
-    public static TextField getTextField() {
+    public static JFXTextField getTextField() {
         return textField;
     }
 
@@ -41,8 +43,8 @@ public class SendCommandView {
         VBox.setVgrow(vBox2, Priority.ALWAYS);
         Label label = new Label("Command:");
         label = (Label) Styler.styleAdd(label, "label-bright");
-        textField = new TextField("");
-        sendCommandButton = new Button("Send Command");
+        textField = new JFXTextField("");
+        sendCommandButton = new JFXButton("Send Command");
         console = new TextArea("");
         console.setId("console");
         console.setEditable(false);

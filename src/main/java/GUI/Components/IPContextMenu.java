@@ -113,7 +113,7 @@ class IPContextMenu implements Repository {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setMinWidth(300);
             stage.setMinHeight(300);
-            stage.setScene(new Scene(new SysInfoView().getSysInfoView(stage), 400, 300));
+            stage.setScene(new Scene(new SysInfoView().getSysInfoView(stage), 400, 500));
             stage.show();
             if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
                 try {
@@ -309,7 +309,7 @@ class IPContextMenu implements Repository {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setMinHeight(100);
             stage.setMinWidth(300);
-            stage.setScene(new Scene(new SleepView().getSleepView(stage), 400, 200));
+            stage.setScene(new Scene(new SleepView().getSleepView(stage), 400, 230));
             stage.show();
             SleepView.getSleepButton().setOnAction(a -> {
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {

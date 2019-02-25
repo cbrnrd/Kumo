@@ -10,11 +10,13 @@ import Logger.Logger;
 import Server.Data.PseudoBase;
 import Server.KumoSettings;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.geometry.Insets;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -25,13 +27,14 @@ import java.io.IOException;
 
 public class ClientBuilderView {
 
-    private CheckBox persistent;
-    private CheckBox autoSpread;
-    private CheckBox debug;
+    private JFXCheckBox persistent;
+    private JFXCheckBox autoSpread;
+    private JFXCheckBox debug;
     private JFXTextField jarCreatedBy;
     private JFXTextField jarVersion;
-    private CheckBox createProguardRules;
-    private JFXTextField updateTime;
+    private JFXCheckBox createProguardRules;
+    private JFXCheckBox keylog;
+    private TextField updateTime;
 
     public BorderPane getClientBuilderView() {
         BorderPane borderPane = new BorderPane();
@@ -58,7 +61,7 @@ public class ClientBuilderView {
         Label jarVersionLabel = (Label) Styler.styleAdd(new Label("Implementation-Version: "), "label-bright");
         jarVersion = new JFXTextField();
         Label proguardLabel = (Label) Styler.styleAdd(new Label("Generate proguard rules: "), "label-bright");
-        createProguardRules = new CheckBox();
+        createProguardRules = new JFXCheckBox();
 
         TitledPane jarSettings = (TitledPane) Styler.styleAdd(new TitledPane(), "label-bright");
         GridPane grid = new GridPane();
@@ -108,10 +111,12 @@ public class ClientBuilderView {
         hBox.setId("clientBuilder");
         hBox.setPadding(new Insets(20, 20, 20, 20));
         Label title = (Label) Styler.styleAdd(new Label("Client Builder"), "title");
-        persistent = new CheckBox("Persistent");
-        //autoSpread = new CheckBox("Auto-Spread");
-        debug = new CheckBox("Debug Mode");
-        hBox.getChildren().add(Styler.vContainer(20, title, persistent, debug )); //autoSpread, debug));
+        persistent = new JFXCheckBox("Persistent");
+        persistent.setDisableVisualFocus(true);
+        //autoSpread = new JFXCheckBox("Auto-Spread");
+        debug = new JFXCheckBox("Debug Mode");
+        keylog = new JFXCheckBox("Keylog");
+        hBox.getChildren().add(Styler.vContainer(20, title, persistent, debug, keylog)); //autoSpread, debug));
         return hBox;
     }
 
@@ -125,14 +130,15 @@ public class ClientBuilderView {
 
         Label serverIPLabel = (Label) Styler.styleAdd(new Label("Server IP: "), "label-bright");
         JFXTextField serverIP = new JFXTextField("" + KumoSettings.CONNECTION_IP);
+        serverIP.requestFocus();
         HBox serverIPBox = Styler.hContainer(serverIPLabel, serverIP);
-        serverIPBox.setPadding(new Insets(10, 10, 10, 10));
+        serverIPBox.setPadding(new Insets(10, 10, 10, 5));
         serverIP.setEditable(true);
 
         Label portLabel = (Label) Styler.styleAdd(new Label("Port: "), "label-bright");
         JFXTextField port = new JFXTextField("" + KumoSettings.PORT);
         HBox portBox = Styler.hContainer(portLabel, port);
-        portBox.setPadding(new Insets(10, 10, 10, 10));
+        portBox.setPadding(new Insets(10, 10, 10, 5));
         port.setEditable(true);
         port.textProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
@@ -143,7 +149,7 @@ public class ClientBuilderView {
         Label clientNameLabel = (Label) Styler.styleAdd(new Label("Client Name: "), "label-bright");
         JFXTextField clientName = new JFXTextField("Client");
         HBox clientNameBox = Styler.hContainer(clientNameLabel, clientName);
-        clientNameBox.setPadding(new Insets(10, 10, 10, 10));
+        clientNameBox.setPadding(new Insets(10, 5, 10, 5));
         clientName.setEditable(true);
 
         // Add required field to all fields
@@ -172,6 +178,9 @@ public class ClientBuilderView {
                 if (debug.isSelected()){
                     ClientBuilder.isDebug = true;
                 }
+                if (keylog.isSelected()){
+                    ClientBuilder.keylogger = true;
+                }
                 PseudoBase.writeKumoData();
             } catch (IOException e) {
                 Logger.log(Level.ERROR, e.toString());
@@ -195,6 +204,8 @@ public class ClientBuilderView {
             if (createProguardRules.isSelected()){
                 ClientBuilder.createProguard = true;
             }
+            JFXSnackbar snackbar = new JFXSnackbar(hBox);
+            snackbar.enqueue(new JFXSnackbar.SnackbarEvent(new Label("Client JAR built")));
         });
 
 

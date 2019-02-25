@@ -3,11 +3,11 @@ package GUI.Views;
 import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
 import GUI.Styler;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
@@ -16,11 +16,11 @@ import javafx.stage.Stage;
 
 public class DownloadAndExecuteView {
 
-    private static TextField urlField;
-    private static Button downloadButton;
+    private static JFXTextField urlField;
+    private static JFXButton downloadButton;
     private static Label statusLabel;
 
-    public static TextField getUrlField() {
+    public static JFXTextField getUrlField() {
         return urlField;
     }
 
@@ -28,7 +28,7 @@ public class DownloadAndExecuteView {
         return urlField.getText();
     }
 
-    public static Button getDownloadButton() {
+    public static JFXButton getDownloadButton() {
         return downloadButton;
     }
 
@@ -51,9 +51,9 @@ public class DownloadAndExecuteView {
         vBox2.setPadding(new Insets(0, 25, 0, 25));
         Label urlLabel = new Label("URL of binary: ");
         urlLabel = (Label) Styler.styleAdd(urlLabel, "label-bright");
-        urlField = new TextField();
+        urlField = new JFXTextField();
         urlField.setPromptText("Example: http://example.com/evil.exe");
-        downloadButton = new Button("GO");
+        downloadButton = new JFXButton("GO");
         statusLabel = new Label("");
         vBox2.getChildren().addAll(urlLabel, urlField, downloadButton, statusLabel);
         vBox.getChildren().addAll(new TopBar().getTopBarSansOptions(stage), vBox2, new BottomBar().getBottomBar());

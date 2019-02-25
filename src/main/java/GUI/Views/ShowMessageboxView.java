@@ -3,6 +3,8 @@ package GUI.Views;
 import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
 import GUI.Styler;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,11 +16,11 @@ import javafx.stage.Stage;
 
 public class ShowMessageboxView {
 
-    private static TextField msg;
-    private static Button goButton;
+    private static JFXTextField msg;
+    private static JFXButton goButton;
 
-    public static TextField getMsg(){ return msg; }
-    public static Button getGoButton(){ return goButton; }
+    public static JFXTextField getMsg(){ return msg; }
+    public static JFXButton getGoButton(){ return goButton; }
 
 
     public VBox getShowMessageboxView(Stage stage){
@@ -32,8 +34,8 @@ public class ShowMessageboxView {
         VBox.setVgrow(vBox2, Priority.ALWAYS);
         Label label = new Label("Message:");
         label = (Label) Styler.styleAdd(label, "label-bright");
-        msg = new TextField("");
-        goButton = new Button("SHOW");
+        msg = new JFXTextField("");
+        goButton = new JFXButton("SHOW");
         vBox2.getChildren().addAll(label, msg, goButton);
         vBox.getChildren().addAll(new TopBar().getStrippedTopBar(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;

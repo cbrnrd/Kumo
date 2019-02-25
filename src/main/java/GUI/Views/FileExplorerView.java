@@ -7,6 +7,7 @@ import GUI.Styler;
 import Logger.Level;
 import Logger.Logger;
 import Server.ClientObject;
+import com.jfoenix.controls.JFXButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -146,7 +147,7 @@ public class FileExplorerView {
 
     private ScrollPane getFileExplorerViewCenter(String pathName, String[] files) {
         pathName = pathName.replace("\\", "/");
-        Button directoryUp = new Button("Up a directory");
+        JFXButton directoryUp = new JFXButton("Up a directory");
         directoryUp.setOnAction(e -> {
             try {
                 client.clientCommunicate("DIRECTORYUP");

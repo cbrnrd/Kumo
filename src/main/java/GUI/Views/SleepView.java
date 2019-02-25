@@ -3,6 +3,8 @@ package GUI.Views;
 import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
 import GUI.Styler;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,12 +15,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class SleepView {
-    private static Button sleepButton;
-    private static TextField textField;
+    private static JFXButton sleepButton;
+    private static JFXTextField textField;
 
-    public static TextField getTextField(){ return textField; }
+    public static JFXTextField getTextField(){ return textField; }
 
-    public static Button getSleepButton(){ return sleepButton; }
+    public static JFXButton getSleepButton(){ return sleepButton; }
 
     public VBox getSleepView(Stage stage) {
         VBox vBox = new VBox();
@@ -31,8 +33,8 @@ public class SleepView {
         VBox.setVgrow(vBox2, Priority.ALWAYS);
         Label label = new Label("Time (sec):");
         label = (Label) Styler.styleAdd(label, "label-bright");
-        textField = new TextField("60");
-        sleepButton = new Button("Sleep");
+        textField = new JFXTextField("60");
+        sleepButton = new JFXButton("Sleep");
         vBox2.getChildren().addAll(label, textField, sleepButton);
         vBox.getChildren().addAll(new TopBar().getTopBarSansOptions(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;

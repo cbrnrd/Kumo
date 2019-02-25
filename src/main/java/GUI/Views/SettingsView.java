@@ -7,11 +7,11 @@ import GUI.Components.TopBar;
 import GUI.Styler;
 import Server.KumoSettings;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -91,7 +91,7 @@ public class SettingsView {
         aesKey.setStyle("-fx-text-fill: grey");
 
 
-        CheckBox soundToggle = new CheckBox();
+        JFXCheckBox soundToggle = new JFXCheckBox();
         soundToggle.setSelected(KumoSettings.SOUND);
         if (soundToggle.isSelected()) {
             soundToggle.setText("Sound (on) ");
@@ -108,7 +108,7 @@ public class SettingsView {
             }
         });
 
-        CheckBox notificaitonToggle = new CheckBox();
+        JFXCheckBox notificaitonToggle = new JFXCheckBox();
         notificaitonToggle.setSelected(KumoSettings.SHOW_NOTIFICATIONS);
         if (notificaitonToggle.isSelected()) {
             notificaitonToggle.setText("Notifications (on) ");
@@ -125,7 +125,7 @@ public class SettingsView {
             }
         });
 
-        CheckBox backgroundPersistentTogle = new CheckBox();
+        JFXCheckBox backgroundPersistentTogle = new JFXCheckBox();
         backgroundPersistentTogle.setSelected(KumoSettings.BACKGROUND_PERSISTENT);
         if (backgroundPersistentTogle.isSelected()) {
             backgroundPersistentTogle.setText("Background Persistent (on) ");

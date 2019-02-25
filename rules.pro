@@ -1,5 +1,4 @@
 -injars kumo-2.0.jar
--injars "..\..\lib\jfoenix-8.0.8.jar"
 -outjars kumo-2.0-obf.jar
 -target 1.8
 -libraryjars "C:\Program Files\Java\jdk1.8.0_201\jre\lib"

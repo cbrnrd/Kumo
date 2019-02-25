@@ -3,6 +3,8 @@ package GUI.Views;
 import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
 import GUI.Styler;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -15,12 +17,12 @@ import javafx.stage.Stage;
 @SuppressWarnings("Duplicates")
 public class SetClipboardView {
 
-    private static Button setClipboard;
-    private static TextField textField;
+    private static JFXButton setClipboard;
+    private static JFXTextField textField;
 
-    public static TextField getTextField(){ return textField; }
+    public static JFXTextField getTextField(){ return textField; }
 
-    public static Button getSetClipboardButton(){ return setClipboard; }
+    public static JFXButton getSetClipboardButton(){ return setClipboard; }
 
     public VBox getSetClipboardView(Stage stage) {
         VBox vBox = new VBox();
@@ -33,8 +35,8 @@ public class SetClipboardView {
         VBox.setVgrow(vBox2, Priority.ALWAYS);
         Label label = new Label("Clipboard data:");
         label = (Label) Styler.styleAdd(label, "label-bright");
-        textField = new TextField("");
-        setClipboard = new Button("Set Clipboard");
+        textField = new JFXTextField("");
+        setClipboard = new JFXButton("Set Clipboard");
         vBox2.getChildren().addAll(label, textField, setClipboard);
         vBox.getChildren().addAll(new TopBar().getTopBarSansOptions(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;

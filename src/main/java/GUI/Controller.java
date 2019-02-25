@@ -43,10 +43,13 @@ public class Controller implements Repository {
         String s = "Release notes: Kumo v" + KumoSettings.CURRENT_VERSION + "\n" +
                 "\tNew features:\n" +
                 "\t\t- Updated UI\n" +
-                "\t\t\t- Updated bottom bar color to purple text on white background.\n" +
+                "\t\t\t- Full transition to Material Design elements (JFoenix).\n" +
+                "\t\t\t- Changed primary application color (mediumslateblue -> #1dd1a1)\n" +
+                "\t\t\t- Updated bottom bar color to colored text on white background.\n" +
                 "\t\t\t- Now \"Home\" screen is the client list.\n" +
                 "\t\t\t- Changed top bar to have navigation tiles.\n" +
-                "\t\t\t- Changed exit button hover color (red -> mediumslateblue).\n" +
+                "\t\t\t- Changed exit and minimize buttons to circles.\n" +
+                "\t\t\t- Switched navigation icons from PNG to SVG to fix scaling issues in Windows.\n" +
                 "\t\t- Add release notes menu.\n" +
                 "\t\t- Add the ability to put a domain name for a connect-back host.\n" +
                 "\t\t- Added more server logging.\n" +
@@ -54,7 +57,8 @@ public class Controller implements Repository {
                 "\tBug fixes:\n" +
                 "\t\t- Fix download & execute so it works on Windows clients.\n" +
                 "\t\t- Fixed accidental stage height reset when double clicking info and updates nav tiles.\n" +
-                "\t\t- Fix client exit on Windows.\n";
+                "\t\t- Fix client exit on Windows.\n" +
+                "\t\t- Fix ugly lcd font rendering.\n";
 
         return s;
     }

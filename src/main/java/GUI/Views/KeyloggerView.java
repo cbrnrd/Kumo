@@ -9,13 +9,13 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class SysInfoView {
+public class KeyloggerView {
 
-    private static TextArea area;
+    private static TextArea data;
 
-    public static TextArea getArea(){ return area; }
+    public static TextArea getData(){ return data; }
 
-    public VBox getSysInfoView(Stage stage){
+    public VBox getKeyloggerView(Stage stage){
         VBox vBox = new VBox();
         VBox.setVgrow(vBox, Priority.ALWAYS);
         vBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
@@ -23,13 +23,11 @@ public class SysInfoView {
         vBox2.setId("settingsView");
         vBox2.setAlignment(Pos.CENTER);
         VBox.setVgrow(vBox2, Priority.ALWAYS);
-        area = new TextArea("");
-        area.setPrefRowCount(30);
-        area.setId("console");
-        area.setEditable(false);
-        vBox2.getChildren().addAll( Styler.vContainer(area));
+        data = new TextArea("");
+        data.setEditable(false);
+        data.setPrefHeight(300);
+        vBox2.getChildren().addAll(Styler.vContainer(data));
         vBox.getChildren().addAll(new TopBar().getTopBarSansOptions(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;
     }
-
 }

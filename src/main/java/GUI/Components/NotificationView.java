@@ -3,6 +3,7 @@ package GUI.Components;
 import GUI.Styler;
 import Server.ClientObject;
 import Server.KumoSettings;
+import com.jfoenix.controls.JFXDialog;
 import javafx.animation.PauseTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -76,7 +77,7 @@ public class NotificationView {
         vBox.setId("notification");
         vBox.setAlignment(Pos.CENTER);
         VBox.setVgrow(vBox, Priority.ALWAYS);
-        Image alert = new Image(getClass().getResourceAsStream("/Images/Icons/alert.png"));
+        Image alert = new Image(getClass().getResourceAsStream("/Images/Icons/info.svg"));
         ImageView imageView = new ImageView(alert);
         notificationText = new Label("");
         notificationText = (Label) Styler.styleAdd(notificationText, "label-light");

