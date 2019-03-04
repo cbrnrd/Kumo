@@ -76,7 +76,7 @@ public class NotificationView {
         vBox.setId("notification");
         vBox.setAlignment(Pos.CENTER);
         VBox.setVgrow(vBox, Priority.ALWAYS);
-        Image alert = new Image(getClass().getResourceAsStream("/Images/Icons/info.svg"));
+        Image alert = new Image(getClass().getResourceAsStream(Styler.getCurrentIcon("/Images/Icons/info.svg")));
         ImageView imageView = new ImageView(alert);
         notificationText = new Label("");
         notificationText = (Label) Styler.styleAdd(notificationText, "label-light");

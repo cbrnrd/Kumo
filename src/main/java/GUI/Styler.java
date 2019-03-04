@@ -63,4 +63,15 @@ public class Styler {
         return "/css/global.css";
     }
 
+    public static String getCurrentIcon(String iconPath){
+        String pathNoExt = iconPath.replace(".svg", "");
+        if (KumoSettings.DARK_MODE) return pathNoExt + "-dark.svg";
+        return iconPath;
+    }
+
+    public static String getCurrentAccentColor(){
+        if (KumoSettings.DARK_MODE) return "#9c88ff";
+        return "#1dd1a1";
+    }
+
 }

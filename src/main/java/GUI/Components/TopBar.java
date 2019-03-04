@@ -27,7 +27,7 @@ public class TopBar {
         homeVbox.setAlignment(Pos.CENTER);
         Label label = (Label) Styler.styleAdd(new Label("HOME"), "label-light");
         label.setStyle("-fx-font-family: \"Roboto\"");
-        Image homeImage = new Image(getClass().getResourceAsStream("/Images/Icons/clients.svg"), 32, 32, false, true);
+        Image homeImage = new Image(getClass().getResourceAsStream(Styler.getCurrentIcon("/Images/Icons/clients.svg")), 32, 32, false, true);
         homeVbox.getChildren().addAll(new ImageView(homeImage), label);
         homeVbox.setPadding(new Insets(5, 10, 0, 10));
         homeVbox.setId("homeButton");
@@ -36,7 +36,7 @@ public class TopBar {
         buildVbox.setAlignment(Pos.CENTER);
         Label buildLabel = (Label) Styler.styleAdd(new Label("BUILD"), "label-light");
         label.setStyle("-fx-font-family: \"Roboto\"");
-        Image buildImg = new Image(getClass().getResourceAsStream("/Images/Icons/build.svg"), 32, 32, false, true);
+        Image buildImg = new Image(getClass().getResourceAsStream(Styler.getCurrentIcon("/Images/Icons/build.svg")), 32, 32, false, true);
         buildVbox.getChildren().addAll(new ImageView(buildImg), buildLabel);
         buildVbox.setPadding(new Insets(5, 10, 0, 10));
         buildVbox.setId("homeButton"); // Use the same style as the home button
@@ -45,7 +45,7 @@ public class TopBar {
         settingsVbox.setAlignment(Pos.CENTER);
         Label settingsLabel = (Label) Styler.styleAdd(new Label("SETTINGS"), "label-light");
         label.setStyle("-fx-font-family: \"Roboto\"");
-        Image settingsImg = new Image(getClass().getResourceAsStream("/Images/Icons/settings.svg"), 32, 32, false, true);
+        Image settingsImg = new Image(getClass().getResourceAsStream(Styler.getCurrentIcon("/Images/Icons/settings.svg")), 32, 32, false, true);
         settingsVbox.getChildren().addAll(new ImageView(settingsImg), settingsLabel);
         settingsVbox.setPadding(new Insets(5, 10, 0, 10));
         settingsVbox.setId("homeButton");
@@ -54,7 +54,7 @@ public class TopBar {
         infoVbox.setAlignment(Pos.CENTER);
         Label infoLabel = (Label) Styler.styleAdd(new Label("INFO"), "label-light");
         label.setStyle("-fx-font-family: \"Roboto\"");
-        Image infoImg = new Image(getClass().getResourceAsStream("/Images/Icons/info.svg"), 32, 32, false, true);
+        Image infoImg = new Image(getClass().getResourceAsStream(Styler.getCurrentIcon("/Images/Icons/info.svg")), 32, 32, false, true);
         infoVbox.getChildren().addAll(new ImageView(infoImg), infoLabel);
         infoVbox.setPadding(new Insets(5, 10, 0, 10));
         infoVbox.setId("homeButton");
@@ -75,8 +75,8 @@ public class TopBar {
             Controller.changePrimaryStage(new ClientBuilderView().getClientBuilderView());
         });
         settingsVbox.setOnMouseClicked(event -> {
-            Controller.changePrimaryStage(new SettingsView().getSettingsView(), 900, 550);
-            Kumo.getPrimaryStage().setHeight(550);
+            Controller.changePrimaryStage(new SettingsView().getSettingsView(), 900, 600);
+            Kumo.getPrimaryStage().setHeight(600);
         });
         infoVbox.setOnMouseClicked(event -> {
             Controller.changePrimaryStage(new UpdatesView().getUpdatesView(), 900, 600);

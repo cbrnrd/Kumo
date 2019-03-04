@@ -4,6 +4,7 @@ package GUI.Views;
 import GUI.Components.BottomBar;
 import GUI.Components.NotificationView;
 import GUI.Components.TopBar;
+import GUI.Controller;
 import GUI.Styler;
 import Server.KumoSettings;
 import com.jfoenix.controls.JFXButton;
@@ -48,6 +49,8 @@ public class SettingsView {
         hBox.setPadding(new Insets(20, 20, 20, 20));
         Label title = (Label) Styler.styleAdd(new Label(" "), "title");
         RequiredFieldValidator fieldValidator = new RequiredFieldValidator("This field is required");
+
+
 
         Label listeningPortLabel = (Label) Styler.styleAdd(new Label("Listening Port: "), "label-bright");
         JFXTextField listeningPort = new JFXTextField("" + KumoSettings.PORT);
@@ -178,6 +181,8 @@ public class SettingsView {
                 }
             }
                 Platform.runLater(() -> NotificationView.openNotification("Settings Applied"));
+            Controller.changePrimaryStage(new SettingsView().getSettingsView(), 900, 600);
+
         });
         hBox.getChildren().add(Styler.vContainer(20, title, listeningPortBox, maxConnectionsBox, aesBox, soundToggle,notificaitonToggle,backgroundPersistentTogle, darkMode, applySettings));
         return hBox;

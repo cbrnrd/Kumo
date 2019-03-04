@@ -40,19 +40,20 @@
     -fx-text-fill: #ecf0f1;
     -fx-text-alignment: center;
     -fx-font-smoothing-type: grey;
+    -fx-font-weight: 900;
 }
 
 .table-row-cell:selected {
-    -fx-background-color: #1dd1a1;
+    -fx-background-color: #9c88ff;
     -fx-background-insets: 0, 1, 2;
 }
 
 .table-row-cell:selected .text {
-    -fx-text-fill: #1dd1a1;
+    -fx-text-fill: #9c88ff;
 }
 
 .table-row-cell:selected .menu-item > .label {
-    -fx-text-fill: #1dd1a1;
+    -fx-text-fill: #9c88ff;
 }
 
 .label-light {
@@ -97,13 +98,13 @@
 
 .exit-button:hover {
     -fx-cursor: hand;
-    /*-fx-background-color: #1dd1a1;*/
+    /*-fx-background-color: #9c88ff;*/
     -fx-background-color: #e74c3c;
 }
 
 .jfx-text-field {
     -fx-background-color: #2f2f3e;
-    -jfx-focus-color: #1dd1a1;
+    -jfx-focus-color: #9c88ff;
     -fx-text-fill: #ecf0f1;
 }
 
@@ -119,7 +120,7 @@
 
 .context-menu {
     -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
-    -fx-text-fill: #1dd1a1;
+    -fx-text-fill: #9c88ff;
     -fx-background-color: #2f2f3e;
     -fx-background-insets: 0, 1, 2;
     /*-fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;*/
@@ -147,14 +148,14 @@
     -fx-text-fill: white;
     -fx-font-family: "Roboto";
     -fx-font-weight: bold;
-    -fx-background-color: #1dd1a1;
+    -fx-background-color: #9c88ff;
     -fx-background-radius: 100;
     -jfx-button-type: RAISED;
 }
 
 .jfx-button:hover {
     -fx-cursor: hand;
-    -fx-background-color: #21d79c;
+    -fx-background-color: #ada0ff;
 }
 
 .text-area:focused .content {
@@ -200,11 +201,11 @@
     -fx-font-family: "Roboto";
     -fx-text-fill: #8d9db1;
     -fx-opacity: 1;
-    -jfx-checked-color: #1dd1a1;
+    -jfx-checked-color: #9c88ff;
 }
 
 .jfx-check-box:selected .mark {
-    -fx-background-color: #1dd1a1;
+    -fx-background-color: #9c88ff;
     -fx-background-insets: 1 0 -1 0, 0;
     -fx-padding: 0.333333em; /* 4 -- this is half the size of the mark */
     /*-fx-shape: "M0,5a5, 5 0 1,0 10,0a5,5 0 1,0 -10,0";*/
@@ -284,7 +285,7 @@
 }
 
 #stat-bar {
-    /*-fx-background-color: #1dd1a1;*/
+    /*-fx-background-color: #9c88ff;*/
     -fx-background-color: #2f2f3e;
 }
 
@@ -308,13 +309,13 @@
 }
 
 .scroll-bar:horizontal .thumb {
-    -fx-background-color: #1dd1a1;
+    -fx-background-color: #9c88ff;
     -fx-background-insets: 4 0 4 0;
     -fx-background-radius: 2em;
 }
 
 .scroll-bar:vertical .thumb {
-    -fx-background-color: #1dd1a1;
+    -fx-background-color: #9c88ff;
     -fx-background-insets: 0 4 0 4;
     -fx-background-radius: 2em;
 }

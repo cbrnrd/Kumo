@@ -19,9 +19,7 @@ dependencies {
     // Dependencies cannot be added via gradle because it breaks ProGuard obfuscation/skrinking/optimization
 
     //compile 'com.jfoenix:jfoenix:9.0.8' // Java 9
-    compile 'com.jfoenix:jfoenix:8.0.8' // Java 8
-
-    //compile 'com.jfoenix:jfoenix:9.0.8' // Java 9
+    compile  'com.jfoenix:jfoenix:8.0.8'
 }
 
 task fatJar(type: Jar){

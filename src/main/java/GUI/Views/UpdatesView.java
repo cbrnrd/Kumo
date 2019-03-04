@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -45,7 +46,11 @@ public class UpdatesView {
                 "Kumo builds on \nthe foundation it laid out and improves on all of them.\n " +
                 "\nImprovements include:\n\t- Encrypted communication\n\t- Metasploit integration\n\t- UI improvements\n\t- Additional client JAR customization" +
                 "\n\t- Clipboard control\n\t- Download and execute\n\t- Password recovery\n\t- Misc client functions\n\t- Under the hood networking improvements\n\t- Lots of bug fixes"), "");
-        desc.setStyle("-fx-text-fill: #ecf0f1");
+        if (KumoSettings.DARK_MODE){
+            desc.setFill(Paint.valueOf("white"));
+        } else {
+            desc.setFill(Paint.valueOf("black"));
+        }
         Button checkUpdates = new Button("Check for Updates");
         checkUpdates.setOnMouseClicked(event -> {
             Platform.runLater(() -> NotificationView.openNotification("Update Check Complete"));

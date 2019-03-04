@@ -44,6 +44,7 @@ public class Controller implements Repository {
                 "\tNew stuff!:\n" +
                 "\t\t- Updated UI\n" +
                 "\t\t\t- Full transition to Material Design elements (JFoenix).\n" +
+                "\t\t\t- Added dark mode.\n" +
                 "\t\t\t- Changed primary application color (mediumslateblue -> #1dd1a1)\n" +
                 "\t\t\t- Updated bottom bar color to colored text on white background.\n" +
                 "\t\t\t- \"Home\" screen is now the client list.\n" +

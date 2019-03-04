@@ -24,7 +24,7 @@ public class ClientList implements Repository {
     public TableView getClientList() {
 
         Label placeholder = new Label("No clients yet :(");
-        placeholder.setTextFill(Paint.valueOf("#1dd1a1"));
+        placeholder.setTextFill(Paint.valueOf(Styler.getCurrentAccentColor()));
 
         tableView = new TableView();
         tableView.setPlaceholder(placeholder);

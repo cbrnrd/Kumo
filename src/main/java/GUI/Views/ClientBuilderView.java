@@ -146,10 +146,10 @@ public class ClientBuilderView {
             }
         }));
 
-        Label clientNameLabel = (Label) Styler.styleAdd(new Label("Client Name: "), "label-bright");
+        Label clientNameLabel = (Label) Styler.styleAdd(new Label("Name: "), "label-bright");
         JFXTextField clientName = new JFXTextField("Client");
         HBox clientNameBox = Styler.hContainer(clientNameLabel, clientName);
-        clientNameBox.setPadding(new Insets(10, 5, 10, 5));
+        clientNameBox.setPadding(new Insets(10, 0, 10, 0));
         clientName.setEditable(true);
 
         // Add required field to all fields

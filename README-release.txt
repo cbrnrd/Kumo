@@ -31,6 +31,14 @@ Persistence on Mac is not supported in version 2.0.
 
 ========================
 
+Other things that are good to know:
+- The key logger is windows only. It will not run on Linux or Mac machines (yet)
+- Domain names can be used as the host (including no-ip)
+- You can run Lazagne from the command line if you want to do some more password recovery on other operating systems.
+  You do not have to use the built in chrome password recovery tool.
+
+========================
+
 Legal:
 Copyright 2019 Clova
 

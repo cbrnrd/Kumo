@@ -24,7 +24,7 @@ public class BottomBar implements Repository {
         VBox.setVgrow(vBox, Priority.ALWAYS);
         connectionsLabel = new Label("  Clients: " + CONNECTIONS.size() + " \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Version " + KumoSettings.CURRENT_VERSION + " | Developer: Clova");
         connectionsLabel = (Label) Styler.styleAdd(connectionsLabel, "label-light");
-        connectionsLabel.setStyle("-fx-text-fill: #1dd1a1");
+        connectionsLabel.setStyle("-fx-text-fill: " + Styler.getCurrentAccentColor());
 
         vBox.getChildren().add(connectionsLabel);
         hBox.getChildren().add(vBox);
