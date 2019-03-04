@@ -20,16 +20,14 @@
 
 .titled-pane > .title{
     -fx-pref-height: 20px;
-    -fx-font: 14 "Roboto Thin";
+    -fx-font: 14 "Roboto";
     -fx-content-display: bottom;
     -fx-alignment: bottom-left;
     -fx-padding: 0;
     -fx-background-color: transparent;
 }
 #java-settings {
-    -fx-background-color: #FFFFFF;
-    -fx-stroke: black;
-    -fx-stroke-width: 3px;
+    -fx-background-color: #2f2f3e;
 }
 
 .root {
@@ -39,9 +37,9 @@
 .title {
     -fx-font-size: 32px;
     -fx-font-family: "Roboto Black";
-    -fx-text-fill: black;
+    -fx-text-fill: #ecf0f1;
     -fx-text-alignment: center;
-    -fx-font-smoothing-type: gray;
+    -fx-font-smoothing-type: grey;
 }
 
 .table-row-cell:selected {
@@ -73,7 +71,7 @@
 .label-bright {
     -fx-font-size: 14px;
     -fx-font-family: "Roboto";
-    -fx-text-fill: black;
+    -fx-text-fill: #ecf0f1;
     -fx-opacity: 1;
 }
 
@@ -104,16 +102,17 @@
 }
 
 .jfx-text-field {
-    -fx-background-color: #e1e1e1;
+    -fx-background-color: #2f2f3e;
     -jfx-focus-color: #1dd1a1;
+    -fx-text-fill: #ecf0f1;
 }
 
 .jfx-text-field .label {
-    -fx-text-fill: #729aec #e;
+    -fx-text-fill: #ecf0f1 #e;
 }
 
 .menu-item:focused {
-    -fx-background-color: whitesmoke;
+    -fx-background-color: #414150;
     -fx-cursor: hand;
     -fx-text-fill: black;
 }
@@ -121,27 +120,27 @@
 .context-menu {
     -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
     -fx-text-fill: #1dd1a1;
-    -fx-background-color: white;
+    -fx-background-color: #2f2f3e;
     -fx-background-insets: 0, 1, 2;
     /*-fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;*/
 }
 
 .table-view {
     -fx-base: #16161d;
-    -fx-control-inner-background: #ecf0f1;
-    -fx-background-color: white;
+    -fx-control-inner-background: #2f2f3e;
+    -fx-background-color: #2f2f3e;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
-    -fx-text-fill: black;
+    -fx-text-fill: #ecf0f1;
 }
 
 .text-input {
-    -fx-text-fill: black;
+    -fx-text-fill: #ecf0f1;
 }
 
 .text-input:focused {
-    -fx-text-fill: black;
+    -fx-text-fill: #ecf0f1;
 }
 
 .jfx-button {
@@ -220,11 +219,11 @@
 }
 
 #settingsView {
-    -fx-background-color: white;
+    -fx-background-color: #2f2f3e;
 }
 
 #downloadAndExecuteView {
-    -fx-background-color: white;
+    -fx-background-color: #2f2f3e;
 }
 
 .notification {
@@ -234,28 +233,28 @@
 }
 
 #iconFlow {
-    -fx-background-color: white;
+    -fx-background-color: #2f2f3e;
     -fx-border-width: 3px;
     -fx-border-color: whitesmoke;
 }
 
 #icon {
-    -fx-background-color: whitesmoke;
+    -fx-background-color: #303030;
     -fx-background-radius: 150px;
 }
 
 #icon:hover {
-    -fx-background-color: #e1e1e1;
+    -fx-background-color: #252525;
     -fx-cursor: hand;
 }
 
 #file-icon {
     -fx-background-radius: 15px;
-    -fx-background-color: whitesmoke;
+    -fx-background-color: #2f2f3e;
 }
 
 #file-icon:hover {
-    -fx-background-color: #e1e1e1;
+    -fx-background-color: #3c3c4c;
     -fx-cursor: hand;
 }
 
@@ -269,24 +268,24 @@
 }
 
 #settingsView {
-    -fx-background-color: white;
+    -fx-background-color: #2f2f3e;
 }
 
 #statisticsView {
-    -fx-background-color: white;
+    -fx-background-color: #2f2f3e;
 }
 
 #updatesView {
-    -fx-background-color: white;
+    -fx-background-color: #2f2f3e;
 }
 
 #clientBuilder {
-    -fx-background-color: white;
+    -fx-background-color: #2f2f3e;
 }
 
 #stat-bar {
     /*-fx-background-color: #1dd1a1;*/
-    -fx-background-color: white;
+    -fx-background-color: #2f2f3e;
 }
 
 .scroll-bar {
@@ -380,7 +379,7 @@
 }
 
 #file-pane {
-    -fx-background-color: white;
+    -fx-background-color: #2f2f3e;
 }
 
 .toggle-button:selected {

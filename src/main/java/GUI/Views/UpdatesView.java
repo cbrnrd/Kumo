@@ -23,7 +23,7 @@ public class UpdatesView {
     private BorderPane updatesView = new BorderPane();
 
     public BorderPane getUpdatesView() {
-        updatesView.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        updatesView.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         HBox hBox1 = getUpdatesPanel();
         HBox hBox = getAboutPanel();
         hBox.setId("updatesView");
@@ -45,6 +45,7 @@ public class UpdatesView {
                 "Kumo builds on \nthe foundation it laid out and improves on all of them.\n " +
                 "\nImprovements include:\n\t- Encrypted communication\n\t- Metasploit integration\n\t- UI improvements\n\t- Additional client JAR customization" +
                 "\n\t- Clipboard control\n\t- Download and execute\n\t- Password recovery\n\t- Misc client functions\n\t- Under the hood networking improvements\n\t- Lots of bug fixes"), "");
+        desc.setStyle("-fx-text-fill: #ecf0f1");
         Button checkUpdates = new Button("Check for Updates");
         checkUpdates.setOnMouseClicked(event -> {
             Platform.runLater(() -> NotificationView.openNotification("Update Check Complete"));

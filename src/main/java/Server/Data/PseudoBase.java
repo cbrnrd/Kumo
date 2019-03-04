@@ -40,6 +40,7 @@ public class PseudoBase implements Repository {
             writer.write(KumoSettings.PORT + " ");
             writer.write(KumoSettings.SOUND + " ");
             writer.write(KumoSettings.AES_KEY + " ");
+
         } catch (IOException i) {
             Logger.log(Level.ERROR, i.toString());
         }

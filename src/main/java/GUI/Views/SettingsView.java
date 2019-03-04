@@ -15,7 +15,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
 
 import javax.crypto.Cipher;
 import java.security.NoSuchAlgorithmException;
@@ -24,7 +23,7 @@ public class SettingsView {
 
     public BorderPane getSettingsView() {
         BorderPane borderPane = new BorderPane();
-        borderPane.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        borderPane.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         borderPane.setTop(new TopBar().getTopBar(KUMO.Kumo.getPrimaryStage()));
         borderPane.setLeft(settingsViewLeft());
         borderPane.setCenter(settingsViewCenter());
@@ -34,12 +33,9 @@ public class SettingsView {
 
     private HBox settingsViewLeft() {
         HBox hBox = Styler.hContainer(20);
-        hBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        hBox.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         hBox.setId("clientBuilder");
         hBox.setPadding(new Insets(20, 20, 20, 20));
-        Font.loadFont(
-                getClass().getResource("/css/axis.bold.otf").toExternalForm(), 20
-        );
         Label title = (Label) Styler.styleAdd(new Label("Server Settings"), "title");
         hBox.getChildren().add(Styler.vContainer(20, title));
         return hBox;
@@ -47,7 +43,7 @@ public class SettingsView {
 
     private HBox settingsViewCenter() {
         HBox hBox = Styler.hContainer(20);
-        hBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        hBox.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         hBox.setId("settingsView");
         hBox.setPadding(new Insets(20, 20, 20, 20));
         Label title = (Label) Styler.styleAdd(new Label(" "), "title");
@@ -142,6 +138,23 @@ public class SettingsView {
             }
         });
 
+        JFXCheckBox darkMode = new JFXCheckBox();
+        darkMode.setSelected(KumoSettings.DARK_MODE);
+        if (darkMode.isSelected()) {
+            darkMode.setText("Dark Mode (on) ");
+        } else {
+            darkMode.setText("Dark Mode (off) ");
+        }
+        darkMode.setOnAction(event -> {
+            if (darkMode.isSelected()) {
+                KumoSettings.DARK_MODE = true;
+                darkMode.setText("Dark Mode (on) ");
+            } else {
+                KumoSettings.DARK_MODE = false;
+                darkMode.setText("Dark Mode (off) ");
+            }
+        });
+
         JFXButton applySettings = new JFXButton("Apply Settings");
         applySettings.setPrefWidth(150);
         applySettings.setPrefHeight(50);
@@ -166,7 +179,7 @@ public class SettingsView {
             }
                 Platform.runLater(() -> NotificationView.openNotification("Settings Applied"));
         });
-        hBox.getChildren().add(Styler.vContainer(20, title, listeningPortBox, maxConnectionsBox, aesBox, soundToggle,notificaitonToggle,backgroundPersistentTogle, applySettings));
+        hBox.getChildren().add(Styler.vContainer(20, title, listeningPortBox, maxConnectionsBox, aesBox, soundToggle,notificaitonToggle,backgroundPersistentTogle, darkMode, applySettings));
         return hBox;
     }
 }

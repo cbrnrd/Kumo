@@ -10,7 +10,6 @@ import Server.ClientObject;
 import com.jfoenix.controls.JFXButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
@@ -138,7 +137,7 @@ public class FileExplorerView {
     public BorderPane getFileExplorerView(String pathName, String[] files, Stage stage, ClientObject client) {
         setClient(client);
         BorderPane borderPane = new BorderPane();
-        borderPane.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        borderPane.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         borderPane.setTop(new TopBar().getTopBarSansOptions(stage));
         borderPane.setCenter(getFileExplorerViewCenter(pathName, files));
         borderPane.setBottom(new BottomBar().getBottomBar());
@@ -166,7 +165,7 @@ public class FileExplorerView {
         FlowPane flow = new FlowPane();
         flow.getChildren().add(pathNameBox);
         flow.setPadding(new Insets(10, 50, 10, 50));
-        flow.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        flow.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         flow.setId("file-pane");
         flow.setVgap(10);
         flow.setHgap(10);

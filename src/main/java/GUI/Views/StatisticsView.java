@@ -19,7 +19,7 @@ class StatisticsView implements Repository {
     private HashMap<String, Integer> operatingSystems = new HashMap<>();
 
     BorderPane getStatisticsView() {
-        statisticsView.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        statisticsView.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         HBox systemPanel = getSystemPanel();
         systemPanel.setId("statisticsView");
         systemPanel.setPadding(new Insets(0, 0, 0, 10));

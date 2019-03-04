@@ -3,7 +3,6 @@ package GUI.Components;
 import GUI.Styler;
 import Server.ClientObject;
 import Server.KumoSettings;
-import com.jfoenix.controls.JFXDialog;
 import javafx.animation.PauseTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -82,7 +81,7 @@ public class NotificationView {
         notificationText = new Label("");
         notificationText = (Label) Styler.styleAdd(notificationText, "label-light");
         vBox.getChildren().addAll(imageView, notificationText);
-        vBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        vBox.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         if (KumoSettings.SOUND) {
             Media notify = new Media(getClass().getResource("/audio/notify.mp3").toExternalForm());
             MediaPlayer mediaPlayer = new MediaPlayer(notify);

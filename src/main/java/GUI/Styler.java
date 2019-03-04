@@ -1,5 +1,6 @@
 package GUI;
 
+import Server.KumoSettings;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -55,6 +56,11 @@ public class Styler {
             hBox.getChildren().add(r);
         }
         return hBox;
+    }
+
+    public static String getCurrentStylesheet(){
+        if (KumoSettings.DARK_MODE) return "/css/dark.css";
+        return "/css/global.css";
     }
 
 }

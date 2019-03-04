@@ -19,7 +19,7 @@ class TitleBar {
 
     HBox getMenuBar(Stage stage) {
         MenuBar menuBar = new MenuBar();
-        menuBar.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        menuBar.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         menuBar.getStyleClass().add("background");
 
         Label kumo = (Label) Styler.styleAdd(new Label("KUMO " + KumoSettings.CURRENT_VERSION), "option-button");

@@ -18,7 +18,7 @@ public class KeyloggerView {
     public VBox getKeyloggerView(Stage stage){
         VBox vBox = new VBox();
         VBox.setVgrow(vBox, Priority.ALWAYS);
-        vBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        vBox.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         VBox vBox2 = new VBox(5);
         vBox2.setId("settingsView");
         vBox2.setAlignment(Pos.CENTER);

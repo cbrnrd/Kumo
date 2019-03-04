@@ -1,5 +1,6 @@
 package KUMO;
 
+import GUI.Styler;
 import GUI.Views.AlertView;
 import GUI.Views.ClientView;
 import GUI.Views.FirstRunView;
@@ -9,6 +10,8 @@ import Logger.Logger;
 import Server.Data.PseudoBase;
 import Server.KumoSettings;
 import Server.Server;
+import de.codecentric.centerdevice.javafxsvg.SvgImageLoaderFactory;
+import de.codecentric.centerdevice.javafxsvg.dimension.PrimitiveDimensionProvider;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -38,7 +41,7 @@ public class Kumo extends Application {
     }
 
     public static void main(String[] args) {
-        //SvgImageLoaderFactory.install(new PrimitiveDimensionProvider());
+        SvgImageLoaderFactory.install(new PrimitiveDimensionProvider());
         if (lockInstance()) {
             launch(args);
         } else {
@@ -151,12 +154,11 @@ public class Kumo extends Application {
         Platform.setImplicitExit(false);
         //Scene mainScene = new Scene(new MainView().getMainView(), 900, 500);
         // Load some required project stuff
-        javafx.scene.text.Font.loadFont(getClass().getResource("/css/axis.bold.otf").toExternalForm().replace("%20", " "), 20);
         System.setProperty("prism.lcdtext", "false");
 
 
         Scene mainScene = new Scene(new ClientView().getClientView(),900, 500);
-        mainScene.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        mainScene.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         getPrimaryStage().setScene(mainScene);
         getPrimaryStage().getIcons().add(new Image(getClass().getResourceAsStream("/Images/Icons/icon.png")));
         getPrimaryStage().setOnCloseRequest(event -> System.exit(0));

@@ -2,6 +2,7 @@ package GUI.Views;
 
 import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
+import GUI.Styler;
 import Server.ClientObject;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -18,7 +19,7 @@ public class RemoteDesktopView {
     public BorderPane getRemoteDesktopView(ClientObject client, Stage stage) {
         setClient(client);
         BorderPane borderPane = new BorderPane();
-        borderPane.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        borderPane.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         ImageView imageView = new ImageView();
         borderPane.setTop(new TopBar().getTopBarSansOptions(stage));
         borderPane.setCenter(imageView);

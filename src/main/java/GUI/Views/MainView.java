@@ -21,7 +21,7 @@ public class MainView {
     private FlowPane getIconFlow() {
         FlowPane flow = new FlowPane();
         flow.setPadding(new Insets(10, 50, 10, 50));
-        flow.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        flow.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         flow.setId("iconFlow");
         flow.setVgap(40);
         flow.setHgap(40);
@@ -102,7 +102,7 @@ public class MainView {
 
     public BorderPane getMainView() {
         BorderPane borderPane = new BorderPane();
-        borderPane.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        borderPane.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         borderPane.getStyleClass().add("root");
         borderPane.setTop(new TopBar().getTopBar(KUMO.Kumo.getPrimaryStage()));
         borderPane.setCenter(getIconFlow());

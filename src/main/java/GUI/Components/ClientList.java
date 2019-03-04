@@ -1,5 +1,6 @@
 package GUI.Components;
 
+import GUI.Styler;
 import Server.ClientObject;
 import Server.Data.Repository;
 import javafx.collections.FXCollections;
@@ -29,7 +30,7 @@ public class ClientList implements Repository {
         tableView.setPlaceholder(placeholder);
         tableView.setEditable(true);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        tableView.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        tableView.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
 
         TableColumn<String, String> onlineStatus = new TableColumn<>("Status");
         onlineStatus.setMaxWidth(70);

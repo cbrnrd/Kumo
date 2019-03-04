@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     //compile 'com.github.sarxos:webcam-capture:0.3.12'
-    //compile 'de.codecentric.centerdevice:javafxsvg:1.3.0'
+    compile 'de.codecentric.centerdevice:javafxsvg:1.3.0'
     // Dependencies cannot be added via gradle because it breaks ProGuard obfuscation/skrinking/optimization
 
     //compile 'com.jfoenix:jfoenix:9.0.8' // Java 9

@@ -20,7 +20,7 @@ public class BottomBar implements Repository {
         HBox hBox = new HBox();
         HBox.setHgrow(hBox, Priority.ALWAYS);
         VBox vBox = new VBox();
-        vBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        vBox.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         VBox.setVgrow(vBox, Priority.ALWAYS);
         connectionsLabel = new Label("  Clients: " + CONNECTIONS.size() + " \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Version " + KumoSettings.CURRENT_VERSION + " | Developer: Clova");
         connectionsLabel = (Label) Styler.styleAdd(connectionsLabel, "label-light");

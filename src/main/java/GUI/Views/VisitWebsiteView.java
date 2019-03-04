@@ -7,9 +7,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -26,7 +24,7 @@ public class VisitWebsiteView {
     public VBox getVisitWebsiteView(Stage stage){
         VBox vBox = new VBox();
         VBox.setVgrow(vBox, Priority.ALWAYS);
-        vBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        vBox.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         VBox vBox2 = new VBox(5);
         vBox2.setId("settingsView");
         vBox2.setAlignment(Pos.CENTER);

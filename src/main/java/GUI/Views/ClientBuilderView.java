@@ -38,7 +38,7 @@ public class ClientBuilderView {
 
     public BorderPane getClientBuilderView() {
         BorderPane borderPane = new BorderPane();
-        borderPane.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        borderPane.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         borderPane.setTop(new TopBar().getTopBar(KUMO.Kumo.getPrimaryStage()));
         borderPane.setLeft(clientBuilderSettingsLeft());
         borderPane.setRight(jarSettingsRight());
@@ -49,7 +49,7 @@ public class ClientBuilderView {
 
     private HBox jarSettingsRight(){
         HBox hbox = Styler.hContainer(20);
-        hbox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        hbox.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         HBox.setHgrow(hbox, Priority.ALWAYS);
         hbox.setId("clientBuilder");
         hbox.setPadding(new Insets(75, 20, 20, 20));
@@ -107,7 +107,7 @@ public class ClientBuilderView {
 
     private HBox clientBuilderSettingsLeft() {
         HBox hBox = Styler.hContainer(20);
-        hBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        hBox.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         hBox.setId("clientBuilder");
         hBox.setPadding(new Insets(20, 20, 20, 20));
         Label title = (Label) Styler.styleAdd(new Label("Client Builder"), "title");
@@ -122,7 +122,7 @@ public class ClientBuilderView {
 
     private HBox clientBuilderSettingsCenter() {
         HBox hBox = Styler.hContainer(20);
-        hBox.getStylesheets().add(getClass().getResource("/css/global.css").toExternalForm());
+        hBox.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         hBox.setId("clientBuilder");
         hBox.setPadding(new Insets(20, 20, 20, 20));
         RequiredFieldValidator fieldValidator = new RequiredFieldValidator("This field is required");
