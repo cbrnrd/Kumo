@@ -183,14 +183,14 @@ public class ClientBuilderView {
                 }
                 PseudoBase.writeKumoData();
             } catch (IOException e) {
-                Logger.log(Level.ERROR, e.toString());
+                Logger.log(Level.ERROR, e.toString(), e);
             }
             if ((!clientName.getText().equals(""))) {
                 ClientBuilder clientBuilder = new ClientBuilder(clientName.getText());
                 try {
                     clientBuilder.run();
                 } catch (IOException e) {
-                    Logger.log(Level.ERROR, e.toString());
+                    Logger.log(Level.ERROR, e.toString(), e);
                 }
             }
             if ((!jarCreatedBy.getText().trim().equals(""))){

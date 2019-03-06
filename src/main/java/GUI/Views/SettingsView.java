@@ -6,6 +6,8 @@ import GUI.Components.NotificationView;
 import GUI.Components.TopBar;
 import GUI.Controller;
 import GUI.Styler;
+import Logger.Level;
+import Logger.Logger;
 import Server.KumoSettings;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -182,6 +184,7 @@ public class SettingsView {
             }
                 Platform.runLater(() -> NotificationView.openNotification("Settings Applied"));
             Controller.changePrimaryStage(new SettingsView().getSettingsView(), 900, 600);
+            Logger.log(Level.INFO, "New settings applied.");
 
         });
         hBox.getChildren().add(Styler.vContainer(20, title, listeningPortBox, maxConnectionsBox, aesBox, soundToggle,notificaitonToggle,backgroundPersistentTogle, darkMode, applySettings));

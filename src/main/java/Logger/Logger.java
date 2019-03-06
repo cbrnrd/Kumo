@@ -16,19 +16,32 @@ public class Logger {
         Date date = new Date();
         switch (level) {
             case INFO:
-                System.out.println(ANSI_PURPLE + level + ANSI_RESET + ": " + date + "\r\n" + ANSI_CYAN + message + ". " + ANSI_RESET);
-                System.out.print("Calling class: " + new Exception().getStackTrace()[1].getClassName()
-                        + " from method: " + new Exception().getStackTrace()[1].getMethodName() + "\r\n");
+                System.out.println('[' + ANSI_BLUE + "INFO" + ':' + date + ANSI_RESET + "] - " + message);
                 break;
             case WARNING:
-                System.out.println(ANSI_GREEN + level + ANSI_RESET + ": " + date + "\r\n" + ANSI_BLUE + message + ". " + ANSI_RESET);
-                System.out.print("Calling class: " + new Exception().getStackTrace()[1].getClassName()
-                        + " from method: " + new Exception().getStackTrace()[1].getMethodName() + "\r\n");
+                System.out.println('[' + ANSI_YELLOW + "WARNING" + ':' + date + ANSI_RESET + "] - " + message);
                 break;
             case ERROR:
-                System.out.println(ANSI_RED + level + ANSI_RESET + ": " + date + "\r\n" + ANSI_YELLOW + message + ". " + ANSI_RESET);
-                System.out.print("Calling class: " + new Exception().getStackTrace()[1].getClassName()
-                        + " from method: " + new Exception().getStackTrace()[1].getMethodName() + "\r\n");
+                System.out.println('[' + ANSI_RED + "ERROR" + ':' + date + ANSI_RESET + "] - " + message);
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void log(Level level, String message, Throwable t) {
+        Date date = new Date();
+        switch (level) {
+            case INFO:
+                System.out.println('[' + ANSI_BLUE + "INFO" + ':' + date + ANSI_RESET + "] - " + message);
+                break;
+            case WARNING:
+                System.out.println('[' + ANSI_YELLOW + "WARNING" + ':' + date + ANSI_RESET + "] - " + message);
+                break;
+            case ERROR:
+                System.out.println('[' + ANSI_RED + "ERROR" + ':' + date + ANSI_RESET + "] - " + message);
+                t.printStackTrace();
                 break;
             default:
                 break;

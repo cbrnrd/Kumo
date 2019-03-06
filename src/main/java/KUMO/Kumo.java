@@ -66,16 +66,16 @@ public class Kumo extends Application {
                             PseudoBase.writeKumoData();
                             Logger.log(Level.INFO, "KumoData saved to file. ");
                         } catch (IOException e) {
-                            Logger.log(Level.ERROR, e.toString());
+                            Logger.log(Level.ERROR, e.toString(), e);
                         }
                     } catch (Exception e) {
-                        Logger.log(Level.ERROR, e.toString());
+                        Logger.log(Level.ERROR, e.toString(), e);
                     }
                 }));
                 return true;
             }
         } catch (Exception e) {
-            Logger.log(Level.ERROR, e.toString());
+            Logger.log(Level.ERROR, e.toString(), e);
         }
         return false;
     }

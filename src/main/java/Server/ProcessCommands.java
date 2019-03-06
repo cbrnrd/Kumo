@@ -26,7 +26,7 @@ class ProcessCommands implements Repository {
             try {
                 input = readFromDis(dis);
             } catch (EOFException e) {
-                Logger.log(Level.ERROR, e.toString());
+                Logger.log(Level.ERROR, e.toString(), e);
                 break;
             }
             /* Reads back the output from a remote execution */

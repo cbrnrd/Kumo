@@ -78,7 +78,7 @@ class IPContextMenu implements Repository {
                 try {
                     clientObject.clientCommunicate("SCREENSHOT");
                 } catch (IOException e1) {
-                    Logger.log(Level.ERROR, e1.toString());
+                    Logger.log(Level.ERROR, e1.toString(), e1);
                 }
             }
         });

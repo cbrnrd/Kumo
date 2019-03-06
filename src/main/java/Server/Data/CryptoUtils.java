@@ -1,5 +1,8 @@
 package Server.Data;
 
+import Logger.Level;
+import Logger.Logger;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -20,7 +23,7 @@ public class CryptoUtils {
             cipher.init(Cipher.ENCRYPT_MODE, keyVal);
             encryptedValue = cipher.doFinal(data.getBytes());
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e){
-            e.printStackTrace();
+            Logger.log(Level.ERROR, "ERROR IN ENCRYPTION!!! Likely a client/server key mismatch.", e);
             return null;
         }
         return Base64.getEncoder().encodeToString(encryptedValue);
@@ -35,7 +38,7 @@ public class CryptoUtils {
             byte[] decodedValue = Base64.getDecoder().decode(data);
             decValue = c.doFinal(decodedValue);
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e){
-            e.printStackTrace();
+            Logger.log(Level.ERROR, "ERROR IN DECRYPTION!!! Likely a client/server key mismatch.", e);
         }
         return new String(decValue);
     }

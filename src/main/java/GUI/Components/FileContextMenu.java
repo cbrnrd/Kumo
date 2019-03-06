@@ -32,7 +32,7 @@ public class FileContextMenu {
                 client.clientCommunicate("DOWNLOAD");
                 client.clientCommunicate(fileName);
             } catch (IOException e1) {
-                Logger.log(Level.ERROR, e1.toString());
+                Logger.log(Level.ERROR, e1.toString(), e1);
             }
         });
         cm.getItems().addAll(sb1, sb2);
@@ -48,7 +48,7 @@ public class FileContextMenu {
                 DataOutputStream dos = new DataOutputStream(client.getClient().getOutputStream());
                 client.clientCommunicate(fileName);
             } catch (IOException e1) {
-                Logger.log(Level.ERROR, e1.toString());
+                Logger.log(Level.ERROR, e1.toString(), e1);
             }
         });
         cm.getItems().addAll(sb2);

@@ -33,7 +33,7 @@ public class ClientBuilder {
         try {
             PseudoBase.writeKumoData();
         } catch (IOException e) {
-            Logger.log(Level.ERROR, e.toString());
+            Logger.log(Level.ERROR, e.toString(), e);
         }
     }
 
@@ -58,8 +58,7 @@ public class ClientBuilder {
                 FileUtils.ExportResource("/Client/Client.class");
                 Thread.sleep(2000);
             } catch (Exception e) {
-                Logger.log(Level.ERROR, e.toString());
-                e.printStackTrace();
+                Logger.log(Level.ERROR, e.toString(), e);
             }
             fileList.add(new File(System.getProperty("user.home").replace("\\", "/") + "/Kumo/Client/Client.class"));
             fileList.add(new File(System.getProperty("user.home").replace("\\", "/") + "/Kumo/.xrst"));
@@ -96,7 +95,7 @@ public class ClientBuilder {
             Logger.log(Level.INFO, "Build Complete!");
             FileUtils.deleteFiles();
         } catch (Exception e) {
-            Logger.log(Level.ERROR, e.toString());
+            Logger.log(Level.ERROR, e.toString(), e);
         }
     }
 

@@ -151,7 +151,7 @@ public class FileExplorerView {
             try {
                 client.clientCommunicate("DIRECTORYUP");
             } catch (IOException e1) {
-                Logger.log(Level.ERROR, e1.toString());
+                Logger.log(Level.ERROR, e1.toString(), e1);
             }
         });
         Label title = (Label) Styler.styleAdd(new Label("Current Directory:"), "title");
