@@ -9,6 +9,7 @@ import GUI.Styler;
 import Logger.Level;
 import Logger.Logger;
 import Server.KumoSettings;
+import Server.Listeners;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
@@ -20,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 import javax.crypto.Cipher;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 public class SettingsView {
@@ -165,7 +167,23 @@ public class SettingsView {
         applySettings.setPrefHeight(50);
         applySettings.setOnAction(event -> {
             if (Integer.parseInt(listeningPort.getText()) != KumoSettings.PORT) {
+                int oldPort = KumoSettings.PORT;
                 KumoSettings.PORT = (Integer.parseInt(listeningPort.getText()));
+
+                try {
+                    // Close old server
+                    if (Listeners.getListener(oldPort) != null) {
+                        Listeners.getListener(oldPort).close();
+                        Logger.log(Level.INFO, "Stopping listening server on port " + oldPort);
+                    }
+                } catch (IOException ioe){
+                    Logger.log(Level.ERROR, "Could not stop listening server: ", ioe);
+                }
+
+                // Restart listening server on new port
+                Runnable startServer = new Server.Server();
+                new Thread(startServer).start();
+                Logger.log(Level.INFO, "New listening server started on port " + KumoSettings.PORT);
             }
             if (Integer.parseInt(maxConnections.getText()) != KumoSettings.MAX_CONNECTIONS) {
                 KumoSettings.MAX_CONNECTIONS = (Integer.parseInt(maxConnections.getText()));

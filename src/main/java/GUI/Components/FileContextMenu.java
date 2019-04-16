@@ -59,7 +59,11 @@ public class FileContextMenu {
                 Logger.log(Level.ERROR, e1.toString(), e1);
             }
         });
-        cm.getItems().addAll(sb2);
+        MenuItem sb3 = new MenuItem("Download Folder");
+        sb3.setOnAction( event -> {
+            // Zip up the folder and request a download
+        });
+        cm.getItems().addAll(sb2, sb3);
         cm.show(fileIcon, e.getScreenX(), e.getScreenY());
     }
 }

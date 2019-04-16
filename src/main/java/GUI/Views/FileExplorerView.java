@@ -218,8 +218,8 @@ public class FileExplorerView {
         scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);    // Vertical scroll bar
         scroll.setContent(flow);
         scroll.viewportBoundsProperty().addListener((ov, oldBounds, bounds) -> {
-            flow.setPrefWidth(bounds.getWidth());
-            flow.setPrefHeight(bounds.getHeight());
+            flow.setPrefWidth(bounds.getWidth()-5);
+            flow.setPrefHeight(bounds.getHeight()-5);
         });
         return scroll;
     }

@@ -124,7 +124,7 @@
 }
 
 .context-menu {
-    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    /*-fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";*/
     -fx-text-fill: #1dd1a1;
     -fx-background-color: white;
     -fx-background-insets: 0, 1, 2;

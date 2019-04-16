@@ -4,14 +4,11 @@ import GUI.Styler;
 import GUI.Views.AlertView;
 import GUI.Views.ClientView;
 import GUI.Views.FirstRunView;
-import GUI.Views.MainView;
 import Logger.Level;
 import Logger.Logger;
 import Server.Data.PseudoBase;
 import Server.KumoSettings;
 import Server.Server;
-import de.codecentric.centerdevice.javafxsvg.SvgImageLoaderFactory;
-import de.codecentric.centerdevice.javafxsvg.dimension.PrimitiveDimensionProvider;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -30,6 +27,9 @@ import java.nio.channels.FileLock;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+//import de.codecentric.centerdevice.javafxsvg.SvgImageLoaderFactory;
+//import de.codecentric.centerdevice.javafxsvg.dimension.PrimitiveDimensionProvider;
+
 
 public class Kumo extends Application {
     private static Stage primaryStage;
@@ -42,7 +42,7 @@ public class Kumo extends Application {
     }
 
     public static void main(String[] args) {
-        SvgImageLoaderFactory.install(new PrimitiveDimensionProvider());
+        //SvgImageLoaderFactory.install(new PrimitiveDimensionProvider());
         if (lockInstance()) {
             launch(args);
         } else {
@@ -234,7 +234,7 @@ public class Kumo extends Application {
     }
 
     private void showStage() {
-        getPrimaryStage().setScene(new Scene(new MainView().getMainView(), 900, 500));
+        getPrimaryStage().setScene(new Scene(new ClientView().getClientView(), 900, 500));
         getPrimaryStage().show();
         getPrimaryStage().toFront();
     }

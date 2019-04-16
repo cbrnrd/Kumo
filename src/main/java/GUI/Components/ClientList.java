@@ -80,6 +80,7 @@ public class ClientList implements Repository {
             cell.textProperty().bind(cell.itemProperty());
             cell.setOnMouseClicked(event -> {
                 if (event.getButton().equals(MouseButton.SECONDARY) && cell.getTableView().getSelectionModel().getSelectedItem() != null && cell.getTableView().getSelectionModel().getSelectedItem().getClient().isConnected()) {
+
                     IPContextMenu.getIPContextMenu(cell, event);
                 }
             });
