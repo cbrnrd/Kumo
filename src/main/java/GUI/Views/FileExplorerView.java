@@ -155,6 +155,7 @@ public class FileExplorerView {
             }
         });
         Label title = (Label) Styler.styleAdd(new Label("Current Directory:"), "title");
+        title.setStyle("-fx-font-size: 16pt");
         Label pathLabel = (Label) Styler.styleAdd(new Label(pathName), "label-bright");
         pathLabel.setWrapText(true);
         HBox pathNameBox = Styler.hContainer(5, Styler.vContainer(10, title, pathLabel, directoryUp));

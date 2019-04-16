@@ -20,7 +20,15 @@ public class FileContextMenu {
     public static void getFileContextMenu(HBox fileIcon, String fileName, MouseEvent e, ClientObject client) {
         ContextMenu cm = new ContextMenu();
         MenuItem sb1 = new MenuItem("Delete File");
+        sb1.setOnAction( event -> {
+            try {
+                client.clientCommunicate("DELFILE " + fileName);
+            } catch (IOException ioe){
+                Logger.log(Level.ERROR, ioe.toString(), ioe);
+            }
+        });
         MenuItem sb2 = new MenuItem("Download File");
+        sb1.setId("fileMenuItem");
 
         sb2.setOnAction(event -> {
             DirectoryChooser directoryChooser = new DirectoryChooser();

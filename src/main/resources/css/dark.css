@@ -115,8 +115,13 @@
 .menu-item:focused {
     -fx-background-color: #414150;
     -fx-cursor: hand;
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
+
+.menu-item .label{
+    -fx-text-fill: white;
+}
+
 
 .context-menu {
     -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";

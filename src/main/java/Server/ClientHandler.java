@@ -51,7 +51,6 @@ public class ClientHandler implements Runnable, Repository {
             InputStream is = client.getClient().getInputStream();
             try {
                 /* Begin listening for client commands via ProcessCommands */
-                Logger.log(Level.INFO, "New client! " + ip + " :: " + client.getNickName() + " :: " + client.getSYSTEM_OS());
                 ProcessCommands.processCommands(is, client);
             } catch (SocketException s){
                 Platform.runLater(() -> CONNECTIONS.remove(ip, client));

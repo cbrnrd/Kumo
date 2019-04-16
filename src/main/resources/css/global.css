@@ -119,6 +119,10 @@
     -fx-text-fill: black;
 }
 
+.menu-item .label{
+    -fx-text-fill: black;
+}
+
 .context-menu {
     -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
     -fx-text-fill: #1dd1a1;
