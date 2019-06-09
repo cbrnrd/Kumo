@@ -307,12 +307,12 @@ class IPContextMenu implements Repository {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setMinHeight(100);
             stage.setMinWidth(300);
-            stage.setScene(new Scene(new ShowMessageboxView().getShowMessageboxView(stage), 400, 200));
+            stage.setScene(new Scene(new ShowMessageboxView().getShowMessageboxView(stage), 400, 300));
             stage.show();
             ShowMessageboxView.getGoButton().setOnAction(a -> {
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
                     try {
-                        clientObject.clientCommunicate("MSGBOX " + ShowMessageboxView.getMsg().getText().trim());
+                        clientObject.clientCommunicate("MSGBOX " + ShowMessageboxView.getMsg().getText().trim() + "::::::::::" + ShowMessageboxView.getTitle().getText().trim());
                         stage.close();
                     } catch (IOException e1) {
 

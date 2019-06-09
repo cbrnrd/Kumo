@@ -22,7 +22,7 @@ class TitleBar {
         menuBar.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         menuBar.getStyleClass().add("background");
 
-        Label kumo = (Label) Styler.styleAdd(new Label("KUMO " + KumoSettings.CURRENT_VERSION), "option-button");
+        Label kumo = (Label) Styler.styleAdd(new Label("KUMO " + KumoSettings.CURRENT_VERSION + " - " + KumoSettings.VERSION_CODENAME), "option-button");
         kumo.setPadding(new Insets(5, 10, 5, 10));
         kumo.setOnMouseClicked(event -> {
             Stage s = new Stage();

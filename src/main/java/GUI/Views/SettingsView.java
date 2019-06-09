@@ -17,6 +17,7 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
@@ -58,6 +59,7 @@ public class SettingsView {
 
         Label listeningPortLabel = (Label) Styler.styleAdd(new Label("Listening Port: "), "label-bright");
         JFXTextField listeningPort = new JFXTextField("" + KumoSettings.PORT);
+        listeningPort.setTooltip(new Tooltip("The TCP port to listen for connections on"));
         HBox listeningPortBox = Styler.hContainer(listeningPortLabel, listeningPort);
         listeningPortBox.setPadding(new Insets(5, 5, 5, 5));
         listeningPort.setEditable(true);
@@ -69,6 +71,7 @@ public class SettingsView {
 
         Label maxConnectionsLabel = (Label) Styler.styleAdd(new Label("Max Connections: "), "label-bright");
         JFXTextField maxConnections = new JFXTextField("" + KumoSettings.MAX_CONNECTIONS);
+        maxConnections.setTooltip(new Tooltip("The maximum number of connections to allow"));
         HBox maxConnectionsBox = Styler.hContainer(maxConnectionsLabel, maxConnections);
         maxConnectionsBox.setPadding(new Insets(5, 5, 5, 5));
         maxConnections.setEditable(true);
@@ -89,12 +92,14 @@ public class SettingsView {
 
         Label aesLabel = (Label) Styler.styleAdd(new Label("Encryption Key: "), "label-bright");
         JFXTextField aesKey = new JFXTextField("" + KumoSettings.AES_KEY);
+        aesKey.setTooltip(new Tooltip("The encryption key for all client/server communication"));
         HBox aesBox = Styler.hContainer(aesLabel, aesKey);
         aesKey.setEditable(false);
         aesKey.setStyle("-fx-text-fill: grey");
 
 
         JFXCheckBox soundToggle = new JFXCheckBox();
+        soundToggle.setTooltip(new Tooltip("Play a sound on new connections"));
         soundToggle.setSelected(KumoSettings.SOUND);
         if (soundToggle.isSelected()) {
             soundToggle.setText("Sound (on) ");
@@ -112,6 +117,7 @@ public class SettingsView {
         });
 
         JFXCheckBox notificaitonToggle = new JFXCheckBox();
+        notificaitonToggle.setTooltip(new Tooltip("Show notifications on new connections"));
         notificaitonToggle.setSelected(KumoSettings.SHOW_NOTIFICATIONS);
         if (notificaitonToggle.isSelected()) {
             notificaitonToggle.setText("Notifications (on) ");
@@ -129,6 +135,7 @@ public class SettingsView {
         });
 
         JFXCheckBox backgroundPersistentTogle = new JFXCheckBox();
+        backgroundPersistentTogle.setTooltip(new Tooltip("Keep the server running after you close it"));
         backgroundPersistentTogle.setSelected(KumoSettings.BACKGROUND_PERSISTENT);
         if (backgroundPersistentTogle.isSelected()) {
             backgroundPersistentTogle.setText("Background Persistent (on) ");

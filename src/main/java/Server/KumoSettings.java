@@ -14,6 +14,7 @@ public class KumoSettings {
     public static String AES_KEY = CryptoUtils.randTextAlpha(16);
     /* STOP - settings not saved / loaded from file */
 
-    public static boolean DARK_MODE = false;
+    public static boolean DARK_MODE = true;
     public static String CURRENT_VERSION = "2.0";
+    public static String VERSION_CODENAME = "CORONA";
 }

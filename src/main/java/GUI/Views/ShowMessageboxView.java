@@ -15,9 +15,11 @@ import javafx.stage.Stage;
 public class ShowMessageboxView {
 
     private static JFXTextField msg;
+    private static JFXTextField title;
     private static JFXButton goButton;
 
     public static JFXTextField getMsg(){ return msg; }
+    public static JFXTextField getTitle() { return title; }
     public static JFXButton getGoButton(){ return goButton; }
 
 
@@ -30,11 +32,14 @@ public class ShowMessageboxView {
         vBox2.setAlignment(Pos.CENTER);
         vBox2.setPadding(new Insets(0, 25, 0, 25));
         VBox.setVgrow(vBox2, Priority.ALWAYS);
+        Label titleLabel = new Label("Title:");
+        titleLabel = (Label) Styler.styleAdd(titleLabel, "label-bright");
+        title = new JFXTextField("");
         Label label = new Label("Message:");
         label = (Label) Styler.styleAdd(label, "label-bright");
         msg = new JFXTextField("");
         goButton = new JFXButton("SHOW");
-        vBox2.getChildren().addAll(label, msg, goButton);
+        vBox2.getChildren().addAll(titleLabel, title, label, msg, goButton);
         vBox.getChildren().addAll(new TopBar().getStrippedTopBar(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;
     }

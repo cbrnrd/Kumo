@@ -87,7 +87,6 @@ public class Kumo extends Application {
 
         File firstStartUp = new File(System.getProperty("user.home") + File.separator + ".kumoStartup");
         if (firstStartUp.exists()){
-            System.out.println("Checking validity of key");
             // Not first run, check if key is activated
             try {
                 String key = new Scanner(firstStartUp).useDelimiter("\\A").next();

