@@ -177,6 +177,11 @@ public class SettingsView {
                 int oldPort = KumoSettings.PORT;
                 KumoSettings.PORT = (Integer.parseInt(listeningPort.getText()));
 
+                // Start listening server on new port
+                Runnable startServer = new Server.Server();
+                new Thread(startServer).start();
+                Logger.log(Level.INFO, "New listening server started on port " + KumoSettings.PORT);
+
                 try {
                     // Close old server
                     if (Listeners.getListener(oldPort) != null) {
@@ -187,10 +192,7 @@ public class SettingsView {
                     Logger.log(Level.ERROR, "Could not stop listening server: ", ioe);
                 }
 
-                // Restart listening server on new port
-                Runnable startServer = new Server.Server();
-                new Thread(startServer).start();
-                Logger.log(Level.INFO, "New listening server started on port " + KumoSettings.PORT);
+
             }
             if (Integer.parseInt(maxConnections.getText()) != KumoSettings.MAX_CONNECTIONS) {
                 KumoSettings.MAX_CONNECTIONS = (Integer.parseInt(maxConnections.getText()));
