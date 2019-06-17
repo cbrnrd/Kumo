@@ -48,7 +48,7 @@ class ProcessCommands implements Repository {
                 String uname = split[1];
                 client.setSYSTEM_OS(SYSTEMOS);
                 client.setUname(uname);
-                Logger.log(Level.INFO, "New client! " + client.getIP() + " :: " + client.getNickName() + " :: " + client.getSYSTEM_OS());
+                Logger.log(Level.GOOD, "New client! " + client.getIP() + " :: " + client.getNickName() + " :: " + client.getSYSTEM_OS());
 
                 /* Goes up a directory in the file explorer (returns files) */
             } else if (input.contains("DIRECTORYUP")) {

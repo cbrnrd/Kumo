@@ -37,23 +37,25 @@
 }
 
 .title {
-    -fx-font-size: 22px;
-    -fx-font-family: "Roboto";
+    -fx-font-size: 32px;
+    -fx-font-family: "Roboto Black";
     -fx-text-fill: black;
+    -fx-font-weight: 900;
     -fx-text-alignment: center;
+    -fx-font-smoothing-type: gray;
 }
 
 .table-row-cell:selected {
-    -fx-background-color: mediumslateblue;
+    -fx-background-color: #1dd1a1;
     -fx-background-insets: 0, 1, 2;
 }
 
 .table-row-cell:selected .text {
-    -fx-text-fill: mediumslateblue;
+    -fx-text-fill: #1dd1a1;
 }
 
 .table-row-cell:selected .menu-item > .label {
-    -fx-text-fill: mediumslateblue;
+    -fx-text-fill: #1dd1a1;
 }
 
 .label-light {
@@ -80,6 +82,7 @@
     -fx-background-color: black;
     -fx-text-fill: white;
     -fx-font-weight: bold;
+    -fx-background-radius: 100;
 }
 
 .option-button:hover {
@@ -92,18 +95,21 @@
     -fx-background-color: black;
     -fx-text-fill: white;
     -fx-font-weight: bold;
+    -fx-background-radius: 100;
 }
 
 .exit-button:hover {
     -fx-cursor: hand;
+    /*-fx-background-color: #1dd1a1;*/
     -fx-background-color: #e74c3c;
 }
 
-.text-field {
+.jfx-text-field {
     -fx-background-color: #e1e1e1;
+    -jfx-focus-color: #1dd1a1;
 }
 
-.text-field .label {
+.jfx-text-field .label {
     -fx-text-fill: #729aec #e;
 }
 
@@ -113,9 +119,13 @@
     -fx-text-fill: black;
 }
 
+.menu-item .label{
+    -fx-text-fill: black;
+}
+
 .context-menu {
-    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
-    -fx-text-fill: mediumslateblue;
+    /*-fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";*/
+    -fx-text-fill: #1dd1a1;
     -fx-background-color: white;
     -fx-background-insets: 0, 1, 2;
     /*-fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;*/
@@ -124,7 +134,7 @@
 .table-view {
     -fx-base: #16161d;
     -fx-control-inner-background: #ecf0f1;
-    -fx-background-color: #ecf0f1;
+    -fx-background-color: white;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -139,16 +149,18 @@
     -fx-text-fill: black;
 }
 
-.button {
-    -fx-text-fill: black;
-    -fx-font-family: "Roboto Thin";
+.jfx-button {
+    -fx-text-fill: white;
+    -fx-font-family: "Roboto";
     -fx-font-weight: bold;
-    -fx-background-color: #a29bfe;
+    -fx-background-color: #1dd1a1;
+    -fx-background-radius: 100;
+    -jfx-button-type: RAISED;
 }
 
-.button:hover {
+.jfx-button:hover {
     -fx-cursor: hand;
-    -fx-background-color: #6c5ce7;
+    -fx-background-color: #21d79c;
 }
 
 .text-area:focused .content {
@@ -183,29 +195,30 @@
     -fx-text-fill: white;
 }
 
-.check-box *.box {
+/*.jfx-check-box *.box {
     -fx-background-color: #d8d8d8;
     -fx-text-fill: #8d9db1;
     -fx-background-radius: 100%;
-}
+}*/
 
-.check-box {
+.jfx-check-box {
     -fx-font-size: 14px;
     -fx-font-family: "Roboto";
     -fx-text-fill: #8d9db1;
     -fx-opacity: 1;
+    -jfx-checked-color: #1dd1a1;
 }
 
-.check-box:selected .mark {
-    -fx-background-color: mediumslateblue;
+.jfx-check-box:selected .mark {
+    -fx-background-color: #1dd1a1;
     -fx-background-insets: 1 0 -1 0, 0;
     -fx-padding: 0.333333em; /* 4 -- this is half the size of the mark */
-    -fx-shape: "M0,5a5, 5 0 1,0 10,0a5,5 0 1,0 -10,0";
+    /*-fx-shape: "M0,5a5, 5 0 1,0 10,0a5,5 0 1,0 -10,0";*/
 }
 
-.check-box:selected *.box {
+/*.jfx-check-box:selected *.box {
     -fx-background-color: white;
-}
+}*/
 
 #drag-bar {
     -fx-background-color: #000000;
@@ -277,7 +290,8 @@
 }
 
 #stat-bar {
-    -fx-background-color: mediumslateblue;
+    /*-fx-background-color: #1dd1a1;*/
+    -fx-background-color: white;
 }
 
 .scroll-bar {
@@ -300,13 +314,13 @@
 }
 
 .scroll-bar:horizontal .thumb {
-    -fx-background-color: mediumslateblue;
+    -fx-background-color: #1dd1a1;
     -fx-background-insets: 4 0 4 0;
     -fx-background-radius: 2em;
 }
 
 .scroll-bar:vertical .thumb {
-    -fx-background-color: mediumslateblue;
+    -fx-background-color: #1dd1a1;
     -fx-background-insets: 0 4 0 4;
     -fx-background-radius: 2em;
 }

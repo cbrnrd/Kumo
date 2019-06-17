@@ -23,8 +23,10 @@ public class Logger {
                 break;
             case ERROR:
                 System.out.println('[' + ANSI_RED + "ERROR" + ':' + date + ANSI_RESET + "] - " + message);
-
                 break;
+            case GOOD:
+                System.out.println('[' + ANSI_GREEN + "GOOD" + ':' + date + ANSI_RESET + "] - " + message);
+
             default:
                 break;
         }

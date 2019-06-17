@@ -1,5 +1,5 @@
 package Logger;
 
 public enum Level {
-    INFO, WARNING, ERROR
+    INFO, WARNING, ERROR, GOOD
 }

@@ -96,7 +96,7 @@ public class ClientBuilder {
                 createProguardRules(jarFileName);
 
             Desktop.getDesktop().open(new File(System.getProperty("user.home") + "/Kumo/"));
-            Logger.log(Level.INFO, "Build Complete!");
+            Logger.log(Level.GOOD, "Build Complete!");
             FileUtils.deleteFiles();
         } catch (Exception e) {
             Logger.log(Level.ERROR, e.toString(), e);
