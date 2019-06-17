@@ -44,13 +44,13 @@ public class ClientList implements Repository {
         nickName.setMaxWidth(200);
         nickName.setResizable(true);
         nickName.setEditable(true);
-        nickName.setCellValueFactory(new PropertyValueFactory<>("nickName"));
-        nickName.setCellFactory(TextFieldTableCell.forTableColumn());
         nickName.setOnEditCommit(
                 t -> t.getTableView().getItems().get(
                         t.getTablePosition().getRow()).setNickName(t.getNewValue())
         );
-        nickName.setCellFactory(col -> {
+        nickName.setCellValueFactory(new PropertyValueFactory<>("nickName"));
+        nickName.setCellFactory(TextFieldTableCell.forTableColumn());
+        /*nickName.setCellFactory(col -> {
             final TableCell<ClientObject, String> cell = new TableCell<>();
             cell.textProperty().bind(cell.itemProperty());
             cell.setOnMouseClicked(event -> {
@@ -58,8 +58,11 @@ public class ClientList implements Repository {
                     IPContextMenu.getIPContextMenu(cell, event);
                 }
             });
+
             return cell;
-        });
+        });*/
+
+
         /*nickName.setCellFactory(col -> {
             final TableCell<ClientObject, String> cell = new TableCell<>();
             cell.textProperty().bind(cell.itemProperty());
