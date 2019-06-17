@@ -9,6 +9,7 @@ import Server.Data.PseudoBase;
 import Server.Data.Repository;
 import javafx.application.Platform;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
@@ -52,14 +53,15 @@ public class ClientHandler implements Runnable, Repository {
             try {
                 /* Begin listening for client commands via ProcessCommands */
                 ProcessCommands.processCommands(is, client);
-            } catch (SocketException s){
+            } catch (SocketException | EOFException s){
                 Platform.runLater(() -> CONNECTIONS.remove(ip, client));
                 Logger.log(Level.WARNING, "Lost client " + client.getNickName() + '.' + "Removing from connections list.");
                 Platform.runLater(() -> PseudoBase.getKumoData().remove(ip, client));
                 Controller.updateStats();
                 Controller.updateTable();
                 s.printStackTrace();
-            }
+            } // EOFException = Client CTRL+C
+
         } catch (IOException e) {
             client.setOnlineStatus("offline");
             e.printStackTrace();
