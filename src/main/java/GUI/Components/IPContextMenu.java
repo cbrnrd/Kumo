@@ -419,6 +419,7 @@ class IPContextMenu implements Repository {
         });
 
         mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, si10, si8, si9, clip, pwdRecovery, misc, update);
+
         MenuItem mi2 = new MenuItem("Copy IP");
         mi2.setOnAction(event -> {
             final Clipboard clipboard = Clipboard.getSystemClipboard();

