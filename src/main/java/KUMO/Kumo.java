@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -149,7 +148,7 @@ public class Kumo extends Application {
         /* Set up primary view */
         getPrimaryStage().setTitle("Kumo RAT");// + KumoSettings.CURRENT_VERSION);
 
-        SwingUtilities.invokeLater(this::addAppToTray);
+        //SwingUtilities.invokeLater(this::addAppToTray);
         Platform.setImplicitExit(false);
         //Scene mainScene = new Scene(new MainView().getMainView(), 900, 500);
         // Load some required project stuff
