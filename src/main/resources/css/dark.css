@@ -43,6 +43,15 @@
     -fx-font-weight: 900;
 }
 
+.small-title{
+    -fx-font-size: 24px;
+    -fx-font-family: "Roboto Black";
+    -fx-text-fill: #ecf0f1;
+    -fx-font-weight: 900;
+    -fx-text-alignment: center;
+    -fx-font-smoothing-type: gray;
+}
+
 .table-row-cell:selected {
     -fx-background-color: #9c88ff;
     -fx-background-insets: 0, 1, 2;

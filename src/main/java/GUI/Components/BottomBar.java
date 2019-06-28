@@ -2,7 +2,6 @@ package GUI.Components;
 
 import GUI.Styler;
 import Server.Data.Repository;
-import Server.KumoSettings;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -22,7 +21,7 @@ public class BottomBar implements Repository {
         VBox vBox = new VBox();
         vBox.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         VBox.setVgrow(vBox, Priority.ALWAYS);
-        connectionsLabel = new Label("  Clients: " + CONNECTIONS.size() + " \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Version " + KumoSettings.CURRENT_VERSION + " | Developer: Clova");
+        connectionsLabel = new Label("  Clients: " + CONNECTIONS.size());
         connectionsLabel = (Label) Styler.styleAdd(connectionsLabel, "label-light");
         connectionsLabel.setStyle("-fx-text-fill: " + Styler.getCurrentAccentColor());
 

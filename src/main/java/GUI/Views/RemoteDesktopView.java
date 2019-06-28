@@ -21,7 +21,7 @@ public class RemoteDesktopView {
         BorderPane borderPane = new BorderPane();
         borderPane.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         ImageView imageView = new ImageView();
-        borderPane.setTop(new TopBar().getTopBarSansOptions(stage));
+        borderPane.setTop(new TopBar().getReflectiveTopBar(stage));
         borderPane.setCenter(imageView);
         borderPane.setBottom(new BottomBar().getBottomBar());
         return borderPane;

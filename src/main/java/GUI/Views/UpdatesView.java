@@ -1,14 +1,13 @@
 package GUI.Views;
 
-import GUI.Components.BottomBar;
-import GUI.Components.NotificationView;
 import GUI.Components.TopBar;
 import GUI.Styler;
 import KUMO.Kumo;
+import Logger.Logger;
 import Server.KumoSettings;
+import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
@@ -16,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -34,7 +34,7 @@ public class UpdatesView {
         updatesView.setTop(new TopBar().getTopBar(KUMO.Kumo.getPrimaryStage()));
         updatesView.setLeft(hBox);
         updatesView.setCenter(hBox1);
-        updatesView.setBottom(new BottomBar().getBottomBar());
+        //updatesView.setBottom(new BottomBar().getBottomBar());
         return updatesView;
     }
 
@@ -49,16 +49,36 @@ public class UpdatesView {
         } else {
             desc.setFill(Paint.valueOf("black"));
         }
-        Button checkUpdates = new Button("Check for Updates");
+        JFXButton checkUpdates = new JFXButton("View Debug Log");
+        checkUpdates.setPadding(new Insets(10, 10, 10, 15));
         checkUpdates.setOnMouseClicked(event -> {
-            Platform.runLater(() -> NotificationView.openNotification("Update Check Complete"));
+            Platform.runLater(() -> {
+                try {
+                    Desktop.getDesktop().open(Logger.getLogFile());
+                } catch (IOException ioe){
+                    ioe.printStackTrace();
+                    new AlertView().showErrorAlert("Unable to open debug log: " + ioe.getMessage());
+                }
+            });
 
             HBox hBox = getUpdatesPanel();
             hBox.setId("updatesView");
             updatesView.setCenter(hBox);
-
         });
-        return Styler.hContainer(Styler.vContainer(20, title, desc)); //, checkUpdates));
+
+        JFXButton helpButton = new JFXButton("Help");
+        helpButton.setPadding(new Insets(15, 15, 15, 15));
+        helpButton.setOnMouseClicked(event -> {
+            Platform.runLater(() -> {
+                new HelpView().showHelpView();
+            });
+
+            HBox hBox = getUpdatesPanel();
+            hBox.setId("updatesView");
+            updatesView.setCenter(hBox);
+        });
+
+        return Styler.hContainer(Styler.vContainer(20, title, desc, checkUpdates, helpButton));
     }
 
     private HBox getUpdatesPanel() {

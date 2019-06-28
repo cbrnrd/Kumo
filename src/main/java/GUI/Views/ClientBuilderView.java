@@ -1,7 +1,6 @@
 package GUI.Views;
 
 
-import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
 import GUI.Styler;
 import KUMO.ClientBuilder;
@@ -42,7 +41,7 @@ public class ClientBuilderView {
         borderPane.setLeft(clientBuilderSettingsLeft());
         borderPane.setRight(jarSettingsRight());
         borderPane.setCenter(clientBuilderSettingsCenter());
-        borderPane.setBottom(new BottomBar().getBottomBar());
+        //borderPane.setBottom(new BottomBar().getBottomBar());
         return borderPane;
     }
 

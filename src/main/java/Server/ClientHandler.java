@@ -9,12 +9,10 @@ import Server.Data.PseudoBase;
 import Server.Data.Repository;
 import javafx.application.Platform;
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketException;
 
 public class ClientHandler implements Runnable, Repository {
     private Socket socket;
@@ -49,17 +47,19 @@ public class ClientHandler implements Runnable, Repository {
             if(KumoSettings.SHOW_NOTIFICATIONS) {
                 Platform.runLater(() -> NotificationView.openNotification(client));
             }
+            Controller.updateTable();
             InputStream is = client.getClient().getInputStream();
             try {
                 /* Begin listening for client commands via ProcessCommands */
                 ProcessCommands.processCommands(is, client);
-            } catch (SocketException | EOFException s){
+            } catch (IOException s){ // Client exits somehow. Could improve py doing specific things for specific errors (SocketError, EOFException)
                 Platform.runLater(() -> CONNECTIONS.remove(ip, client));
-                Logger.log(Level.WARNING, "Lost client " + client.getNickName() + '.' + "Removing from connections list.");
+                Logger.log(Level.WARNING, "Lost client " + client.getNickName() + '.' + " Removing from connections list.");
                 Platform.runLater(() -> PseudoBase.getKumoData().remove(ip, client));
                 Controller.updateStats();
                 Controller.updateTable();
                 s.printStackTrace();
+
             } // EOFException = Client CTRL+C
 
         } catch (IOException e) {

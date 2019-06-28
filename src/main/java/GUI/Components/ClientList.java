@@ -50,18 +50,6 @@ public class ClientList implements Repository {
         );
         nickName.setCellValueFactory(new PropertyValueFactory<>("nickName"));
         nickName.setCellFactory(TextFieldTableCell.forTableColumn());
-        /*nickName.setCellFactory(col -> {
-            final TableCell<ClientObject, String> cell = new TableCell<>();
-            cell.textProperty().bind(cell.itemProperty());
-            cell.setOnMouseClicked(event -> {
-                if (event.getButton().equals(MouseButton.SECONDARY) && cell.getTableView().getSelectionModel().getSelectedItem() != null && cell.getTableView().getSelectionModel().getSelectedItem().getClient().isConnected()) {
-                    IPContextMenu.getIPContextMenu(cell, event);
-                }
-            });
-
-            return cell;
-        });*/
-
 
         /*nickName.setCellFactory(col -> {
             final TableCell<ClientObject, String> cell = new TableCell<>();
@@ -75,7 +63,7 @@ public class ClientList implements Repository {
         });*/
 
         TableColumn<ClientObject, String> IP = new TableColumn<>("IP");
-        IP.setMinWidth(200);
+        IP.setMinWidth(175);
         IP.setResizable(false);
         IP.setCellValueFactory(new PropertyValueFactory<>("IP"));
         IP.setCellFactory(col -> {
@@ -123,10 +111,27 @@ public class ClientList implements Repository {
             return cell;
         });
 
+        TableColumn<ClientObject, String> country = new TableColumn<>("Country");
+        country.setMinWidth(75);
+        country.setResizable(true);
+        country.setCellValueFactory(new PropertyValueFactory<>("countryCode"));
+        country.setEditable(false);
+        country.setCellFactory(col -> {
+            final TableCell<ClientObject, String> cell = new TableCell<>();
+            cell.textProperty().bind(cell.itemProperty());
+            cell.setOnMouseClicked(event -> {
+                if (event.getButton().equals(MouseButton.SECONDARY) && cell.getTableView().getSelectionModel().getSelectedItem() != null && cell.getTableView().getSelectionModel().getSelectedItem().getClient().isConnected()) {
+                    IPContextMenu.getIPContextMenu(cell, event);
+                }
+            });
+            return cell;
+        });
+
         ObservableList<ClientObject> list = FXCollections.observableArrayList();
+
         list.addAll(CONNECTIONS.values()); // Only ClientObjects
         tableView.setItems(list);
-        tableView.getColumns().addAll(onlineStatus, nickName, IP, OS, user);
+        tableView.getColumns().addAll(onlineStatus, nickName, IP, OS, user, country);
 
         return tableView;
     }

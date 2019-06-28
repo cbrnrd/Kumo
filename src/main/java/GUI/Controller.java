@@ -1,11 +1,9 @@
 package GUI;
 
-import GUI.Components.BottomBar;
 import Server.ClientObject;
 import Server.Data.PseudoBase;
 import Server.Data.Repository;
 import Server.KumoSettings;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -26,8 +24,10 @@ public class Controller implements Repository {
     }
 
     /* Refreshes the number of connections based on KumoData size. */
+    @Deprecated
     public static void updateStats() {
-        Platform.runLater(() -> BottomBar.getConnectionsLabel().setText("  Clients: " + CONNECTIONS.size() + " \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Version " + KumoSettings.CURRENT_VERSION + " | Developer: Clova" ));
+        return;
+        //Platform.runLater(() -> BottomBar.getConnectionsLabel().setText("  Clients: " + CONNECTIONS.size() + " \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Version " + KumoSettings.CURRENT_VERSION + " | Developer: Clova" ));
     }
 
     /* Changes the primary view to the provided scene. */
@@ -72,4 +72,5 @@ public class Controller implements Repository {
                 "\t\t- Fix ugly lcd font rendering.\n";
         return s;
     }
+
 }

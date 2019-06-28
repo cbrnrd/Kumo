@@ -28,7 +28,7 @@ public class GetClipboardView {
         data.setEditable(false);
         data.setPrefHeight(300);
         vBox2.getChildren().addAll(Styler.vContainer(data));
-        vBox.getChildren().addAll(new TopBar().getTopBarSansOptions(stage), vBox2, new BottomBar().getBottomBar());
+        vBox.getChildren().addAll(new TopBar().getReflectiveTopBar(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;
     }
 

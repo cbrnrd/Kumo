@@ -4,6 +4,8 @@ import KUMO.Kumo;
 
 import java.io.*;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 
 public class FileUtils {
 
@@ -70,5 +72,32 @@ public class FileUtils {
         }
         fil.delete();
         dir.delete();
+    }
+
+    public static void appendLineToFile(String line, File f){
+        try{
+            Files.write(f.toPath(), (line + "\r\n").getBytes(), StandardOpenOption.APPEND);
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+    }
+
+    public static String stacktraceToString(Throwable t){
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        t.printStackTrace(pw);
+        return sw.toString();
+    }
+
+    public static String getCountryFlagEmoji(String country){
+        int flagOffset = 0x1F1E6;
+        int asciiOffset = 0x41;
+
+
+        int firstChar = Character.codePointAt(country, 0) - asciiOffset + flagOffset;
+        int secondChar = Character.codePointAt(country, 1) - asciiOffset + flagOffset;
+
+        return new String(Character.toChars(firstChar))
+                + new String(Character.toChars(secondChar));
     }
 }

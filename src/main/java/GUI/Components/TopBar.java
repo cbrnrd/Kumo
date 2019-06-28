@@ -8,6 +8,8 @@ import GUI.Views.ClientView;
 import GUI.Views.SettingsView;
 import GUI.Views.UpdatesView;
 import KUMO.Kumo;
+import Server.ClientObject;
+import Server.Data.Repository;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -18,7 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-public class TopBar {
+public class TopBar implements Repository {
 
     public VBox getTopBar(Stage stage) {
         Image image = new Image(getClass().getResourceAsStream("/Images/logo.png"));
@@ -54,7 +56,7 @@ public class TopBar {
         VBox infoVbox = new VBox();
         infoVbox.setAlignment(Pos.CENTER);
         Label infoLabel = (Label) Styler.styleAdd(new Label("INFO"), "label-light");
-        label.setStyle("-fx-font-family: \"Roboto\"");
+        infoLabel.setStyle("-fx-font-family: \"Roboto\"");
         Image infoImg = new Image(getClass().getResourceAsStream(Styler.getCurrentIcon("/Images/Icons/info.svg")), 32, 32, false, true);
         infoVbox.getChildren().addAll(new ImageView(infoImg), infoLabel);
         infoVbox.setPadding(new Insets(5, 10, 0, 10));
@@ -66,7 +68,15 @@ public class TopBar {
         vBox1.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/Images/logo.png"))));
         vBox1.setPadding(new Insets(5, 10, 5, 160));
 
-        HBox hBox = Styler.hContainer(new HBox(), homeVbox, buildVbox, settingsVbox, infoVbox, vBox1);
+        VBox clientsVbox = new VBox();
+        clientsVbox.setAlignment(Pos.CENTER);
+        Label clientsLabel = (Label) Styler.styleAdd(new Label("CLIENTS"), "label-light");
+        clientsLabel.setStyle("-fx-font-family: \"Roboto\"");
+        Label clientsNum = (Label) Styler.styleAdd(new Label("" + CONNECTIONS.size()), "title");
+        clientsVbox.setPadding(new Insets(5, 10, 5, 300));
+        clientsVbox.getChildren().addAll(clientsNum, clientsLabel);
+
+        HBox hBox = Styler.hContainer(new HBox(), homeVbox, buildVbox, settingsVbox, infoVbox, vBox1, clientsVbox);
         homeVbox.setOnMouseClicked(event -> {
             Kumo.getPrimaryStage().setHeight(500);
             Controller.changePrimaryStage(new ClientView().getClientView());
@@ -105,5 +115,18 @@ public class TopBar {
 
     public VBox getStrippedTopBar(Stage stage){
         return Styler.vContainer(new VBox(), new TitleBar().getMenuBar(stage));
+    }
+
+    public VBox getReflectiveTopBar(Stage stage){
+        ClientObject client = (ClientObject) ClientList.getTableView().getSelectionModel().getSelectedItem();
+        String nickname = client.getNickName();
+
+        VBox vBox1 = new VBox();
+        vBox1.setAlignment(Pos.CENTER);
+        vBox1.getChildren().add(Styler.styleAdd(new Label("Active client: " + nickname), "small-title"));
+        vBox1.setPadding(new Insets(5, 10, 5, 5));
+        HBox hBox = Styler.hContainer(new HBox(), vBox1);
+
+        return Styler.vContainer(new VBox(), new TitleBar().getMenuBar(stage), hBox);
     }
 }

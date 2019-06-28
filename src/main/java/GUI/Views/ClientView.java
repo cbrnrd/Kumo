@@ -1,6 +1,5 @@
 package GUI.Views;
 
-import GUI.Components.BottomBar;
 import GUI.Components.ClientList;
 import GUI.Components.TopBar;
 import GUI.Styler;
@@ -13,7 +12,7 @@ public class ClientView {
         borderPane.getStyleClass().add("root");
         borderPane.setTop(new TopBar().getTopBar(KUMO.Kumo.getPrimaryStage()));
         borderPane.setCenter(Styler.vContainer(new ClientList().getClientList()));
-        borderPane.setBottom(new BottomBar().getBottomBar());
+        //borderPane.setBottom(new BottomBar().getBottomBar());
         return borderPane;
     }
 }

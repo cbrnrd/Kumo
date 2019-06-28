@@ -34,7 +34,7 @@ public class SleepView {
         textField = new JFXTextField("60");
         sleepButton = new JFXButton("Sleep");
         vBox2.getChildren().addAll(label, textField, sleepButton);
-        vBox.getChildren().addAll(new TopBar().getTopBarSansOptions(stage), vBox2, new BottomBar().getBottomBar());
+        vBox.getChildren().addAll(new TopBar().getReflectiveTopBar(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;
     }
 }

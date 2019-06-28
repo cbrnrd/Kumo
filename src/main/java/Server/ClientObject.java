@@ -5,6 +5,7 @@ import GUI.Controller;
 import Logger.Level;
 import Logger.Logger;
 import Server.Data.CryptoUtils;
+import Server.Data.NetUtils;
 import Server.Data.Repository;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -20,6 +21,7 @@ public class ClientObject implements Serializable, Repository {
     private String nickName;
     private String IP;
     private String uname;
+    private String countryCode = "Fetching...";
     private transient PrintWriter clientOutput;
     private transient DataOutputStream dis;
 
@@ -27,14 +29,17 @@ public class ClientObject implements Serializable, Repository {
         this.client = client;
         this.nickName = nickName;
         this.IP = IP;
+        new Thread(() -> {
+            this.countryCode = NetUtils.sendHttpRequest("http://api.hostip.info/country.php?ip="+IP);
+            if (countryCode.equals("")) countryCode = "N/A"; // eg localhost, 127.0.0.1, 192.168.1.1, etc
+            //countryCodeImage = new CustomImage(new ImageView("https://www.countryflags.io/" + countryCode + "/flat/32.png"));
+            updateStatus();
+        }, "CountryCodeFetchThread").start();
+
         try {
             this.clientOutput = new PrintWriter(client.getOutputStream(), true);
             dis = new DataOutputStream(client.getOutputStream());
-            if (SYSTEM_OS == null) {
-                clientCommunicate("SYS");
-            } else {
-                clientCommunicate("SYS");
-            }
+            clientCommunicate("SYS");
         } catch (IOException e) {
             Logger.log(Level.WARNING, "Exception thrown: " + e);
         }
@@ -93,6 +98,8 @@ public class ClientObject implements Serializable, Repository {
         return onlineStatus;
     }
 
+    public String getCountryCode() { return countryCode; }
+
     public void setOnlineStatus(String status) {
         onlineStatus = status;
     }
@@ -134,5 +141,6 @@ public class ClientObject implements Serializable, Repository {
         clientOutput.close();
         client.close();
     }
+
 }
 

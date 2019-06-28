@@ -28,7 +28,7 @@ public class SysInfoView {
         area.setId("console");
         area.setEditable(false);
         vBox2.getChildren().addAll( Styler.vContainer(area));
-        vBox.getChildren().addAll(new TopBar().getTopBarSansOptions(stage), vBox2, new BottomBar().getBottomBar());
+        vBox.getChildren().addAll(new TopBar().getReflectiveTopBar(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;
     }
 

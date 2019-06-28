@@ -9,6 +9,7 @@ import Logger.Logger;
 import Server.Data.PseudoBase;
 import Server.KumoSettings;
 import Server.Server;
+import com.sun.javafx.PlatformUtil;
 import de.codecentric.centerdevice.javafxsvg.SvgImageLoaderFactory;
 import de.codecentric.centerdevice.javafxsvg.dimension.PrimitiveDimensionProvider;
 import javafx.application.Application;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -81,6 +83,9 @@ public class Kumo extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException, ClassNotFoundException {
+        // Initialize logger
+        Logger.initialize(new File(System.getProperty("user.home") + File.separator + File.separator + "kumo-debug.log"));
+
         KUMO.Kumo.primaryStage = primaryStage;
 
         File firstStartUp = new File(System.getProperty("user.home") + File.separator + ".kumoStartup");
@@ -148,9 +153,11 @@ public class Kumo extends Application {
         /* Set up primary view */
         getPrimaryStage().setTitle("Kumo RAT");// + KumoSettings.CURRENT_VERSION);
 
-        //SwingUtilities.invokeLater(this::addAppToTray);
+        if (!PlatformUtil.isMac()){
+            // This causes an infinite loop on mac. GUI doesnt start
+            SwingUtilities.invokeLater(this::addAppToTray);
+        }
         Platform.setImplicitExit(false);
-        //Scene mainScene = new Scene(new MainView().getMainView(), 900, 500);
         // Load some required project stuff
         System.setProperty("prism.lcdtext", "false");
 

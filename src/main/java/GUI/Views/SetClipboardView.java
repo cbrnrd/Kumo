@@ -36,7 +36,7 @@ public class SetClipboardView {
         textField = new JFXTextField("");
         setClipboard = new JFXButton("Set Clipboard");
         vBox2.getChildren().addAll(label, textField, setClipboard);
-        vBox.getChildren().addAll(new TopBar().getTopBarSansOptions(stage), vBox2, new BottomBar().getBottomBar());
+        vBox.getChildren().addAll(new TopBar().getReflectiveTopBar(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;
     }
 }

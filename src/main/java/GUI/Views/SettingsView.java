@@ -1,7 +1,6 @@
 package GUI.Views;
 
 
-import GUI.Components.BottomBar;
 import GUI.Components.NotificationView;
 import GUI.Components.TopBar;
 import GUI.Controller;
@@ -33,7 +32,7 @@ public class SettingsView {
         borderPane.setTop(new TopBar().getTopBar(KUMO.Kumo.getPrimaryStage()));
         borderPane.setLeft(settingsViewLeft());
         borderPane.setCenter(settingsViewCenter());
-        borderPane.setBottom(new BottomBar().getBottomBar());
+        //borderPane.setBottom(new BottomBar().getBottomBar());
         return borderPane;
     }
 

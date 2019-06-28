@@ -5,6 +5,7 @@ import GUI.Components.TopBar;
 import GUI.Styler;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -19,6 +20,7 @@ public class DownloadAndExecuteView {
     private static JFXTextField urlField;
     private static JFXButton downloadButton;
     private static Label statusLabel;
+    private RequiredFieldValidator validator = new RequiredFieldValidator("This field is required.");
 
     public static JFXTextField getUrlField() {
         return urlField;
@@ -52,11 +54,15 @@ public class DownloadAndExecuteView {
         Label urlLabel = new Label("URL of binary: ");
         urlLabel = (Label) Styler.styleAdd(urlLabel, "label-bright");
         urlField = new JFXTextField();
+        urlField.getValidators().add(validator);
+        urlField.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) urlField.validate();
+        });
         urlField.setPromptText("Example: http://example.com/evil.exe");
         downloadButton = new JFXButton("GO");
         statusLabel = new Label("");
         vBox2.getChildren().addAll(urlLabel, urlField, downloadButton, statusLabel);
-        vBox.getChildren().addAll(new TopBar().getTopBarSansOptions(stage), vBox2, new BottomBar().getBottomBar());
+        vBox.getChildren().addAll(new TopBar().getReflectiveTopBar(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;
     }
 

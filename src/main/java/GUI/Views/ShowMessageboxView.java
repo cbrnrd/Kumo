@@ -5,6 +5,7 @@ import GUI.Components.TopBar;
 import GUI.Styler;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -38,9 +39,19 @@ public class ShowMessageboxView {
         Label label = new Label("Message:");
         label = (Label) Styler.styleAdd(label, "label-bright");
         msg = new JFXTextField("");
+
+        // Validator
+        RequiredFieldValidator fieldValidator = new RequiredFieldValidator("This field is required");
+        JFXTextField[] fields = {title, msg};
+        for (JFXTextField f : fields) {
+            f.getValidators().add(fieldValidator);
+            f.focusedProperty().addListener((o, old, newVal) -> {
+                if (!newVal) f.validate();
+            });
+        }
         goButton = new JFXButton("SHOW");
         vBox2.getChildren().addAll(titleLabel, title, label, msg, goButton);
-        vBox.getChildren().addAll(new TopBar().getStrippedTopBar(stage), vBox2, new BottomBar().getBottomBar());
+        vBox.getChildren().addAll(new TopBar().getReflectiveTopBar(stage), vBox2, new BottomBar().getBottomBar());
         return vBox;
     }
 
