@@ -41,35 +41,28 @@ public class Controller implements Repository {
 
     public static String getReleaseNotes(){
         String s = "Release notes: Kumo v" + KumoSettings.CURRENT_VERSION + " - " + KumoSettings.VERSION_CODENAME + "\n" +
-                "\tNew stuff!:\n" +
-                "\t\t- Updated UI\n" +
-                "\t\t\t* Full transition to Material Design elements.\n" +
-                "\t\t\t* Add dark mode/light mode toggle switch. Defaults to dark mode.\n" +
-                "\t\t\t* Changed primary application color (mediumslateblue -> #1dd1a1)\n" +
-                "\t\t\t* Updated bottom bar color to colored text on white background.\n" +
-                "\t\t\t* \"Home\" screen is now the client list.\n" +
-                "\t\t\t* Changed top bar to have navigation tiles.\n" +
-                "\t\t\t* Changed exit and minimize buttons to rounded buttons.\n" +
-                "\t\t\t* Switched navigation icons from PNG to SVG to fix image scaling issues in Windows." +
-                "\t\t- Added tooltips on settings text boxes to clear up any uncertainties about what certain settings do.\n" +
-                "\t\t- Added the ability to customize the path where the persistence JAR is saved. (Found un Settings>JAR Settings>Persistence Path).\n" +
-                "\t\t- Changed some download directories to the client temp directory (it used to just download to the working dir).\n" +
-                "\t\t- Add user and OS column to client list\n" +
-                "\t\t- Add release notes menu.\n" +
-                "\t\t- Add the ability to put a domain name for a connect-back host.\n" +
-                "\t\t- Added more server logging.\n" +
-                "\t\t- Improved readability of logs.\n" +
-                "\t\t- Add the ability to generate ProGuard obfuscation rules for the client JAR.\n" +
-                "\t\t- Added linux persistence\n" +
-                "\t\t- Added Windows key logger (PowerShell based)\n" +
-                "\t\t- Added more stuff to system info.\n\n" +
-                "\tBug fixes:\n" +
-                "\t\t- Fix proguard rules being generated even if the option was turned off.\n" +
-                "\t\t- Changed the first run view to follow material design.\n" +
-                "\t\t- Fix download & execute so it works on Windows clients.\n" +
-                "\t\t- Fixed accidental stage height reset when double clicking info and updates nav tiles.\n" +
-                "\t\t- Fix client exit on Windows.\n" +
-                "\t\t- Fix ugly lcd font rendering.\n";
+                "* Fix linux persistence\n" +
+                "* Remove bottom bar\n" +
+                "* Add client count to top bar\n" +
+                "* Add server debug log viewer\n" +
+                "* Increase persistence write timeout\n" +
+                "* Fix MSF Python web delivery payload\n" +
+                "* Fix MSF web delivery payload target selection (client side)\n" +
+                "* Add various field validations\n" +
+                "* Add client country to client list\n" +
+                "* Add Help and Show Debug Log buttons to INFO tab\n" +
+                "* Update LEGAL\n" +
+                "* Dark mode preferences now saves across server restarts\n" +
+                "* Top bar in dialogs now reflects the active client\n" +
+                "* Increase persistence creation timeout (2s -> 4s)\n" +
+                "* Improve communication to server if the keylog file is requested and keylogging isn't enabled\n" +
+                "* Reduce size of IP column in the client list by 25px\n" +
+                "* Add some more verbose server logging to help with debugging\n" +
+                "* Server logs now output to a file as well as to the console\n" +
+                "* Fix bug where adding the app to tray on OSX/MacOS would cause an infinite loop and the program would not start completely\n" +
+                "* Added some small utility functions to the server to shrink the codebase a little bit\n" +
+                "* Add server system information to startup output log\n" +
+                "* Switch browser credential gather method (PSH based to EXE based)";
         return s;
     }
 

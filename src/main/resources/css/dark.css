@@ -85,6 +85,13 @@
     -fx-opacity: 1;
 }
 
+.label-bright-white {
+    -fx-font-size: 14px;
+    -fx-font-family: "Roboto";
+    -fx-text-fill: #ecf0f1;
+    -fx-opacity: 1;
+}
+
 .option-button {
     -fx-background-color: black;
     -fx-text-fill: white;

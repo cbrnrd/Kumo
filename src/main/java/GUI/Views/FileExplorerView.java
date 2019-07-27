@@ -171,6 +171,7 @@ public class FileExplorerView {
         flow.setVgap(10);
         flow.setHgap(10);
         flow.setAlignment(Pos.CENTER);
+
         HBox[] icons = new HBox[files.length];
         int rot = 0;
         for (String s : files) {
@@ -221,6 +222,7 @@ public class FileExplorerView {
             flow.setPrefWidth(bounds.getWidth()-5);
             flow.setPrefHeight(bounds.getHeight()-5);
         });
+
         return scroll;
     }
 

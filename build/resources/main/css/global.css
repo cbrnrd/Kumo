@@ -45,6 +45,15 @@
     -fx-font-smoothing-type: gray;
 }
 
+.small-title{
+    -fx-font-size: 24px;
+    -fx-font-family: "Roboto Black";
+    -fx-text-fill: #ecf0f1;
+    -fx-font-weight: 900;
+    -fx-text-alignment: center;
+    -fx-font-smoothing-type: gray;
+}
+
 .table-row-cell:selected {
     -fx-background-color: #1dd1a1;
     -fx-background-insets: 0, 1, 2;
@@ -75,6 +84,13 @@
     -fx-font-size: 14px;
     -fx-font-family: "Roboto";
     -fx-text-fill: black;
+    -fx-opacity: 1;
+}
+
+.label-bright-white{
+    -fx-font-size: 14px;
+    -fx-font-family: "Roboto";
+    -fx-text-fill: #ecf0f1;
     -fx-opacity: 1;
 }
 

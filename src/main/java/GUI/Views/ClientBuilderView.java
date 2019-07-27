@@ -8,17 +8,19 @@ import Logger.Level;
 import Logger.Logger;
 import Server.Data.PseudoBase;
 import Server.KumoSettings;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXSnackbar;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 
 import java.io.IOException;
 
@@ -33,6 +35,7 @@ public class ClientBuilderView {
     private JFXCheckBox createProguardRules;
     private JFXCheckBox keylog;
     private TextField updateTime;
+    private JFXComboBox<String> screenshotTypeComboBox;
 
     public BorderPane getClientBuilderView() {
         BorderPane borderPane = new BorderPane();
@@ -92,25 +95,47 @@ public class ClientBuilderView {
         jarSettings.setAnimated(true);
         jarSettings.setContent(grid);
 
-       /* // Evasion, custom networking
-        Label updateTimeLabel = (Label) Styler.styleAdd(new Label("Update Time: "), "label-bright");
-        updateTime = new JFXTextField("30");
+        // Evasion, custom networking
+        Label updateTimeLabel = (Label) Styler.styleAdd(new Label("Reconnect Time (ms): "), "label-bright");
+        updateTimeLabel.setTooltip(new Tooltip("The amount of time to wait to reconnect when the client gets disconnected."));
+        updateTime = new JFXTextField("1000");
+        updateTime.textProperty().addListener(((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                updateTime.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        }));
+
 
         TitledPane networkSettings = (TitledPane) Styler.styleAdd(new TitledPane(), "label-bright");
         GridPane netGrid = new GridPane();
-        grid.setId("java-settings");
-        grid.setVgap(4);
-        grid.setPadding(new Insets(5));
-        grid.add(updateTimeLabel, 0, 0);
-        grid.add(updateTime, 1, 0);
+        netGrid.setId("java-settings");
+        netGrid.setVgap(4);
+        netGrid.setPadding(new Insets(5));
+        netGrid.add(updateTimeLabel, 0, 0);
+        netGrid.add(updateTime, 1, 0);
 
         networkSettings.setLayoutY(10);
         networkSettings.setText("Networking Settings");
         networkSettings.setExpanded(false);
         networkSettings.setAnimated(true);
-        networkSettings.setContent(grid);*/
+        networkSettings.setContent(netGrid);
 
-        hbox.getChildren().add(Styler.vContainer(20, jarSettings));//, networkSettings));
+
+        // Handle both being opened at the same time (they shouldn't)
+        jarSettings.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY)){
+                networkSettings.setExpanded(false);
+            }
+        });
+
+        networkSettings.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY)){
+                jarSettings.setExpanded(false);
+            }
+        });
+
+        hbox.getChildren().add(Styler.vContainer(40, jarSettings, networkSettings));//, networkSettings));
+
         return hbox;
     }
 
@@ -127,11 +152,24 @@ public class ClientBuilderView {
         persistent.setDisableVisualFocus(true);
         persistent.setTooltip(new Tooltip("Windows & Linux only"));
 
-        //autoSpread = new JFXCheckBox("Auto-Spread");
         debug = new JFXCheckBox("Debug Mode");
         keylog = new JFXCheckBox("Keylog");
         keylog.setTooltip(new Tooltip("Windows only (PSH based)"));
-        hBox.getChildren().add(Styler.vContainer(20, title, persistent, debug, keylog)); //autoSpread, debug));
+
+        // Screenshot ext option
+        Label scLabel = (Label) Styler.styleAdd(new Label("Screenshot type"), "label-bright");
+        ObservableList<String> extensions = FXCollections.observableArrayList("jpg", "png");
+        screenshotTypeComboBox = new JFXComboBox<>(extensions);
+        screenshotTypeComboBox.setFocusColor(Paint.valueOf(Styler.getCurrentAccentColor()));
+        screenshotTypeComboBox.getSelectionModel().select(KumoSettings.MscreenshotType);
+        screenshotTypeComboBox.setOnAction((e) -> KumoSettings.MscreenshotType = screenshotTypeComboBox.getSelectionModel().getSelectedItem());
+
+        Group group = new Group(Styler.hContainer(scLabel, screenshotTypeComboBox));
+
+
+        hBox.getChildren().addAll(Styler.vContainer(20, title, persistent, debug, keylog, group)); //autoSpread, debug));
+
+
         return hBox;
     }
 
@@ -225,6 +263,11 @@ public class ClientBuilderView {
             }
             if (createProguardRules.isSelected()){
                 ClientBuilder.createProguard = true;
+            }
+
+            // Networking settings
+            if (!updateTime.getText().equals("")){
+                ClientBuilder.updateTime = Integer.parseInt(updateTime.getText());
             }
             JFXSnackbar snackbar = new JFXSnackbar(hBox);
             snackbar.enqueue(new JFXSnackbar.SnackbarEvent(new Label("Client JAR built")));

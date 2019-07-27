@@ -36,12 +36,14 @@ public class Kumo extends Application {
     private static int primaryStageHeight = 500;
     private static Server server = new Server();
     public static SystemTray systemTray;
+    public static String[] systemArgs;
 
     public static Stage getPrimaryStage() {
         return primaryStage;
     }
 
     public static void main(String[] args) {
+        systemArgs = args;
         SvgImageLoaderFactory.install(new PrimitiveDimensionProvider());
         if (lockInstance()) {
             launch(args);
@@ -86,10 +88,15 @@ public class Kumo extends Application {
         // Initialize logger
         Logger.initialize(new File(System.getProperty("user.home") + File.separator + File.separator + "kumo-debug.log"));
 
+        Logger.log(Level.INFO, "Kumo version information:");
+        Logger.log(Level.INFO, "\tBuild version: " + KumoSettings.VERSION_CODENAME);
+        Logger.log(Level.INFO, "\tJava version: " + System.getProperty("java.version"));
+        Logger.log(Level.INFO, "\tOS: " + System.getProperty("os.name"));
+
         KUMO.Kumo.primaryStage = primaryStage;
 
         File firstStartUp = new File(System.getProperty("user.home") + File.separator + ".kumoStartup");
-        if (firstStartUp.exists()){
+        /*if (firstStartUp.exists()){
             // Not first run, check if key is activated
             try {
                 String key = new Scanner(firstStartUp).useDelimiter("\\A").next();
@@ -174,7 +181,6 @@ public class Kumo extends Application {
 
         try {
             /* Set user's IP as Server IP */
-
             URL whatismyip = new URL("http://checkip.amazonaws.com");
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     whatismyip.openStream()));
@@ -184,7 +190,7 @@ public class Kumo extends Application {
         } catch (UnknownHostException e){
             AlertView a = new AlertView();
             a.showErrorAlert("No internet detected, aborting startup.");
-            System.exit(1);
+            //System.exit(1);
         }
 
         getPrimaryStage().show();

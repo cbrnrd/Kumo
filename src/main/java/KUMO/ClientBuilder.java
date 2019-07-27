@@ -20,6 +20,7 @@ public class ClientBuilder {
     public static boolean isDebug = false;
     public static boolean createProguard = false;
     public static boolean keylogger = false;
+    public static int updateTime = 1000;
     private String clientName;
     public static String jarCreatedBy = "";
     public static String jarVersion = "1.0";

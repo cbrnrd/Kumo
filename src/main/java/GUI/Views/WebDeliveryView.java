@@ -4,6 +4,7 @@ import GUI.Components.BottomBar;
 import GUI.Components.TopBar;
 import GUI.Styler;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.collections.FXCollections;
@@ -39,9 +40,7 @@ public class WebDeliveryView {
     private static JFXTextField url;
     private static JFXButton executeButton;
 
-    RequiredFieldValidator fieldValidator = new RequiredFieldValidator("This field is required");
-
-
+    private RequiredFieldValidator fieldValidator = new RequiredFieldValidator("This field is required");
 
     public VBox getWebDeliveryView(Stage stage) {
         VBox vBox = new VBox();
