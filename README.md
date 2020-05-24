@@ -1,5 +1,4 @@
-## ![icon](https://github.com/cbrnrd/Kumo/blob/master/src/main/resources/Images/Icons/icon.png?raw=true)
-Kumo
+# Kumo
 
 Kumo is a lightweight and portable remote administrative tool written in Java. It can be used on Windows, macOS, or Linux as long as they have the JRE installed.
 
@@ -10,7 +9,7 @@ Kumo is a lightweight and portable remote administrative tool written in Java. I
 * Clean, simple, and modern UI
 * Easy client building process
 * Customizable server and client settings
-* Persistence (Windows)
+* Persistence
 
 ## In progress
 These features will likely be released in the order they are in below:
@@ -21,9 +20,9 @@ These features will likely be released in the order they are in below:
 * ~~Show messagebox~~ ✔
 * ~~Metasploit integration~~ ✔
 * Upload/~~download~~ ✔ and execute
-* Linux/Mac persistence
+* ~~Linux~~ ✔/Mac persistence
 * Remote desktop
-* Keylogger
+* ~~Keylogger~~ ✔ (windows only)
 * XMR miner
 * Webcam stuff
 * Process viewer/killer

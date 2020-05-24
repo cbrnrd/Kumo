@@ -30,6 +30,11 @@ import java.nio.channels.FileLock;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * This is the main entry point for Kumo.
+ * It first checks with the authentication server, then creates the necessary files,
+ * starts up the listening server, then shows the main GUI window.
+ */
 
 public class Kumo extends Application {
     private static Stage primaryStage;

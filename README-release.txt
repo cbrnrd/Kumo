@@ -2,9 +2,6 @@ Thank you for purchasing Kumo!
 
 Kumo is a modern-looking cross-platform remote administration tool written in Java.
 
-There are two versions of Kumo included in this package: one meant for Java < 9 and one meant for Java 9.
-These two versions are identical, except for the GUI library it uses.
-
 ========================
 Known Issues:
     - Weird GUI alighment or sizing

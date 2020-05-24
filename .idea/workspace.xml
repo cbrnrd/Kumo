@@ -2,50 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae4be0f1-a72f-4ae7-97ee-b26db5c04c6e" name="Default" comment="Finish chrome pwd recovery">
-      <change afterPath="$PROJECT_DIR$/src/main/java/GUI/Views/MiscTextView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/xrat_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/xrat_test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GUI/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Logger/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Server/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README-release.txt" beforeDir="false" afterPath="$PROJECT_DIR$/README-release.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/GUI/Components/BottomBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GUI/Components/BottomBar.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/GUI/Components/ClientList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GUI/Components/ClientList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/GUI/Components/FileContextMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GUI/Components/FileContextMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/GUI/Components/IPContextMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GUI/Components/IPContextMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/GUI/Components/TopBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GUI/Components/TopBar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/GUI/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GUI/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/ClientBuilderView.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/ClientBuilderView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/ClientView.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/ClientView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/DownloadAndExecuteView.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/DownloadAndExecuteView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/FileExplorerView.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/FileExplorerView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/RemoteDesktopView.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/RemoteDesktopView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/SettingsView.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/SettingsView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/UpdatesView.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/UpdatesView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/WebDeliveryView.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GUI/Views/WebDeliveryView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/KUMO/ClientBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/KUMO/ClientBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/KUMO/Kumo.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/KUMO/Kumo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Logger/Logger$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Logger/Logger$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Logger/Logger.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Logger/Logger.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Server/ClientHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Server/ClientObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Server/ClientObject.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Server/Data/FileUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Server/Data/FileUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Server/Data/PseudoBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Server/Data/PseudoBase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Server/KumoSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Server/KumoSettings.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Server/ProcessCommands.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Server/ProcessCommands.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/css/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/css/global.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/Components/FileContextMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/Components/FileContextMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/GUI/Components/IPContextMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/Components/IPContextMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/Components/TopBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/Components/TopBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/Views/ClientBuilderView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/Views/ClientBuilderView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/Views/DownloadAndExecuteView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/Views/DownloadAndExecuteView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/Views/FileExplorerView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/Views/FileExplorerView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/Views/WebDeliveryView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/Views/WebDeliveryView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/KUMO/ClientBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KUMO/ClientBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/KUMO/Kumo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KUMO/Kumo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/Data/PseudoBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/Data/PseudoBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/KumoSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/KumoSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Server/ProcessCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server/ProcessCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dark.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/global.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -97,37 +71,7 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="xrat" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="xrat" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build setup" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="xrat" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="distribution" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="xrat" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="help" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="xrat" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="other" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="xrat" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="verification" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -138,93 +82,50 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Components/IPContextMenu.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9154">
+              <caret line="419" column="10" selection-start-line="419" selection-end-line="420" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Server/ProcessCommands.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1219">
+              <caret line="66" column="19" selection-start-line="66" selection-start-column="19" selection-end-line="66" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor>
+                <caret column="2" selection-start-column="2" selection-end-column="2" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README-release.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="11" column="107" selection-start-line="11" selection-start-column="107" selection-end-line="11" selection-end-column="107" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Client/Client.java">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="656" column="69" selection-start-line="656" selection-start-column="69" selection-end-line="656" selection-end-column="69" />
-              <folding>
-                <element signature="e#41039#41040#0" expanded="true" />
-                <element signature="e#41091#41092#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CHANGELOG.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="61" selection-start-column="61" selection-end-column="61" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Components/FileContextMenu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="66" column="80" selection-start-line="66" selection-start-column="80" selection-end-line="66" selection-end-column="80" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/SettingsView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2607">
-              <caret line="48" column="35" lean-forward="true" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/ClientBuilderView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="269" column="81" selection-start-line="269" selection-start-column="81" selection-end-line="269" selection-end-column="81" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/KUMO/ClientBuilder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Server/Data/PseudoBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="58" column="56" selection-start-line="58" selection-start-column="56" selection-end-line="58" selection-end-column="56" />
-              <folding>
-                <element signature="e#559#560#0" expanded="true" />
-                <element signature="e#590#591#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/FileExplorerView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="671">
-              <caret line="169" column="32" lean-forward="true" selection-start-line="169" selection-start-column="32" selection-end-line="169" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#892#893#0" expanded="true" />
-                <element signature="e#940#941#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="442">
+              <caret line="20" column="39" lean-forward="true" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -240,36 +141,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getTopBarSansOptions</find>
-      <find>.title</find>
+      <find>Kumo is adap</find>
+      <find>Persistence Path</find>
+      <find>Release note</find>
+      <find>isPersis</find>
+      <find>KUMO</find>
+      <find>proguard</find>
+      <find>Server IP</find>
+      <find>Ku</find>
+      <find>Desktop</find>
+      <find>SHUTDOWN</find>
+      <find>MSGBOX</find>
+      <find>getListener</find>
+      <find>New Client!</find>
+      <find>Build Comple</find>
+      <find>Thread</find>
+      <find>svg</find>
+      <find>PLUGIN</find>
+      <find>CMD</find>
+      <find>&quot;CMD&quot;</find>
+      <find>SYSTEMOS.contains</find>
       <find>DAE</find>
-      <find>textarea-padded</find>
-      <find>Top</find>
-      <find>READKEYLOG</find>
-      <find>TopB</find>
-      <find>Download</find>
-      <find>combo</find>
-      <find>getKumoD</find>
-      <find>label-bri</find>
-      <find>small-title</find>
-      <find>small-tit</find>
-      <find>CHR</find>
-      <find>MSF</find>
+      <find>UAE</find>
+      <find>WEB</find>
+      <find>Copy</find>
+      <find>this::</find>
       <find>===</find>
-      <find>DA</find>
-      <find>*</find>
-      <find>socket</find>
-      <find>FILELIST</find>
-      <find>Screenshot</find>
-      <find>Saving screen</find>
-      <find>SCREENSHOT</find>
-      <find>SCREEN</find>
-      <find>temp</find>
-      <find>input.cont</find>
-      <find>java.io.tm</find>
-      <find>Misc</find>
-      <find>FULO</find>
-      <find>Thread.sleep(1000</find>
+      <find>loadServer</find>
+      <find>Chrome</find>
+      <find>ENDPSH</find>
+      <find>PSHURL</find>
     </findStrings>
     <replaceStrings>
       <replace>mediumslateblue</replace>
@@ -281,9 +182,6 @@
       <replace>Styler.getCurrentStylesheet()</replace>
       <replace>#2f2f3e</replace>
       <replace>amfox.ddns.net:8001/</replace>
-      <replace>getReflectiveTopBar</replace>
-      <replace>[*]</replace>
-      <replace>hydeps</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\Carter\IdeaProjects\xrat-fnstatic\src\main\java\KUMO</dir>
@@ -297,57 +195,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Components/BottomBar.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/rules.pro" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/WebDeliveryView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/SetClipboardView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/VisitWebsiteView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/SleepView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Components/NotificationView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/DownloadAndExecuteView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/SendCommandView.java" />
         <option value="$PROJECT_DIR$/build/libs/rules.pro" />
-        <option value="$PROJECT_DIR$/README-release.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Components/TopBar.java" />
         <option value="$PROJECT_DIR$/src/main/java/GUI/Styler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/ClientView.java" />
         <option value="$PROJECT_DIR$/src/main/java/GUI/Views/RemoteDesktopView.java" />
         <option value="$PROJECT_DIR$/src/main/java/GUI/Views/AlertView.java" />
         <option value="$PROJECT_DIR$/TODO-2.0.txt" />
         <option value="$PROJECT_DIR$/src/main/java/Server/Data/CryptoUtils.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Components/TitleBar.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/FirstRunView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/Server.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Logger/Level.java" />
-        <option value="$PROJECT_DIR$/src/main/java/KUMO/OsCheck.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/Listeners.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/ClientView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Logger/Logger.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/Data/FileUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/Data/CustomImage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Components/ClientList.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/Data/NetUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/ReleaseNotesView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Components/BottomBar.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/ClientHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/ShowMessageboxView.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/LICENSE" />
-        <option value="$PROJECT_DIR$/src/main/resources/help.html" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/UpdatesView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/HelpView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/WebDeliveryView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/SettingsView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Components/TopBar.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Components/FileContextMenu.java" />
         <option value="$PROJECT_DIR$/src/main/resources/css/dark.css" />
         <option value="$PROJECT_DIR$/src/main/resources/css/global.css" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/DownloadAndExecuteView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Controller.java" />
-        <option value="$PROJECT_DIR$/build/libs/release/README.txt" />
-        <option value="$PROJECT_DIR$/build/libs/release/INSTALL.txt" />
-        <option value="$PROJECT_DIR$/src/main/java/KUMO/Kumo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/ClientObject.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/KumoSettings.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/MiscTextView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Server/ProcessCommands.java" />
         <option value="$PROJECT_DIR$/src/main/java/GUI/Views/FileExplorerView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Components/FolderContextMenu.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Components/IPContextMenu.java" />
-        <option value="$PROJECT_DIR$/src/main/java/GUI/Components/FileContextMenu.java" />
-        <option value="$PROJECT_DIR$/CHANGELOG.txt" />
-        <option value="$PROJECT_DIR$/src/main/java/KUMO/ClientBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/Server/Data/PseudoBase.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Components/TitleBar.java" />
         <option value="$PROJECT_DIR$/src/main/java/GUI/Views/ClientBuilderView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Server/KumoSettings.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/FirstRunView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Controller.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/ShowMessageboxView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/UpdatesView.java" />
+        <option value="$PROJECT_DIR$/build/libs/release/README.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/Server/Server.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Server/Listeners.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Views/SettingsView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Logger/Level.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Logger/Logger.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Server/ClientHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Components/ClientList.java" />
+        <option value="$PROJECT_DIR$/build/libs/release/INSTALL.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/Server/ProcessCommands.java" />
         <option value="$PROJECT_DIR$/src/main/java/Client/Client.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Logger/README.md" />
+        <option value="$PROJECT_DIR$/src/main/java/KUMO/Kumo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/KUMO/ClientBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/README.md" />
+        <option value="$PROJECT_DIR$/src/main/java/Server/README.md" />
+        <option value="$PROJECT_DIR$/src/main/java/GUI/Components/IPContextMenu.java" />
+        <option value="$PROJECT_DIR$/src/main/java/README.md" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/README-release.txt" />
       </list>
     </option>
   </component>
@@ -358,9 +256,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="175" />
-    <option name="width" value="980" />
-    <option name="height" value="1030" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -368,96 +267,30 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="xrat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xrat-fnstatic" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="Kumo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
               <item name="xrat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xrat-fnstatic" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Kumo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="xrat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xrat-fnstatic" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="xrat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xrat-fnstatic" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xrat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xrat-fnstatic" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xrat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xrat-fnstatic" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="GUI" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xrat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xrat-fnstatic" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="GUI" type="462c0819:PsiDirectoryNode" />
-              <item name="Components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xrat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xrat-fnstatic" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="GUI" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xrat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xrat-fnstatic" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="KUMO" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xrat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xrat-fnstatic" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="Server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xrat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xrat-fnstatic" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="Server" type="462c0819:PsiDirectoryNode" />
-              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="Kumo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -465,9 +298,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/build/libs/rules.pro&#10;E:/Backup stuff/Code/IdeaProjects/Kumo/build/resources/main/css/global.css" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562848787840" />
-    <property name="last.edited.regexp" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1588566408950" />
+    <property name="last.edited.regexp" value="https://" />
+    <property name="last_opened_file_path" value="C:/Users/Carter/Downloads/ood_hw1" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -480,8 +313,8 @@
       <recent name="E:\Backup stuff\Code\IdeaProjects\Kumo\lib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Backup stuff\Code\IdeaProjects\Kumo\build\libs\release\kumo" />
       <recent name="E:\Backup stuff\Code\IdeaProjects\Kumo\build\libs\release" />
+      <recent name="E:\Backup stuff\Code\IdeaProjects\Kumo\build\libs\release\kumo" />
       <recent name="E:\Backup stuff\Code\IdeaProjects\Kumo\src\main\resources\css" />
       <recent name="E:\Backup stuff\Code\IdeaProjects\Kumo\build\resources\main\css" />
       <recent name="C:\Users\Carter\IdeaProjects\xrat-fnstatic\src\main\resources\Images" />
@@ -499,7 +332,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.xrat-fnstatic [run]">
+  <component name="RunManager" selected="Gradle.xrat-fnstatic [fatJar]">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -640,8 +473,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.xrat-fnstatic [run]" />
         <item itemvalue="Gradle.xrat-fnstatic [fatJar]" />
+        <item itemvalue="Gradle.xrat-fnstatic [run]" />
         <item itemvalue="Gradle.Kumo [installDist]" />
         <item itemvalue="Gradle.Kumo [dependencies]" />
         <item itemvalue="Gradle.Kumo [:xrat:dependencies]" />
@@ -681,11 +514,16 @@
       <workItem from="1560435628829" duration="433000" />
       <workItem from="1560452793545" duration="11113000" />
       <workItem from="1560610500924" duration="723000" />
-      <workItem from="1561227382281" duration="41485000" />
-      <workItem from="1562743825546" duration="1325000" />
-      <workItem from="1562825421904" duration="10079000" />
-      <workItem from="1562892790665" duration="22000" />
-      <workItem from="1562998404142" duration="3051000" />
+      <workItem from="1560794064995" duration="395000" />
+      <workItem from="1560796922665" duration="2951000" />
+      <workItem from="1560882695683" duration="446000" />
+      <workItem from="1560907539690" duration="2470000" />
+      <workItem from="1560974401739" duration="5775000" />
+      <workItem from="1561001271737" duration="855000" />
+      <workItem from="1578499406930" duration="23000" />
+      <workItem from="1588555471410" duration="3908000" />
+      <workItem from="1588566082817" duration="947000" />
+      <workItem from="1590340589801" duration="546000" />
     </task>
     <task id="LOCAL-00001" summary="Add JAR options to client builder">
       <created>1548210844025</created>
@@ -855,58 +693,44 @@
       <option name="project" value="LOCAL" />
       <updated>1560364685284</updated>
     </task>
-    <task id="LOCAL-00025" summary="* Client improvements&#10;* Bottom bar -&gt; top bar&#10;* Add help and debug buttons to INFO tab&#10;* Add various field validations&#10;* Client country&#10;* Top bar in dialogs now reflects active client">
-      <created>1561760547395</created>
+    <task id="LOCAL-00025" summary="Finish upload and execute">
+      <created>1560799124616</created>
       <option name="number" value="00025" />
       <option name="presentableId" value="LOCAL-00025" />
       <option name="project" value="LOCAL" />
-      <updated>1561760547395</updated>
+      <updated>1560799124616</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Make Client ID editable">
+      <created>1560803482850</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1560803482850</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Update keylogger link">
+      <created>1560882922389</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1560882922389</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Change password recovery to sharpweb">
+      <created>1560988769155</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1560988769156</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="237074000" />
+    <option name="totallyTimeSpent" value="199428000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2080537" />
-      <window_info id="Structure" order="1" weight="0.25" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info id="Image Layers" order="6" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32647058" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49597314" weight="0.2764706" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50402683" side_tool="true" weight="0.2764706" />
-      <window_info anchor="bottom" id="Build" order="8" weight="0.33235294" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49731544" visible="true" weight="0.2617647" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32794118" />
-      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32998884" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven Projects" order="4" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Gradle" order="6" weight="0.15033557" />
-      <window_info anchor="right" id="Theme Preview" order="7" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Maven" order="9" weight="0.32995737" />
-      <window_info anchor="right" id="Database" order="10" weight="0.32942432" />
-    </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19731544" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19669509" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -915,30 +739,31 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3277592" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4966443" weight="0.2764706" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4966443" weight="0.27759197" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5033557" side_tool="true" weight="0.28088236" />
-      <window_info anchor="bottom" id="Build" order="8" weight="0.33235294" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49731544" visible="true" weight="0.33529413" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32794118" />
+      <window_info anchor="bottom" id="Build" order="8" weight="0.33333334" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49731544" weight="0.33667782" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32887402" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32998884" />
+      <window_info anchor="right" id="Key Promoter X" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Maven Projects" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Gradle" order="6" weight="0.15033557" />
+      <window_info anchor="right" id="Gradle" order="6" weight="0.15085287" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Maven" order="9" weight="0.32995737" />
       <window_info anchor="right" id="Database" order="10" weight="0.32942432" />
-    </layout-to-restore>
+    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -953,55 +778,12 @@
       </list>
     </option>
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list />
-          </value>
-        </entry>
-        <entry key="User">
-          <value>
-            <list />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
     <ignored-roots>
       <path value="$USER_HOME$" />
     </ignored-roots>
-    <MESSAGE value="Add JAR options to client builder" />
-    <MESSAGE value="GUI updates" />
-    <MESSAGE value="Get encryption and screenshot working" />
     <MESSAGE value="Change jar customization names" />
     <MESSAGE value="Begin first run process" />
     <MESSAGE value="Finish chrome pwd recovery" />
@@ -1023,8 +805,11 @@
     <MESSAGE value="Minor changes (4/15)" />
     <MESSAGE value="Prep 2.0-corona release" />
     <MESSAGE value="Add Listeners class to server" />
-    <MESSAGE value="* Client improvements&#10;* Bottom bar -&gt; top bar&#10;* Add help and debug buttons to INFO tab&#10;* Add various field validations&#10;* Client country&#10;* Top bar in dialogs now reflects active client" />
-    <option name="LAST_COMMIT_MESSAGE" value="* Client improvements&#10;* Bottom bar -&gt; top bar&#10;* Add help and debug buttons to INFO tab&#10;* Add various field validations&#10;* Client country&#10;* Top bar in dialogs now reflects active client" />
+    <MESSAGE value="Finish upload and execute" />
+    <MESSAGE value="Make Client ID editable" />
+    <MESSAGE value="Update keylogger link" />
+    <MESSAGE value="Change password recovery to sharpweb" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change password recovery to sharpweb" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -1032,340 +817,72 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/MainView.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Images/Icons/settings.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Components/TitleBar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-52">
-          <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+        <state relative-caret-position="202">
+          <caret line="24" column="133" selection-start-line="24" selection-start-column="133" selection-end-line="24" selection-end-column="133" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/KUMO/OsCheck.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Listeners.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/FirstRunView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/javafx-src.zip!/javafx/application/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="224" column="75" lean-forward="true" selection-start-line="224" selection-start-column="75" selection-end-line="224" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/ClientView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/HashMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="812" column="20" selection-start-line="812" selection-start-column="20" selection-end-line="812" selection-end-column="20" />
-          <folding>
-            <element signature="e#42259#42260#0" expanded="true" />
-            <element signature="e#42335#42336#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Data/FileUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="96" selection-start-line="96" selection-end-line="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Styler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="71" column="25" selection-start-line="71" selection-start-column="25" selection-end-line="71" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Data/Repository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Logger/Logger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="94" column="30" lean-forward="true" selection-start-line="94" selection-start-column="30" selection-end-line="94" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/javafx-src.zip!/javafx/scene/control/cell/PropertyValueFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1696">
-          <caret line="112" column="11" selection-start-line="112" selection-start-column="11" selection-end-line="112" selection-end-column="11" />
-          <folding>
-            <element signature="e#4183#4184#0" expanded="true" />
-            <element signature="e#4223#4224#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/javafx-src.zip!/com/sun/glass/ui/win/WinApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-710">
-          <caret line="92" column="39" selection-start-line="92" selection-start-column="39" selection-end-line="92" selection-end-column="39" />
+        <state relative-caret-position="234">
+          <caret line="25" column="68" selection-start-line="25" selection-start-column="68" selection-end-line="25" selection-end-column="68" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/ReleaseNotesView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="28" column="115" lean-forward="true" selection-start-line="28" selection-start-column="115" selection-end-line="28" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Data/NetUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="9" column="28" lean-forward="true" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Components/BottomBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/AlertView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="30" column="28" lean-forward="true" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/LICENSE">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-69">
-          <caret line="5" column="50" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/help.html" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/UpdatesView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="69" column="51" selection-start-line="69" selection-start-column="51" selection-end-line="69" selection-end-column="51" />
+        <state relative-caret-position="104">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/ShowMessageboxView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="44" column="45" lean-forward="true" selection-start-line="44" selection-start-column="45" selection-end-line="44" selection-end-column="45" />
+        <state relative-caret-position="206">
+          <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/PluginView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-69">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/css/dark.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="48" column="26" lean-forward="true" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/css/global.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="50" column="26" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/DownloadAndExecuteView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="713">
-          <caret line="55" column="54" selection-start-line="55" selection-start-column="54" selection-end-line="55" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Components/TopBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1245">
-          <caret line="122" column="47" lean-forward="true" selection-start-line="122" selection-start-column="47" selection-end-line="122" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/libs/release/INSTALL.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="21" column="103" lean-forward="true" selection-start-line="21" selection-start-column="103" selection-end-line="21" selection-end-column="103" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build/libs/release/README.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="71" selection-start-line="4" selection-start-column="71" selection-end-line="4" selection-end-column="71" />
+        <state relative-caret-position="234">
+          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Controller.java">
+    <entry file="file://$PROJECT_DIR$/TODO-2.0.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="42" column="100" selection-start-line="42" selection-start-column="97" selection-end-line="42" selection-end-column="113" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="26">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Components/ClientList.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/css/dark.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="573">
-          <caret line="74" column="38" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="38" />
+        <state relative-caret-position="4004">
+          <caret line="154" column="13" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Data/CustomImage.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/css/global.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+        <state relative-caret-position="1378">
+          <caret line="53" column="20" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/KumoSettings.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/SettingsView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/GetClipboardView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/MiscTextView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/KUMO/Kumo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4186">
-          <caret line="45" column="18" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Components/FolderContextMenu.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Components/IPContextMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="115" column="68" selection-start-line="115" selection-start-column="68" selection-end-line="115" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ProcessCommands.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ClientHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/FileExplorerView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="671">
-          <caret line="169" column="32" lean-forward="true" selection-start-line="169" selection-start-column="32" selection-end-line="169" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#892#893#0" expanded="true" />
-            <element signature="e#940#941#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ClientObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="125" column="66" lean-forward="true" selection-start-line="125" selection-start-column="66" selection-end-line="125" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/WebDeliveryView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-184">
-          <caret line="26" column="39" lean-forward="true" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/HelpView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/javafx-src.zip!/javafx/event/EventHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CHANGELOG.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="61" selection-start-column="61" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Data/CryptoUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="4472">
+          <caret line="194" selection-start-line="194" selection-end-line="194" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1374,57 +891,318 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Components/FileContextMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="66" column="80" selection-start-line="66" selection-start-column="80" selection-end-line="66" selection-end-column="80" />
+        <state relative-caret-position="-26">
+          <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/SettingsView.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/MainView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2607">
-          <caret line="48" column="35" lean-forward="true" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-52">
+          <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Data/PseudoBase.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/UpdatesView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="58" column="56" selection-start-line="58" selection-start-column="56" selection-end-line="58" selection-end-column="56" />
-          <folding>
-            <element signature="e#559#560#0" expanded="true" />
-            <element signature="e#590#591#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-312">
+          <caret line="26" column="21" lean-forward="true" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/ClientBuilderView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="269" column="81" selection-start-line="269" selection-start-column="81" selection-end-line="269" selection-end-column="81" />
+        <state relative-caret-position="-1909">
+          <caret line="95" column="13" lean-forward="true" selection-start-line="95" selection-start-column="13" selection-end-line="95" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/WebDeliveryView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1014">
+          <caret line="58" column="47" selection-start-line="58" selection-start-column="47" selection-end-line="58" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/libs/release/INSTALL.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="20" column="53" lean-forward="true" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Components/ClientList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="49" column="43" selection-start-line="49" selection-start-column="43" selection-end-line="49" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Styler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1456">
+          <caret line="60" column="48" selection-start-line="60" selection-start-column="48" selection-end-line="60" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/ClientView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="11" column="92" selection-start-line="11" selection-start-column="92" selection-end-line="11" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Components/BottomBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="24" column="171" selection-start-line="24" selection-start-column="171" selection-end-line="24" selection-end-column="171" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Logger/Level.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Logger/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="24" column="55" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Logger/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="156">
+            <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/KUMO/ClientBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+        <state relative-caret-position="-2184">
+          <caret line="18" column="64" selection-start-line="18" selection-start-column="64" selection-end-line="18" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="546">
+            <caret line="21" column="155" selection-start-line="21" selection-start-column="155" selection-end-line="21" selection-end-column="155" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/KUMO/Kumo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4754">
+          <caret line="34" column="3" lean-forward="true" selection-start-line="34" selection-start-column="3" selection-end-line="34" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1133#1134#0" expanded="true" />
+            <element signature="e#1168#1169#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#412#413#0" expanded="true" />
+            <element signature="e#458#459#0" expanded="true" />
+            <element signature="e#1079#1080#0" expanded="true" />
+            <element signature="e#1108#1109#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Listeners.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/KumoSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="16" column="43" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Client/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="656" column="69" selection-start-line="656" selection-start-column="69" selection-end-line="656" selection-end-column="69" />
+        <state relative-caret-position="588">
+          <caret line="864" column="45" lean-forward="true" selection-start-line="864" selection-start-column="45" selection-end-line="864" selection-end-column="45" />
           <folding>
-            <element signature="e#41039#41040#0" expanded="true" />
-            <element signature="e#41091#41092#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#37764#37765#0" expanded="true" />
+            <element signature="e#37816#37817#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ClientObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-204">
+          <caret line="69" column="34" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
+          <folding>
+            <element signature="e#1935#1936#0" expanded="true" />
+            <element signature="e#1967#1968#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ClientHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="806">
+          <caret line="62" column="32" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Data/CryptoUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="40" column="56" selection-start-line="40" selection-start-column="56" selection-end-line="40" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Data/FileUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Data/PseudoBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2492">
+          <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/Data/Repository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="782">
+            <caret line="36" column="58" selection-start-line="36" selection-start-column="58" selection-end-line="36" selection-end-column="58" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Images/logo.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/GetClipboardView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Views/ChromePassView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="208">
+            <caret line="8" column="97" selection-start-line="8" selection-start-column="97" selection-end-line="8" selection-end-column="97" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/obfuscation-dictionary.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-207" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rules.pro">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Images/Icons/build.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/LICENSE">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GUI/Components/IPContextMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9154">
+          <caret line="419" column="10" selection-start-line="419" selection-end-line="420" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Server/ProcessCommands.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1219">
+          <caret line="66" column="19" selection-start-line="66" selection-start-column="19" selection-end-line="66" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor>
+            <caret column="2" selection-start-column="2" selection-end-column="2" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README-release.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="107" selection-start-line="11" selection-start-column="107" selection-end-line="11" selection-end-column="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="20" column="39" lean-forward="true" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
         </state>
       </provider>
     </entry>

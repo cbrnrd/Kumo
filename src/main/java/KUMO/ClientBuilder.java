@@ -14,6 +14,11 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
 
+/**
+ * This class compiles ../Client/Client.java into a runnable JAR
+ * You probably dont have to touch this, but you can if you want
+ */
+
 public class ClientBuilder {
     public static boolean isPersistent = false;
     public static boolean autoSpread = false;

