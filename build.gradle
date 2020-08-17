@@ -1,13 +1,12 @@
-version '2.0'
+version '2.1'
 
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'distribution'
 
-
 sourceCompatibility = 1.8
 
-mainClassName = "KUMO.Kumo"
+mainClassName = "kumo.Kumo"
 
 repositories {
     mavenCentral()
@@ -19,16 +18,20 @@ dependencies {
     // Dependencies cannot be added via gradle because it breaks ProGuard obfuscation/shrinking/optimization
     //compile 'com.jfoenix:jfoenix:9.0.8' // Java 9
     compile 'com.jfoenix:jfoenix:8.0.8'
+    compile 'xalan:xalan:2.7.0'
+
 }
+
 
 task fatJar(type: Jar){
     manifest {
         attributes 'Implementation-Title' : 'kumo',
                 'Implementation-Version' : project.version,
-                'Main-Class' : 'KUMO.Kumo'
+                'Main-Class' : 'kumo.Kumo'
     }
-    baseName = 'kumo'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    baseName = 'kumoB'
+    //from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    //from configurations.compile - configurations.providedRuntime
     with jar
 }
 
@@ -36,7 +39,7 @@ jar {
     manifest {
         attributes('Implementation-Title' : 'kumo',
                 'Implementation-Version' : project.version,
-                'Main-Class' : 'KUMO.Kumo'
+                'Main-Class' : 'kumo.Kumo'
         )
     }
     baseName = 'kumo-gradle'

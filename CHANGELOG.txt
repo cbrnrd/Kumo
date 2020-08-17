@@ -1,2 +1,0 @@
-Add "Upload to directory" option in the client file explorer.
-Add option to choose screenshot type.
