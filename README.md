@@ -40,6 +40,10 @@ Kumo is not to be used without permission or ownership of the systems Kumo is in
 * This is a very very very very hard fork of Ghosts/Maus, so props to Ghosts for a great starting point.
 * Originally this software was licensed, but it's been commented out (not fully removed) in `kumo.Kumo`.
 
+## TODO
+* Create basic obfuscator of final jar so the client class name isn't always `Client.class`
+* Organize the client context menu and add icons to those sections.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/cbrnrd/Kumo. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
