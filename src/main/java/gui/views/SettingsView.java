@@ -41,7 +41,7 @@ public class SettingsView {
         hBox.getStylesheets().add(getClass().getResource(Styler.getCurrentStylesheet()).toExternalForm());
         hBox.setId("clientBuilder");
         hBox.setPadding(new Insets(20, 20, 20, 20));
-        Label title = (Label) Styler.styleAdd(new Label("server Settings"), "title");
+        Label title = (Label) Styler.styleAdd(new Label("Server Settings"), "title");
         hBox.getChildren().add(Styler.vContainer(20, title));
         return hBox;
     }

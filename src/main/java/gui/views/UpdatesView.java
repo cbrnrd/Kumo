@@ -39,7 +39,7 @@ public class UpdatesView {
     }
 
     private HBox getAboutPanel() {
-        Label title = (Label) Styler.styleAdd(new Label("kumo " + KumoSettings.CURRENT_VERSION + " - " + KumoSettings.VERSION_CODENAME), "title");
+        Label title = (Label) Styler.styleAdd(new Label("Kumo " + KumoSettings.CURRENT_VERSION + " - " + KumoSettings.VERSION_CODENAME), "title");
         Text desc = (Text) Styler.styleAdd(new Text("kumo is a lightweight cross-platform remote administrative tool " +
                 "written in Java. \n\nkumo is intended to present necessary features \nin an attractive and " +
                 "easy to use UI.\n\nKumo was built to experiment with GUI design but evolved into a great project \nthat is fun to work on. There are 2 libraries used in Kumo: JFoenix and javafxsvg.\nPlease remember to use Kumo responsibly and use the\nsoftware according to the rules outlined in the \"LEGAL\" section to the right --->." +
